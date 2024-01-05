@@ -1,0 +1,9 @@
+class CreateNoSqlPlaceholder < Mongoid::Migration
+  def self.up
+    NoSqlPlaceholder.create(:name => "placeholder_name")
+  end
+
+  def self.down
+    NoSqlPlaceholder.where(:name => "placeholder_name").first.destroy
+  end
+end
