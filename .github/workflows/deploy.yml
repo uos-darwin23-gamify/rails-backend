@@ -2,7 +2,7 @@ name: "Deploy To Server"
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
 
 env:
   DOKKU_REPO: "ssh://dokku@gamifycoding.me:22/rails-backend"
@@ -16,11 +16,11 @@ jobs:
 
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.4.1
+        uses: styfle/cancel-workflow-action@0.12.0
         with:
           access_token: ${{ github.token }}
 
-      - name: Cloning repo
+      - name: Cloning Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -28,6 +28,7 @@ jobs:
       - name: Dokku
         uses: dokku/github-action@v1.4.0
         with:
+          git_push_flags: '--force'
           ssh_private_key: ${{ secrets.SSH_KEY }}
           git_remote_url: ${{ env.DOKKU_REPO }}
           branch: ${{ env.DOKKU_DEPLOY_BRANCH }}
