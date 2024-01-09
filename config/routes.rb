@@ -16,4 +16,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  scope "api" do
+    get "/auth/status", to: "users/authentication_status#index"
+
+
+
+
+
+
+  end
 end
