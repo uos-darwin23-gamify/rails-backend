@@ -2,7 +2,7 @@ name: "Deploy To Server"
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
 
 env:
   DOKKU_REPO: "ssh://dokku@gamifycoding.me:22/rails-backend"
