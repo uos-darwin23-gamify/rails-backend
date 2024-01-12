@@ -18,7 +18,7 @@ class User < ApplicationRecord
   private
 
   def email_in_pre_authorized_emails
-    return if PreAuthorizedEmail.exists?(email:)
+    return if PreAuthorizedEmail.exists?(["lower(email) = ?", email.downcase])
 
     errors.add(:email, "is not pre-authorized")
   end

@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   scope "api" do
     get "/auth/status", to: "users/authentication_status#index"
 
-
+    scope "admin" do
+      get "pre-authorized-emails", to: "admin/pre_authorized_emails#all_pre_authorized_emails"
+      post "pre-authorized-emails", to: "admin/pre_authorized_emails#create_pre_authorized_email"
+      put "pre-authorized-emails", to: "admin/pre_authorized_emails#update_pre_authorized_email"
+      delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
+    end
 
 
 

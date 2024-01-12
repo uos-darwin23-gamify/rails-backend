@@ -35,4 +35,16 @@ module ApplicationHelper
 
     true
   end
+
+  def authorize_admin_controllers
+    render json: {message: "Not Authorized"}, status: :unauthorized unless admin?
+  end
+
+  def render_bad_request
+    render json: {message: "Bad request"}, status: :bad_request
+  end
+
+  def render_internal_server_error
+    render json: {message: "Internal server error"}, status: :internal_server_error
+  end
 end

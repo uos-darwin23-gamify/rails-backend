@@ -21,7 +21,7 @@
 	};
 </script>
 
-<Card.Root class="relative flex-shrink-0 w-full max-w-sm">
+<Card.Root class="relative flex-shrink-0 grow max-w-sm m-4">
 	<Card.Header>
 		<Card.Title>Login</Card.Title>
 		<Card.Description>Log into GamifyCoding&#8482;</Card.Description>

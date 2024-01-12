@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_184904) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_pre_authorized_emails_on_email", unique: true
+    t.index "lower((email)::text)", name: "index_pre_authorized_emails_on_LOWER_email", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -6,6 +6,6 @@ class CreatePreAuthorizedEmails < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :pre_authorized_emails, :email, unique: true
+    add_index :pre_authorized_emails, "LOWER(email)", unique: true
   end
 end
