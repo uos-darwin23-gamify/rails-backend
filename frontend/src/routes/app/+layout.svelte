@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '$lib/global.css';
 	import { authenticated } from '$lib/stores';
 	import { scale } from 'svelte/transition';
 	import UserType from '$lib/enums/userType';
