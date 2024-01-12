@@ -3,8 +3,8 @@
 		"@typescript-eslint/no-unused-vars": [
 			"warn",
 			{
-				"argsIgnorePattern": "^_",
-				"varsIgnorePattern": "^$$(Props|Events|Slots|Generic)$"
+				"argsIgnorePattern": "^_$",
+				"varsIgnorePattern": "^\\$\\$(Props|Events|Slots|Generic)$"
 			}
 		]
 	}

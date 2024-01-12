@@ -10,6 +10,7 @@
 
 # Active Record syntax
 SqlPlaceholder.where(:name => "placeholder_name").first_or_create
+PreAuthorizedEmail.find_or_create_by(:email => "test@test.com")
 
 # Mongoid syntax
 NoSqlPlaceholder.find_or_create_by(:name => "placeholder_name")

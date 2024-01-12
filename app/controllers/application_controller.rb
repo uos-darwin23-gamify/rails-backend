@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-    include ActionController::Cookies
-    include ApplicationHelper
+  include ActionController::Cookies
+  include ApplicationHelper
 end

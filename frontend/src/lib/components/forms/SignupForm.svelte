@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { signUp } from '$lib/auth';
-	import Icon from '@iconify/svelte';
-	import validIcon from '@iconify-icons/mdi/checkbox-marked';
-	import errorIcon from '@iconify-icons/mdi/close-box';
 	import { authenticated } from '$lib/stores';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import * as Card from '$lib/components/ui/card';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { Separator } from '$lib/components/ui/separator';
+	import { Info } from 'lucide-svelte';
+	import * as Popover from '$lib/components/ui/popover';
 
 	// const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 	const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -74,113 +78,104 @@
 	}
 </script>
 
-<form
-	class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-	on:submit|preventDefault={handleSubmit}
->
-	<div class="card-body">
-		<h2 class="card-title">Signup</h2>
-		<div class="form-control">
-			<label class="label" for="email">
-				<span class="label-text">Email</span>
-			</label>
-			<input
-				type="text"
-				placeholder="email"
-				class="input input-bordered"
-				id="email"
-				bind:value={formData.email}
-				on:input={() => {
-					if (formValidation.emailValid === null) {
-						formValidation.emailValid = false;
-					}
+<Card.Root class="relative flex-shrink-0 w-full max-w-sm">
+	<Card.Header>
+		<div class="flex justify-between">
+			<div class="flex flex-col">
+				<Card.Title>Signup</Card.Title>
+				<Card.Description>Create an account for GamifyCoding&#8482;</Card.Description>
+			</div>
+			<Popover.Root portal={null}>
+				<Popover.Trigger asChild let:builder>
+					<Button builders={[builder]} variant="outline" size="icon"
+						><Info className="h-4 w-4" /></Button
+					>
+				</Popover.Trigger>
+				<Popover.Content class="w-80">
+					<div class="flex justify-between space-x-4">
+						<div class="shrink-0">
+							<Info className="h-4 w-4" />
+						</div>
+						<div class="space-y-1">
+							<h4 class="text-sm font-semibold">Note</h4>
+							<p class="text-sm">
+								This platform is for a research experiment. You need a pre-authorized email to sign
+								up.
+							</p>
+						</div>
+					</div>
+				</Popover.Content>
+			</Popover.Root>
+		</div>
+	</Card.Header>
+	<Card.Content>
+		<form class="grid w-full items-center gap-4" on:submit|preventDefault={handleSubmit}>
+			<div class="flex flex-col space-y-1.5">
+				<Label for="email">Email</Label>
+				<Input
+					id="email"
+					placeholder="Email"
+					bind:value={formData.email}
+					on:input={() => {
+						if (formValidation.emailValid === null) {
+							formValidation.emailValid = false;
+						}
 
-					formValidation.emailNotTaken = null;
-				}}
-			/>
-		</div>
-		<div class="form-control">
-			<label class="label" for="password">
-				<span class="label-text">Password (min. 8 characters)</span>
-			</label>
-			<input
-				type="password"
-				placeholder="password"
-				class="input input-bordered"
-				id="password"
-				bind:value={formData.password}
-				on:input={() => {
-					if (formValidation.passwordMin8 === null) {
-						formValidation.passwordMin8 = false;
-					}
-				}}
-			/>
-		</div>
-		<div class="form-control">
-			<label class="label" for="confirm-password">
-				<span class="label-text">Confirm Password</span>
-			</label>
-			<input
-				type="password"
-				placeholder="confirm password"
-				class="input input-bordered"
-				id="confirm-password"
-				bind:value={formData.confirmPassword}
-				on:input={() => {
-					if (formValidation.passwordsMatch === null) {
-						formValidation.passwordsMatch = false;
-					}
-				}}
-			/>
-		</div>
-		{#if formValidation.emailValid !== null || formValidation.emailNotTaken !== null || formValidation.passwordMin8 !== null || formValidation.passwordsMatch !== null}
-			<div class="divider my-1" />
-		{/if}
-		{#if formValidation.emailValid === false}
-			<div class="flex">
-				<Icon icon={errorIcon} height={24} class="scale-125" color="oklch(var(--er))" />
-				<p class="ml-3">Email Not Valid</p>
+						formValidation.emailNotTaken = null;
+					}}
+				/>
+				<div class="flex flex-col gap-2">
+					{#if formValidation.emailValid === false}
+						<Label class="text-error">Email Not Valid</Label>
+					{:else if formValidation.emailValid === true}
+						<Label class="text-success">Email Valid</Label>
+					{/if}
+					{#if formValidation.emailNotTaken === false}
+						<Label class="text-error">Email Is Not Pre-Authorized Or Belongs To Another User</Label>
+					{/if}
+				</div>
 			</div>
-		{:else if formValidation.emailValid === true}
-			<div class="flex">
-				<Icon icon={validIcon} height={24} class="scale-125" color="oklch(var(--su))" />
-				<p class="ml-3">Email Valid</p>
+			<div class="flex flex-col space-y-1.5">
+				<Label for="password">Password (min. 8 characters)</Label>
+				<Input
+					id="password"
+					type="password"
+					placeholder="Password"
+					bind:value={formData.password}
+					on:input={() => {
+						if (formValidation.passwordMin8 === null) {
+							formValidation.passwordMin8 = false;
+						}
+					}}
+				/>
+				{#if formValidation.passwordMin8 === false}
+					<Label class="text-error">Password Too Short (min. 8 characters)</Label>
+				{:else if formValidation.passwordMin8 === true}
+					<Label class="text-success">Password Length Ok</Label>
+				{/if}
 			</div>
-		{/if}
-		{#if formValidation.emailNotTaken === false}
-			<div class="flex">
-				<Icon icon={errorIcon} height={24} class="scale-125" color="oklch(var(--er))" />
-				<p class="ml-3">Email Belongs To Another User</p>
+			<div class="flex flex-col space-y-1.5">
+				<Label for="confirm-password">Confirm Password</Label>
+				<Input
+					id="confirm-password"
+					type="password"
+					placeholder="Confirm Password"
+					bind:value={formData.confirmPassword}
+					on:input={() => {
+						if (formValidation.passwordsMatch === null) {
+							formValidation.passwordsMatch = false;
+						}
+					}}
+				/>
+				{#if formValidation.passwordsMatch === false}
+					<Label class="text-error">Passwords Do Not Match</Label>
+				{:else if formValidation.passwordsMatch === true}
+					<Label class="text-success">Passwords Match</Label>
+				{/if}
 			</div>
-		{/if}
-		{#if formValidation.passwordMin8 === false}
-			<div class="flex">
-				<Icon icon={errorIcon} height={24} class="scale-125" color="oklch(var(--er))" />
-				<p class="ml-3">Password Too Short (min. 8 characters)</p>
-			</div>
-		{:else if formValidation.passwordMin8 === true}
-			<div class="flex">
-				<Icon icon={validIcon} height={24} class="scale-125" color="oklch(var(--su))" />
-				<p class="ml-3">Password Length Ok</p>
-			</div>
-		{/if}
-		{#if formValidation.passwordsMatch === false}
-			<div class="flex">
-				<Icon icon={errorIcon} height={24} class="scale-125" color="oklch(var(--er))" />
-				<p class="ml-3">Passwords Do Not Match</p>
-			</div>
-		{:else if formValidation.passwordsMatch === true}
-			<div class="flex">
-				<Icon icon={validIcon} height={24} class="scale-125" color="oklch(var(--su))" />
-				<p class="ml-3">Passwords Match</p>
-			</div>
-		{/if}
-		<div class="divider my-1" />
-		<div class="form-control">
-			<button class="btn btn-primary btn-sm">Create Account</button>
-		</div>
-		<div class="form-control">
-			<a class="btn btn-neutral btn-sm mt-2" href="/login">Back</a>
-		</div>
-	</div>
-</form>
+			<Separator class="my-1" />
+			<Button type="submit">Create Account</Button>
+			<a href="/login" class={buttonVariants({ variant: 'secondary' })}>Back</a>
+		</form>
+	</Card.Content>
+</Card.Root>
