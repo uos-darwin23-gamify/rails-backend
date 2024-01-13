@@ -88,7 +88,7 @@
 			<Popover.Root portal={null}>
 				<Popover.Trigger asChild let:builder>
 					<Button builders={[builder]} variant="outline" size="icon"
-						><Info class="h-5 w-5" /></Button
+						><Info class="h-6 w-6" /></Button
 					>
 				</Popover.Trigger>
 				<Popover.Content class="w-80">
