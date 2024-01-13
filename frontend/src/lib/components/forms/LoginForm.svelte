@@ -42,6 +42,7 @@
 				<Input
 					id="password"
 					placeholder="Password"
+					type="password"
 					bind:value={formData.password}
 					on:input={() => (emailOrPasswordInvalid = false)}
 				/>

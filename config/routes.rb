@@ -31,4 +31,8 @@ Rails.application.routes.draw do
 
 
   end
+
+  scope "socket" do
+    post "/auth/status", to: "socket_io/authentication_status#index"
+  end
 end

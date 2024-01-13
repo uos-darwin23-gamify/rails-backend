@@ -4,8 +4,13 @@
 	import UserType from '$lib/enums/userType';
 	import { onMount } from 'svelte';
 	import { buttonVariants } from '$lib/components/ui/button';
+	import { socketConnection } from '$lib/stores';
 
-	onMount(authenticated.verify);
+	onMount(async () => {
+		await authenticated.verify();
+		socketConnection.reset();
+		$socketConnection.on('user-type', ({ userType }) => console.log(userType));
+	});
 	$: loading = $authenticated === null;
 	$: {
 		switch ($authenticated) {

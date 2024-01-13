@@ -131,13 +131,13 @@ describe('logOut', () => {
 });
 
 describe('authenticationStatus', () => {
-	it("returns UserType.CUSTOMER if the server responds with a 200 status code body: { userType: 'customer' }", async () => {
+	it("returns UserType.USER if the server responds with a 200 status code body: { userType: 'user' }", async () => {
 		const mockFetch = vi.spyOn(global, 'fetch');
 		mockFetch.mockResolvedValueOnce(
-			new Response(JSON.stringify({ userType: 'customer' }), { status: 200 })
+			new Response(JSON.stringify({ userType: 'user' }), { status: 200 })
 		);
 		const result = await authenticationStatus();
-		expect(result).toBe(UserType.CUSTOMER);
+		expect(result).toBe(UserType.USER);
 	});
 
 	it("returns UserType.ADMIN if the server responds with a 200 status code body: { userType: 'admin' }", async () => {
@@ -147,15 +147,6 @@ describe('authenticationStatus', () => {
 		);
 		const result = await authenticationStatus();
 		expect(result).toBe(UserType.ADMIN);
-	});
-
-	it("returns UserType.REPORTER if the server responds with a 200 status code body: { userType: 'reporter' }", async () => {
-		const mockFetch = vi.spyOn(global, 'fetch');
-		mockFetch.mockResolvedValueOnce(
-			new Response(JSON.stringify({ userType: 'reporter' }), { status: 200 })
-		);
-		const result = await authenticationStatus();
-		expect(result).toBe(UserType.REPORTER);
 	});
 
 	it('returns false if the server responds with a 401 status code', async () => {

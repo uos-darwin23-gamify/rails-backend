@@ -9,6 +9,14 @@ module ApplicationHelper
     user.user_type
   end
 
+  def authenticated_from_socket?
+    user = current_user_from_socket
+
+    return false unless user
+
+    user.user_type
+  end
+
   def current_user
     return false if cookies[:access_token].blank?
 
@@ -20,7 +28,18 @@ module ApplicationHelper
     current_user
   end
 
-  def user?
+  def current_user_from_socket
+    return false if params[:access_token].blank?
+
+    jwt_payload = JWT.decode(params[:access_token], Rails.application.credentials.devise_jwt_secret_key!).first
+    current_user = User.find(jwt_payload["sub"])
+
+    return false unless current_user
+
+    current_user
+  end
+
+  def user_type?
     user = current_user
 
     return false if !user || user.user_type != "user"
@@ -28,7 +47,7 @@ module ApplicationHelper
     true
   end
 
-  def admin?
+  def admin_type?
     user = current_user
 
     return false if !user || user.user_type != "admin"
@@ -37,7 +56,7 @@ module ApplicationHelper
   end
 
   def authorize_admin_controllers
-    render json: {message: "Not Authorized"}, status: :unauthorized unless admin?
+    render json: {message: "Not Authorized"}, status: :unauthorized unless admin_type?
   end
 
   def render_bad_request

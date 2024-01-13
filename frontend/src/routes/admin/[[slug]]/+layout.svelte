@@ -3,9 +3,13 @@
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import UserType from '$lib/enums/userType';
+	import { socketConnection } from '$lib/stores';
 
-	onMount(authenticated.verify);
-
+	onMount(async () => {
+		await authenticated.verify();
+		socketConnection.reset();
+		$socketConnection.on('user-type', ({ userType }) => console.log(userType));
+	});
 	$: loading = $authenticated === null;
 	$: {
 		switch ($authenticated) {
