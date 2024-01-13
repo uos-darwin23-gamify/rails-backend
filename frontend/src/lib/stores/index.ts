@@ -3,8 +3,6 @@ import { authenticationStatus } from '$lib/auth';
 import type UserType from '$lib/enums/userType';
 import { io } from 'socket.io-client';
 import type { Events } from '$lib/types/Events';
-import { dev } from '$app/environment';
-import { PUBLIC_SOCKET_IO_URL_PRODUCTION } from '$env/static/public';
 
 const createAuthenticatedStore = () => {
 	const { subscribe, set } = writable<null | boolean | UserType>(null);
@@ -18,7 +16,7 @@ export const authenticated = createAuthenticatedStore();
 
 const createSocketConnectionStore = () => {
 	const storeInstance = writable<Events>(
-		io(dev ? '' : PUBLIC_SOCKET_IO_URL_PRODUCTION, {
+		io({
 			path: '/socket',
 			ackTimeout: 10000,
 			retries: 3,
@@ -32,7 +30,7 @@ const createSocketConnectionStore = () => {
 			storeInstance.update((oldSocketConnection) => {
 				oldSocketConnection?.disconnect();
 
-				return io(dev ? '' : PUBLIC_SOCKET_IO_URL_PRODUCTION, {
+				return io({
 					path: '/socket',
 					ackTimeout: 10000,
 					retries: 3,

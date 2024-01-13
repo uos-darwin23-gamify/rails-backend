@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SocketIo
+module SocketServer
   class AuthenticationStatusController < ApplicationController
     def index
       user_type = authenticated_from_socket?
