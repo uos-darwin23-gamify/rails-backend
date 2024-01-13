@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { logOut } from '$lib/auth';
 	import { authenticated } from '$lib/stores';
+	import { Button } from '$lib/components/ui/button';
 
 	const handleLogout = async () => {
 		const logoutSuccessful = await logOut();
@@ -8,4 +9,4 @@
 	};
 </script>
 
-<button class="btn" on:click={handleLogout}>Logout</button>
+<Button on:click={handleLogout}>Logout</Button>
