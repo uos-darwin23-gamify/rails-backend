@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { signUp } from '$lib/auth';
 	import { authenticated } from '$lib/stores';
-	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
@@ -175,7 +175,7 @@
 			</div>
 			<Separator class="my-1" />
 			<Button type="submit">Create Account</Button>
-			<a href="/login" class={buttonVariants({ variant: 'secondary' })}>Back</a>
+			<Button href="/login" variant="secondary">Back</Button>
 		</form>
 	</Card.Content>
 </Card.Root>

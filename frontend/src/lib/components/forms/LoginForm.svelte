@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { logIn } from '$lib/auth';
 	import { authenticated } from '$lib/stores';
-	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
@@ -52,7 +52,7 @@
 			{/if}
 			<Separator class="my-1" />
 			<Button type="submit">Login</Button>
-			<a href="/signup" class={buttonVariants({ variant: 'secondary' })}>Create An Account</a>
+			<Button href="/signup" variant="secondary">Create An Account</Button>
 		</form>
 	</Card.Content>
 </Card.Root>

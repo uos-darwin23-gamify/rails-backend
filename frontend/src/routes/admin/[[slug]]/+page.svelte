@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Header from '$lib/components/admin/header/Header.svelte';
 	import SideMenu from '$lib/components/admin/sidemenu/SideMenu.svelte';
-	import AdminDashboardUrls from '$lib/enums/adminDashboardUrls.js';
+	import AdminDashboardUrls from '$lib/enums/AdminDashboardUrls.js';
 	import Overview from '$lib/components/admin/main/overview/Overview.svelte';
 	import Users from '$lib/components/admin/main/users/Users.svelte';
 	import PreAuthorizedEmails from '$lib/components/admin/main/preauthorizedemails/PreAuthorizedEmails.svelte';
@@ -46,14 +46,13 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
-		class="relative flex grow bg-base-200 md:brightness-100 overflow-x-hidden"
+		class="relative flex grow bg-base-300 md:brightness-100 overflow-x-hidden"
 		class:brightness-50={!menuClosed}
-		class:backdrop-blur={!menuClosed}
 		on:click={() => (menuClosed = true)}
 	>
+		<svelte:component this={mainComponent} />
 		{#if !menuClosed}
 			<div class="absolute w-full h-full md:hidden backdrop-blur" />
 		{/if}
-		<svelte:component this={mainComponent} />
 	</div>
 </div>

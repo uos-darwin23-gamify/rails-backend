@@ -1,4 +1,4 @@
-import UserType from '$lib/enums/userType';
+import UserType from '$lib/enums/UserType';
 
 /**
  * Checks if the user is authenticated / Determines userType by making a request to the server.

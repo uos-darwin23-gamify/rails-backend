@@ -2,7 +2,7 @@
 	import { authenticated } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
-	import UserType from '$lib/enums/userType';
+	import UserType from '$lib/enums/UserType';
 	import { socketConnection } from '$lib/stores';
 
 	onMount(async () => {

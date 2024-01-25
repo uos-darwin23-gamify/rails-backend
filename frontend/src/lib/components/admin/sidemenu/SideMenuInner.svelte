@@ -1,7 +1,8 @@
 <script lang="ts">
-	import AdminDashboardUrls from '$lib/enums/adminDashboardUrls';
+	import AdminDashboardUrls from '$lib/enums/AdminDashboardUrls';
 	import { createEventDispatcher } from 'svelte';
 	import { Home, Users, Mails } from 'lucide-svelte';
+	import { Button } from '$lib/components/ui/button';
 
 	export let slug: string | undefined;
 
@@ -10,31 +11,28 @@
 
 <ul class="menu menu-lg p-4 min-h-full text-base-content flex-nowrap">
 	<li>
-		<a
-			class:font-semibold={!slug}
-			class:active={!slug}
+		<Button
+			variant={!slug ? 'secondary' : 'outline'}
 			href={`/admin${AdminDashboardUrls.OVERVIEW ? '/' + AdminDashboardUrls.OVERVIEW : ''}`}
 			data-testid="overview-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
-			class="flex items-center text-sm"><Home class="h-5 w-5 mr-2" />Overview</a
+			class="flex items-center text-sm justify-start"><Home class="h-5 w-5 mr-2" />Overview</Button
 		>
 	</li>
 	<div class="my-1" />
 	<li>
-		<a
-			class:font-semibold={slug === AdminDashboardUrls.USERS}
-			class:active={slug === AdminDashboardUrls.USERS}
+		<Button
+			variant={slug === AdminDashboardUrls.USERS ? 'secondary' : 'outline'}
 			href={`/admin${AdminDashboardUrls.USERS ? '/' + AdminDashboardUrls.USERS : ''}`}
 			data-testid="users-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
-			class="flex items-center text-sm"><Users class="h-5 w-5 mr-2" />Users</a
+			class="flex items-center text-sm justify-start"><Users class="h-5 w-5 mr-2" />Users</Button
 		>
 	</li>
 	<div class="my-1" />
 	<li>
-		<a
-			class:font-semibold={slug === AdminDashboardUrls.PRE_AUTHORIZED_EMAILS}
-			class:active={slug === AdminDashboardUrls.PRE_AUTHORIZED_EMAILS}
+		<Button
+			variant={slug === AdminDashboardUrls.PRE_AUTHORIZED_EMAILS ? 'secondary' : 'outline'}
 			href={`/admin${
 				AdminDashboardUrls.PRE_AUTHORIZED_EMAILS
 					? '/' + AdminDashboardUrls.PRE_AUTHORIZED_EMAILS
@@ -42,7 +40,8 @@
 			}`}
 			data-testid="pre-authorized-emails-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
-			class="flex items-center text-sm"><Mails class="h-5 w-5 mr-2" />Pre-Authorized Emails</a
+			class="flex items-center text-sm justify-start"
+			><Mails class="h-5 w-5 mr-2" />Pre-Authorized Emails</Button
 		>
 	</li>
 </ul>

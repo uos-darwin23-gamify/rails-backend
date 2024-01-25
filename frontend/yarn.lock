@@ -2229,6 +2229,11 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+radix-icons-svelte@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/radix-icons-svelte/-/radix-icons-svelte-1.2.1.tgz#532706b0cd838cb8a832b1d7098d06c7f7ab534f"
+  integrity sha512-svmiMd0ocpdTm9cvAz0klcZpnh639lVctj6psQiawd4pYalVzOG4cX+JizAgRckyTAsRVdzObP7D2EBrSfdghA==
+
 react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
@@ -2539,6 +2544,15 @@ svelte-check@^3.6.0:
     postcss "^8.4.29"
     postcss-scss "^4.0.8"
 
+svelte-headless-table@^0.18.1:
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/svelte-headless-table/-/svelte-headless-table-0.18.1.tgz#20f865bceffcf13be541dd2aaf8fa3a4bb2a1bb2"
+  integrity sha512-pcZIi36u8RV9B3m0oG6000az7tvT6CCK+c8qBUuNUQSChsfJySC5ryGdJSTFlAYBVRGUgZlqYOKGUgSbOfIrnA==
+  dependencies:
+    svelte-keyed "^2.0.0"
+    svelte-render "^2.0.0"
+    svelte-subscribe "^2.0.1"
+
 svelte-hmr@^0.15.3:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.15.3.tgz#df54ccde9be3f091bf5f18fc4ef7b8eb6405fbe6"
@@ -2548,6 +2562,11 @@ svelte-intersection-observer@^0.10.1:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/svelte-intersection-observer/-/svelte-intersection-observer-0.10.2.tgz#3c268f606f65cb1d011505ac532b57916f55d94f"
   integrity sha512-aGGyRacrp+zK34AcST0h4T32QW+94vH1jNhMmOueVP1ZQk6XpgBzoKl5WEgAF5H4Afzb8B6vEOXotVa5I9TVBA==
+
+svelte-keyed@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-keyed/-/svelte-keyed-2.0.0.tgz#57131f4cfab204e9000197049f70cdb772c0e84b"
+  integrity sha512-7TeEn+QbJC2OJrHiuM0T8vMBkms3DNpTE+Ir+NtnVBnBMA78aL4f1ft9t0Hn/pBbD/TnIXi4YfjFRAgtN+DZ5g==
 
 svelte-legos@^0.2.2:
   version "0.2.2"
@@ -2569,10 +2588,22 @@ svelte-preprocess@^5.1.0:
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
 
+svelte-render@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-render/-/svelte-render-2.0.0.tgz#9bf166d432d5da5a9c7dc364982e2cdac97f480d"
+  integrity sha512-YWMwXGlUlnlb8QhEd138Kmay2KfU6sE7jj3epoYZuHe3M2voGdXfgqYJY7gGizW55N0zDWtuRaY3Rh6PGcGQyQ==
+  dependencies:
+    svelte-subscribe "^2.0.0"
+
 svelte-sonner@^0.3.11:
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/svelte-sonner/-/svelte-sonner-0.3.11.tgz#28c4d7a9364835031b7816a55219f534b646b97b"
   integrity sha512-TkjgDC7zr0waky81Z9CShXMD+4NQ7UASuRx0BhgQo8ZTDQQYk8X8MzJa3zVtZVa6RYJEiahHBXx8Zt/Ie9G5hg==
+
+svelte-subscribe@^2.0.0, svelte-subscribe@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/svelte-subscribe/-/svelte-subscribe-2.0.1.tgz#4464991235f85bed347c7423998c38426b123af3"
+  integrity sha512-eKXIjLxB4C7eQWPqKEdxcGfNXm2g/qJ67zmEZK/GigCZMfrTR3m7DPY93R6MX+5uoqM1FRYxl8LZ1oy4URWi2A==
 
 svelte@^4.2.7:
   version "4.2.8"

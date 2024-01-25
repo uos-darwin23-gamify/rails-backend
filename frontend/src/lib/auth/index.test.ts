@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { signUp, logIn, logOut, authenticationStatus } from '$lib/auth';
 import 'isomorphic-fetch';
-import UserType from '$lib/enums/userType';
+import UserType from '$lib/enums/UserType';
 
 const EMAIL = 'test@example.com';
 const PASSWORD = 'password';

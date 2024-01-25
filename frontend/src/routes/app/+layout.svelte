@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { authenticated } from '$lib/stores';
 	import { scale } from 'svelte/transition';
-	import UserType from '$lib/enums/userType';
+	import UserType from '$lib/enums/UserType';
 	import { onMount } from 'svelte';
 	import { socketConnection } from '$lib/stores';
 
