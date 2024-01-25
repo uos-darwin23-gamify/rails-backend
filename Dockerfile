@@ -9,6 +9,7 @@ FROM node:20-alpine as frontend
 COPY . .
 WORKDIR /frontend
 
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN yarn install
 RUN yarn deploy
 
