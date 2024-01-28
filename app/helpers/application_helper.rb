@@ -59,6 +59,10 @@ module ApplicationHelper
     render json: {message: "Not Authorized"}, status: :unauthorized unless admin_type?
   end
 
+  def authorize_user_controllers
+    render json: {message: "Not Authorized"}, status: :unauthorized unless user_type?
+  end
+
   def render_bad_request
     render json: {message: "Bad request"}, status: :bad_request
   end

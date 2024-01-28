@@ -1,12 +1,12 @@
 <script lang="ts">
-	import LogoutButton from '$lib/components/LogoutButton.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import AvatarDropdown from './AvatarDropdown.svelte';
 
 	export let menuClosed: boolean;
 </script>
 
 <header
-	id="admin-header"
+	id="app-header"
 	class="p-2 flex items-center justify-between sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
 >
 	<div class="px-1 md:hidden">
@@ -40,7 +40,7 @@
 			/>
 		</Button>
 	</div>
-	<h1 class="select-none px-4 hidden md:block">Admin Dashboard</h1>
-	<h1 class="select-none md:hidden absolute left-1/2 -translate-x-1/2">Admin Dashboard</h1>
-	<LogoutButton />
+	<h1 class="select-none px-4 hidden md:block">GamifyCoding&#8482;</h1>
+	<h1 class="select-none md:hidden absolute left-1/2 -translate-x-1/2">GamifyCoding&#8482;</h1>
+	<AvatarDropdown />
 </header>

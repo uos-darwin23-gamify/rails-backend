@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AdminDashboardUrls from '$lib/enums/AdminDashboardUrls';
 	import { createEventDispatcher } from 'svelte';
-	import { Home, Users, Mails } from 'lucide-svelte';
+	import { Home, Swords, Users, Mails } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 
 	export let slug: string | undefined;
@@ -17,6 +17,19 @@
 			data-testid="overview-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
 			class="flex items-center text-sm justify-start"><Home class="h-5 w-5 mr-2" />Overview</Button
+		>
+	</li>
+	<div class="my-1" />
+	<li>
+		<Button
+			variant={slug === AdminDashboardUrls.CHALLENGE_EDITOR ? 'secondary' : 'outline'}
+			href={`/admin${
+				AdminDashboardUrls.CHALLENGE_EDITOR ? '/' + AdminDashboardUrls.CHALLENGE_EDITOR : ''
+			}`}
+			data-testid="challenge-editor-button"
+			on:click={() => dispatch('sideMenuItemClicked')}
+			class="flex items-center text-sm justify-start"
+			><Swords class="h-5 w-5 mr-2" />Challenge Editor</Button
 		>
 	</li>
 	<div class="my-1" />

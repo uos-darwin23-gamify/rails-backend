@@ -1,11 +1,10 @@
 <script lang="ts">
-	import Header from '$lib/components/admin/header/Header.svelte';
-	import SideMenu from '$lib/components/admin/sidemenu/SideMenu.svelte';
-	import AdminDashboardUrls from '$lib/enums/AdminDashboardUrls.js';
-	import Overview from '$lib/components/admin/main/overview/Overview.svelte';
-	import ChallengeEditor from '$lib/components/admin/main/challenge-editor/ChallengeEditor.svelte';
-	import Users from '$lib/components/admin/main/users/Users.svelte';
-	import PreAuthorizedEmails from '$lib/components/admin/main/pre-authorized-emails/PreAuthorizedEmails.svelte';
+	import Header from '$lib/components/app/header/Header.svelte';
+	import SideMenu from '$lib/components/app/sidemenu/SideMenu.svelte';
+	import AppUrls from '$lib/enums/AppUrls';
+	import Home from '$lib/components/app/main/home/Home.svelte';
+	import Challenges from '$lib/components/app/main/challenges/Challenges.svelte';
+	import Settings from '$lib/components/app/main/settings/Settings.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
 
@@ -16,17 +15,14 @@
 
 	$: {
 		switch (data.slug) {
-			case AdminDashboardUrls.CHALLENGE_EDITOR:
-				mainComponent = ChallengeEditor;
+			case AppUrls.CHALLENGES:
+				mainComponent = Challenges;
 				break;
-			case AdminDashboardUrls.USERS:
-				mainComponent = Users;
-				break;
-			case AdminDashboardUrls.PRE_AUTHORIZED_EMAILS:
-				mainComponent = PreAuthorizedEmails;
+			case AppUrls.SETTINGS:
+				mainComponent = Settings;
 				break;
 			default:
-				mainComponent = Overview;
+				mainComponent = Home;
 				break;
 		}
 	}
@@ -34,7 +30,7 @@
 	let headerHeight = 64;
 
 	onMount(() => {
-		const header = document.getElementById('admin-header');
+		const header = document.getElementById('app-header');
 		const height = header?.getBoundingClientRect().height;
 		if (height !== undefined) {
 			headerHeight = height;

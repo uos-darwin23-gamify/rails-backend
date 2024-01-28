@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { logOut } from '$lib/auth';
 	import { authenticated } from '$lib/stores';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import type { VariantProps } from 'tailwind-variants';
+
+	type Variant = VariantProps<typeof buttonVariants>['variant'];
+	type Size = VariantProps<typeof buttonVariants>['size'];
+
+	export let variant: Variant = undefined;
+	export let size: Size = undefined;
 
 	const handleLogout = async () => {
 		const logoutSuccessful = await logOut();
@@ -9,4 +16,4 @@
 	};
 </script>
 
-<Button on:click={handleLogout}>Logout</Button>
+<Button {variant} {size} on:click={handleLogout}>Logout</Button>
