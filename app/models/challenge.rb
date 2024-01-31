@@ -9,10 +9,14 @@ class Challenge
 
   DIFFICULTIES = %i[EASY MEDIUM HARD].freeze
 
-  validates :name, uniqueness: true
+  # validates :name, uniqueness: true
   validates :difficulty, inclusion: {in: DIFFICULTIES}
 
-  def challenge_type
+  def type
     _type
+  end
+
+  def id
+    self._id.to_s
   end
 end

@@ -12,7 +12,7 @@
 	} from 'svelte-headless-table/plugins';
 	import {
 		DataTableCheckbox,
-		DataTableTitleCell,
+		DataTableEmailCell,
 		DataTableRowActions,
 		// DataTablePriorityCell,
 		DataTableColumnHeader,
@@ -72,7 +72,7 @@
 			id: 'email',
 			cell: ({ value, row }) => {
 				if (row.isData()) {
-					return createRender(DataTableTitleCell, {
+					return createRender(DataTableEmailCell, {
 						value
 						// ,labelValue: row.original.email
 					});

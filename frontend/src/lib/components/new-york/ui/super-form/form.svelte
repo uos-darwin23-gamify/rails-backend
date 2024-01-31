@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-	import type { UnwrapEffects, ZodValidation } from "sveltekit-superforms";
-	import type { AnyZodObject } from "zod";
+	import type { UnwrapEffects, ZodValidation } from 'sveltekit-superforms';
+	import type { AnyZodObject } from 'zod';
 
 	type Validation = ZodValidation<AnyZodObject>;
 	type T = Validation;
@@ -8,10 +8,10 @@
 </script>
 
 <script lang="ts" generics="T extends Validation = Validation, M = any">
-	import { superForm, type FormOptions } from "sveltekit-superforms/client";
-	import type { HTMLFormAttributes } from "svelte/elements";
+	import { superForm, type FormOptions } from 'sveltekit-superforms/client';
+	import type { HTMLFormAttributes } from 'svelte/elements';
 
-	import type { SuperValidated } from "sveltekit-superforms";
+	import type { SuperValidated } from 'sveltekit-superforms';
 
 	type Options<T, M> = FormOptions<UnwrapEffects<T>, M>;
 	type $$Props = HTMLFormAttributes & {

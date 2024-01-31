@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { createFormField } from ".";
-	import type { Form, FormFieldName } from "./types";
-	import type { AnyZodObject } from "zod";
-	import { cn } from "$lib/utils/ui";
+	import { createFormField } from '.';
+	import type { Form, FormFieldName } from './types';
+	import type { AnyZodObject } from 'zod';
+	import { cn } from '$lib/utils/ui';
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -35,6 +35,6 @@
 	};
 </script>
 
-<div class={cn("space-y-2", className)} {...$$restProps}>
+<div class={cn('space-y-2', className)} {...$$restProps}>
 	<slot {field} />
 </div>

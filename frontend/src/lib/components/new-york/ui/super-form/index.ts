@@ -1,18 +1,18 @@
-import Root from "./form.svelte";
-import Description from "./form-description.svelte";
-import Field from "./form-field.svelte";
-import Label from "./form-label.svelte";
-import Message from "./form-message.svelte";
+import Root from './form.svelte';
+import Description from './form-description.svelte';
+import Field from './form-field.svelte';
+import Label from './form-label.svelte';
+import Message from './form-message.svelte';
 
-import { setContext } from "svelte";
-import type { FieldAttrs, Form, FormFieldContext, FormStores } from "./types";
-import { formFieldProxy } from "sveltekit-superforms/client";
-import type { AnyZodObject, z } from "zod";
+import { setContext } from 'svelte';
+import type { FieldAttrs, Form, FormFieldContext, FormStores } from './types';
+import { formFieldProxy } from 'sveltekit-superforms/client';
+import type { AnyZodObject, z } from 'zod';
 
-import type { FormPathLeaves, UnwrapEffects, ZodValidation } from "sveltekit-superforms";
+import type { FormPathLeaves, UnwrapEffects, ZodValidation } from 'sveltekit-superforms';
 
-export const FORM_CONTROL_CONTEXT = "FormFieldControl";
-export const FORM_FIELD_CONTEXT = "FormField";
+export const FORM_CONTROL_CONTEXT = 'FormFieldControl';
+export const FORM_FIELD_CONTEXT = 'FormField';
 
 export function createFormField<
 	T extends ZodValidation<AnyZodObject>,
@@ -39,12 +39,12 @@ export function createFormField<
 
 	function getFieldAttrs<T>(val: T, errors: string[] | undefined) {
 		return {
-			"aria-invalid": errors ? true : undefined,
-			"aria-describedby": !errors
+			'aria-invalid': errors ? true : undefined,
+			'aria-describedby': !errors
 				? context.formDescriptionId
 				: `${context.formDescriptionId} ${context.formMessageId}`,
-			"data-invalid": errors ? true : undefined,
-			"data-valid": errors ? undefined : true,
+			'data-invalid': errors ? true : undefined,
+			'data-valid': errors ? undefined : true,
 			name,
 			id: context.formItemId,
 			value: val

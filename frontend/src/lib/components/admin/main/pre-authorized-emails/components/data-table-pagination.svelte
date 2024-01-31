@@ -1,14 +1,9 @@
 <script lang="ts">
-	import { Button } from "$lib/components/new-york/ui/button";
-	import {
-		ChevronRight,
-		ChevronLeft,
-		DoubleArrowRight,
-		DoubleArrowLeft
-	} from "radix-icons-svelte";
-	import * as Select from "$lib/components/new-york/ui/select";
-	import type { PreAuthorizedEmail } from "../data/schemas";
-	import type { TableViewModel } from "svelte-headless-table";
+	import { Button } from '$lib/components/new-york/ui/button';
+	import { ChevronRight, ChevronLeft, DoubleArrowRight, DoubleArrowLeft } from 'radix-icons-svelte';
+	import * as Select from '$lib/components/new-york/ui/select';
+	import type { PreAuthorizedEmail } from '../data/schemas';
+	import type { TableViewModel } from 'svelte-headless-table';
 
 	export let tableModel: TableViewModel<PreAuthorizedEmail>;
 
@@ -21,7 +16,7 @@
 
 <div class="flex items-center justify-between px-2 flex-wrap gap-2">
 	<div class="flex-1 text-sm text-muted-foreground">
-		{Object.keys($selectedDataIds).length} of{" "}
+		{Object.keys($selectedDataIds).length} of{' '}
 		{$rows.length} row(s) selected.
 	</div>
 	<div class="flex items-center space-x-6 lg:space-x-8 flex-wrap gap-2">
@@ -29,7 +24,7 @@
 			<p class="text-sm font-medium">Rows per page</p>
 			<Select.Root
 				onSelectedChange={(selected) => pageSize.set(Number(selected?.value))}
-				selected={{ value: 10, label: "10" }}
+				selected={{ value: 10, label: '10' }}
 			>
 				<Select.Trigger class="w-[180px]">
 					<Select.Value placeholder="Select page size" />

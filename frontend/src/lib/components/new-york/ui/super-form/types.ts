@@ -1,7 +1,7 @@
-import type { Writable } from "svelte/store";
-import type { FormPathLeaves, UnwrapEffects, ZodValidation } from "sveltekit-superforms";
-import type { SuperForm, formFieldProxy } from "sveltekit-superforms/client";
-import type { AnyZodObject, z } from "zod";
+import type { Writable } from 'svelte/store';
+import type { FormPathLeaves, UnwrapEffects, ZodValidation } from 'sveltekit-superforms';
+import type { SuperForm, formFieldProxy } from 'sveltekit-superforms/client';
+import type { AnyZodObject, z } from 'zod';
 
 export type Expand<T> = T extends object
 	? T extends infer O
@@ -32,16 +32,16 @@ export type FormFieldContext = {
 };
 
 export type FieldAttrs<T> = {
-	"aria-invalid"?: boolean;
-	"aria-describedby"?: string;
+	'aria-invalid'?: boolean;
+	'aria-describedby'?: string;
 	name: string;
 	id: string;
 	value: T;
 };
 
 export type ControlFieldAttrs<T> = {
-	control: Omit<FieldAttrs<T>, "name">;
-	input: Pick<FieldAttrs<T>, "value" | "name">;
+	control: Omit<FieldAttrs<T>, 'name'>;
+	input: Pick<FieldAttrs<T>, 'value' | 'name'>;
 };
 
 export type FormStores<

@@ -5,21 +5,28 @@ module Users
     before_action :authorize_user_controllers
 
     def all_challenges
-      challenges = Challenge.all
+      challenges = Challenge.all.as_json(only: [:name, :difficulty], methods: [:id, :type])
       render json: challenges
     end
 
     def challenge
-      challenge_name = params[:name]
+      challenge_oid = params[:id]
 
-      if challenge_name.nil? || !challenge_name.is_a?(String)
+      # if challenge_name.nil? || !challenge_name.is_a?(String)
+      #   return render_bad_request
+      # end
+
+      # challenge = Challenge.find_by(name: challenge_name)
+      # return render_bad_request if challenge.nil?
+
+      if challenge_oid.nil? || !challenge_oid.is_a?(String)
         return render_bad_request
       end
 
-      challenge = Challenge.find_by(name: challenge_name)
+      challenge = Challenge.find(challenge_oid)
       return render_bad_request if challenge.nil?
 
-      case challenge.challenge_type
+      case challenge.type
       when "FillBlankChallenge"
         render json: challenge.as_json(only: [:name, :difficulty, :question_array])
       when "McqChallenge"

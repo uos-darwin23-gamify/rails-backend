@@ -4,9 +4,11 @@
 	import AppUrls from '$lib/enums/AppUrls';
 	import Home from '$lib/components/app/main/home/Home.svelte';
 	import Challenges from '$lib/components/app/main/challenges/Challenges.svelte';
+	import Challenge from '$lib/components/app/main/challenge/Challenge.svelte';
 	import Settings from '$lib/components/app/main/settings/Settings.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	export let data;
 	let menuClosed = true;
@@ -16,7 +18,12 @@
 	$: {
 		switch (data.slug) {
 			case AppUrls.CHALLENGES:
-				mainComponent = Challenges;
+				const challengeId = $page.url.searchParams.get('id');
+				if (challengeId !== null) {
+					mainComponent = Challenge;
+				} else {
+					mainComponent = Challenges;
+				}
 				break;
 			case AppUrls.SETTINGS:
 				mainComponent = Settings;
