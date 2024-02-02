@@ -21,4 +21,8 @@ class Challenge
   def id
     self._id.to_s
   end
+
+  def verify_solution(solution)
+    raise NotImplementedError, "Subclasses must define 'verify_solution'."
+  end
 end

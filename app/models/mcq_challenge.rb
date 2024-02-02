@@ -6,6 +6,10 @@ class McqChallenge < Challenge
 
   validate :validate_answers, :validate_correct_answers
 
+  def verify_solution(solution)
+    solution.is_a?(Array) && solution.all? { |s| s.is_a?(Integer) } && solution.sort == correct_answers.sort
+  end
+
   private
 
   def validate_answers

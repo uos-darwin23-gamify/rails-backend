@@ -8,6 +8,13 @@ class CodeOutputChallenge < Challenge
   validates :code, length: { minimum: 1 }
   validate :validate_correct_answer_regex_length, :validate_correct_answer_regex_content, :validate_question_content
 
+  def verify_solution(solution)
+    solution.is_a?(Array) && 
+    solution.all? { |s| s.is_a?(String) } &&
+    solution.length == correct_answer_regex_array.length &&
+    solution.zip(correct_answer_regex_array).all? { |s, regex| Regexp.new(regex).match?(s) }
+  end
+
   private
 
   def validate_correct_answer_regex_length

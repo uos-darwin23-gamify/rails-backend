@@ -7,6 +7,13 @@ class ConnectBlocksChallenge < Challenge
 
   validate :validate_first_group, :validate_second_group, :validate_correct_answers
 
+  def verify_solution(solution)
+    solution.is_a?(Array) && 
+    solution.all? { |s| s.is_a?(Array) && s.length == 2 && s.all? { |i| i.is_a?(Integer) } } &&
+    solution.uniq.length == solution.length &&
+    solution.sort == correct_answers.sort
+  end
+
   private
 
   def validate_first_group

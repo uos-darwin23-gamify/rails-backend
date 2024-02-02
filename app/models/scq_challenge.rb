@@ -6,6 +6,10 @@ class ScqChallenge < Challenge
 
   validate :validate_answers, :validate_correct_answer
 
+  def verify_solution(solution)
+    solution.is_a?(Integer) && solution == correct_answer
+  end
+
   private
 
   def validate_answers
