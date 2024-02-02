@@ -27,12 +27,14 @@ module Users
       return render_bad_request if challenge.nil?
 
       case challenge.type
-      when "FillBlankChallenge"
-        render json: challenge.as_json(only: [:name, :difficulty, :question_array])
+      when "ScqChallenge"
+        render json: challenge.as_json(only: [:name, :question_overview, :difficulty, :answers], methods: [:id, :type])
       when "McqChallenge"
-        render json: challenge.as_json(only: [:name, :difficulty, :question, :answers])
-      when "DragDropChallenge"
-        render json: challenge.as_json(only: [:name, :difficulty, :items])
+        render json: challenge.as_json(only: [:name, :question_overview, :difficulty, :answers], methods: [:id, :type])
+      when "ConnectBlocksChallenge"
+        render json: challenge.as_json(only: [:name, :question_overview, :difficulty, :first_group, :second_group], methods: [:id, :type])
+      when "CodeOutputChallenge"
+        render json: challenge.as_json(only: [:name, :question_overview, :difficulty, :code, :question_array], methods: [:id, :type])
       else
         render_internal_server_error
       end
