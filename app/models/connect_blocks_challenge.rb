@@ -8,8 +8,8 @@ class ConnectBlocksChallenge < Challenge
   validate :validate_first_group, :validate_second_group, :validate_correct_answers
 
   def verify_solution(solution)
-    solution.is_a?(Array) && 
-    solution.all? { |s| s.is_a?(Array) && s.length == 2 && s.all? { |i| i.is_a?(Integer) } } &&
+    solution.is_a?(Array) &&
+    solution.all? {|s| s.is_a?(Array) && s.length == 2 && s.all? {|i| i.is_a?(Integer) } } &&
     solution.uniq.length == solution.length &&
     solution.sort == correct_answers.sort
   end
@@ -25,20 +25,20 @@ class ConnectBlocksChallenge < Challenge
   end
 
   def validate_group(field, group)
-    unless group.is_a?(Array) && group.length > 0
+    unless group.is_a?(Array) && group.length.positive?
       errors.add(field, "must be an array with length greater than 0")
       return
     end
 
     group.each do |item|
-      unless item.is_a?(String) && item.length > 0
+      unless item.is_a?(String) && item.length.positive?
         errors.add(field, "#{item} must be a string with length greater than 0")
       end
     end
   end
 
   def validate_correct_answers
-    unless correct_answers.is_a?(Array) && correct_answers.length > 0
+    unless correct_answers.is_a?(Array) && correct_answers.length.positive?
       errors.add(:correct_answers, "must be an array with length greater than 0")
       return
     end
@@ -49,7 +49,7 @@ class ConnectBlocksChallenge < Challenge
     end
 
     correct_answers.each do |answer|
-      unless answer.is_a?(Array) && answer.length == 2 && answer.all? { |i| i.is_a?(Integer) }
+      unless answer.is_a?(Array) && answer.length == 2 && answer.all? {|i| i.is_a?(Integer) }
         errors.add(:correct_answers, "#{answer} must be an array of exactly two integers")
         next
       end

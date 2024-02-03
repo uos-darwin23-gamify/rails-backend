@@ -46,7 +46,7 @@
 </script>
 
 <Header bind:menuClosed />
-<div class="relative flex grow" style={`height: calc(100% - ${headerHeight}px);`}>
+<div class="relative flex" style={`height: calc(100% - ${headerHeight}px);`}>
 	<div class="overflow-y-auto shrink-0">
 		<SideMenu bind:menuClosed slug={data.slug} />
 	</div>

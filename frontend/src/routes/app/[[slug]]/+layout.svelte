@@ -36,7 +36,7 @@
 		</div>
 	{:else}
 		<div
-			class="flex flex-col grow overflow-x-hidden relative"
+			class="flex flex-col grow overflow-hidden relative"
 			in:scale={{ start: 0.9, duration: 500, opacity: 0 }}
 		>
 			<slot />
