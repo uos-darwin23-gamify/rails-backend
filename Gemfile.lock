@@ -300,6 +300,11 @@ GEM
     ruby2_keywords (0.0.5)
     ruby_parser (3.20.3)
       sexp_processor (~> 4.16)
+    sentry-rails (5.16.1)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.16.1)
+    sentry-ruby (5.16.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sexp_processor (4.17.0)
     stringio (3.1.0)
     temple (0.10.3)
@@ -348,6 +353,8 @@ DEPENDENCIES
   rubocop-factory_bot
   rubocop-rails
   rubocop-rspec
+  sentry-rails
+  sentry-ruby
   tzinfo-data
 
 RUBY VERSION
