@@ -13,13 +13,15 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import Badge from './Badge.svelte';
 	import { Check, Cross2 } from 'radix-icons-svelte';
+	import type { SolutionType } from '$lib/types/challenge-solution';
+	import type { ChallengeDataType } from '$lib/types/challenge-data';
 
-	let data: any;
+	let data: ChallengeDataType;
 	let loading = true;
 	const challengeId = $page.url.searchParams.get('id');
 	let challengeType: ChallengeType;
 	let mainComponent: (new (...args: any[]) => SvelteComponent) | null = null;
-	let solutionState: any;
+	let solutionState: SolutionType | null = null;
 
 	let result: boolean | null = null;
 	let explanation = '';
@@ -89,6 +91,8 @@
 	onMount(getChallenge);
 
 	const submitSolution = async () => {
+		if (solutionState === null) return;
+
 		const response = await fetch('/api/challenge', {
 			method: 'POST',
 			body: JSON.stringify({ id: challengeId, solution: solutionState }),
@@ -123,11 +127,9 @@
 				</Card.Header>
 				<Card.Content class="flex grow flex-col">
 					<p class="text-wrap mb-4">{data.question_overview}</p>
-					<Card.Root class="flex grow">
-						<Card.Content class="p-0 overflow-y-auto">
-							<svelte:component this={mainComponent} {data} bind:solutionState />
-						</Card.Content>
-					</Card.Root>
+					<div class="flex grow">
+						<svelte:component this={mainComponent} {data} bind:solutionState />
+					</div>
 				</Card.Content>
 				<Card.Footer class="flex justify-between">
 					<Button variant="secondary" on:click={() => goto('/app/challenges')}>Back</Button>
@@ -149,14 +151,17 @@
 							<Cross2 class="h-7 w-7 ml-1" style="color: oklch(var(--er));" />
 						{/if}</Dialog.Title
 					>
-					<Dialog.Description>{explanation}</Dialog.Description>
+					<Dialog.Description class="text-left"
+						><p class="text-base mb-1">Explanation:</p>
+						{explanation}</Dialog.Description
+					>
 				{:else}
 					<Dialog.Description
 						>Error occurred during submission, contact admin for details.</Dialog.Description
 					>
 				{/if}
 			</Dialog.Header>
-			<Dialog.Footer>
+			<Dialog.Footer class="mt-4">
 				<Button on:click={() => goto('/app/challenges')}>Acknowledge</Button>
 			</Dialog.Footer>
 		</Dialog.Content>

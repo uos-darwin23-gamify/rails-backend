@@ -3,7 +3,7 @@
 	import { socketConnection } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_SENTRY_DSN } from '$env/static/public';
 
 	$: $socketConnection;
 
@@ -11,8 +11,7 @@
 		if (!dev) {
 			const Sentry = await import('@sentry/svelte');
 			Sentry.init({
-				// Note, Replay is NOT instantiated below:
-				dsn: env.PUBLIC_SENTRY_DSN,
+				dsn: PUBLIC_SENTRY_DSN,
 
 				// This sets the sample rate to be 10%. You may want this to be 100% while
 				// in development and sample at a lower rate in production
