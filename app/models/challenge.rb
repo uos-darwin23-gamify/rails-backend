@@ -7,9 +7,9 @@ class Challenge
   field :name, type: String
   field :question_overview, type: String
   field :correct_answer_explanation, type: String
-  field :difficulty, type: Symbol
+  field :difficulty, type: String
 
-  DIFFICULTIES = %i[EASY MEDIUM HARD].freeze
+  DIFFICULTIES = %w[EASY MEDIUM HARD].freeze
 
   validates :name, :question_overview, :correct_answer_explanation, length: {minimum: 1}
   validates :difficulty, inclusion: {in: DIFFICULTIES}
