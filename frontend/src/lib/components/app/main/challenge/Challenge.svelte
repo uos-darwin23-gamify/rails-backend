@@ -127,7 +127,7 @@
 				</Card.Header>
 				<Card.Content class="flex grow flex-col">
 					<p class="text-wrap mb-4">{data.question_overview}</p>
-					<div class="flex grow">
+					<div class="flex grow relative overflow-x-auto" id="challenge-container">
 						<svelte:component this={mainComponent} {data} bind:solutionState />
 					</div>
 				</Card.Content>
