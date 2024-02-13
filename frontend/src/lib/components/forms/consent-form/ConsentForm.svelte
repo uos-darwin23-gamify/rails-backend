@@ -1,11 +1,8 @@
 <script lang="ts">
-	import * as Form from '$lib/components/ui/form';
-	import { formSchema, type FormSchema } from './schema';
-	import type { SuperValidated } from 'sveltekit-superforms';
-	import ConsentFormField from './ConsentFormField.svelte';
-	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
-
-	export let form: SuperValidated<FormSchema>;
+	import { Checkbox } from '$lib/components/ui/checkbox';
+	import * as Card from '$lib/components/ui/card';
+	import { Button } from '$lib/components/ui/button';
+	import * as Dialog from '$lib/components/ui/dialog';
 
 	const formFieldsTakingPart = [
 		{
@@ -76,63 +73,76 @@
 		}
 	];
 
-	let allChecked = false;
+	const headers = [
+		{ headerIndex: 0, header: 'Taking Part in the Project' },
+		{ headerIndex: formFieldsTakingPart.length, header: 'How my information will be used during and after the project' },
+		{ headerIndex: formFieldsTakingPart.length + formFieldsInfoUsage.length, header: 'So that the information you provide can be used legally by the researchers' }
+	];
+	const allFields = [...formFieldsTakingPart, ...formFieldsInfoUsage, ...formFieldsCopyright];
 
-	function toggleAll(event: any) {
-		if (event && event.target) {
-			// get the current state of the "check all" checkbox
-			allChecked = event.target.checked;
+	let checkboxes: boolean[] = new Array(allFields.length).fill(false);
 
-			// update the state of all of the checkboxes in the form
-			formFieldsTakingPart.forEach((field) => ((form as any)[field.name] = allChecked));
-			formFieldsInfoUsage.forEach((field) => ((form as any)[field.name] = allChecked));
-			formFieldsCopyright.forEach((field) => ((form as any)[field.name] = allChecked));
+	const findHeader = (index: number) => headers.find(({ headerIndex }) => headerIndex === index);
+
+	$: allSelected = checkboxes.every((x) => x);
+
+	const handleSelectAll = () => (checkboxes = checkboxes.map(() => !allSelected));
+
+	let dialogOpen = false;
+
+	const handleSubmit = () => {
+		console.log('test');
+		if (!allSelected) {
+			dialogOpen = true;
+		} else {
+			fetch('/api/consent', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
 		}
-	}
+	};
 </script>
 
-<div class="flex justify-center pb-10">
-	<div class="w-1/2">
-		<h1 class="text-center text-2xl py-5">Gamification of Coding Consent Form</h1>
-		<Form.Root
-			method="POST"
-			{form}
-			schema={formSchema}
-			let:config
-			class="space-y-6"
-		>
-        <div class="flex justify-end items-center">
-            <div class="flex flex-col items-end">
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                <label class="text-sm text-center">Check all</label>
-                <div>
-                    <Checkbox bind:checked={allChecked} on:click={toggleAll} />
-                </div>
-            </div>
-        </div>
-
-
-			<h2 class="text-xl">Taking Part in the Project</h2>
-
-
-			{#each formFieldsTakingPart as { name, label }}
-				<ConsentFormField {config} {name} {label} {allChecked} />
-			{/each}
-
-			<h2 class="text-xl">How my information will be used during and after the project</h2>
-			{#each formFieldsInfoUsage as { name, label }}
-				<ConsentFormField {config} {name} {label} {allChecked} />
-			{/each}
-
-			<h2 class="text-xl">
-				So that the information you provide can be used legally by the researchers
-			</h2>
-			{#each formFieldsCopyright as { name, label }}
-				<ConsentFormField {config} {name} {label} {allChecked} />
-			{/each}
-			<div class="flex justify-center">
-				<Form.Button>Submit</Form.Button>
-			</div>
-		</Form.Root>
-	</div>
-</div>
+<form class="p-6 flex grow relative bg-base-100" on:submit|preventDefault={handleSubmit}>
+	<Card.Root class="h-full flex overflow-y-auto grow justify-center pb-10">
+		<div class="basis-1/2 flex flex-col">
+			<Card.Header>
+				<Card.Title>Gamification of Coding Consent Form</Card.Title>
+				<!-- <Card.Description>Card Description</Card.Description> -->
+			</Card.Header>
+			<Card.Content>
+				<div class="flex justify-end gap-4">
+					<p>Select All</p>
+					<Checkbox checked={checkboxes.every((x) => x)} on:click={handleSelectAll} />
+				</div>
+				{#each allFields as field, index (index)}
+					{#if findHeader(index) !== undefined}
+						<h2>{findHeader(index)?.header}</h2>
+					{/if}
+					<div class="flex justify-between gap-12">
+						<p>{field.label}</p>
+						<Checkbox bind:checked={checkboxes[index]} />
+					</div>
+				{/each}
+			</Card.Content>
+			<Card.Footer>
+				<Button type="submit">Submit</Button>
+			</Card.Footer>
+		</div>
+	</Card.Root>
+</form>
+<Dialog.Root bind:open={dialogOpen}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title class="flex justify-center items-center">Consent Needed to Proceed</Dialog.Title>
+			<Dialog.Description class="text-left">
+				All checkboxes must be selected in order to proceed.</Dialog.Description
+			>
+		</Dialog.Header>
+		<Dialog.Footer class="mt-4">
+			<Button on:click={() => (dialogOpen = false)}>Acknowledge</Button>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>
