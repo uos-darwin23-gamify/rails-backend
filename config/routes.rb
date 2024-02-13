@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     post "challenge", to: "users/challenges#submit_challenge_solution"
     post "consent", to: "users/consent#submit_consent"
     get "consent", to: "users/consent#consent"
+    post "change-password", to: "users/settings#change_password"
   end
 
   scope "api/socket-server" do
