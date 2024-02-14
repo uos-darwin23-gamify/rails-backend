@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export const getOffsetTop = (element: HTMLElement) => {
+	export const getOffsetTop = (element: HTMLElement | null) => {
 		let offsetTop = 0;
 		while (element) {
 			offsetTop += element.offsetTop;
@@ -8,13 +8,31 @@
 		return offsetTop;
 	};
 
-	export const getOffsetLeft = (element: HTMLElement) => {
+	export const getOffsetLeft = (element: HTMLElement | null) => {
 		let offsetTop = 0;
 		while (element) {
 			offsetTop += element.offsetLeft;
 			element = element.offsetParent as HTMLElement;
 		}
 		return offsetTop;
+	};
+
+	export const getScrollLeft = (element: HTMLElement | null) => {
+		let scrollLeft = 0;
+		while (element) {
+			scrollLeft += element.scrollLeft;
+			element = element.parentElement as HTMLElement;
+		}
+		return scrollLeft;
+	};
+
+	export const getScrollTop = (element: HTMLElement | null) => {
+		let scrollTop = 0;
+		while (element) {
+			scrollTop += element.scrollTop;
+			element = element.parentElement as HTMLElement;
+		}
+		return scrollTop;
 	};
 </script>
 
@@ -77,8 +95,8 @@
 	const updateCursorPositionMouse = (e: MouseEvent) => {
 		// cursorPosition.x = e.x;
 		// cursorPosition.y = e.y;
-		cursorPosition.x = e.x + (document.getElementById('challenge-container')?.scrollLeft ?? 0);
-		cursorPosition.y = e.y + (document.getElementById('challenge-container')?.scrollTop ?? 0);
+		cursorPosition.x = e.x + getScrollLeft(document.getElementById('challenge-container'));
+		cursorPosition.y = e.y + getScrollTop(document.getElementById('challenge-container'));
 
 		if (multiTouch) {
 			multiTouch = false;
@@ -91,9 +109,9 @@
 	const updateCursorPositionTouch = (e: TouchEvent) => {
 		if (e.touches.length > 0) {
 			cursorPosition.x =
-				e.touches[0].clientX + (document.getElementById('challenge-container')?.scrollLeft ?? 0);
+				e.touches[0].clientX + getScrollLeft(document.getElementById('challenge-container'));
 			cursorPosition.y =
-				e.touches[0].clientY + (document.getElementById('challenge-container')?.scrollTop ?? 0);
+				e.touches[0].clientY + getScrollTop(document.getElementById('challenge-container'));
 
 			handleMultiTouch(e);
 		} else {
@@ -176,13 +194,13 @@
 			on:touchmove|preventDefault={updateCursorPositionTouch}
 			on:mousedown={updateCursorPositionMouse}
 			on:touchstart={updateCursorPositionTouch}
-			on:touchend={updateCursorPositionTouch}
-			on:mouseup={() => (drawingConnection = false)}
-			on:touchend={() => {
+			on:touchend={(e) => {
 				if (!multiTouch) {
 					drawingConnection = false;
 				}
+				updateCursorPositionTouch(e);
 			}}
+			on:mouseup={() => (drawingConnection = false)}
 			on:click={() => (connectionSelected = null)}
 		>
 			<div class="flex gap-32 justify-between grow items-center relative">
@@ -207,6 +225,7 @@
 										bind:connections
 										offset={offsets[block.id]}
 										{multiTouch}
+										{updateCursorPositionTouch}
 									/>
 								</Card.Content>
 							</Card.Root>
@@ -234,6 +253,7 @@
 										bind:connections
 										offset={offsets[block.id]}
 										{multiTouch}
+										{updateCursorPositionTouch}
 									/>
 								</Card.Content>
 							</Card.Root>

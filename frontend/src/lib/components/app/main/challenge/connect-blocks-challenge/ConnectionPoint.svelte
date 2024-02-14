@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { tick } from 'svelte';
+	import { getScrollLeft, getScrollTop } from './ConnectBlocksChallenge.svelte';
+
 	export let block: {
 		x: number;
 		y: number;
@@ -23,6 +26,7 @@
 	export let connectionIdGeneration: number;
 	export let offset: { x: number; y: number };
 	export let multiTouch: boolean;
+	export let updateCursorPositionTouch: (e: TouchEvent) => void;
 
 	const connectionAlreadyExists = (targetblockId: number, mobile: boolean) => {
 		const foundConnection = connections.find(({ firstBlockId, secondBlockId }) => {
@@ -51,7 +55,16 @@
 	class="non-draggable border-color bg-base-100 absolute box-content h-5 w-5 rounded-full border-2 hover:brightness-75 active:brightness-100"
 	class:border-4={drawingConnection}
 	style={`transform: translate(${offset.x}px, ${offset.y}px)`}
-	on:pointerdown={() => {
+	on:mousedown={() => {
+		drawingConnection = true;
+		drawingConnectionOrigin.x = block.x + offset.x;
+		drawingConnectionOrigin.y = block.y + offset.y;
+		drawingConnectionBlockId = block.id;
+	}}
+	on:touchstart={async (e) => {
+		updateCursorPositionTouch(e);
+		await tick();
+
 		if (multiTouch) {
 			return;
 		}
@@ -98,7 +111,7 @@
 			return;
 		}
 
-		if (multiTouch) {
+		if (multiTouch && e.targetTouches.length !== 0) {
 			return;
 		}
 
@@ -106,8 +119,8 @@
 
 		const actualEventTarget = document
 			?.elementsFromPoint(
-				cursorPosition.x - (document.getElementById('challenge-container')?.scrollLeft ?? 0),
-				cursorPosition.y - (document.getElementById('challenge-container')?.scrollTop ?? 0)
+				cursorPosition.x - getScrollLeft(document.getElementById('challenge-container')),
+				cursorPosition.y - getScrollTop(document.getElementById('challenge-container'))
 			)
 			.find((element) => element.id.length > 0);
 
