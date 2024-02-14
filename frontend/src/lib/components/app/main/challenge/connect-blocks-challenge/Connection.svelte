@@ -61,7 +61,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="absolute origin-left rounded-full hover:brightness-75 active:brightness-50 bg-connection"
+	class="absolute origin-left rounded-full hover:brightness-75 active:brightness-50 bg-connection brightness-150"
 	style={`transform: translate(${translationVector.x}px, ${translationVector.y}px) translateX(50%) rotate(${angle}rad); width: ${length}px; height: ${14}px;`}
 	on:click|stopPropagation={() => (connectionSelected = connection.id)}
 	class:selected={connectionSelected === connection.id}
@@ -72,7 +72,6 @@
 		background-color: oklch(var(--p));
 		border-style: solid;
 		border-width: 2px;
-		/* box-sizing: content-box; */
 		border-color: oklch(var(--s));
 	}
 
@@ -80,7 +79,7 @@
 		border-style: solid;
 		border-width: 2px;
 		box-sizing: content-box;
-		border-color: hsl(var(--in));
+		border-color: white;
 		background-color: oklch(var(--a));
 	}
 
@@ -88,7 +87,16 @@
 		border-style: solid;
 		border-width: 2px;
 		box-sizing: content-box;
-		border-color: oklch(var(--wa));
+		border-color: white;
+		background-color: oklch(var(--a));
+		filter: brightness(1);
+	}
+
+	.selected:hover {
 		filter: brightness(0.75);
+	}
+
+	.selected:active {
+		filter: brightness(0.5);
 	}
 </style>

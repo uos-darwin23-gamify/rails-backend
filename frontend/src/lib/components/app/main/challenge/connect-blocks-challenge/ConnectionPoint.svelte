@@ -52,7 +52,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	id={block.id.toString()}
-	class="non-draggable border-color bg-base-100 absolute box-content h-5 w-5 rounded-full border-2 hover:brightness-75 active:brightness-100"
+	class="non-draggable border-color bg-base-100 absolute box-content h-5 w-5 rounded-full border-2 hover:brightness-75 active:brightness-100 touch-none"
 	class:border-4={drawingConnection}
 	style={`transform: translate(${offset.x}px, ${offset.y}px)`}
 	on:mousedown={() => {

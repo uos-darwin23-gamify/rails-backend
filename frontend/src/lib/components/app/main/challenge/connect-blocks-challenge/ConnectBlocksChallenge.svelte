@@ -21,7 +21,7 @@
 		let scrollLeft = 0;
 		while (element) {
 			scrollLeft += element.scrollLeft;
-			element = element.parentElement as HTMLElement;
+			element = element.parentElement;
 		}
 		return scrollLeft;
 	};
@@ -30,10 +30,62 @@
 		let scrollTop = 0;
 		while (element) {
 			scrollTop += element.scrollTop;
-			element = element.parentElement as HTMLElement;
+			element = element.parentElement;
 		}
 		return scrollTop;
 	};
+
+	// const getScrollLeftOffsets = (element: HTMLElement | null, offsets: number[] = []): number[] => {
+	// 	if (element) {
+	// 		offsets.push(element.scrollLeft);
+	// 		return getScrollLeftOffsets(element.parentElement, offsets);
+	// 	} else {
+	// 		return offsets;
+	// 	}
+	// };
+
+	// const getScrollTopOffsets = (element: HTMLElement | null, offsets: number[] = []): number[] => {
+	// 	if (element) {
+	// 		offsets.push(element.scrollTop);
+	// 		return getScrollTopOffsets(element.parentElement, offsets);
+	// 	} else {
+	// 		return offsets;
+	// 	}
+	// };
+
+	// const setScrollLeftOffsets = (element: HTMLElement | null, offsets: number[]) => {
+	// 	if (element) {
+	// 		element.scrollLeft = offsets[0];
+	// 		offsets.shift();
+	// 		setScrollLeftOffsets(element.parentElement, offsets.length > 0 ? offsets : [0]);
+	// 	}
+	// };
+
+	// const setScrollTopOffsets = (element: HTMLElement | null, offsets: number[]) => {
+	// 	if (element) {
+	// 		element.scrollTop = offsets[0];
+	// 		offsets.shift();
+	// 		setScrollTopOffsets(element.parentElement, offsets.length > 0 ? offsets : [0]);
+	// 	}
+	// };
+
+	// function preventScroll(e: Event) {
+	// 	e.preventDefault();
+	// }
+
+	// const freezeScroll = (element: HTMLElement | null) => {
+	// 	if (element) {
+	// 		element.addEventListener('scroll', preventScroll, { passive: false });
+	// 		freezeScroll(element.parentElement);
+	// 	}
+	// };
+
+	// const unfreezeScroll = (element: HTMLElement | null) => {
+	// 	if (element) {
+	// 		element.removeEventListener('scroll', preventScroll);
+	// 		unfreezeScroll(element.parentElement);
+	// 	}
+	// };
 </script>
 
 <script lang="ts">
@@ -45,6 +97,9 @@
 	import Connection from './Connection.svelte';
 	import { onMount } from 'svelte';
 	import { OFFSET } from './config';
+	import { Button } from '$lib/components/ui/button';
+	import * as Popover from '$lib/components/ui/popover';
+	import { Info } from 'lucide-svelte';
 
 	export let data: ConnectBlocksChallengeDataType;
 	export let solutionState: ConnectBlocksChallengeSolutionType;
@@ -73,6 +128,25 @@
 	let cursorPosition = { x: 0, y: 0 };
 	let blocksDOM: HTMLElement[] = new Array(blocks.length).fill(null);
 	let connectionSelected: number | null = null;
+
+	// let scrollLeftOffsets: number[] | null = null;
+	// let scrollTopOffsets: number[] | null = null;
+
+	// $: {
+	// 	if (drawingConnection) {
+	// 		scrollLeftOffsets = getScrollLeftOffsets(document.getElementById('challenge-container'));
+	// 		scrollTopOffsets = getScrollLeftOffsets(document.getElementById('challenge-container'));
+	// 		setScrollLeftOffsets(document.getElementById('challenge-container'), scrollLeftOffsets);
+	// 		setScrollTopOffsets(document.getElementById('challenge-container'), scrollTopOffsets);
+
+	// 		freezeScroll(document.getElementById('challenge-container'));
+	// 	} else {
+	// 		scrollLeftOffsets = null;
+	// 		scrollTopOffsets = null;
+
+	// 		unfreezeScroll(document.getElementById('challenge-container'));
+	// 	}
+	// }
 
 	$: {
 		const partial: ConnectBlocksChallengeSolutionType = [];
@@ -154,6 +228,17 @@
 </script>
 
 <svelte:window
+	on:mousemove={updateCursorPositionMouse}
+	on:touchmove|preventDefault={updateCursorPositionTouch}
+	on:mousedown={updateCursorPositionMouse}
+	on:touchstart={updateCursorPositionTouch}
+	on:touchend={(e) => {
+		if (!multiTouch) {
+			drawingConnection = false;
+		}
+		updateCursorPositionTouch(e);
+	}}
+	on:mouseup={() => (drawingConnection = false)}
 	on:resize={() => {
 		const canvasTop = getOffsetTop(canvas);
 		const canvasLeft = getOffsetLeft(canvas);
@@ -184,89 +269,131 @@
 />
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<Card.Root class="flex grow select-none">
-	<Card.Content class="p-6 flex grow relative overflow-hidden">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			bind:this={canvas}
-			class="flex items-center justify-center grow"
-			on:mousemove={updateCursorPositionMouse}
-			on:touchmove|preventDefault={updateCursorPositionTouch}
-			on:mousedown={updateCursorPositionMouse}
-			on:touchstart={updateCursorPositionTouch}
-			on:touchend={(e) => {
-				if (!multiTouch) {
-					drawingConnection = false;
-				}
-				updateCursorPositionTouch(e);
-			}}
-			on:mouseup={() => (drawingConnection = false)}
-			on:click={() => (connectionSelected = null)}
-		>
-			<div class="flex gap-32 justify-between grow items-center relative">
-				<div class="flex flex-col basis-1/2 gap-2">
-					{#each blocks.filter(({ group }) => group === 1) as block, index (index)}
-						<div bind:this={blocksDOM[block.id]}>
-							<Card.Root>
-								<Card.Content
-									class="flex justify-center items-center gap-4 grow py-3 px-3 h-full w-full z-10 relative bg-card"
-								>
-									<div class="flex grow justify-start">
-										<p>{block.content}</p>
-									</div>
-									<ConnectionPoint
-										{block}
-										{blocks}
-										{cursorPosition}
-										bind:drawingConnection
-										bind:drawingConnectionOrigin
-										bind:drawingConnectionBlockId
-										bind:connectionIdGeneration
-										bind:connections
-										offset={offsets[block.id]}
-										{multiTouch}
-										{updateCursorPositionTouch}
-									/>
-								</Card.Content>
-							</Card.Root>
-						</div>
-					{/each}
-				</div>
-				<div class="flex flex-col basis-1/2 gap-2">
-					{#each blocks.filter(({ group }) => group === 2) as block, index (index)}
-						<div bind:this={blocksDOM[block.id]}>
-							<Card.Root>
-								<Card.Content
-									class="flex justify-center items-center gap-4 grow py-3 px-3 h-full w-full z-10 relative bg-card"
-								>
-									<div class="flex grow justify-start">
-										<p>{block.content}</p>
-									</div>
-									<ConnectionPoint
-										{block}
-										{blocks}
-										{cursorPosition}
-										bind:drawingConnection
-										bind:drawingConnectionOrigin
-										bind:drawingConnectionBlockId
-										bind:connectionIdGeneration
-										bind:connections
-										offset={offsets[block.id]}
-										{multiTouch}
-										{updateCursorPositionTouch}
-									/>
-								</Card.Content>
-							</Card.Root>
-						</div>
-					{/each}
-				</div>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="flex grow" on:click={() => (connectionSelected = null)}>
+	<Card.Root class="flex grow select-none flex-col">
+		<div class="flex justify-end">
+			<div class="flex px-2 pt-2 sticky right-0 gap-2 z-20">
+				{#if connectionSelected === null}
+					<Popover.Root preventScroll>
+						<Popover.Trigger asChild let:builder>
+							<Button builders={[builder]} variant="secondary">Delete Connection</Button>
+						</Popover.Trigger>
+						<Popover.Content class="w-80">
+							<div class="flex justify-between space-x-4">
+								<div class="shrink-0">
+									<Info className="h-4 w-4" />
+								</div>
+								<div class="space-y-1">
+									<h4 class="text-sm font-semibold">Note</h4>
+									<p class="text-sm">Select a drawn connection by clicking on it.</p>
+								</div>
+							</div>
+						</Popover.Content>
+					</Popover.Root>
+				{:else}
+					<Button
+						variant="destructive"
+						on:click={() => {
+							connections = connections.filter(({ id }) => id !== connectionSelected);
+						}}>Delete Connection</Button
+					>
+				{/if}
+				{#if connections.length === 0}
+					<Popover.Root preventScroll>
+						<Popover.Trigger asChild let:builder>
+							<Button builders={[builder]} variant="secondary">Reset</Button>
+						</Popover.Trigger>
+						<Popover.Content class="w-80">
+							<div class="flex justify-between space-x-4">
+								<div class="shrink-0">
+									<Info className="h-4 w-4" />
+								</div>
+								<div class="space-y-1">
+									<h4 class="text-sm font-semibold">Note</h4>
+									<p class="text-sm">You need to draw at least one connection.</p>
+								</div>
+							</div>
+						</Popover.Content>
+					</Popover.Root>{:else}
+					<Button
+						variant="destructive"
+						on:click={() => {
+							connections = [];
+							connectionSelected = null;
+						}}>Reset</Button
+					>
+				{/if}
 			</div>
-			{#each connections as connection (connection.id)}
-				<Connection {connection} {blocks} {blocksDOM} bind:connectionSelected />
-			{/each}
-			{#if drawingConnection}
-				<PartialConnection {canvas} {cursorPosition} {drawingConnectionOrigin} />
-			{/if}
 		</div>
-	</Card.Content>
-</Card.Root>
+		<Card.Content class="p-6 flex grow relative overflow-hidden">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div bind:this={canvas} class="flex items-center justify-center grow">
+				<div class="flex gap-32 justify-between grow items-center relative">
+					<div class="flex flex-col basis-1/2 gap-2">
+						{#each blocks.filter(({ group }) => group === 1) as block, index (index)}
+							<div bind:this={blocksDOM[block.id]}>
+								<Card.Root>
+									<Card.Content
+										class="flex justify-center items-center gap-4 grow py-3 px-3 h-full w-full z-10 relative bg-card"
+									>
+										<div class="flex grow justify-start">
+											<p>{block.content}</p>
+										</div>
+										<ConnectionPoint
+											{block}
+											{blocks}
+											{cursorPosition}
+											bind:drawingConnection
+											bind:drawingConnectionOrigin
+											bind:drawingConnectionBlockId
+											bind:connectionIdGeneration
+											bind:connections
+											offset={offsets[block.id]}
+											{multiTouch}
+											{updateCursorPositionTouch}
+										/>
+									</Card.Content>
+								</Card.Root>
+							</div>
+						{/each}
+					</div>
+					<div class="flex flex-col basis-1/2 gap-2">
+						{#each blocks.filter(({ group }) => group === 2) as block, index (index)}
+							<div bind:this={blocksDOM[block.id]}>
+								<Card.Root>
+									<Card.Content
+										class="flex justify-center items-center gap-4 grow py-3 px-3 h-full w-full z-10 relative bg-card"
+									>
+										<div class="flex grow justify-start">
+											<p>{block.content}</p>
+										</div>
+										<ConnectionPoint
+											{block}
+											{blocks}
+											{cursorPosition}
+											bind:drawingConnection
+											bind:drawingConnectionOrigin
+											bind:drawingConnectionBlockId
+											bind:connectionIdGeneration
+											bind:connections
+											offset={offsets[block.id]}
+											{multiTouch}
+											{updateCursorPositionTouch}
+										/>
+									</Card.Content>
+								</Card.Root>
+							</div>
+						{/each}
+					</div>
+				</div>
+				{#each connections as connection (connection.id)}
+					<Connection {connection} {blocks} {blocksDOM} bind:connectionSelected />
+				{/each}
+				{#if drawingConnection}
+					<PartialConnection {canvas} {cursorPosition} {drawingConnectionOrigin} />
+				{/if}
+			</div>
+		</Card.Content>
+	</Card.Root>
+</div>
