@@ -1,8 +1,10 @@
-import { get, writable } from 'svelte/store';
+import { get, readable, writable } from 'svelte/store';
 import { authenticationStatus } from '$lib/auth';
-import type UserType from '$lib/enums/userType';
+import type UserType from '$lib/enums/UserType';
 import { io } from 'socket.io-client';
 import type { Events } from '$lib/types/Events';
+import loader from '@monaco-editor/loader';
+import { browser } from '$app/environment';
 
 const createAuthenticatedStore = () => {
 	const { subscribe, set } = writable<null | boolean | UserType>(null);
@@ -42,3 +44,12 @@ const createSocketConnectionStore = () => {
 };
 
 export const socketConnection = createSocketConnectionStore();
+
+export const monaco = readable(
+	(() => {
+		if (browser) {
+			loader.config({});
+			return loader.init();
+		}
+	})()
+);
