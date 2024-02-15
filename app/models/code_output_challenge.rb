@@ -33,9 +33,20 @@ class CodeOutputChallenge < Challenge
 
   def validate_question_content
     question_array.each do |q|
-      unless q.is_a?(String) && q.length.positive?
-        errors.add(:question_array, "#{q} must be a string with length greater than 0")
+      unless q.is_a?(Hash) && valid_question_hash?(q)
+        errors.add(:question_array, "#{q} must be a hash with valid properties")
       end
     end
+  end
+
+  def valid_question_hash?(hash)
+    hash.key?(:question) && hash[:question].is_a?(String) && hash[:question].length.positive? && valid_select_hash?(hash[:select])
+  end
+
+  def valid_select_hash?(hash)
+    return true unless hash
+
+    hash.is_a?(Hash) && hash.key?(:startLineNumber) && hash.key?(:startColumn) && hash.key?(:endLineNumber) && hash.key?(:endColumn) &&
+    hash[:startLineNumber].is_a?(Integer) && hash[:startColumn].is_a?(Integer) && hash[:endLineNumber].is_a?(Integer) && hash[:endColumn].is_a?(Integer)
   end
 end
