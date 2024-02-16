@@ -43,6 +43,7 @@
 		>
 	</li>
 	<div class="grow"></div>
+	<div class="my-2" />
 	<li>
 		<LogoutButton variant="secondary" />
 	</li>

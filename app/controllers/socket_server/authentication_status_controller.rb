@@ -2,6 +2,8 @@
 
 module SocketServer
   class AuthenticationStatusController < ApplicationController
+    before_action :authorize_socket_server_controllers
+
     def index
       user_type = authenticated_from_socket?
 

@@ -3,7 +3,6 @@
 	import { scale } from 'svelte/transition';
 	import UserType from '$lib/enums/UserType';
 	import { onMount } from 'svelte';
-	import { buttonVariants } from '$lib/components/ui/button';
 	import { socketConnection } from '$lib/stores';
 
 	onMount(async () => {
@@ -37,14 +36,9 @@
 		</div>
 	{:else}
 		<div
-			class="flex flex-col grow overflow-x-hidden relative"
+			class="flex flex-col grow overflow-hidden relative"
 			in:scale={{ start: 0.9, duration: 500, opacity: 0 }}
 		>
-			<header
-				class="p-2 flex items-center justify-end sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-			>
-				<a href="/login" class={buttonVariants()}>Open App</a>
-			</header>
 			<slot />
 		</div>
 	{/if}

@@ -1,0 +1,1 @@
+export type ScqChallengeSolutionType = number;

@@ -64,7 +64,8 @@
 		errorMessage = undefined;
 	}
 
-	const closeDialog = () => (document.querySelector('[data-dialog-close]') as HTMLElement).click();
+	let dialogOpen = false;
+	const closeDialog = () => (dialogOpen = false);
 </script>
 
 <div class="flex items-center justify-between gap-2">
@@ -104,6 +105,7 @@
 
 	<div class="flex">
 		<Dialog.Root
+			bind:open={dialogOpen}
 			onOpenChange={() => {
 				newEmails = '';
 				errorMessage = undefined;

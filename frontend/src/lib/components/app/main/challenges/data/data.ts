@@ -1,10 +1,10 @@
-import { BorderDashed, Hand, ListBullet } from 'radix-icons-svelte';
+import { Button, Hand, ListBullet, DotFilled } from 'radix-icons-svelte';
 
 export const challengeTypes = [
 	{
-		value: 'FillBlankChallenge',
-		label: 'Fill In The Blank',
-		icon: BorderDashed
+		value: 'ScqChallenge',
+		label: 'Single Choice',
+		icon: DotFilled
 	},
 	{
 		value: 'McqChallenge',
@@ -12,9 +12,14 @@ export const challengeTypes = [
 		icon: ListBullet
 	},
 	{
-		value: 'DragDropChallenge',
-		label: 'Drag & Drop',
+		value: 'ConnectBlocksChallenge',
+		label: 'Connect Blocks',
 		icon: Hand
+	},
+	{
+		value: 'CodeOutputChallenge',
+		label: 'Code Output',
+		icon: Button
 	}
 ];
 
