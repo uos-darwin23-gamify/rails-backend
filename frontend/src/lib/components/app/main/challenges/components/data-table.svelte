@@ -26,7 +26,7 @@
 	import type { ChallengeOverview } from '../data/schemas';
 	import { goto } from '$app/navigation';
 	import { Button } from '$lib/components/ui/button';
-	import { Info, Timer, ShieldAlert } from 'lucide-svelte';
+	import { Timer, ShieldAlert } from 'lucide-svelte';
 
 	export let data: ChallengeOverview[];
 

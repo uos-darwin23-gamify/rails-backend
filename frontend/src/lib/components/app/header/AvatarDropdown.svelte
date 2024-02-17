@@ -5,28 +5,44 @@
 	import { goto } from '$app/navigation';
 	import { logOut } from '$lib/auth';
 	import { authenticated } from '$lib/stores';
-	import AvatarSrc from './avatar.jpeg';
+	import { onMount } from 'svelte';
+
+	let username: string;
+	let error = false;
 
 	const handleLogout = async () => {
 		const logoutSuccessful = await logOut();
 		logoutSuccessful && authenticated.verify();
 	};
+
+	onMount(async () => {
+		const response = await fetch('/api/auth/info');
+
+		if (!response.ok) {
+			username = 'Failed To Fetch';
+			error = true;
+		} else {
+			const data = await response.json();
+			username = data.username;
+		}
+	});
 </script>
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
 		<Button variant="ghost" builders={[builder]} class="relative h-8 w-8 rounded-full mx-1">
 			<Avatar.Root class="h-10 w-10">
-				<Avatar.Image src={AvatarSrc} alt="@shadcn" />
-				<Avatar.Fallback>AN</Avatar.Fallback>
+				{#if !error}
+					<Avatar.Fallback>{username?.replace(/[^A-Z]/g, '').slice(0, 2)}</Avatar.Fallback>
+				{/if}
 			</Avatar.Root>
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="w-56" align="end">
 		<DropdownMenu.Label class="font-normal">
 			<div class="flex flex-col space-y-1">
-				<p class="text-sm font-medium leading-none">anonymous</p>
-				<p class="text-xs leading-none text-muted-foreground">anonymous@wearelegion.com</p>
+				<p class="text-sm font-medium leading-none">{username}</p>
+				<p class="text-xs leading-none text-muted-foreground">@{username}</p>
 			</div>
 		</DropdownMenu.Label>
 		<DropdownMenu.Separator />

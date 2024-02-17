@@ -17,7 +17,8 @@
 		// DataTablePriorityCell,
 		DataTableColumnHeader,
 		DataTableToolbar,
-		DataTablePagination
+		DataTablePagination,
+		DataTableGroupCell
 	} from '.';
 
 	import type { PreAuthorizedEmail } from '../data/schemas';
@@ -40,6 +41,7 @@
 	});
 
 	export let deleteEmail: (id: number) => Promise<void>;
+	export let editEmail: (id: number, email: string, group: 'league' | 'global') => Promise<void>;
 
 	const columns = table.createColumns([
 		table.display({
@@ -78,6 +80,47 @@
 					});
 				}
 				return value;
+			},
+			plugins: {
+				colFilter: {
+					fn: ({ filterValue, value }) => {
+						return value.toLowerCase().includes(filterValue.toLowerCase());
+					},
+					initialFilterValue: '',
+					render: ({ filterValue }) => {
+						return get(filterValue);
+					}
+				}
+			}
+		}),
+		table.column({
+			accessor: 'group',
+			header: 'Group',
+			id: 'group',
+			cell: ({ value, row }) => {
+				if (row.isData()) {
+					return createRender(DataTableGroupCell, {
+						value
+						// ,labelValue: row.original.email
+					});
+				}
+				return value;
+			},
+			plugins: {
+				colFilter: {
+					fn: ({ filterValue, value }) => {
+						if (filterValue.length === 0) return true;
+						if (!Array.isArray(filterValue) || typeof value !== 'string') return true;
+
+						return filterValue.some((filter) => {
+							return value.includes(filter);
+						});
+					},
+					initialFilterValue: [],
+					render: ({ filterValue }) => {
+						return get(filterValue);
+					}
+				}
 			}
 		}),
 		table.display({
@@ -90,6 +133,7 @@
 					return createRender(DataTableRowActions, {
 						row: row.original,
 						deleteEmail,
+						editEmail,
 						rowId: parseInt(row.id)
 					});
 				}
@@ -103,7 +147,7 @@
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = tableModel;
 
 	export const selectedRowIdsStore = pluginStates.select.selectedDataIds;
-	export let addNewEmails: (emails: string[]) => Promise<void>;
+	export let addNewEmails: (emails: string[], groupType: 'league' | 'global') => Promise<void>;
 </script>
 
 <div class="space-y-4">

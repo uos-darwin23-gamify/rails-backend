@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   scope "api" do
-    get "/auth/status", to: "users/authentication_status#index"
+    scope "auth" do
+      get "status", to: "users/authentication_status#index"
+      get "info", to: "users/authentication_status#info"
+    end
 
     scope "admin" do
       get "pre-authorized-emails", to: "admin/pre_authorized_emails#all_pre_authorized_emails"

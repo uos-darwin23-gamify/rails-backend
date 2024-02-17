@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
 
   create_table "pre_authorized_emails", force: :cascade do |t|
     t.string "email", null: false
+    t.integer "group", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((email)::text)", name: "index_pre_authorized_emails_on_LOWER_email", unique: true
@@ -48,12 +49,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "user_type", default: 0, null: false
+    t.integer "group", null: false
+    t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

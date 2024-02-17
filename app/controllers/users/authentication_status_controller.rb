@@ -11,5 +11,13 @@ module Users
         render json: {userType: "Not Authenticated"}, status: :unauthorized
       end
     end
+
+    def info
+      return render json: {userType: "Not Authenticated"}, status: :unauthorized unless authenticated?
+
+      user = current_user
+
+      render json: {username: user.username, group: user.group}
+    end
   end
 end
