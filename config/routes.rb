@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  namespace :users do
+    get 'consent/consent'
+    get 'consent/submit_consent'
+  end
+  namespace :api do
+    namespace :users do
+      get 'consent/consent'
+      get 'consent/submit_consent'
+    end
+  end
   devise_for :users, path: "api/auth", path_names: {
                                          sign_in:      "login",
                                          sign_out:     "logout",
@@ -30,6 +40,8 @@ Rails.application.routes.draw do
     get "challenges", to: "users/challenges#all_challenges"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
+
+    post "consent", to: "users/consent#submit_consent"
     
   end
 
