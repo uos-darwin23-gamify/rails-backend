@@ -3,6 +3,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import { goto } from '$app/navigation';
 
 	const formFieldsTakingPart = [
 		{
@@ -96,16 +97,23 @@
 
 	let dialogOpen = false;
 
-	const handleSubmit = () => {
+	async function handleSubmit() {
 		if (!allSelected) {
 			dialogOpen = true;
 		} else {
-			fetch('/api/consent', {
+			const response = await fetch('/api/consent', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			});
+
+			if (response.ok) {
+				console.log('Success. Form submitted');
+				goto('/app');
+			} else {
+				console.error('Failed to submit form');
+			}
 		}
 	};
 </script>
