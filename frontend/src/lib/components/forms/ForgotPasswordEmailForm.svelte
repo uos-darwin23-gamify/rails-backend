@@ -4,6 +4,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
+	import { goto } from '$app/navigation';
 
 	let formData = { email: '' };
 	let emailNotValid = false;
@@ -13,23 +14,12 @@
 			'/api/users/passwords/email_exists?email=' + encodeURIComponent(formData.email)
 		);
 
-		// Log the raw response text
-		const text = await response.text();
-
-		// was having trouble parsing the response as JSON
-		try {
-			const data = JSON.parse(text);
-
-			console.log(data);
-
-			// if (data.exists) {
-			// 	console.log('Email found');
-			// } else {
-			// 	console.log('Email not found');
-			// 	emailNotValid = true;
-			// }
-		} catch (error) {
-			console.error('Failed to parse response as JSON', error);
+		const data = JSON.parse(await response.text());
+		if (data.exists) {
+			console.log('Email found');
+			goto('/new-password');
+		} else {
+			emailNotValid = true;
 		}
 	};
 </script>
