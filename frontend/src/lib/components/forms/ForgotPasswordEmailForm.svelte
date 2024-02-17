@@ -4,21 +4,27 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
-	import { goto } from '$app/navigation';
 
 	let formData = { email: '' };
 	let emailNotValid = false;
 
 	const handleSubmit = async () => {
-		const response = await fetch(
-			'/api/users/passwords/email_exists?email=' + encodeURIComponent(formData.email)
-		);
+		const response = await fetch('/api/auth/password', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				user: {
+					email: formData.email
+				},
+				redirect_url: 'http://localhost:5173/new-password'
+			})
+		});
 
-		const data = JSON.parse(await response.text());
-		if (data.exists) {
-			console.log('Email found');
-			goto('/new-password');
+		if (response.ok) {
+			console.log('Password reset email sent');
 		} else {
+			console.log(response.text());
+			console.log('Error sending password reset email');
 			emailNotValid = true;
 		}
 	};
@@ -42,7 +48,7 @@
 			</div>
 
 			{#if emailNotValid}
-				<Label class="text-error">Email Not Found</Label>
+				<Label class="text-error">Error sending password reset email</Label>
 			{/if}
 			<Separator class="my-1" />
 			<Button type="submit">Next</Button>

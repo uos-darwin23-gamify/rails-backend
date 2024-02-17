@@ -5,21 +5,51 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
 
-	let formData = { email: '' };
-	let emailNotValid = false;
+	let formData = { password: '', confirmPassword: '' };
+	type FormValidation = null | false | true;
+
+	let formValidation: {
+		passwordMin8: FormValidation;
+		passwordsMatch: FormValidation;
+	} = {
+		passwordMin8: null,
+		passwordsMatch: null
+	};
+
+	const validateData = (): boolean => {
+		let isOk = true;
+
+		if (formData.password.length < 8) {
+			isOk = false;
+			formValidation.passwordMin8 = false;
+		}
+
+		if (formData.password !== formData.confirmPassword) {
+			isOk = false;
+			formValidation.passwordsMatch = false;
+		}
+
+		return isOk;
+	};
 
 	const handleSubmit = async () => {
-        // TODO: Implement this
-        // const emailFound = await checkEmail(formData.email);
-        let emailFound = true;
-        if (emailFound) {
-            console.log('Email found');
-        } else {
-            console.log('Email not found');
-            emailNotValid = true;
-        }
-		console.log('formData', formData);
+		if (!validateData()) {
+			console.log('Password reset failed');
+		}
+		else {
+			console.log('Password reset successful');
+		}
 	};
+
+	$: {
+		if (formValidation.passwordMin8 !== null) {
+			formValidation.passwordMin8 = formData.password.length >= 8;
+		}
+
+		if (formValidation.passwordsMatch !== null) {
+			formValidation.passwordsMatch = formData.password === formData.confirmPassword;
+		}
+	}
 </script>
 
 <Card.Root class="relative flex-shrink-0 grow max-w-sm m-4">
@@ -30,20 +60,45 @@
 	<Card.Content>
 		<form class="grid w-full items-center gap-4" on:submit|preventDefault={handleSubmit}>
 			<div class="flex flex-col space-y-1.5">
-				<Label for="email">Email</Label>
+				<Label for="password">Password (min. 8 characters)</Label>
 				<Input
-					id="email"
-					placeholder="Email"
-					bind:value={formData.email}
-					on:input={() => (emailNotValid = false)}
+					id="password"
+					type="password"
+					placeholder="Password"
+					bind:value={formData.password}
+					on:input={() => {
+						if (formValidation.passwordMin8 === null) {
+							formValidation.passwordMin8 = false;
+						}
+					}}
 				/>
+				{#if formValidation.passwordMin8 === false}
+					<Label class="text-error">Password Too Short (min. 8 characters)</Label>
+				{:else if formValidation.passwordMin8 === true}
+					<Label class="text-success">Password Length Ok</Label>
+				{/if}
 			</div>
-
-			{#if emailNotValid}
-				<Label class="text-error">Email Not Found</Label>
-			{/if}
+			<div class="flex flex-col space-y-1.5">
+				<Label for="confirm-password">Confirm Password</Label>
+				<Input
+					id="confirm-password"
+					type="password"
+					placeholder="Confirm Password"
+					bind:value={formData.confirmPassword}
+					on:input={() => {
+						if (formValidation.passwordsMatch === null) {
+							formValidation.passwordsMatch = false;
+						}
+					}}
+				/>
+				{#if formValidation.passwordsMatch === false}
+					<Label class="text-error">Passwords Do Not Match</Label>
+				{:else if formValidation.passwordsMatch === true}
+					<Label class="text-success">Passwords Match</Label>
+				{/if}
+			</div>
 			<Separator class="my-1" />
-			<Button type="submit">Next</Button>
+			<Button type="submit">Confirm</Button>
 		</form>
 	</Card.Content>
 </Card.Root>

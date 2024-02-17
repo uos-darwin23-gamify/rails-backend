@@ -20,9 +20,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   scope "api" do
-    devise_scope :user do
-      get '/users/passwords/email_exists', to: 'users/passwords#email_exists'
-    end
 
     scope "auth" do
       get "status", to: "users/authentication_status#index"
