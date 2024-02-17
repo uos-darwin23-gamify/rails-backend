@@ -75,8 +75,14 @@
 
 	const headers = [
 		{ headerIndex: 0, header: 'Taking Part in the Project' },
-		{ headerIndex: formFieldsTakingPart.length, header: 'How my information will be used during and after the project' },
-		{ headerIndex: formFieldsTakingPart.length + formFieldsInfoUsage.length, header: 'So that the information you provide can be used legally by the researchers' }
+		{
+			headerIndex: formFieldsTakingPart.length,
+			header: 'How my information will be used during and after the project'
+		},
+		{
+			headerIndex: formFieldsTakingPart.length + formFieldsInfoUsage.length,
+			header: 'So that the information you provide can be used legally by the researchers'
+		}
 	];
 	const allFields = [...formFieldsTakingPart, ...formFieldsInfoUsage, ...formFieldsCopyright];
 
@@ -91,7 +97,6 @@
 	let dialogOpen = false;
 
 	const handleSubmit = () => {
-		console.log('test');
 		if (!allSelected) {
 			dialogOpen = true;
 		} else {
@@ -109,7 +114,7 @@
 	<Card.Root class="h-full flex overflow-y-auto grow justify-center pb-10">
 		<div class="basis-1/2 flex flex-col">
 			<Card.Header>
-				<Card.Title>Gamification of Coding Consent Form</Card.Title>
+				<Card.Title class="text-center">Gamification of Coding Consent Form</Card.Title>
 				<!-- <Card.Description>Card Description</Card.Description> -->
 			</Card.Header>
 			<Card.Content>
@@ -119,24 +124,26 @@
 				</div>
 				{#each allFields as field, index (index)}
 					{#if findHeader(index) !== undefined}
-						<h2>{findHeader(index)?.header}</h2>
+						<h2 class="font-bold mb-2">{findHeader(index)?.header}</h2>
 					{/if}
-					<div class="flex justify-between gap-12">
-						<p>{field.label}</p>
+					<div class="flex justify-between gap-12 mb-4">
+						<p class="font-thin">{field.label}</p>
 						<Checkbox bind:checked={checkboxes[index]} />
 					</div>
 				{/each}
 			</Card.Content>
-			<Card.Footer>
+			<Card.Footer class="flex justify-center">
 				<Button type="submit">Submit</Button>
 			</Card.Footer>
 		</div>
 	</Card.Root>
 </form>
+
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title class="flex justify-center items-center">Consent Needed to Proceed</Dialog.Title>
+			<Dialog.Title class="flex justify-center items-center">Consent Needed to Proceed</Dialog.Title
+			>
 			<Dialog.Description class="text-left">
 				All checkboxes must be selected in order to proceed.</Dialog.Description
 			>

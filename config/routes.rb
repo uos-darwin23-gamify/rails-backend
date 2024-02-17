@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get "challenges", to: "users/challenges#all_challenges"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
+    
   end
 
   scope "api/socket-server" do
