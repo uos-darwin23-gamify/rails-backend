@@ -6,8 +6,10 @@ Rails.application.routes.draw do
                                        },
                      controllers: {
                        sessions:      "users/sessions",
-                       registrations: "users/registrations"
+                       registrations: "users/registrations",
+                       passwords:     "users/passwords"
                      }
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,6 +20,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   scope "api" do
+    devise_scope :user do
+      get '/users/passwords/email_exists', to: 'users/passwords#email_exists'
+    end
+
     scope "auth" do
       get "status", to: "users/authentication_status#index"
       get "info", to: "users/authentication_status#info"
