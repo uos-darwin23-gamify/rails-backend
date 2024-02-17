@@ -10,10 +10,13 @@ module Users
       raw_token = params[:reset_password_token]
       encrypted_token = Devise.token_generator.digest(User, :reset_password_token, raw_token)
       @user = User.find_by(reset_password_token: encrypted_token)
-      Rails.logger.debug @user
-
+    
       if @user.present?
-        render json: {message: "User found"}, status: :ok
+        if params[:redirect_url].present?
+          redirect_to params[:redirect_url]
+        else
+          render json: {error: "Redirect URL not provided"}, status: :unprocessable_entity
+        end
       else
         render json: {error: "Invalid reset password token"}, status: :unprocessable_entity
       end
