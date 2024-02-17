@@ -6,6 +6,19 @@ module Users
       params.require(:user).permit(:email).merge(redirect_url: params[:redirect_url])
     end
 
+    def edit
+      raw_token = params[:reset_password_token]
+      encrypted_token = Devise.token_generator.digest(User, :reset_password_token, raw_token)
+      @user = User.find_by(reset_password_token: encrypted_token)
+      Rails.logger.debug @user
+
+      if @user.present?
+        render json: {message: "User found"}, status: :ok
+      else
+        render json: {error: "Invalid reset password token"}, status: :unprocessable_entity
+      end
+    end
+
     # POST /resource/password
     def create
       self.resource = resource_class.send_reset_password_instructions(resource_params)
