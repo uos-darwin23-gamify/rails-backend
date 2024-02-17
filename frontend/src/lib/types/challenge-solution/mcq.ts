@@ -1,1 +1,1 @@
-export type McqChallengeSolutionType = number[];
+export type McqChallengeSolutionType = number[] | null;

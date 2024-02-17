@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import ChallengeType from '$lib/enums/ChallengeType';
 	import ScqChallenge from './scq-challenge/ScqChallenge.svelte';
 	import McqChallenge from './mcq-challenge/McqChallenge.svelte';
@@ -22,6 +22,11 @@
 	let challengeType: ChallengeType;
 	let mainComponent: (new (...args: any[]) => SvelteComponent) | null = null;
 	let solutionState: SolutionType | null = null;
+
+	let startTime: Date = new Date();
+	let endTime: Date = new Date();
+	let timeElapsedSeconds = 0;
+	let interval: ReturnType<typeof setTimeout>;
 
 	let result: boolean | null = null;
 	let explanation = '';
@@ -62,6 +67,22 @@
 				data = await response.json();
 				loading = false;
 
+				startTime = new Date(data.start_time);
+
+				if (data.finished) {
+					endTime = new Date(data.end_time);
+				}
+
+				timeElapsedSeconds = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
+				interval = setInterval(() => {
+					timeElapsedSeconds = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
+				}, 1000);
+
+				if (data.answer !== null) {
+					const answer = JSON.parse(data.answer);
+					solutionState = answer;
+				}
+
 				switch (data.type) {
 					case 'ScqChallenge':
 						challengeType = ChallengeType.SCQ;
@@ -90,6 +111,8 @@
 
 	onMount(getChallenge);
 
+	onDestroy(() => clearInterval(interval));
+
 	const submitSolution = async () => {
 		if (solutionState === null) return;
 
@@ -108,6 +131,12 @@
 		submissionError = response.status === 400;
 		explanation = (await response.json()).explanation;
 	};
+
+	const formatTime = (seconds: number): string => {
+		const minutes = Math.floor(seconds / 60);
+		const remainingSeconds = seconds % 60;
+		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+	};
 </script>
 
 {#if loading}
@@ -118,12 +147,23 @@
 	<div class="flex grow p-4 relative overflow-x-auto">
 		<Card.Root class="flex grow relative overflow-x-auto">
 			<div class="grow w-full flex flex-col">
-				<Card.Header class="flex flex-row items-start justify-between space-y-0">
-					<div class="flex flex-col gap-1.5">
+				<Card.Header class="flex flex-row justify-between space-y-0 gap-2">
+					<div class="flex flex-col gap-1.5 justify-between">
 						<Card.Title>{data.name}</Card.Title>
 						<Card.Description>{challengeTypeDescription}</Card.Description>
 					</div>
-					<Badge value={data.difficulty} />
+					<div class="flex flex-col justify-between gap-1.5 items-end">
+						<Badge value={data.difficulty} />
+						{#if data.finished}
+							<Card.Description
+								>Completed In: {formatTime(
+									Math.ceil((endTime.getTime() - startTime.getTime()) / 1000)
+								)}</Card.Description
+							>
+						{:else}
+							<Card.Description>Time Elapsed: {formatTime(timeElapsedSeconds)}</Card.Description>
+						{/if}
+					</div>
 				</Card.Header>
 				<Card.Content class="flex grow flex-col">
 					<p class="text-wrap mb-4">{data.question_overview}</p>
@@ -133,7 +173,9 @@
 				</Card.Content>
 				<Card.Footer class="flex justify-between">
 					<Button variant="secondary" on:click={() => goto('/app/challenges')}>Back</Button>
-					<Button on:click={submitSolution}>Submit Solution</Button>
+					{#if !data.finished}
+						<Button on:click={submitSolution}>Submit Solution</Button>
+					{/if}
 				</Card.Footer>
 			</div>
 		</Card.Root>

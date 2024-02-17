@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   validate :email_in_pre_authorized_emails
 
+  has_many :solutions, foreign_key: "user_email", primary_key: "email"
+
   private
 
   def email_in_pre_authorized_emails

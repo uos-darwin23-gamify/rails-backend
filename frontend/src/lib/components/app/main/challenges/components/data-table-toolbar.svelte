@@ -14,7 +14,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import { challengeTypes, challengeDiffuculties } from '../data/data';
+	import { challengeTypes, challengeDiffuculties, challengeStatuses } from '../data/data';
 	// export let addNewEmails: (emails: string[]) => Promise<void>;
 
 	export let tableModel: TableViewModel<ChallengeOverview>;
@@ -33,6 +33,7 @@
 			name: string;
 			type: string[];
 			difficulty: string[];
+			status: string[];
 		}>;
 	} = pluginStates.colFilter;
 
@@ -58,35 +59,44 @@
 <div class="flex items-center gap-2 flex-wrap">
 	<Input
 		placeholder="Filter by name..."
-		class="h-8 sm:w-[250px] lg:w-[350px]"
+		class="h-8 sm:w-[250px] lg:w-[350px] grow sm:grow-0 lg:grow-0 md:grow"
 		type="search"
 		bind:value={$filterValues.name}
 	/>
-	<div class="flex flex-1 items-center grow justify-between gap-2">
-		<div class="flex items-center gap-2">
-			<DataTableFacetedFilter
-				bind:filterValues={$filterValues.type}
-				title="Type"
-				options={challengeTypes}
-			/>
-			<DataTableFacetedFilter
-				bind:filterValues={$filterValues.difficulty}
-				title="Difficulty"
-				options={challengeDiffuculties}
-			/>
-			{#if showReset}
-				<Button
-					on:click={() => {
-						$filterValues.name = '';
-						$filterValues.type = [];
-						$filterValues.difficulty = [];
-					}}
-					variant="outline"
-					class="h-8 px-2 lg:px-3"
-				>
-					<Cross2 class="h-4 w-4" />
-				</Button>
-			{/if}
+	<div
+		class="flex flex-1 sm:items-center grow justify-between gap-2 flex-col sm:flex-row relative overflow-x-auto sm:overflow-x-visible"
+	>
+		<div class="relative overflow-x-auto flex sm:overflow-x-visible">
+			<div class="flex items-center gap-2 w-full">
+				<DataTableFacetedFilter
+					bind:filterValues={$filterValues.type}
+					title="Type"
+					options={challengeTypes}
+				/>
+				<DataTableFacetedFilter
+					bind:filterValues={$filterValues.difficulty}
+					title="Difficulty"
+					options={challengeDiffuculties}
+				/>
+				<DataTableFacetedFilter
+					bind:filterValues={$filterValues.status}
+					title="Status"
+					options={challengeStatuses}
+				/>
+				{#if showReset}
+					<Button
+						on:click={() => {
+							$filterValues.name = '';
+							$filterValues.type = [];
+							$filterValues.difficulty = [];
+						}}
+						variant="outline"
+						class="h-8 px-2 lg:px-3"
+					>
+						<Cross2 class="h-4 w-4" />
+					</Button>
+				{/if}
+			</div>
 		</div>
 		<DataTableViewOptions {tableModel} />
 	</div>

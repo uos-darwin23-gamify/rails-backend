@@ -6,11 +6,14 @@
 	import { cn } from '$lib/utils/ui';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Badge from '$lib/components/new-york/ui/badge/badge.svelte';
-	import { challengeTypes, challengeDiffuculties } from '../data/data';
+	import { challengeTypes, challengeDiffuculties, challengeStatuses } from '../data/data';
 
 	export let filterValues: string[] = [];
 	export let title: string;
-	export let options = [] as typeof challengeTypes | typeof challengeDiffuculties;
+	export let options = [] as
+		| typeof challengeTypes
+		| typeof challengeDiffuculties
+		| typeof challengeStatuses;
 
 	let open = false;
 
@@ -25,8 +28,8 @@
 
 <Popover.Root bind:open>
 	<Popover.Trigger asChild let:builder>
-		<Button builders={[builder]} variant="outline" size="sm" class="h-8">
-			<PlusCircled class="mr-2 h-4 w-4" />
+		<Button builders={[builder]} variant="outline" size="sm" class="h-8 grow">
+			<PlusCircled class="mr-2 h-4 w-4 hidden sm:visible" />
 			{title}
 
 			{#if filterValues.length > 0}

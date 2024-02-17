@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_12_184904) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,11 +30,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_184904) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "sql_placeholder", force: :cascade do |t|
-    t.string "name"
+  create_table "solutions", force: :cascade do |t|
+    t.string "user_email", null: false
+    t.string "challenge_oid", null: false
+    t.datetime "start_time", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "end_time"
+    t.string "answer"
+    t.boolean "answer_correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_sql_placeholder_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

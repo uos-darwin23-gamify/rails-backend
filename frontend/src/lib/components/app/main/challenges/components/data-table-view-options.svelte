@@ -18,12 +18,12 @@
 		.map(([id]) => id);
 
 	// const hidableCols = ['title', 'status', 'priority'];
-	const hidableCols = ['name', 'type', 'difficulty'];
+	const hidableCols = ['name', 'type', 'difficulty', 'status'];
 </script>
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
-		<Button variant="outline" size="sm" class="ml-auto h-8 flex" builders={[builder]}>
+		<Button variant="outline" size="sm" class="h-8 flex" builders={[builder]}>
 			<MixerHorizontal class="mr-2 h-4 w-4" />
 			View
 		</Button>

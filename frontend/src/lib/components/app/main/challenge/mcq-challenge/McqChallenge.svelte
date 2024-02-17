@@ -8,12 +8,18 @@
 	export let data: McqChallengeDataType;
 	export let solutionState: McqChallengeSolutionType;
 
+	const lock = solutionState !== null;
+
 	let checkboxState: boolean[] = new Array(data.answers.length).fill(false);
 
 	$: {
-		solutionState = checkboxState
-			.map((value, index) => (value ? index : undefined))
-			.filter((index) => index !== undefined) as McqChallengeSolutionType;
+		if (!lock) {
+			solutionState = checkboxState
+				.map((value, index) => (value ? index : undefined))
+				.filter((index) => index !== undefined) as McqChallengeSolutionType;
+		} else {
+			checkboxState = checkboxState.map((_, index) => solutionState!.includes(index));
+		}
 	}
 </script>
 
@@ -29,7 +35,11 @@
 				<Button
 					variant={checkboxState[index * 2] ? 'secondary' : 'outline'}
 					class="flex justify-start gap-4 grow py-3 px-3 h-full w-full border"
-					><Checkbox bind:checked={checkboxState[index * 2]} id={String(index * 2)} />
+					><Checkbox
+						disabled={lock}
+						bind:checked={checkboxState[index * 2]}
+						id={String(index * 2)}
+					/>
 					<Label
 						class="cursor-pointer text-wrap leading-5 text-left text-xs md:text-sm lg:text-base"
 						for={String(index * 2)}>{groupedAnswerPair[0]}</Label
@@ -45,7 +55,11 @@
 				<Button
 					variant={checkboxState[index * 2 + 1] ? 'secondary' : 'outline'}
 					class="flex justify-start gap-4 grow py-3 px-3 h-full w-full border"
-					><Checkbox bind:checked={checkboxState[index * 2 + 1]} id={String(index * 2 + 1)} />
+					><Checkbox
+						disabled={lock}
+						bind:checked={checkboxState[index * 2 + 1]}
+						id={String(index * 2 + 1)}
+					/>
 					<Label
 						class="cursor-pointer text-wrap leading-5 text-left text-xs md:text-sm lg:text-base"
 						for={String(index * 2 + 1)}>{groupedAnswerPair[1]}</Label
