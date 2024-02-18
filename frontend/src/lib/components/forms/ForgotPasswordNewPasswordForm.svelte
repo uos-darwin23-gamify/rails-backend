@@ -36,6 +36,11 @@
 	const accessToken = new URLSearchParams(window.location.search).get('reset-password-token');
 
 	const handleSubmit = async () => {
+		if (!validateData()) {
+        console.error('Validation failed');
+        return;
+    }
+
     if (accessToken === null) {
         console.error('Token not found in URL');
         return;
