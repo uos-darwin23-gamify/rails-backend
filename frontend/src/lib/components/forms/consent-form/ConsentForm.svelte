@@ -4,6 +4,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
+	import { onMount } from 'svelte';
 
 	const formFieldsTakingPart = [
 		{
@@ -109,39 +111,50 @@
 			});
 
 			if (response.ok) {
-				console.log('Success. Form submitted');
+				toast.success('Consent form submitted.');
 				goto('/app');
 			} else {
 				console.error('Failed to submit form');
 			}
 		}
-	};
+	}
+
+	onMount(async () => {
+		const response = await fetch('/api/consent');
+
+		if (response.ok) {
+			const consent = (await response.json()).consent;
+			consent && goto('/app');
+		} else {
+			console.error('Failed to fetch');
+		}
+	});
 </script>
 
-<form class="p-6 flex grow relative bg-base-100" on:submit|preventDefault={handleSubmit}>
-	<Card.Root class="h-full flex overflow-y-auto grow justify-center pb-10">
-		<div class="basis-1/2 flex flex-col">
+<form class="flex grow p-4 relative overflow-x-auto" on:submit|preventDefault={handleSubmit}>
+	<Card.Root class="flex grow relative overflow-x-auto">
+		<div class="flex flex-col grow w-full">
 			<Card.Header>
 				<Card.Title class="text-center">Gamification of Coding Consent Form</Card.Title>
 				<!-- <Card.Description>Card Description</Card.Description> -->
 			</Card.Header>
-			<Card.Content>
-				<div class="flex justify-end gap-4">
+			<Card.Content class="flex grow flex-col">
+				<div class="flex justify-end gap-4 items-center">
 					<p>Select All</p>
 					<Checkbox checked={checkboxes.every((x) => x)} on:click={handleSelectAll} />
 				</div>
 				{#each allFields as field, index (index)}
 					{#if findHeader(index) !== undefined}
-						<h2 class="font-bold mb-2">{findHeader(index)?.header}</h2>
+						<h2 class="font-bold mb-2 text-sm sm:text-base">{findHeader(index)?.header}</h2>
 					{/if}
 					<div class="flex justify-between gap-12 mb-4">
-						<p class="font-thin">{field.label}</p>
+						<p class="font-thin text-xs sm:text-sm">{field.label}</p>
 						<Checkbox bind:checked={checkboxes[index]} />
 					</div>
 				{/each}
 			</Card.Content>
-			<Card.Footer class="flex justify-center">
-				<Button type="submit">Submit</Button>
+			<Card.Footer class="flex justify-end">
+				<Button type="submit" class="grow sm:grow-0">Submit</Button>
 			</Card.Footer>
 		</div>
 	</Card.Root>
@@ -150,13 +163,13 @@
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title class="flex justify-center items-center">Consent Needed to Proceed</Dialog.Title
+			<Dialog.Title class="flex justify-center items-center">Consent needed to proceed</Dialog.Title
 			>
-			<Dialog.Description class="text-left">
-				All checkboxes must be selected in order to proceed.</Dialog.Description
+			<Dialog.Description class="text-left pt-2">
+				All checkboxes must be selected in order to proceed and use the platform.</Dialog.Description
 			>
 		</Dialog.Header>
-		<Dialog.Footer class="mt-4">
+		<Dialog.Footer class="mt-3">
 			<Button on:click={() => (dialogOpen = false)}>Acknowledge</Button>
 		</Dialog.Footer>
 	</Dialog.Content>

@@ -1,6 +1,8 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "Users::Consents", type: :request do
+require "rails_helper"
+
+RSpec.describe "Users::Consents" do
   describe "GET /consent" do
     it "returns http success" do
       get "/users/consent/consent"
@@ -14,5 +16,4 @@ RSpec.describe "Users::Consents", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
-
 end
