@@ -12,11 +12,23 @@
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	export let data;
 	let menuClosed = true;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let mainComponent: (new (...args: any[]) => SvelteComponent) | null = null;
+
+	onMount(async () => {
+		const response = await fetch('/api/consent');
+
+		if (response.ok) {
+			const consent = (await response.json()).consent;
+			!consent && goto('/app/consent');
+		} else {
+			console.error('Failed to fetch');
+		}
+	});
 
 	$: {
 		switch (data.slug) {

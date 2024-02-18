@@ -21,6 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.integer :group, null: false
 
       t.string :username, null: false
+      t.boolean :consent, default: false
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

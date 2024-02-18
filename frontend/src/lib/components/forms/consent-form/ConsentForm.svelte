@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { Checkbox } from '$lib/components/ui/checkbox';
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
-
-	let consentDialogOpen = false;
+	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
+	import { onMount } from 'svelte';
 
 	const formFieldsTakingPart = [
 		{
@@ -87,53 +89,88 @@
 	];
 	const allFields = [...formFieldsTakingPart, ...formFieldsInfoUsage, ...formFieldsCopyright];
 
+	let checkboxes: boolean[] = new Array(allFields.length).fill(false);
+
 	const findHeader = (index: number) => headers.find(({ headerIndex }) => headerIndex === index);
+
+	$: allSelected = checkboxes.every((x) => x);
+
+	const handleSelectAll = () => (checkboxes = checkboxes.map(() => !allSelected));
+
+	let dialogOpen = false;
+
+	async function handleSubmit() {
+		if (!allSelected) {
+			dialogOpen = true;
+		} else {
+			const response = await fetch('/api/consent', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (response.ok) {
+				toast.success('Consent form submitted.');
+				goto('/app');
+			} else {
+				console.error('Failed to submit form');
+			}
+		}
+	}
+
+	onMount(async () => {
+		const response = await fetch('/api/consent');
+
+		if (response.ok) {
+			const consent = (await response.json()).consent;
+			consent && goto('/app');
+		} else {
+			console.error('Failed to fetch');
+		}
+	});
 </script>
 
-<div class="flex grow p-4 relative overflow-x-auto" id="form-container">
-	<Card.Root class="flex grow relative overflow-x-auto"
-		><div class="grow w-full">
+<form class="flex grow p-4 relative overflow-x-auto" on:submit|preventDefault={handleSubmit}>
+	<Card.Root class="flex grow relative overflow-x-auto">
+		<div class="flex flex-col grow w-full">
 			<Card.Header>
-				<Card.Title>Help &amp; Support</Card.Title>
-				<!-- <Card.Description></Card.Description> -->
+				<Card.Title class="text-center">Gamification of Coding Consent Form</Card.Title>
+				<!-- <Card.Description>Card Description</Card.Description> -->
 			</Card.Header>
-			<Card.Content>
-				<div class="flex flex-col gap-4 items-start">
-					<p>
-						Email to contact in case of any issues or queries: <a
-							href="mailto:support@gamifycoding.me">support@gamifycoding.me</a
-						>
-					</p>
-					<Button on:click={() => (consentDialogOpen = true)}>View Consent Form</Button>
-				</div></Card.Content
-			>
+			<Card.Content class="flex grow flex-col">
+				<div class="flex justify-end gap-4 items-center">
+					<p>Select All</p>
+					<Checkbox checked={checkboxes.every((x) => x)} on:click={handleSelectAll} />
+				</div>
+				{#each allFields as field, index (index)}
+					{#if findHeader(index) !== undefined}
+						<h2 class="font-bold mb-2 text-sm sm:text-base">{findHeader(index)?.header}</h2>
+					{/if}
+					<div class="flex justify-between gap-12 mb-4">
+						<p class="font-thin text-xs sm:text-sm">{field.label}</p>
+						<Checkbox bind:checked={checkboxes[index]} />
+					</div>
+				{/each}
+			</Card.Content>
+			<Card.Footer class="flex justify-end">
+				<Button type="submit" class="grow sm:grow-0">Submit</Button>
+			</Card.Footer>
 		</div>
 	</Card.Root>
-</div>
-<Dialog.Root bind:open={consentDialogOpen}>
-	<Dialog.Content class="flex grow flex-col max-w-none overflow-y-auto h-full-dialog-custom">
-		<Card.Header>
-			<Card.Title class="text-center">Gamification of Coding Consent Form</Card.Title>
-			<!-- <Card.Description>Card Description</Card.Description> -->
-		</Card.Header>
-		<Card.Content class="flex grow flex-col">
-			{#each allFields as field, index (index)}
-				{#if findHeader(index) !== undefined}
-					<h2 class="font-bold mb-2 text-sm sm:text-base">{findHeader(index)?.header}</h2>
-				{/if}
-				<div class="flex justify-between gap-12 mb-4">
-					<p class="font-thin text-xs sm:text-sm">{field.label}</p>
-				</div>
-			{/each}
-		</Card.Content>
-		<Card.Footer class="flex justify-end">
-			<Button class="grow sm:grow-0" on:click={() => (consentDialogOpen = false)}>Close</Button>
-		</Card.Footer>
+</form>
+
+<Dialog.Root bind:open={dialogOpen}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title class="flex justify-center items-center">Consent needed to proceed</Dialog.Title
+			>
+			<Dialog.Description class="text-left pt-2">
+				All checkboxes must be selected in order to proceed and use the platform.</Dialog.Description
+			>
+		</Dialog.Header>
+		<Dialog.Footer class="mt-3">
+			<Button on:click={() => (dialogOpen = false)}>Acknowledge</Button>
+		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>
-
-<style>
-	:global(.h-full-dialog-custom) {
-		height: calc(100% - 16px) !important;
-	}
-</style>
