@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Sub-task 1",
+      "type": "shell",
+      "command": "rails s",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Sub-task 2",
+      "type": "shell",
+      "command": "cd frontend && yarn dev",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Sub-task 3",
+      "type": "shell",
+      "command": "cd ../realtime-backend && yarn dev",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Start dev",
+      "dependsOn": ["Sub-task 1", "Sub-task 2", "Sub-task 3"],
+      "dependsOrder": "parallel",
+      "group": "build",
+      "isBackground": true
+    }
+  ]
+}

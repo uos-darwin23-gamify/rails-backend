@@ -9,9 +9,15 @@
 	export let solutionState: ScqChallengeSolutionType | null;
 	let answerIndex: string | undefined = undefined;
 
+	const lock = solutionState !== null;
+
 	$: {
-		const answerIndexParsed = parseInt(answerIndex ?? '');
-		solutionState = isNaN(answerIndexParsed) ? null : answerIndexParsed;
+		if (!lock) {
+			const answerIndexParsed = parseInt(answerIndex ?? '');
+			solutionState = isNaN(answerIndexParsed) ? null : answerIndexParsed;
+		} else {
+			answerIndex = solutionState?.toString();
+		}
 	}
 </script>
 

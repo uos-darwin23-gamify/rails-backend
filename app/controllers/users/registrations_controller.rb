@@ -4,6 +4,7 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
+    before_action :append_group_and_username, :configure_sign_up_params, only: [:create]
     include RackSessionsFix
     respond_to :json
 
@@ -19,6 +20,29 @@ module Users
         render json: {
           status: {message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
         }, status: :unprocessable_entity
+      end
+    end
+
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password group username])
+    end
+
+    def append_group_and_username
+      params[:user][:group] = determine_group
+      params[:user][:username] = generate_username
+    end
+
+    def determine_group
+      pre_authorized_email = PreAuthorizedEmail.find_by(["lower(email) = ?", params[:user][:email]])
+      return if pre_authorized_email.nil?
+
+      pre_authorized_email.group
+    end
+
+    def generate_username
+      loop do
+        username = "#{Faker::Color.color_name.capitalize}#{Faker::Creature::Animal.name.capitalize}"
+        break username unless User.exists?(username:)
       end
     end
     # GET /resource/sign_up

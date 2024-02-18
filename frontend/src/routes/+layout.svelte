@@ -1,11 +1,12 @@
 <script lang="ts">
 	import '../global.pcss';
-	import { socketConnection } from '$lib/stores';
+	import { socketConnection, monaco } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
 	import { PUBLIC_SENTRY_DSN } from '$env/static/public';
 
 	$: $socketConnection;
+	$: $monaco;
 
 	onMount(async () => {
 		if (!dev) {
@@ -15,7 +16,7 @@
 
 				// This sets the sample rate to be 10%. You may want this to be 100% while
 				// in development and sample at a lower rate in production
-				replaysSessionSampleRate: 1.0,
+				replaysSessionSampleRate: 0.0,
 
 				// If the entire session is not sampled, use the below sample rate to sample
 				// sessions when an error occurs.

@@ -13,27 +13,29 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
-	export let addNewEmails: (emails: string[]) => Promise<void>;
+	export let addNewEmails: (emails: string[], groupType: 'league' | 'global') => Promise<void>;
 
 	export let tableModel: TableViewModel<PreAuthorizedEmail>;
 
 	const { pluginStates } = tableModel;
-	const {
-		filterValue
-	}: {
-		filterValue: Writable<string>;
-	} = pluginStates.filter;
+	// const {
+	// 	filterValue
+	// }: {
+	// 	filterValue: Writable<string>;
+	// } = pluginStates.filter;
 
 	const {
 		filterValues
 	}: {
 		filterValues: Writable<{
-			status: string[];
-			priority: string[];
+			email: string;
+			group: string[];
 		}>;
 	} = pluginStates.colFilter;
 
-	$: showReset = Object.values({ ...$filterValues, $filterValue }).some((v) => v.length > 0);
+	$: showReset = Object.values({ ...$filterValues }).some(
+		(v) => v.length > 0 || (typeof v === 'string' && v.length > 0)
+	);
 
 	// const dispatch = createEventDispatcher();
 	let newEmails = '';
@@ -58,6 +60,7 @@
 	};
 
 	let tabValue: 'single' | 'bulk' = 'single';
+	let groupTypeValue: 'league' | 'global' = 'league';
 	$: {
 		tabValue;
 		newEmails = '';
@@ -68,42 +71,36 @@
 	const closeDialog = () => (dialogOpen = false);
 </script>
 
-<div class="flex items-center justify-between gap-2">
-	<div class="flex flex-1 items-center space-x-2">
-		<Input
-			placeholder="Filter emails..."
-			class="h-8 w-[250px] lg:w-[350px]"
-			type="search"
-			bind:value={$filterValue}
-		/>
-
-		<!-- <DataTableFacetedFilter
-			bind:filterValues={$filterValues.status}
-			title="Status"
-			options={statuses}
-		/>
-		<DataTableFacetedFilter
-			bind:filterValues={$filterValues.priority}
-			title="Priority"
-			options={priorities}
-		/>
-		{#if showReset}
-			<Button
-				on:click={() => {
-					$filterValue = "";
-					$filterValues.status = [];
-					$filterValues.priority = [];
-				}}
-				variant="ghost"
-				class="h-8 px-2 lg:px-3"
-			>
-				Reset
-				<Cross2 class="ml-2 h-4 w-4" />
-			</Button>
-		{/if} -->
-	</div>
-
-	<div class="flex">
+<div class="flex items-center gap-2 flex-wrap">
+	<Input
+		placeholder="Filter emails..."
+		class="h-8 sm:w-[250px] lg:w-[350px] grow sm:grow-0 xl:grow-0 md:grow basis-[200px]"
+		type="search"
+		bind:value={$filterValues.email}
+	/>
+	<div class="flex grow justify-between gap-2">
+		<div class="flex sm:items-center gap-2">
+			<DataTableFacetedFilter
+				bind:filterValues={$filterValues.group}
+				title="Group"
+				options={[
+					{ label: 'League', value: 'league' },
+					{ label: 'Global', value: 'global' }
+				]}
+			/>
+			{#if showReset}
+				<Button
+					on:click={() => {
+						$filterValues.email = '';
+						$filterValues.group = [];
+					}}
+					variant="outline"
+					class="h-8 px-2 lg:px-3"
+				>
+					<Cross2 class="h-4 w-4" />
+				</Button>
+			{/if}
+		</div>
 		<Dialog.Root
 			bind:open={dialogOpen}
 			onOpenChange={() => {
@@ -112,7 +109,8 @@
 			}}
 		>
 			<Dialog.Trigger
-				><Button on:click={() => (newEmails = '')}><PlusCircled class="h-5 w-5 mr-2" />Add</Button
+				><Button class="h-8" on:click={() => (newEmails = '')}
+					><PlusCircled class="h-5 w-5 mr-2" />Add</Button
 				></Dialog.Trigger
 			>
 			<Dialog.Content class="sm:max-w-[425px]">
@@ -121,11 +119,17 @@
 						<Tabs.Trigger value="single">Single</Tabs.Trigger>
 						<Tabs.Trigger value="bulk">Bulk</Tabs.Trigger>
 					</Tabs.List>
+					<Tabs.Root bind:value={groupTypeValue} class="mt-2">
+						<Tabs.List class="grid w-full grid-cols-2">
+							<Tabs.Trigger value="league">League</Tabs.Trigger>
+							<Tabs.Trigger value="global">Global</Tabs.Trigger>
+						</Tabs.List>
+					</Tabs.Root>
 					<Tabs.Content value="single">
 						<form
 							on:submit|preventDefault={() =>
 								!validateAndFormatNewEmails(newEmails).error &&
-								addNewEmails(validateAndFormatNewEmails(newEmails).newEmails)}
+								addNewEmails(validateAndFormatNewEmails(newEmails).newEmails, groupTypeValue)}
 						>
 							<Card.Root class="border-0">
 								<Card.Header>
@@ -156,7 +160,7 @@
 						<form
 							on:submit|preventDefault={() =>
 								!validateAndFormatNewEmails(newEmails).error &&
-								addNewEmails(validateAndFormatNewEmails(newEmails).newEmails)}
+								addNewEmails(validateAndFormatNewEmails(newEmails).newEmails, groupTypeValue)}
 						>
 							<Card.Root class="border-0">
 								<Card.Header>

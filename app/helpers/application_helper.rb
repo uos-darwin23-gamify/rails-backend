@@ -63,6 +63,13 @@ module ApplicationHelper
     render json: {message: "Not Authorized"}, status: :unauthorized unless user_type?
   end
 
+  def authorize_socket_server_controllers
+    return if params[:API_KEY] == Rails.application.credentials.socket_server_api_key!
+
+    render json:   {message: "Not Authorized"},
+           status: :unauthorized
+  end
+
   def render_bad_request
     render json: {message: "Bad request"}, status: :bad_request
   end

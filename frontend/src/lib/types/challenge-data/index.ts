@@ -8,6 +8,11 @@ type BaseChallengeDataType = {
 	type: 'ScqChallenge' | 'McqChallenge' | 'ConnectBlocksChallenge' | 'CodeOutputChallenge';
 	difficulty: 'EASY' | 'MEDIUM' | 'HARD';
 	question_overview: string;
+	start_time: string;
+	end_time: string;
+	started: boolean;
+	finished: boolean;
+	answer: string | null;
 };
 
 type ScqChallengeDataType = BaseChallengeDataType & Scq;

@@ -2,6 +2,7 @@ export { default as DataTableCheckbox } from './data-table-checkbox.svelte';
 export { default as DataTableNameCell } from './data-table-name-cell.svelte';
 export { default as DataTableTypeCell } from './data-table-type-cell.svelte';
 export { default as DataTableDifficultyCell } from './data-table-difficulty-cell.svelte';
+export { default as DataTableStatusCell } from './data-table-status-cell.svelte';
 export { default as DataTableRowActions } from './data-table-row-actions.svelte';
 export { default as DataTableColumnHeader } from './data-table-column-header.svelte';
 export { default as DataTableToolbar } from './data-table-toolbar.svelte';

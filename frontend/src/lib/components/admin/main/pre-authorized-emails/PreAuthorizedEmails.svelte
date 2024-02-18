@@ -6,6 +6,7 @@
 	import type { PreAuthorizedEmail } from './data/schemas';
 	import * as Popover from '$lib/components/ui/popover';
 	import { Info } from 'lucide-svelte';
+	import * as Dialog from '$lib/components/ui/dialog';
 
 	let data: PreAuthorizedEmail[];
 	let loading = true;
@@ -74,7 +75,26 @@
 		getEmails();
 	};
 
-	export const addNewEmails = async (emails: string[]) => {
+	export const editEmail = async (id: number, email: string, group: 'league' | 'global') => {
+		loading = true;
+		const correspondingEmailId = data[id].id;
+
+		const response = await fetch('/api/admin/pre-authorized-emails', {
+			method: 'PUT',
+			body: JSON.stringify({ id: correspondingEmailId, email, group }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (!response.ok) {
+			console.error(await response.json());
+		}
+
+		getEmails();
+	};
+
+	export const addNewEmails = async (emails: string[], groupType: 'league' | 'global') => {
 		loading = true;
 
 		if (emails.length > 0) {
@@ -84,7 +104,7 @@
 				responses.push(
 					fetch('/api/admin/pre-authorized-emails', {
 						method: 'POST',
-						body: JSON.stringify({ email }),
+						body: JSON.stringify({ email, group: groupType }),
 						headers: {
 							'Content-Type': 'application/json'
 						}
@@ -101,6 +121,8 @@
 			}
 		}
 	};
+
+	let dialogOpen = false;
 </script>
 
 {#if loading}
@@ -116,11 +138,11 @@
 					<Card.Description>Only these emails can be used by users for signup.</Card.Description>
 				</Card.Header>
 				<Card.Content>
-					<DataTable {data} bind:selectedRowIdsStore {addNewEmails} {deleteEmail} />
+					<DataTable {data} bind:selectedRowIdsStore {addNewEmails} {deleteEmail} {editEmail} />
 				</Card.Content>
 				<Card.Footer class="flex justify-end">
 					{#if selectedRowIds !== false && selectedRowIds.length > 0}
-						<Button variant="destructive" on:click={deleteSelectedEmails}>Delete</Button>
+						<Button variant="destructive" on:click={() => (dialogOpen = true)}>Delete</Button>
 					{:else}
 						<Popover.Root portal={null}>
 							<Popover.Trigger asChild let:builder>
@@ -143,4 +165,30 @@
 			</div>
 		</Card.Root>
 	</div>
+	<Dialog.Root bind:open={dialogOpen}>
+		<Dialog.Content>
+			<Dialog.Header>
+				<Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
+				<Dialog.Description>
+					This action cannot be undone. This will permanently delete the selected pre-authorized
+					emails. If the users have already created accounts with these emails, then the accounts
+					will still exist after the deletion.
+				</Dialog.Description>
+			</Dialog.Header>
+			<Dialog.Footer class="mt-4 flex sm:justify-between gap-2">
+				<Button
+					variant="secondary"
+					on:click={() => {
+						dialogOpen = false;
+					}}>Cancel</Button
+				>
+				<Button
+					on:click={() => {
+						deleteSelectedEmails();
+						dialogOpen = false;
+					}}>Delete Emails</Button
+				>
+			</Dialog.Footer>
+		</Dialog.Content>
+	</Dialog.Root>
 {/if}

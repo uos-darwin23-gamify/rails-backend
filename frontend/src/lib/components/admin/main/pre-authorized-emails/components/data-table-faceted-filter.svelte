@@ -6,11 +6,13 @@
 	import { cn } from '$lib/utils/ui';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Badge from '$lib/components/new-york/ui/badge/badge.svelte';
-	// import type { statuses } from "../data/data";
 
 	export let filterValues: string[] = [];
 	export let title: string;
-	// export let options = [] as typeof statuses;
+	export let options = [] as (
+		| { label: 'League'; value: 'league' }
+		| { label: 'Global'; value: 'global' }
+	)[];
 
 	let open = false;
 
@@ -23,12 +25,11 @@
 	};
 </script>
 
-<!-- <Popover.Root bind:open>
+<Popover.Root bind:open>
 	<Popover.Trigger asChild let:builder>
-		<Button builders={[builder]} variant="outline" size="sm" class="h-8 border-dashed">
-			<PlusCircled class="mr-2 h-4 w-4" />
+		<Button builders={[builder]} variant="outline" size="sm" class="h-8">
+			<PlusCircled class="mr-2 h-4 w-4 hidden sm:block" />
 			{title}
-
 			{#if filterValues.length > 0}
 				<Separator orientation="vertical" class="mx-2 h-4" />
 				<Badge variant="secondary" class="rounded-sm px-1 font-normal lg:hidden">
@@ -42,7 +43,7 @@
 					{:else}
 						{#each filterValues as option}
 							<Badge variant="secondary" class="rounded-sm px-1 font-normal">
-								{option}
+								{options.find((x) => x.value === option)?.label}
 							</Badge>
 						{/each}
 					{/if}
@@ -65,13 +66,13 @@
 						>
 							<div
 								class={cn(
-									"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+									'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
 									filterValues.includes(option.value)
-										? "bg-primary text-primary-foreground"
-										: "opacity-50 [&_svg]:invisible"
+										? 'bg-primary text-primary-foreground'
+										: 'opacity-50 [&_svg]:invisible'
 								)}
 							>
-								<Check className={cn("h-4 w-4")} />
+								<Check className={cn('h-4 w-4')} />
 							</div>
 							<span>
 								{option.label}
@@ -93,4 +94,4 @@
 			</Command.List>
 		</Command.Root>
 	</Popover.Content>
-</Popover.Root> -->
+</Popover.Root>

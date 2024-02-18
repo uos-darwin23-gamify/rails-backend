@@ -9,12 +9,12 @@
 #   end
 
 # Active Record syntax
-PreAuthorizedEmail.find_or_create_by(:email => "test@test.com")
+PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
 
 # Mongoid syntax
 # ScqChallenge seed data
-ScqChallenge.find_or_create_by(
-  name: "Single choice question challenge 1",
+ScqChallenge.find_or_create_by!(
+  name: "Capital Cities",
   difficulty: :EASY,
   # question_overview: "Choose the correct answer",
   question_overview: "What is the capital of France?",
@@ -24,8 +24,8 @@ ScqChallenge.find_or_create_by(
 )
 
 # McqChallenge seed data
-McqChallenge.find_or_create_by(
-  name: "Multiple choice question challenge 1",
+McqChallenge.find_or_create_by!(
+  name: "General Geography Knowledge",
   difficulty: :MEDIUM,
   # question_overview: "Choose all of the correct answers",
   question_overview: "Which of the following are correct?",
@@ -35,8 +35,8 @@ McqChallenge.find_or_create_by(
 )
 
 # ConnectBlocksChallenge seed data
-ConnectBlocksChallenge.find_or_create_by(
-  name: "Connect blocks challenge 1",
+ConnectBlocksChallenge.find_or_create_by!(
+  name: "Category Matching",
   difficulty: :HARD,
   # question_overview: "Connect all matching blocks",
   question_overview: "Match the objects to the correct categories",
@@ -47,13 +47,47 @@ ConnectBlocksChallenge.find_or_create_by(
 )
 
 # CodeOutputChallenge seed data
-CodeOutputChallenge.find_or_create_by(
-  name: "Code output challenge 1",
+CodeOutputChallenge.find_or_create_by!(
+  name: "Prime Numbers",
   difficulty: :HARD,
-  # question_overview: "Analyze the code",
-  question_overview: "What is the output of the code?",
-  code: "print('Hello, world!')",
-  question_array: ["Output:"],
-  correct_answer_regex_array: ["^Hello, world!$"],
-  correct_answer_explanation: "The print function in Python outputs the string 'Hello, world!' to the console."
+  question_overview: "Analyze the following C code and answer the questions",
+  # question_overview: "What is the output of the code?",
+  code: %Q{#include <stdio.h>
+int main() {
+  int num, i, isPrime = 1;
+  printf("Enter a positive integer: ");
+  scanf("%d", &num);
+  for (i = 2; i <= num / 2; ++i) {
+    if (num % i == 0) {
+      isPrime = 0;
+      break;
+    }
+  }
+  if (isPrime)
+    printf("%d is a prime number.", num);
+  else
+    printf("%d is not a prime number.", num);
+  return 0;
+}},
+  # Escaping special characters:
+  # printf("%d is a prime number.\\n", num);
+  question_array: [
+    {question: 'What is the output for input "4"?'},
+    {question: 'What is the output for input "7"?', select: {
+      startLineNumber: 4,
+      startColumn: 3,
+      endLineNumber: 4,
+      endColumn: 41
+    }},
+    {question: 'What does the main() function actually return?', select: {
+      startLineNumber: 2,
+      startColumn: 1,
+      endLineNumber: 18,
+      endColumn: 1
+    }},
+],
+  correct_answer_regex_array: ["^4 is not a prime number.$", "^7 is a prime number.$", "^0$"],
+  # Example with any combination of preceding and/or trailing character sequences permitted:
+  # correct_answer_regex_array: ["4 is not a prime number.", "7 is a prime number.", "0"],
+  correct_answer_explanation: "The code is a simple C program to check if a number is prime. For input '4', the output is '4 is not a prime number.' because 4 is not a prime number. For input '7', the output is '7 is a prime number.' because 7 is a prime number. The main() function returns '0' indicating successful execution of the program."
 )

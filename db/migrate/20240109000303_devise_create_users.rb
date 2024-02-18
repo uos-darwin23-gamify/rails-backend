@@ -14,8 +14,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       ## Rememberable
       t.datetime :remember_created_at
 
-            # User type
-            t.integer :user_type, default: 0, null: false
+      # User type
+      t.integer :user_type, default: 0, null: false
+
+      # Group (league/global)
+      t.integer :group, null: false
+
+      t.string :username, null: false
+      t.boolean :consent, default: false
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -40,6 +46,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     end
 
     add_index :users, :email,                unique: true
+    add_index :users, :username,             unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true

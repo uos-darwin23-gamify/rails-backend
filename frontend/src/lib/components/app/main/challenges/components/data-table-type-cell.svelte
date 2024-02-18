@@ -10,7 +10,7 @@
 
 <HoverCard.Root>
 	<HoverCard.Trigger>
-		<Badge variant="outline"
+		<Badge variant="outline" class="bg-card"
 			><svelte:component this={icon} class="mr-2 my-1" />
 			<p class="sm:max-w-[160px] max-w-[72px] truncate font-medium">{label}</p></Badge
 		>
