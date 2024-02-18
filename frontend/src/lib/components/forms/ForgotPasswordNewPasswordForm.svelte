@@ -5,9 +5,12 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
+	import * as Dialog from '$lib/components/ui/dialog';
 
 	let formData = { password: '', confirmPassword: '' };
 	type FormValidation = null | false | true;
+
+	let successDialogOpen = false;
 
 	let formValidation: {
 		passwordMin8: FormValidation;
@@ -37,34 +40,34 @@
 
 	const handleSubmit = async () => {
 		if (!validateData()) {
-        console.error('Validation failed');
-        return;
-    }
+			console.error('Validation failed');
+			return;
+		}
 
-    if (accessToken === null) {
-        console.error('Token not found in URL');
-        return;
-    }
+		if (accessToken === null) {
+			console.error('Token not found in URL');
+			return;
+		}
 
-    const response = await fetch('api/auth/password', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'access-token': accessToken
-        },
-        body: JSON.stringify({
-            password: formData.password,
-            password_confirmation: formData.confirmPassword,
-			reset_password_token: accessToken
-        })
-    });
+		const response = await fetch('api/auth/password', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'access-token': accessToken
+			},
+			body: JSON.stringify({
+				password: formData.password,
+				password_confirmation: formData.confirmPassword,
+				reset_password_token: accessToken
+			})
+		});
 
-    if (!response.ok) {
-        console.error('Failed to reset password');
-    } else {
-		goto('/login')
-    }
-};
+		if (!response.ok) {
+			console.error('Failed to reset password');
+		} else {
+			successDialogOpen = true;
+		}
+	};
 
 	$: {
 		if (formValidation.passwordMin8 !== null) {
@@ -127,3 +130,20 @@
 		</form>
 	</Card.Content>
 </Card.Root>
+
+{#if successDialogOpen}
+	<Dialog.Root bind:open={successDialogOpen}>
+		<Dialog.Content>
+			<Dialog.Header>
+				<Dialog.Title class="flex justify-center items-center">Password has been changed</Dialog.Title
+				>
+				<Dialog.Description class="text-left">
+					Your password has been changed. Please log in to continue.</Dialog.Description
+				>
+			</Dialog.Header>
+			<Dialog.Footer class="mt-4">
+				<Button on:click={() => { successDialogOpen = false; goto('/login'); }}>Acknowledge</Button>
+			</Dialog.Footer>
+		</Dialog.Content>
+	</Dialog.Root>
+{/if}
