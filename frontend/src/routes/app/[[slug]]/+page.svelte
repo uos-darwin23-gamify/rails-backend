@@ -7,6 +7,7 @@
 	import Challenge from '$lib/components/app/main/challenge/Challenge.svelte';
 	import Settings from '$lib/components/app/main/settings/Settings.svelte';
 	import Leaderboard from '$lib/components/app/main/leaderboard/Leaderboard.svelte';
+	import Guide from '$lib/components/app/main/guide/Guide.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -20,6 +21,9 @@
 		switch (data.slug) {
 			case AppUrls.LEADERBOARD:
 				mainComponent = Leaderboard;
+				break;
+			case AppUrls.GUIDE:
+				mainComponent = Guide;
 				break;
 			case AppUrls.CHALLENGES:
 				const challengeId = $page.url.searchParams.get('id');

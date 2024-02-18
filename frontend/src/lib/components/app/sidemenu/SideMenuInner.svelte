@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AppUrls from '$lib/enums/AppUrls';
 	import { createEventDispatcher } from 'svelte';
-	import { Home, Swords, Settings2, Shield } from 'lucide-svelte';
+	import { Home, Swords, Settings2, Shield, BookText } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import LogoutButton from '$lib/components/LogoutButton.svelte';
 
@@ -40,6 +40,16 @@
 			on:click={() => dispatch('sideMenuItemClicked')}
 			class="flex items-center text-sm justify-start"
 			><Swords class="h-5 w-5 mr-2" />Challenges</Button
+		>
+	</li>
+	<div class="my-1" />
+	<li>
+		<Button
+			variant={slug === AppUrls.GUIDE ? 'secondary' : 'outline'}
+			href={`/app${AppUrls.GUIDE ? '/' + AppUrls.GUIDE : ''}`}
+			data-testid="guide-button"
+			on:click={() => dispatch('sideMenuItemClicked')}
+			class="flex items-center text-sm justify-start"><BookText class="h-5 w-5 mr-2" />Guide</Button
 		>
 	</li>
 	<div class="my-1" />
