@@ -82,6 +82,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    addressable (2.8.6)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
@@ -91,6 +93,7 @@ GEM
     bson (4.15.0)
     builder (3.2.4)
     cgi (0.4.1)
+    chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -159,6 +162,10 @@ GEM
       activesupport (>= 4.2)
     jwt (2.7.1)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.9.0)
+      launchy (>= 2.2, < 3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -200,6 +207,7 @@ GEM
     pg (1.5.4)
     psych (5.1.2)
       stringio
+    public_suffix (5.0.4)
     puma (6.4.1)
       nio4r (~> 2.0)
     racc (1.7.3)
@@ -325,6 +333,8 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     zeitwerk (2.6.12)
 
 PLATFORMS
@@ -342,6 +352,7 @@ DEPENDENCIES
   hamlit-rails (~> 0.2.3)
   html2haml (~> 2.3)
   jsonapi-serializer
+  letter_opener
   mongoid (~> 8.1)
   pg (~> 1.1)
   puma (>= 5.0)
@@ -356,6 +367,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   tzinfo-data
+  whenever
 
 RUBY VERSION
    ruby 3.1.2p20

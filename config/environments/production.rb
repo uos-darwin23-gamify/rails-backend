@@ -69,7 +69,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'https://mail.gamifycoding.me',
-    port: 22,
+    port: 465,
     domain: 'gamifycoding.me',
     user_name: 'admin@gamifycoding.me',
     password: '12345678',
