@@ -23,7 +23,6 @@
 		if (response.ok) {
 			console.log('Password reset email sent');
 		} else {
-			console.log(response.text());
 			console.log('Error sending password reset email');
 			emailNotValid = true;
 		}

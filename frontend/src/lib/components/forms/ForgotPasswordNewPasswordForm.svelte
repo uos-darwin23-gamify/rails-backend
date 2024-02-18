@@ -32,14 +32,27 @@
 		return isOk;
 	};
 
+	const accessToken = new URLSearchParams(window.location.search).get('reset-password-token');
+
 	const handleSubmit = async () => {
-		if (!validateData()) {
-			console.log('Password reset failed');
-		}
-		else {
-			console.log('Password reset successful');
-		}
-	};
+    if (accessToken === null) {
+        console.error('Token not found in URL');
+        return;
+    }
+
+    const response = await fetch('api/auth/password', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'access-token': accessToken
+        },
+        body: JSON.stringify({
+            password: formData.password,
+            password_confirmation: formData.confirmPassword,
+			reset_password_token: accessToken
+        })
+    });
+};
 
 	$: {
 		if (formValidation.passwordMin8 !== null) {
