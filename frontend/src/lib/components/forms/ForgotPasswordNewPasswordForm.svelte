@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
@@ -52,6 +53,12 @@
 			reset_password_token: accessToken
         })
     });
+
+    if (!response.ok) {
+        console.error('Failed to reset password');
+    } else {
+		goto('/login')
+    }
 };
 
 	$: {
