@@ -6,7 +6,7 @@ class NotificationMailer < ApplicationMailer
     users = User.all
     
     # Check if there are any email addresses
-    if emails.exists?
+    if users.exists?
       users.find_each do |user|
         mail(to: user.email, subject: "Your Daily Notification") do |format|
           format.html { render 'notification', locals: { email: user.email } }
