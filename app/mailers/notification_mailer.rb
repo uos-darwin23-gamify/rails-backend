@@ -3,14 +3,13 @@ class NotificationMailer < ApplicationMailer
 
   # Method to send notification to all pre-authorized email addresses
   def notification_to_all
-    emails = PreAuthorizedEmail.all
+    users = User.all
     
     # Check if there are any email addresses
     if emails.exists?
-      emails.find_each do |entry|
-        puts "---------------------------------------------"
-        mail(to: entry.email, subject: "Your Daily Notification") do |format|
-          format.html { render 'notification', locals: { email: entry.email } }
+      users.find_each do |user|
+        mail(to: user.email, subject: "Your Daily Notification") do |format|
+          format.html { render 'notification', locals: { email: user.email } }
         end.deliver
       end
     else
