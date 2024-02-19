@@ -37,3 +37,18 @@ export const challengeDiffuculties = [
 		label: 'Hard'
 	}
 ];
+
+export const challengeStatuses = [
+	{
+		value: 'New',
+		label: 'New'
+	},
+	{
+		value: 'In Progress',
+		label: 'In Progress'
+	},
+	{
+		value: 'Finished',
+		label: 'Finished'
+	}
+];

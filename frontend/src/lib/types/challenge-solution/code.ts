@@ -1,1 +1,1 @@
-export type CodeOutputChallengeSolutionType = string[];
+export type CodeOutputChallengeSolutionType = string[] | null;

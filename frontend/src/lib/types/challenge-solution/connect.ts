@@ -1,1 +1,1 @@
-export type ConnectBlocksChallengeSolutionType = number[][];
+export type ConnectBlocksChallengeSolutionType = number[][] | null;

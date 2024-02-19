@@ -1,1 +1,1 @@
-export type ScqChallengeSolutionType = number;
+export type ScqChallengeSolutionType = number | null;

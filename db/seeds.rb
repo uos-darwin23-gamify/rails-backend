@@ -9,7 +9,7 @@
 #   end
 
 # Active Record syntax
-PreAuthorizedEmail.find_or_create_by!(:email => "test@test.com")
+PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
 
 # Mongoid syntax
 # ScqChallenge seed data

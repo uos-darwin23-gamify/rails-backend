@@ -14,7 +14,15 @@
 	let answers: string[] = new Array(data.question_array.length).fill('');
 	let loading = true;
 
-	$: solutionState = answers;
+	const lock = solutionState !== null;
+
+	$: {
+		if (!lock) {
+			solutionState = answers;
+		} else {
+			answers = solutionState!;
+		}
+	}
 	$: atLeastOneSelect = data.question_array.some(({ select }) => select);
 
 	type IStandaloneCodeEditor = Monaco.editor.IStandaloneCodeEditor;
@@ -101,15 +109,24 @@
 					<div class="flex min-w-36 grow items-center">
 						{#if index === data.question_array.length - 1 && index === 0}
 							<Input
+								disabled={lock}
 								bind:value={answers[index]}
 								class="focus-visible:mr-1 focus-visible:mb-1 focus-visible:mt-1"
 							/>
 						{:else if index === data.question_array.length - 1}
-							<Input bind:value={answers[index]} class="focus-visible:mr-1 focus-visible:mb-1" />
+							<Input
+								disabled={lock}
+								bind:value={answers[index]}
+								class="focus-visible:mr-1 focus-visible:mb-1"
+							/>
 						{:else if index === 0}
-							<Input bind:value={answers[index]} class="focus-visible:mr-1 focus-visible:mt-1" />
+							<Input
+								disabled={lock}
+								bind:value={answers[index]}
+								class="focus-visible:mr-1 focus-visible:mt-1"
+							/>
 						{:else}
-							<Input bind:value={answers[index]} class="focus-visible:mr-1" />
+							<Input disabled={lock} bind:value={answers[index]} class="focus-visible:mr-1" />
 						{/if}
 					</div>
 				</div>

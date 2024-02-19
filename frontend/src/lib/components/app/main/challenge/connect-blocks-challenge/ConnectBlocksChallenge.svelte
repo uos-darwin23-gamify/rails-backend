@@ -129,6 +129,8 @@
 	let blocksDOM: HTMLElement[] = new Array(blocks.length).fill(null);
 	let connectionSelected: number | null = null;
 
+	const lock = solutionState !== null;
+
 	// let scrollLeftOffsets: number[] | null = null;
 	// let scrollTopOffsets: number[] | null = null;
 
@@ -149,21 +151,25 @@
 	// }
 
 	$: {
-		const partial: ConnectBlocksChallengeSolutionType = [];
+		if (!lock) {
+			const partial: ConnectBlocksChallengeSolutionType = [];
 
-		connections.forEach(({ firstBlockId, secondBlockId }) => {
-			const firstBlock = blocks[firstBlockId];
-			const secondBlock = blocks[secondBlockId];
+			connections.forEach(({ firstBlockId, secondBlockId }) => {
+				const firstBlock = blocks[firstBlockId];
+				const secondBlock = blocks[secondBlockId];
 
-			partial.push([firstBlock.groupIndex, secondBlock.groupIndex]);
-		});
+				partial.push([firstBlock.groupIndex, secondBlock.groupIndex]);
+			});
 
-		const uniquePartial = Array.from(
-			new Set(partial.map((value) => JSON.stringify(value))),
-			(json) => JSON.parse(json)
-		);
+			const uniquePartial = Array.from(
+				new Set(partial.map((value) => JSON.stringify(value))),
+				(json) => JSON.parse(json)
+			);
 
-		solutionState = uniquePartial;
+			solutionState = uniquePartial;
+		} else {
+			drawingConnection = false;
+		}
 	}
 
 	const updateCursorPositionMouse = (e: MouseEvent) => {
@@ -224,6 +230,23 @@
 				y: 0
 			};
 		});
+
+		if (lock) {
+			solutionState?.forEach(([firstIndex, secondIndex]) => {
+				const firstBlock = blocks.find(
+					({ group, groupIndex }) => group === 1 && groupIndex === firstIndex
+				)!;
+				const secondBlock = blocks.find(
+					({ group, groupIndex }) => group === 2 && groupIndex === secondIndex
+				)!;
+				connections[connections.length] = {
+					id: connectionIdGeneration,
+					firstBlockId: firstBlock.id,
+					secondBlockId: secondBlock.id
+				};
+				connectionIdGeneration++;
+			});
+		}
 	});
 </script>
 
@@ -272,60 +295,62 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="flex grow" on:click={() => (connectionSelected = null)}>
 	<Card.Root class="flex grow select-none flex-col">
-		<div class="flex justify-end">
-			<div class="flex px-2 pt-2 sticky right-0 gap-2 z-20">
-				{#if connectionSelected === null}
-					<Popover.Root preventScroll>
-						<Popover.Trigger asChild let:builder>
-							<Button builders={[builder]} variant="secondary">Delete Connection</Button>
-						</Popover.Trigger>
-						<Popover.Content class="w-80">
-							<div class="flex justify-between space-x-4">
-								<div class="shrink-0">
-									<Info className="h-4 w-4" />
+		{#if !lock}
+			<div class="flex justify-end">
+				<div class="flex px-2 pt-2 sticky right-0 gap-2 z-20">
+					{#if connectionSelected === null}
+						<Popover.Root preventScroll>
+							<Popover.Trigger asChild let:builder>
+								<Button builders={[builder]} variant="secondary">Delete Connection</Button>
+							</Popover.Trigger>
+							<Popover.Content class="w-80">
+								<div class="flex justify-between space-x-4">
+									<div class="shrink-0">
+										<Info className="h-4 w-4" />
+									</div>
+									<div class="space-y-1">
+										<h4 class="text-sm font-semibold">Note</h4>
+										<p class="text-sm">Select a drawn connection by clicking on it.</p>
+									</div>
 								</div>
-								<div class="space-y-1">
-									<h4 class="text-sm font-semibold">Note</h4>
-									<p class="text-sm">Select a drawn connection by clicking on it.</p>
+							</Popover.Content>
+						</Popover.Root>
+					{:else}
+						<Button
+							variant="destructive"
+							on:click={() => {
+								connections = connections.filter(({ id }) => id !== connectionSelected);
+							}}>Delete Connection</Button
+						>
+					{/if}
+					{#if connections.length === 0}
+						<Popover.Root preventScroll>
+							<Popover.Trigger asChild let:builder>
+								<Button builders={[builder]} variant="secondary">Reset</Button>
+							</Popover.Trigger>
+							<Popover.Content class="w-80">
+								<div class="flex justify-between space-x-4">
+									<div class="shrink-0">
+										<Info className="h-4 w-4" />
+									</div>
+									<div class="space-y-1">
+										<h4 class="text-sm font-semibold">Note</h4>
+										<p class="text-sm">You need to draw at least one connection.</p>
+									</div>
 								</div>
-							</div>
-						</Popover.Content>
-					</Popover.Root>
-				{:else}
-					<Button
-						variant="destructive"
-						on:click={() => {
-							connections = connections.filter(({ id }) => id !== connectionSelected);
-						}}>Delete Connection</Button
-					>
-				{/if}
-				{#if connections.length === 0}
-					<Popover.Root preventScroll>
-						<Popover.Trigger asChild let:builder>
-							<Button builders={[builder]} variant="secondary">Reset</Button>
-						</Popover.Trigger>
-						<Popover.Content class="w-80">
-							<div class="flex justify-between space-x-4">
-								<div class="shrink-0">
-									<Info className="h-4 w-4" />
-								</div>
-								<div class="space-y-1">
-									<h4 class="text-sm font-semibold">Note</h4>
-									<p class="text-sm">You need to draw at least one connection.</p>
-								</div>
-							</div>
-						</Popover.Content>
-					</Popover.Root>{:else}
-					<Button
-						variant="destructive"
-						on:click={() => {
-							connections = [];
-							connectionSelected = null;
-						}}>Reset</Button
-					>
-				{/if}
+							</Popover.Content>
+						</Popover.Root>{:else}
+						<Button
+							variant="destructive"
+							on:click={() => {
+								connections = [];
+								connectionSelected = null;
+							}}>Reset</Button
+						>
+					{/if}
+				</div>
 			</div>
-		</div>
+		{/if}
 		<Card.Content class="p-6 flex grow relative overflow-hidden">
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div bind:this={canvas} class="flex items-center justify-center grow">

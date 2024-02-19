@@ -2,10 +2,7 @@
 	import { onMount } from 'svelte';
 	import DataTable from './components/data-table.svelte';
 	import * as Card from '$lib/components/ui/card';
-	import { Button } from '$lib/components/ui/button';
 	import type { ChallengeOverview } from './data/schemas';
-	import * as Popover from '$lib/components/ui/popover';
-	import { Info } from 'lucide-svelte';
 
 	let data: ChallengeOverview[];
 	let loading = true;

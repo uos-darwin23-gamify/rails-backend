@@ -4,6 +4,7 @@
 	import UserType from '$lib/enums/UserType';
 	import { onMount } from 'svelte';
 	import { socketConnection } from '$lib/stores';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	onMount(async () => {
 		await authenticated.verify();
@@ -30,6 +31,7 @@
 </svelte:head>
 
 <main class="h-dvh w-dvw flex">
+	<Toaster theme="dark" />
 	{#if loading}
 		<div class="grow flex items-center justify-center">
 			<span class="loading loading-infinity loading-lg" />

@@ -19,4 +19,4 @@
 	}
 </script>
 
-<Badge variant="outline" class={bgColor + ' ml-2'}>{value}</Badge>
+<Badge variant="outline" class={bgColor}>{value}</Badge>
