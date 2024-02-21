@@ -12,9 +12,6 @@
         color: white;
         margin-top: 0;
       }
-      -# p, a, a[href] {
-      -#   color: white !important;
-      -# }
       p {
         color: white;
       }
@@ -29,8 +26,8 @@
       .inner {
         background-color: #262626;
         margin: 0 auto;
-        width: 90%;
-        height: 90%;
+        width: 95%;
+        height: 95%;
         border-radius: .3rem;
         padding: 1.5rem;
       }
@@ -39,8 +36,8 @@
         margin: 0;
       }
       .padding {
-        padding-top: 5%;
-        padding-bottom: 5%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
       }
       .last-element {
         margin-bottom: 0;
@@ -50,8 +47,14 @@
         text-align: right;
         font-size: 11px;
       }
-      .align-center{
+      .align-center {
         text-align: center;
+      }
+      .muted a, .muted a[href] {
+        color: #a3a3a3;
+      }
+      .unsubscribe {
+        font-size: 10px;
       }
   %body
     %table.outer{ "width" => "100%", "height" => "100%" }
@@ -68,4 +71,6 @@
                 %p.align-center Your daily notification:
                 -# INSERT CONTENT HERE
                 %p.sign-off Best regards,
-                %p.last-element.sign-off GamifyCoding™
+                %p.sign-off GamifyCoding™
+                %p.align-center.last-element.muted.unsubscribe
+                  %a{ "href" => "gamifycoding.me/api/unsubscribe?token=" + @unsubscribe_token} Unsubscribe
