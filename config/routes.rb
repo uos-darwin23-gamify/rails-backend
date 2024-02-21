@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       post "pre-authorized-emails", to: "admin/pre_authorized_emails#create_pre_authorized_email"
       put "pre-authorized-emails", to: "admin/pre_authorized_emails#update_pre_authorized_email"
       delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
+
+      get "challenge-editor-all", to: "admin/challenge_editor#all_challenges"
     end
 
     get "challenges", to: "users/challenges#all_challenges"
