@@ -6,6 +6,8 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	let formData = { password: '', confirmPassword: '' };
 	type FormValidation = null | false | true;
@@ -36,24 +38,26 @@
 		return isOk;
 	};
 
-	const accessToken = new URLSearchParams(window.location.search).get('reset-password-token');
+	const accessToken = $page.url.searchParams.get('reset-password-token');
+	let redirectOnDialogClose = false;
+	let error = false;
 
 	const handleSubmit = async () => {
 		if (!validateData()) {
-			console.error('Validation failed');
+			// console.error('Validation failed');
 			return;
 		}
 
-		if (accessToken === null) {
-			console.error('Token not found in URL');
-			return;
-		}
+		// if (accessToken === null) {
+		// 	console.error('Token not found in URL');
+		// 	return;
+		// }
 
 		const response = await fetch('api/auth/password', {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json',
-				'access-token': accessToken
+				'Content-Type': 'application/json'
+				// 'access-token': accessToken
 			},
 			body: JSON.stringify({
 				password: formData.password,
@@ -63,9 +67,11 @@
 		});
 
 		if (!response.ok) {
-			console.error('Failed to reset password');
+			error = true;
+			// console.error('Failed to reset password');
 		} else {
 			successDialogOpen = true;
+			redirectOnDialogClose = true;
 		}
 	};
 
@@ -76,6 +82,18 @@
 
 		if (formValidation.passwordsMatch !== null) {
 			formValidation.passwordsMatch = formData.password === formData.confirmPassword;
+		}
+	}
+
+	onMount(() => {
+		if (accessToken === null) {
+			goto('/');
+		}
+	});
+
+	$: {
+		if (redirectOnDialogClose && !successDialogOpen) {
+			goto('/login');
 		}
 	}
 </script>
@@ -124,9 +142,14 @@
 				{:else if formValidation.passwordsMatch === true}
 					<Label class="text-success">Passwords Match</Label>
 				{/if}
+				{#if error}
+					<Label class="text-error"
+						>Failed to reset password (password reset link has already been used or has expired)</Label
+					>
+				{/if}
 			</div>
 			<Separator class="my-1" />
-			<Button type="submit">Confirm</Button>
+			<Button type="submit">Update Password</Button>
 		</form>
 	</Card.Content>
 </Card.Root>
@@ -135,14 +158,15 @@
 	<Dialog.Root bind:open={successDialogOpen}>
 		<Dialog.Content>
 			<Dialog.Header>
-				<Dialog.Title class="flex justify-center items-center">Password has been changed</Dialog.Title
+				<Dialog.Title class="flex justify-center items-center"
+					>Password has been changed</Dialog.Title
 				>
 				<Dialog.Description class="text-left">
-					Your password has been changed. Please log in to continue.</Dialog.Description
+					Your password has been updated successfully. Please log in to continue.</Dialog.Description
 				>
 			</Dialog.Header>
 			<Dialog.Footer class="mt-4">
-				<Button on:click={() => { successDialogOpen = false; goto('/login'); }}>Acknowledge</Button>
+				<Button on:click={() => (successDialogOpen = false)}>Acknowledge</Button>
 			</Dialog.Footer>
 		</Dialog.Content>
 	</Dialog.Root>

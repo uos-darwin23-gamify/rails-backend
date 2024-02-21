@@ -4,28 +4,24 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
+	import { dev } from '$app/environment';
+	import { goto } from '$app/navigation';
 
 	let formData = { email: '' };
-	let emailNotValid = false;
 
 	const handleSubmit = async () => {
-		const response = await fetch('/api/auth/password', {
+		await fetch('/api/auth/password', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				user: {
 					email: formData.email
 				},
-				redirect_url: 'http://localhost:5173/new-password'
+				redirect_url: dev ? 'localhost:5173/new-password' : 'gamifycoding.me/new-password'
 			})
 		});
 
-		if (response.ok) {
-			console.log('Password reset email sent');
-		} else {
-			console.log('Error sending password reset email');
-			emailNotValid = true;
-		}
+		goto('/forgot-password/next');
 	};
 </script>
 
@@ -38,19 +34,11 @@
 		<form class="grid w-full items-center gap-4" on:submit|preventDefault={handleSubmit}>
 			<div class="flex flex-col space-y-1.5">
 				<Label for="email">Email</Label>
-				<Input
-					id="email"
-					placeholder="Email"
-					bind:value={formData.email}
-					on:input={() => (emailNotValid = false)}
-				/>
+				<Input id="email" placeholder="Email" bind:value={formData.email} />
 			</div>
-
-			{#if emailNotValid}
-				<Label class="text-error">Error sending password reset email</Label>
-			{/if}
 			<Separator class="my-1" />
-			<Button type="submit">Next</Button>
+			<Button type="submit">Send Password Reset Link</Button>
+			<Button href="/login" variant="secondary">Back</Button>
 		</form>
 	</Card.Content>
 </Card.Root>

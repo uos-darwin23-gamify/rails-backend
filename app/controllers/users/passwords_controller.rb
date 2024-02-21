@@ -6,14 +6,14 @@ module Users
       params.require(:user).permit(:email).merge(redirect_url: params[:redirect_url])
     end
 
-    def edit # rubocop:disable Metrics/AbcSize
+    def edit
       raw_token = params[:reset_password_token]
       encrypted_token = Devise.token_generator.digest(User, :reset_password_token, raw_token)
-      @user = User.find_by(reset_password_token: encrypted_token) 
+      user = User.find_by(reset_password_token: encrypted_token)
 
-      if @user.present?
+      if user.present?
         if params[:redirect_url].present?
-          Rails.logger.debug { "Redirecting to #{params[:redirect_url]}?reset-password-token=#{raw_token}" }
+          # Rails.logger.debug { "Redirecting to #{params[:redirect_url]}?reset-password-token=#{raw_token}" }
           redirect_to "#{params[:redirect_url]}?reset-password-token=#{raw_token}"
         else
           render json: {error: "Redirect URL not provided"}, status: :unprocessable_entity

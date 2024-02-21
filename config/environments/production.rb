@@ -63,22 +63,9 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "rails_backend_production"
-  
+  config.action_mailer.default_url_options = {host: ENV["SERVER_DOMAIN"]}
   config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'https://gamifycoding.me/' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'mail.gamifycoding.me',
-    port:                 465,
-    domain:               'gamifycoding.me',
-    user_name:            'admin@gamifycoding.me',
-    password:             '12345678',
-    authentication:       'plain',
-    ssl:                  true,
-    enable_starttls_auto: true
-  }
-
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: ENV["EMAIL_ADDRESS"],

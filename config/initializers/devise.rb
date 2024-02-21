@@ -25,10 +25,14 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.mailer_sender = 'noreply@gamifycoding.me'
-
-  # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  if ENV["RAILS_ENV"] == "production"
+    config.mailer_sender = "No Reply - GamifyCoding\u2122 <#{ENV["EMAIL_ADDRESS"]}>"
+    # Configure the class responsible to send e-mails.
+    config.mailer = 'Devise::Mailer'
+    config.parent_mailer = 'ActionMailer::Base'
+  else
+    config.mailer_sender = "No Reply - GamifyCoding\u2122 <no-reply@gamifycoding.me>"
+  end
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -179,7 +183,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 8..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly

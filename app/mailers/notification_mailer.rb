@@ -11,8 +11,8 @@ class NotificationMailer < ApplicationMailer
     if users.exists?
       users.find_each do |user|
         mail(to: user.email, subject: "Your Daily Notifications - GamifyCoding\u2122") do |format|
-          headers['List-Unsubscribe-Post'] = 'List-Unsubscribe=One-Click'
-          headers['List-Unsubscribe'] = "<https://gamifycoding.me/api/unsubscribe?token=#{user.email_unsubscribe_token}>"
+          headers["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+          headers["List-Unsubscribe"] = "<https://gamifycoding.me/api/unsubscribe?token=#{user.email_unsubscribe_token}>"
           @unsubscribe_token = user.email_unsubscribe_token
           format.html { render "notification", locals: {email: user.email} }
         end.deliver

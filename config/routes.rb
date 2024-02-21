@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   scope "api" do
-
     scope "auth" do
       get "status", to: "users/authentication_status#index"
       get "info", to: "users/authentication_status#info"

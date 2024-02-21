@@ -79,9 +79,11 @@ module ApplicationHelper
   end
 
   def generate_email_unsubscribe_token
-    begin
+    token = SecureRandom.hex(30)
+    loop do
       token = SecureRandom.hex(30)
-    end while User.exists?(email_unsubscribe_token: token)
+      break unless User.exists?(email_unsubscribe_token: token)
+    end
     token
   end
 end
