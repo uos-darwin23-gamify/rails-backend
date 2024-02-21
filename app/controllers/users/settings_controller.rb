@@ -5,7 +5,7 @@ module Users
     before_action :authorize_user_controllers
 
     def change_password
-      challenge_oid = params[:id]
+      params[:id]
 
       user = current_user
       return render_internal_server_error if user.nil?
@@ -20,12 +20,12 @@ module Users
         current_password:      params[:currentPassword]
       }
 
-      if user.update_with_password(user_params)
-        bypass_sign_in(user)
-        return render json: {message: "OK"}
-      else
+      unless user.update_with_password(user_params)
         return render json: {message: "Not Authorized"}, status: :unauthorized
       end
+
+      bypass_sign_in(user)
+      render json: {message: "OK"}
     end
 
     def email_notifications_setting
@@ -41,39 +41,29 @@ module Users
 
       new_setting = params[:email_notifications_setting]
 
-      if new_setting.nil?
-        return render_bad_request
-      end
+      return render_bad_request if new_setting.nil?
 
-      unless new_setting.is_a?(TrueClass) || new_setting.is_a?(FalseClass)
-        return render_bad_request
-      end
+      return render_bad_request unless new_setting.is_a?(TrueClass) || new_setting.is_a?(FalseClass)
 
       user.update_attribute(:email_notifications, new_setting)
-      return render json: {message: "OK"}
+      render json: {message: "OK"}
     end
 
     def unsubscribe
       token = params[:token]
 
-      if token.nil?
-        return redirect_to "/unsubscribe/failure"
-      end
+      return redirect_to "/unsubscribe/failure" if token.nil?
 
       user = User.find_by(email_unsubscribe_token: token)
 
-      if user.nil?
-        return redirect_to "/unsubscribe/failure"
-      end
+      return redirect_to "/unsubscribe/failure" if user.nil?
 
-      if token != user.email_unsubscribe_token
-        return redirect_to "/unsubscribe/failure"
-      end
+      return redirect_to "/unsubscribe/failure" if token != user.email_unsubscribe_token
 
       user.update_attribute(:email_notifications, false)
       user.update_attribute(:email_unsubscribe_token, generate_email_unsubscribe_token)
 
-      return redirect_to "/unsubscribe/success"
+      redirect_to "/unsubscribe/success"
     end
   end
 end

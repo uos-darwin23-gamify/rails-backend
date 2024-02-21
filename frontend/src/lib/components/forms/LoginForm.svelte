@@ -53,6 +53,7 @@
 			<Separator class="my-1" />
 			<Button type="submit">Login</Button>
 			<Button href="/signup" variant="secondary">Create An Account</Button>
+			<Button variant="outline" href="/forgot-password">Forgot Password</Button>
 		</form>
 	</Card.Content>
 </Card.Root>
