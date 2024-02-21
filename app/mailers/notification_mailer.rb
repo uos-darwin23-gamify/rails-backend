@@ -1,15 +1,17 @@
-class NotificationMailer < ApplicationMailer
-  default from: "no-reply@gamifycoding.me"
+# frozen_string_literal: true
 
-  # Method to send notification to all pre-authorized email addresses
+class NotificationMailer < ApplicationMailer
+  default from: "No Reply - GamifyCoding\u2122 <no-reply@gamifycoding.me>"
+
+  # Method to send notification to all user email addresses
   def notification_to_all
     users = User.all
-    
+
     # Check if there are any email addresses
     if users.exists?
       users.find_each do |user|
-        mail(to: user.email, subject: "Your Daily Notification") do |format|
-          format.html { render 'notification', locals: { email: user.email } }
+        mail(to: user.email, subject: "Your Daily Notifications - GamifyCoding\u2122") do |format|
+          format.html { render "notification", locals: {email: user.email} }
         end.deliver
       end
     else

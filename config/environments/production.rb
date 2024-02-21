@@ -68,13 +68,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'https://mail.gamifycoding.me',
+    user_name: ENV["EMAIL_ADDRESS"],
+    password: ENV["EMAIL_PASSWORD"],
+    domain: ENV["SERVER_DOMAIN"],
+    address: ENV["MAIL_SERVER_ADDRESS"],
     port: 465,
-    domain: 'gamifycoding.me',
-    user_name: 'admin@gamifycoding.me',
-    password: '12345678',
-    authentication: 'plain',
-    enable_starttls_auto: true
+    authentication: :login,
+    enable_starttls_auto: true,
+    ssl: true,
+    tls: true
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

@@ -12,6 +12,7 @@ module Users
 
     def respond_with(current_user, _opts={})
       if resource.persisted?
+        WelcomeMailer.welcome_email(current_user.email, current_user.username).deliver_later
         render json: {
           status: {code: 200, message: "Signed up successfully."},
           data:   UserSerializer.new(current_user).serializable_hash[:data][:attributes]
