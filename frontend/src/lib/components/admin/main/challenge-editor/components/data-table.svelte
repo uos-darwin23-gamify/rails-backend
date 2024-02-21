@@ -20,11 +20,8 @@
 		DataTableDifficultyCell,
 		DataTableTypeCell
 	} from '.';
-	import * as Dialog from '$lib/components/ui/dialog';
 	import type { ChallengeOverview } from '../data/schemas';
-	import { goto } from '$app/navigation';
-	import { Button } from '$lib/components/ui/button';
-	import { Timer, ShieldAlert } from 'lucide-svelte';
+
 
 	export let data: ChallengeOverview[];
 
