@@ -74,6 +74,14 @@
 		}
 	];
 
+	const formFieldsEmailNotifications = [
+		{
+			name: 'consent14',
+			label:
+				'I agree to daily email notifications containing information about new challenge releases, changes to leaderboard position as well as general user statistics being enabled by default. These notifications can be disabled on the settings page at any time.'
+		}
+	];
+
 	const headers = [
 		{ headerIndex: 0, header: 'Taking Part in the Project' },
 		{
@@ -83,14 +91,25 @@
 		{
 			headerIndex: formFieldsTakingPart.length + formFieldsInfoUsage.length,
 			header: 'So that the information you provide can be used legally by the researchers'
+		},
+		{
+			headerIndex:
+				formFieldsTakingPart.length + formFieldsInfoUsage.length + formFieldsCopyright.length,
+			header: 'Email Notifications'
 		}
 	];
-	const allFields = [...formFieldsTakingPart, ...formFieldsInfoUsage, ...formFieldsCopyright];
+
+	const allFields = [
+		...formFieldsTakingPart,
+		...formFieldsInfoUsage,
+		...formFieldsCopyright,
+		...formFieldsEmailNotifications
+	];
 
 	const findHeader = (index: number) => headers.find(({ headerIndex }) => headerIndex === index);
 </script>
 
-<div class="flex grow p-4 relative overflow-x-auto" id="form-container">
+<div class="flex grow p-4 relative overflow-x-auto">
 	<Card.Root class="flex grow relative overflow-x-auto"
 		><div class="grow w-full">
 			<Card.Header>
@@ -105,6 +124,7 @@
 						>
 					</p>
 					<Button on:click={() => (consentDialogOpen = true)}>View Consent Form</Button>
+					<Button href="/consent.pdf" target="_blank">Download Consent Form</Button>
 				</div></Card.Content
 			>
 		</div>

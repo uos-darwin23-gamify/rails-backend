@@ -87,7 +87,7 @@
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
 		<form on:submit|preventDefault={handleSubmit}>
-			<Dialog.Header>
+			<Dialog.Header class="gap-4">
 				<div class="flex flex-col space-y-1.5">
 					<Label for="current-password">Current Password</Label>
 					<Input
@@ -95,11 +95,6 @@
 						type="password"
 						placeholder="Current Password"
 						bind:value={formData.currentPassword}
-						on:input={() => {
-							if (formValidation.passwordMin8 === null) {
-								formValidation.passwordMin8 = false;
-							}
-						}}
 					/>
 					{#if formValidation.currentPasswordCorrect === false}
 						<Label class="text-error">Current Password Incorrect</Label>

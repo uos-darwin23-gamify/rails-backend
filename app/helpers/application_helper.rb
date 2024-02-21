@@ -77,4 +77,11 @@ module ApplicationHelper
   def render_internal_server_error
     render json: {message: "Internal server error"}, status: :internal_server_error
   end
+
+  def generate_email_unsubscribe_token
+    begin
+      token = SecureRandom.hex(30)
+    end while User.exists?(email_unsubscribe_token: token)
+    token
+  end
 end
