@@ -125,6 +125,7 @@
 					</p>
 					<Button on:click={() => (consentDialogOpen = true)}>View Consent Form</Button>
 					<Button href="/consent.pdf" target="_blank">Download Consent Form</Button>
+					<Button href="/info.pdf" target="_blank">Download Information Sheet</Button>
 				</div></Card.Content
 			>
 		</div>
