@@ -21,6 +21,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.integer :group, null: false
 
       t.string :username, null: false
+      t.boolean :consent, default: false
+
+      t.boolean :email_notifications, default: true
+      t.string :email_unsubscribe_token, null: false
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -47,6 +51,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     add_index :users, :email,                unique: true
     add_index :users, :username,             unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :email_unsubscribe_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end

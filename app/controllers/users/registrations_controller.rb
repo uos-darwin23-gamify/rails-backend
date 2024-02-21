@@ -4,7 +4,7 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
-    before_action :append_group_and_username, :configure_sign_up_params, only: [:create]
+    before_action :append_group_and_username_and_email_unsubscribe_token, :configure_sign_up_params, only: [:create]
     include RackSessionsFix
     respond_to :json
 
@@ -12,6 +12,7 @@ module Users
 
     def respond_with(current_user, _opts={})
       if resource.persisted?
+        WelcomeMailer.welcome_email(current_user.email, current_user.username).deliver_later
         render json: {
           status: {code: 200, message: "Signed up successfully."},
           data:   UserSerializer.new(current_user).serializable_hash[:data][:attributes]
@@ -24,12 +25,13 @@ module Users
     end
 
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password group username])
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password group username email_unsubscribe_token])
     end
 
-    def append_group_and_username
+    def append_group_and_username_and_email_unsubscribe_token
       params[:user][:group] = determine_group
       params[:user][:username] = generate_username
+      params[:user][:email_unsubscribe_token] = generate_email_unsubscribe_token
     end
 
     def determine_group

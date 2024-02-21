@@ -36,6 +36,13 @@ Rails.application.routes.draw do
     get "challenges", to: "users/challenges#all_challenges"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
+    post "consent", to: "users/consent#submit_consent"
+    get "consent", to: "users/consent#consent"
+    post "change-password", to: "users/settings#change_password"
+    post "email-notifications-setting", to: "users/settings#change_email_notifications_setting"
+    get "email-notifications-setting", to: "users/settings#email_notifications_setting"
+    post "unsubscribe", to: "users/settings#unsubscribe"
+    get "unsubscribe", to: "users/settings#unsubscribe"
   end
 
   scope "api/socket-server" do

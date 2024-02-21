@@ -2,7 +2,9 @@ enum AppUrls {
 	HOME = '',
 	LEADERBOARD = 'leaderboard',
 	CHALLENGES = 'challenges',
-	SETTINGS = 'settings'
+	GUIDE = 'guide',
+	SETTINGS = 'settings',
+	HELP = 'help'
 }
 
 export default AppUrls;
