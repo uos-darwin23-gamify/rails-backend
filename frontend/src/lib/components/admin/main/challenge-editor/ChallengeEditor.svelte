@@ -40,6 +40,7 @@
 			<div class="grow w-full">
 				<Card.Header class="flex justify-between items-center">
 					<div>
+						<p>{data[1].name}</p>
 						<Card.Title>Challenges</Card.Title>
 						<Card.Description>List of all challenges.</Card.Description>
 					</div>

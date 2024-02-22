@@ -31,7 +31,7 @@
 		<Button builders={[builder]} variant="outline" size="sm" class="h-8 grow">
 			<PlusCircled class="mr-2 h-4 w-4 hidden sm:block" />
 			{title}
-
+			<p>{filterValues}</p>
 			{#if filterValues.length > 0}
 				<Separator orientation="vertical" class="mx-2 h-4" />
 				<Badge variant="secondary" class="rounded-sm px-1 font-normal lg:hidden">
