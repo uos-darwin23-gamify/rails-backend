@@ -65,7 +65,7 @@
 			}
 		}),
 		table.column({
-			accessor: '_type',
+			accessor: 'type',
 			header: 'Type',
 			id: 'type',
 			cell: ({ value, row }) => {
