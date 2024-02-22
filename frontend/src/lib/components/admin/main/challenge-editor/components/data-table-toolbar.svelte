@@ -19,12 +19,15 @@
 
 	export let tableModel: TableViewModel<ChallengeOverview>;
 
+	let selectedForm = 'Option 1'; // This will hold the value of the selected option
+	const forms = {
+		form1: 'Single Choice Question',
+		form2: 'Mutiple Choice Question',
+		form3: 'Code',
+		form4: 'Connect Blocks'
+	};
+
 	const { pluginStates } = tableModel;
-	// const {
-	// 	filterValue
-	// }: {
-	// 	filterValue: Writable<string>;
-	// } = pluginStates.filter;
 
 	const {
 		filterValues
@@ -33,7 +36,7 @@
 			name: string;
 			type: string[];
 			difficulty: string[];
-			status: string[];
+			// status: string[];
 		}>;
 	} = pluginStates.colFilter;
 
@@ -41,19 +44,8 @@
 		(v) => v.length > 0 || (typeof v === 'string' && v.length > 0)
 	);
 
-	// const dispatch = createEventDispatcher();
-	// const handleNameFilterInput = (e: Event) => {
-	// 	const inputEvent = e as InputEvent;
-	// 	const target = inputEvent.target as HTMLInputElement;
-	// 	const value = target.value;
-
-	// 	if (value) {
-	// 		$filterValues.name = [];
-	// 		$filterValues.name[0] = value;
-	// 	} else {
-	// 		$filterValues.name = [];
-	// 	}
-	// };
+	let dialogOpen = false;
+	const closeDialog = () => (dialogOpen = false);
 </script>
 
 <div class="flex items-center gap-2 flex-wrap">
@@ -78,11 +70,11 @@
 					title="Difficulty"
 					options={challengeDiffuculties}
 				/>
-				<DataTableFacetedFilter
+				<!-- <DataTableFacetedFilter
 					bind:filterValues={$filterValues.status}
 					title="Status"
 					options={challengeStatuses}
-				/>
+				/> -->
 				{#if showReset}
 					<Button
 						on:click={() => {
@@ -97,9 +89,46 @@
 					</Button>
 				{/if}
 			</div>
+			<Dialog.Root bind:open={dialogOpen}>
+				<Dialog.Trigger>
+					<Button class="h-8"><PlusCircled class="h-5 w-5 mr-2" />Add</Button></Dialog.Trigger
+				>
+				<Dialog.Content class="sm:max-w-[425px]">
+					<select bind:value={selectedForm}> </select>
+					<Card.Footer class="justify-between">
+						<Button variant="secondary" on:click={closeDialog}>Cancel</Button>
+					</Card.Footer>
+				</Dialog.Content>
+			</Dialog.Root>
 		</div>
 		<DataTableViewOptions {tableModel} />
 	</div>
+
+	<!--
+	<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
+	<div on:click|stopPropagation>
+		<slot name="header" />
+		<hr />
+		<select bind:value={selectedForm}>
+			<option value="">Please select</option>
+			{#each Object.entries(forms) as [formKey, formValue]}
+				<option value={formKey}>{formValue}</option>
+			{/each}
+		</select>
+		{#if selectedForm === 'form1'}
+			<ScqForm/>
+		{:else if selectedForm === 'form2'}
+			<McqForm/>
+		{:else if selectedForm === 'form3'}
+			<CodeOutputForm/>
+		{:else if selectedForm === 'form4'}
+			<ConnectBlocksForm/>
+		{/if}
+		<hr />
+		<button autofocus on:click={() => dialog.close()}>close modal</button>
+	</div>
+</dialog>
+-->
 
 	<!-- <div class="flex">
 		<Dialog.Root

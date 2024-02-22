@@ -1,10 +1,15 @@
+# frozen_string_literal: true
+
 module Admin
   class ChallengeEditorController < ApplicationController
     before_action :authorize_admin_controllers
-    before_action :set_challenge, only: [:show, :update, :destroy]
+    before_action :set_challenge, only: %i[show update destroy]
 
     def all_challenges
-      render json: Challenge.all
+      challenges = Challenge.all.map do |challenge|
+        challenge.as_json(methods: %i[id type])
+      end
+      render json: challenges
     end
 
     # GET /challenges
@@ -20,11 +25,11 @@ module Admin
 
     # POST /challenges
     def create_scq
-      puts "---------------------------------------------------------------------------"
-      puts "Starting"
-      puts scq_challenge_params
+      Rails.logger.debug "---------------------------------------------------------------------------"
+      Rails.logger.debug "Starting"
+      Rails.logger.debug scq_challenge_params
       @challenge = Challenge.new(scq_challenge_params)
-      puts @challenge
+      Rails.logger.debug @challenge
       if @challenge.save
         render json: @challenge, status: :created, location: @challenge
       else
@@ -33,11 +38,11 @@ module Admin
     end
 
     def create_mcq
-      puts "---------------------------------------------------------------------------"
-      puts "Starting"
-      puts mcq_challenge_params
+      Rails.logger.debug "---------------------------------------------------------------------------"
+      Rails.logger.debug "Starting"
+      Rails.logger.debug mcq_challenge_params
       @challenge = Challenge.new(mcq_challenge_params)
-      puts @challenge
+      Rails.logger.debug @challenge
       if @challenge.save
         render json: @challenge, status: :created, location: @challenge
       else
@@ -61,37 +66,34 @@ module Admin
 
     private
 
-      # Use callbacks to share common setup or constraints between actions
-      def set_challenge
-        @challenge = Challenge.find(params[:id])
-      end
-
-      # Only allow a list of trusted parameters through
-      def scq_challenge_params
-
-        params.require(:challenge).permit(
-          :name,
-          :difficulty,
-          :question_overview,
-          { answers: [] }, # Ensure this is an array
-          :correct_answer,
-          :correct_answer_explanation,
-          :_type
-        )
-      end
-
-      def mcq_challenge_params
-
-        params.require(:challenge).permit(
-          :name,
-          :difficulty,
-          :question_overview,
-          { answers: [] }, # Ensure this is an array
-          { correct_answers: [] },
-          :correct_answer_explanation,
-          :_type
-        )
-      end
-
+    # Use callbacks to share common setup or constraints between actions
+    def set_challenge
+      @challenge = Challenge.find(params[:id])
     end
+
+    # Only allow a list of trusted parameters through
+    def scq_challenge_params
+      params.require(:challenge).permit(
+        :name,
+        :difficulty,
+        :question_overview,
+        {answers: []}, # Ensure this is an array
+        :correct_answer,
+        :correct_answer_explanation,
+        :_type
+      )
+    end
+
+    def mcq_challenge_params
+      params.require(:challenge).permit(
+        :name,
+        :difficulty,
+        :question_overview,
+        {answers: []}, # Ensure this is an array
+        {correct_answers: []},
+        :correct_answer_explanation,
+        :_type
+      )
+    end
+  end
 end
