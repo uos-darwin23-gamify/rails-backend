@@ -22,7 +22,6 @@
 	} from '.';
 	import type { ChallengeOverview } from '../data/schemas';
 
-
 	export let data: ChallengeOverview[];
 
 	const table = createTable(readable(data), {
@@ -123,6 +122,21 @@
 				}
 			}
 		}),
+		table.display({
+			id: 'actions',
+			header: () => {
+				return '';
+			},
+			cell: ({ row }) => {
+				if (row.isData() && row.original) {
+					return createRender(DataTableRowActions, {
+						row: row.original,
+						rowId: parseInt(row.id)
+					});
+				}
+				return '';
+			}
+		})
 	]);
 
 	const tableModel = table.createViewModel(columns);
@@ -130,7 +144,6 @@
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = tableModel;
 
 	const rowToRowOriginal = (row: any) => row.original;
-
 </script>
 
 <div class="space-y-4">
@@ -164,8 +177,7 @@
 			<Table.Body {...$tableBodyAttrs}>
 				{#each $pageRows as row (row.id)}
 					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-						<Table.Row
-							{...rowAttrs}>
+						<Table.Row {...rowAttrs}>
 							{#each row.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs>
 									<Table.Cell {...attrs}>
