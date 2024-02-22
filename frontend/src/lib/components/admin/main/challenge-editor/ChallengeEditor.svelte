@@ -42,9 +42,6 @@
 						<Card.Title>Challenges</Card.Title>
 						<Card.Description>List of all challenges.</Card.Description>
 					</div>
-					<div>
-						<button class="add-challenge-btn" on:click={toggleModal}>Add questions</button>
-					</div>
 				</Card.Header>
 				<Card.Content>
 					<DataTable {data} />
@@ -53,22 +50,4 @@
 		</Card.Root>
 	</div>
 {/if}
-<Modal bind:showModal>
-	<h2 slot="header">Select and Add questions</h2>
-</Modal>
 
-<style>
-	.add-challenge-btn {
-		/* Style your button here */
-		padding: 8px 16px;
-		background-color: #007bff;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		font-weight: bold;
-	}
-	.add-challenge-btn:hover {
-		background-color: #0056b3;
-	}
-</style>

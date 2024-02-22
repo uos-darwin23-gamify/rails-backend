@@ -15,11 +15,16 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { challengeTypes, challengeDiffuculties, challengeStatuses } from '../data/data';
+	import ScqForm from './scq/form.svelte';
+	import McqForm from './mcq/form.svelte';
+	import CodeOutputForm from './code_output/form.svelte';
+	import ConnectBlocksForm from './connect_blocks/form.svelte';	
+	import ScqBulkForm from './scq/form_bulk.svelte'
 	// export let addNewEmails: (emails: string[]) => Promise<void>;
 
 	export let tableModel: TableViewModel<ChallengeOverview>;
 
-	let selectedForm = 'Option 1'; // This will hold the value of the selected option
+	let selectedForm = ''; // This will hold the value of the selected option
 	const forms = {
 		form1: 'Single Choice Question',
 		form2: 'Mutiple Choice Question',
@@ -46,6 +51,8 @@
 
 	let dialogOpen = false;
 	const closeDialog = () => (dialogOpen = false);
+	let tabValue: 'single' | 'bulk' = 'single';
+
 </script>
 
 <div class="flex items-center gap-2 flex-wrap">
@@ -93,11 +100,42 @@
 				<Dialog.Trigger>
 					<Button class="h-8"><PlusCircled class="h-5 w-5 mr-2" />Add</Button></Dialog.Trigger
 				>
-				<Dialog.Content class="sm:max-w-[425px]">
-					<select bind:value={selectedForm}> </select>
+				<Dialog.Content class="flex grow flex-col max-w-none overflow-y-auto h-full-dialog-custom">
+					<hr />
+					<select bind:value={selectedForm}>
+						<option value="">Please select</option>
+						{#each Object.entries(forms) as [formKey, formValue]}
+							<option value={formKey}>{formValue}</option>
+						{/each}
+					</select>
+					<Tabs.Root bind:value={tabValue} class="mt-5">
+						<Tabs.List class="grid w-full grid-cols-2">
+							<Tabs.Trigger value="single">Single</Tabs.Trigger>
+							<Tabs.Trigger value="bulk">Bulk</Tabs.Trigger>
+						</Tabs.List>
+						<Tabs.Content value="single">
+							{#if selectedForm === 'form1'}
+								<ScqForm/>
+							{:else if selectedForm === 'form2'}
+								<McqForm/>
+							{:else if selectedForm === 'form3'}
+								<CodeOutputForm/>
+							{:else if selectedForm === 'form4'}
+								<ConnectBlocksForm/>
+							{/if}
+							<hr />
+					</Tabs.Content>
+					<Tabs.Content value="bulk">
+						{#if selectedForm === 'form1'}
+							<ScqBulkForm/>
+						{/if}
+					<hr />
+					</Tabs.Content>
+
 					<Card.Footer class="justify-between">
 						<Button variant="secondary" on:click={closeDialog}>Cancel</Button>
 					</Card.Footer>
+					</Tabs.Root>
 				</Dialog.Content>
 			</Dialog.Root>
 		</div>
@@ -215,3 +253,9 @@
 		</Dialog.Root>
 	</div> -->
 </div>
+
+<style>
+	:global(.h-full-dialog-custom) {
+		height: calc(100% - 16px) !important;
+	}
+</style>
