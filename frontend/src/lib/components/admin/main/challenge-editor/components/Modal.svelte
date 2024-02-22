@@ -17,7 +17,6 @@
   });
 
   $: if (showModal && dialog) {
-
     dialog.showModal();
   } else if (dialog) {
     dialog.close();
@@ -30,27 +29,19 @@
 		form4: 'Connect Blocks',
 	};
 </script>
-
-<dialog bind:this={dialog}>
-  <!-- Modal content -->
-</dialog>
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
 	<div on:click|stopPropagation>
 		<slot name="header" />
 		<hr />
-		<!-- Dropdown for selecting the form -->
 		<select bind:value={selectedForm}>
 			<option value="">Please select</option>
 			{#each Object.entries(forms) as [formKey, formValue]}
 				<option value={formKey}>{formValue}</option>
 			{/each}
 		</select>
-		<!-- Conditional rendering of forms based on selectedForm -->
 		{#if selectedForm === 'form1'}
 			<ScqForm/>
 		{:else if selectedForm === 'form2'}
-			<!-- Form 2 structure or component -->
 			<McqForm/>
 		{:else if selectedForm === 'form3'}
 			<CodeOutputForm/>
@@ -58,7 +49,6 @@
 			<ConnectBlocksForm/>
 		{/if}
 		<hr />
-		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>close modal</button>
 	</div>
 </dialog>
