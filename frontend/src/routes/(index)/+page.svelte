@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { buttonVariants } from '$lib/components/ui/button';
+	import WelcomePage from '$lib/components/welcome-page/WelcomePage.svelte';
 	import { onMount } from 'svelte';
 
 	let headerHeight = 64;
@@ -20,7 +21,5 @@
 	<a href="/login" class={buttonVariants()}>Open App</a>
 </header>
 <div class="relative flex overflow-y-auto" style={`height: calc(100% - ${headerHeight}px);`}>
-	<div class="flex grow items-center flex-col">
-		<div class="flex flex-col justify-center items-center grow">Welcome Page</div>
-	</div>
+	<WelcomePage />
 </div>

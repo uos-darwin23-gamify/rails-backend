@@ -30,11 +30,11 @@
 			toggleOrder: ['asc', 'desc']
 		}),
 		page: addPagination(),
-		// filter: addTableFilter({
-		// 	fn: ({ filterValue, value }) => {
-		// 		return value.toLowerCase().includes(filterValue.toLowerCase());
-		// 	}
-		// }),
+		 //filter: addTableFilter({
+		 //	fn: ({ filterValue, value }) => {
+		 //		return value.toLowerCase().includes(filterValue.toLowerCase());
+		 //	}
+		 //}),
 		colFilter: addColumnFilters(),
 		hide: addHiddenColumns()
 	});
@@ -65,7 +65,7 @@
 			}
 		}),
 		table.column({
-			accessor: 'type',
+			accessor: '_type',
 			header: 'Type',
 			id: 'type',
 			cell: ({ value, row }) => {
