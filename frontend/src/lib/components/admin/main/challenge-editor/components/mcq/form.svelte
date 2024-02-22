@@ -4,9 +4,9 @@
 		difficulty: '',
 		question_overview: '',
 		answers: ['', '', '', ''],
-		correct_answer: null,
+		correct_answers: [],
 		correct_answer_explanation: '',
-		_type: 'ScqChallenge',
+		_type: 'McqChallenge',
 		// `updated_at` and `created_at` will be handled server-side
 	};
 
@@ -16,7 +16,7 @@
     console.log("HI")
 
     // Endpoint where you want to submit the form data
-    const endpoint = '/api/admin/scq-challenge-create'; // Adjust this to your actual endpoint
+    const endpoint = '/api/admin/mcq-challenge-create'; // Adjust this to your actual endpoint
 
     const data = {
         challenge: challenge // Wrap your challenge data within a challenge key
@@ -70,20 +70,16 @@
 	{#each challenge.answers as answer, index (index)}
 		<label for={`answer-${index}`}>Answer {index + 1}</label>
 		<input id={`answer-${index}`} bind:value={challenge.answers[index]} />
-	{/each}
 
-	<label for="correct-answer">Correct Answer</label>
-	<select id="correct-answer" bind:value={challenge.correct_answer}>
-		<option value="">Select the correct answer</option>
-		{#each challenge.answers as _, index (index)}
-			<option value={index}>{index + 1}</option>
-		{/each}
-	</select>
+    <label for={`c-answer-${index}`}>Correct Answer?</label>
+		<input id={`c-answer-${index}`} type="checkbox" bind:value={challenge.correct_answers.append} />
+	{/each}
 
 	<label for="explanation">Correct Answer Explanation</label>
 	<textarea id="explanation" bind:value={challenge.correct_answer_explanation}></textarea>
 
 	<button type="submit">Submit Challenge</button>
+  <p>{challenge.correct_answers}</p>
 </form>
 
 <style>

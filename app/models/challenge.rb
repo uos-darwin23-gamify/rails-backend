@@ -8,6 +8,10 @@ class Challenge
   field :question_overview, type: String
   field :correct_answer_explanation, type: String
   field :difficulty, type: String
+  field :answers, type: Array
+  field :correct_answers, type: Array
+  field :correct_answer, type: String
+  field :_type, type: String
 
   DIFFICULTIES = %w[EASY MEDIUM HARD].freeze
 

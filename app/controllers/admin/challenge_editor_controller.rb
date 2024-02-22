@@ -19,11 +19,24 @@ module Admin
     end
 
     # POST /challenges
-    def create
+    def create_scq
       puts "---------------------------------------------------------------------------"
       puts "Starting"
-      puts challenge_params
-      @challenge = Challenge.new(challenge_params)
+      puts scq_challenge_params
+      @challenge = Challenge.new(scq_challenge_params)
+      puts @challenge
+      if @challenge.save
+        render json: @challenge, status: :created, location: @challenge
+      else
+        render json: @challenge.errors, status: :unprocessable_entity
+      end
+    end
+
+    def create_mcq
+      puts "---------------------------------------------------------------------------"
+      puts "Starting"
+      puts mcq_challenge_params
+      @challenge = Challenge.new(mcq_challenge_params)
       puts @challenge
       if @challenge.save
         render json: @challenge, status: :created, location: @challenge
@@ -52,20 +65,33 @@ module Admin
       def set_challenge
         @challenge = Challenge.find(params[:id])
       end
+
       # Only allow a list of trusted parameters through
-      def challenge_params
-        
+      def scq_challenge_params
+
         params.require(:challenge).permit(
-          :name, 
-          :difficulty, 
-          :question_overview, 
+          :name,
+          :difficulty,
+          :question_overview,
           { answers: [] }, # Ensure this is an array
           :correct_answer,
           :correct_answer_explanation,
           :_type
         )
       end
-      
-      
+
+      def mcq_challenge_params
+
+        params.require(:challenge).permit(
+          :name,
+          :difficulty,
+          :question_overview,
+          { answers: [] }, # Ensure this is an array
+          { correct_answers: [] },
+          :correct_answer_explanation,
+          :_type
+        )
+      end
+
     end
 end

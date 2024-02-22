@@ -3,6 +3,7 @@
 
 	import { onMount, createEventDispatcher } from 'svelte';
 	import ScqForm from './scq/form.svelte';
+	import McqForm from './mcq/form.svelte';
   export let showModal = false;
   let dialog;
 
@@ -20,10 +21,10 @@
     dialog.close();
   }
 	let selectedForm = 'Option 1'; // This will hold the value of the selected option
-
+	
 	const forms = {
-		form1: 'Single Choice Questions',
-		form2: 'Option 2',
+		form1: 'Single Choice Question',
+		form2: 'Mutiple Choice Question',
 		form3: 'Option 3',
 		form4: 'Option 4',
 	};
@@ -46,11 +47,14 @@
 			{#each Object.entries(forms) as [formKey, formValue]}
 				<option value={formKey}>{formValue}</option>
 			{/each}
-		</select>	
+		</select>
 		<!-- Conditional rendering of forms based on selectedForm -->
 		{#if selectedForm === 'form1'}
 			<!-- Form 1 structure or component -->
 			<ScqForm/>
+		{:else if selectedForm === 'form2'}
+			<!-- Form 2 structure or component -->
+			<McqForm/>
 		{:else}
 			<p>Select question type</p>
 		{/if}
