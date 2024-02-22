@@ -4,6 +4,8 @@
 	import { onMount, createEventDispatcher } from 'svelte';
 	import ScqForm from './scq/form.svelte';
 	import McqForm from './mcq/form.svelte';
+	import CodeOutputForm from './code_output/form.svelte'
+	import ConnectBlocksForm from './connect_blocks/form.svelte'
   export let showModal = false;
   let dialog;
 
@@ -21,21 +23,17 @@
     dialog.close();
   }
 	let selectedForm = 'Option 1'; // This will hold the value of the selected option
-	
 	const forms = {
 		form1: 'Single Choice Question',
 		form2: 'Mutiple Choice Question',
-		form3: 'Option 3',
-		form4: 'Option 4',
+		form3: 'Code',
+		form4: 'Connect Blocks',
 	};
 </script>
 
 <dialog bind:this={dialog}>
   <!-- Modal content -->
 </dialog>
-
-
-
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
 	<div on:click|stopPropagation>
@@ -50,13 +48,14 @@
 		</select>
 		<!-- Conditional rendering of forms based on selectedForm -->
 		{#if selectedForm === 'form1'}
-			<!-- Form 1 structure or component -->
 			<ScqForm/>
 		{:else if selectedForm === 'form2'}
 			<!-- Form 2 structure or component -->
 			<McqForm/>
-		{:else}
-			<p>Select question type</p>
+		{:else if selectedForm === 'form3'}
+			<CodeOutputForm/>
+		{:else if selectedForm === 'form4'}
+			<ConnectBlocksForm/>
 		{/if}
 		<hr />
 		<!-- svelte-ignore a11y-autofocus -->

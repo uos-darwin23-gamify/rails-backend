@@ -44,7 +44,7 @@
 						<Card.Description>List of all challenges.</Card.Description>
 					</div>
 					<div>
-						<button class="add-challenge-btn" on:click={toggleModal}>Show Modal</button>
+						<button class="add-challenge-btn" on:click={toggleModal}>Add questions</button>
 					</div>
 				</Card.Header>
 				<Card.Content>
