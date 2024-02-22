@@ -1,35 +1,40 @@
 <script>
-// @ts-nocheck
+	// @ts-nocheck
 
 	import { onMount, createEventDispatcher } from 'svelte';
 	import ScqForm from './scq/form.svelte';
 	import McqForm from './mcq/form.svelte';
-	import CodeOutputForm from './code_output/form.svelte'
-	import ConnectBlocksForm from './connect_blocks/form.svelte'
-  export let showModal = false;
-  let dialog;
+	import CodeOutputForm from './code_output/form.svelte';
+	import ConnectBlocksForm from './connect_blocks/form.svelte';
+	export let showModal = false;
+	let dialog;
 
 	let csrfToken;
 
-  onMount(() => {
-    const meta = document.querySelector('meta[name="csrf-token"]');
-    csrfToken = meta ? meta.getAttribute('content') : '';
-  });
+	onMount(() => {
+		const meta = document.querySelector('meta[name="csrf-token"]');
+		csrfToken = meta ? meta.getAttribute('content') : '';
+	});
 
-  $: if (showModal && dialog) {
-    dialog.showModal();
-  } else if (dialog) {
-    dialog.close();
-  }
+	$: if (showModal && dialog) {
+		dialog.showModal();
+	} else if (dialog) {
+		dialog.close();
+	}
 	let selectedForm = 'Option 1'; // This will hold the value of the selected option
 	const forms = {
 		form1: 'Single Choice Question',
 		form2: 'Mutiple Choice Question',
 		form3: 'Code',
-		form4: 'Connect Blocks',
+		form4: 'Connect Blocks'
 	};
 </script>
-<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
+
+<dialog
+	bind:this={dialog}
+	on:close={() => (showModal = false)}
+	on:click|self={() => dialog.close()}
+>
 	<div on:click|stopPropagation>
 		<slot name="header" />
 		<hr />
@@ -40,13 +45,13 @@
 			{/each}
 		</select>
 		{#if selectedForm === 'form1'}
-			<ScqForm/>
+			<ScqForm />
 		{:else if selectedForm === 'form2'}
-			<McqForm/>
+			<McqForm />
 		{:else if selectedForm === 'form3'}
-			<CodeOutputForm/>
+			<CodeOutputForm />
 		{:else if selectedForm === 'form4'}
-			<ConnectBlocksForm/>
+			<ConnectBlocksForm />
 		{/if}
 		<hr />
 		<button autofocus on:click={() => dialog.close()}>close modal</button>

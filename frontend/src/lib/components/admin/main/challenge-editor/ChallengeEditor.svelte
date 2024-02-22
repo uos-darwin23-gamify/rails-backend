@@ -11,20 +11,19 @@
 	let showModal = false;
 
 	const getChallengeOverview = async () => {
-			loading = true;
-			const response = await fetch('/api/admin/challenge-editor-all');
+		loading = true;
+		const response = await fetch('/api/admin/challenge-editor-all');
 
-			if (response.ok) {
-					data = await response.json();
-					loading = false;
-			}
-
-
+		if (response.ok) {
+			data = await response.json();
+			console.log(data);
+			loading = false;
+		}
 	};
 
 	const toggleModal = () => {
-				showModal = !showModal;
-				console.log("Toggled showModal to:", showModal);
+		showModal = !showModal;
+		console.log('Toggled showModal to:', showModal);
 	};
 
 	onMount(getChallengeOverview);
@@ -55,24 +54,21 @@
 	</div>
 {/if}
 <Modal bind:showModal>
-	<h2 slot="header">
-		Select and Add questions
-	</h2>
+	<h2 slot="header">Select and Add questions</h2>
 </Modal>
-
 
 <style>
 	.add-challenge-btn {
-			/* Style your button here */
-			padding: 8px 16px;
-			background-color: #007BFF;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-			font-weight: bold;
+		/* Style your button here */
+		padding: 8px 16px;
+		background-color: #007bff;
+		color: white;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-weight: bold;
 	}
 	.add-challenge-btn:hover {
-			background-color: #0056b3;
+		background-color: #0056b3;
 	}
 </style>

@@ -24,7 +24,7 @@
 		form1: 'Single Choice Question',
 		form2: 'Mutiple Choice Question',
 		form3: 'Code',
-		form4: 'Connect Blocks',
+		form4: 'Connect Blocks'
 	};
 
 	const { pluginStates } = tableModel;
@@ -36,7 +36,7 @@
 			name: string;
 			type: string[];
 			difficulty: string[];
-			status: string[];
+			// status: string[];
 		}>;
 	} = pluginStates.colFilter;
 
@@ -70,11 +70,11 @@
 					title="Difficulty"
 					options={challengeDiffuculties}
 				/>
-				<DataTableFacetedFilter
+				<!-- <DataTableFacetedFilter
 					bind:filterValues={$filterValues.status}
 					title="Status"
 					options={challengeStatuses}
-				/>
+				/> -->
 				{#if showReset}
 					<Button
 						on:click={() => {
@@ -88,26 +88,23 @@
 						<Cross2 class="h-4 w-4" />
 					</Button>
 				{/if}
-			</div> 
-			<Button class="h-8" on:click={() => {dialogOpen=true}}
-					><PlusCircled class="h-5 w-5 mr-2" />Add</Button
+			</div>
+			<Dialog.Root bind:open={dialogOpen}>
+				<Dialog.Trigger>
+					<Button class="h-8"><PlusCircled class="h-5 w-5 mr-2" />Add</Button></Dialog.Trigger
 				>
+				<Dialog.Content class="sm:max-w-[425px]">
+					<select bind:value={selectedForm}> </select>
+					<Card.Footer class="justify-between">
+						<Button variant="secondary" on:click={closeDialog}>Cancel</Button>
+					</Card.Footer>
+				</Dialog.Content>
+			</Dialog.Root>
 		</div>
 		<DataTableViewOptions {tableModel} />
 	</div>
-	<Dialog.Root
-	bind:open={dialogOpen}>
-	<Dialog.Content class="sm:max-w-[425px]">
-		<select bind:value={selectedForm}>
-		</select>
-		<Card.Footer class="justify-between">
-			<Button variant="secondary" on:click={closeDialog}>Cancel</Button>
-		</Card.Footer>
-</Dialog.Content>
-</Dialog.Root>
 
-
-<!--
+	<!--
 	<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={() => dialog.close()}>
 	<div on:click|stopPropagation>
 		<slot name="header" />
@@ -132,7 +129,6 @@
 	</div>
 </dialog>
 -->
-
 
 	<!-- <div class="flex">
 		<Dialog.Root

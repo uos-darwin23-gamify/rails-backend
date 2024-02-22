@@ -6,51 +6,45 @@
 		answers: ['', '', '', ''],
 		correct_answers: [],
 		correct_answer_explanation: '',
-		_type: 'McqChallenge',
+		_type: 'McqChallenge'
 		// `updated_at` and `created_at` will be handled server-side
 	};
 
 	async function submitChallenge() {
-    // Prevent the form from submitting traditionally
-    event.preventDefault();
-    console.log("HI")
+		// Prevent the form from submitting traditionally
+		event.preventDefault();
+		console.log('HI');
 
-    // Endpoint where you want to submit the form data
-    const endpoint = '/api/admin/mcq-challenge-create'; // Adjust this to your actual endpoint
+		// Endpoint where you want to submit the form data
+		const endpoint = '/api/admin/mcq-challenge-create'; // Adjust this to your actual endpoint
 
-    const data = {
-        challenge: challenge // Wrap your challenge data within a challenge key
-    };
-    // Use fetch API to submit the form data
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST', // or 'PUT'
-            headers: { 
-                'Content-Type': 'application/json',
-            },
+		const data = {
+			challenge: challenge // Wrap your challenge data within a challenge key
+		};
+		// Use fetch API to submit the form data
+		try {
+			const response = await fetch(endpoint, {
+				method: 'POST', // or 'PUT'
+				headers: {
+					'Content-Type': 'application/json'
+				},
 
-            body: JSON.stringify(data) // Your form data
-          
+				body: JSON.stringify(data) // Your form data
+			});
 
-        });
-
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            console.log('Success:', jsonResponse);
-            // Handle success (e.g., showing a success message or redirecting)
-        } else {
-            throw new Error('Network response was not ok.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        // Handle error (e.g., showing an error message)
-    }
-	
+			if (response.ok) {
+				const jsonResponse = await response.json();
+				console.log('Success:', jsonResponse);
+				// Handle success (e.g., showing a success message or redirecting)
+			} else {
+				throw new Error('Network response was not ok.');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			// Handle error (e.g., showing an error message)
+		}
 	}
-
-
 </script>
-
 
 <form on:submit|preventDefault={submitChallenge}>
 	<label for="name">Challenge Name</label>
@@ -71,7 +65,7 @@
 		<label for={`answer-${index}`}>Answer {index + 1}</label>
 		<input id={`answer-${index}`} bind:value={challenge.answers[index]} />
 
-    <label for={`c-answer-${index}`}>Correct Answer?</label>
+		<label for={`c-answer-${index}`}>Correct Answer?</label>
 		<input id={`c-answer-${index}`} type="checkbox" bind:value={challenge.correct_answers.append} />
 	{/each}
 
@@ -79,7 +73,7 @@
 	<textarea id="explanation" bind:value={challenge.correct_answer_explanation}></textarea>
 
 	<button type="submit">Submit Challenge</button>
-  <p>{challenge.correct_answers}</p>
+	<p>{challenge.correct_answers}</p>
 </form>
 
 <style>
@@ -98,7 +92,9 @@
 		font-weight: bold;
 	}
 
-	input, select, textarea {
+	input,
+	select,
+	textarea {
 		width: 100%;
 		padding: 10px;
 		margin-top: 5px;
