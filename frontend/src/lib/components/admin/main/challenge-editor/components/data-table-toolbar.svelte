@@ -92,7 +92,6 @@
 			<Button class="h-8" on:click={() => {dialogOpen=true}}
 					><PlusCircled class="h-5 w-5 mr-2" />Add</Button
 				>
-				
 		</div>
 		<DataTableViewOptions {tableModel} />
 	</div>
