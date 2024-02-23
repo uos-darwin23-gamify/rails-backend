@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require_relative 'challenges'
+
 # Active Record syntax
 PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
 
