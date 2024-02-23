@@ -1,0 +1,8 @@
+{
+  "cron": [
+    {
+      "command": "bundle exec rake cron:notification_to_all",
+      "schedule": "0 10 * * *"
+    }
+  ]
+}

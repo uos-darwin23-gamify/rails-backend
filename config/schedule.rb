@@ -18,8 +18,9 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+# set :output, "/home/user/darwin/rails-backend/cron_log.log"
 
-
-every 1.day, at: '10:00 am' do
-  runner "NotificationJob.perform_now"
-end
+# every 1.day, at: '10:00 am' do
+#   # runner "NotificationJob.perform_now"
+#   rake 'cron:notification_to_all'
+# end
