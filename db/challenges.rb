@@ -3,6 +3,7 @@
 # # Mongoid syntax
 # # ScqChallenge seed data
 # Challenge::Scq.find_or_create_by!(
+#   date_when_available: Date.strptime('26/02/2024', '%d/%m/%Y'),
 #   name: "Capital Cities",
 #   difficulty: :SIMPLE,
 #   # question_overview: "Choose the correct answer",
@@ -14,6 +15,7 @@
 
 # # McqChallenge seed data
 # Challenge::Mcq.find_or_create_by!(
+#   date_when_available: Date.strptime('26/02/2024', '%d/%m/%Y'),
 #   name: "General Geography Knowledge",
 #   difficulty: :EASY,
 #   # question_overview: "Choose all of the correct answers",
@@ -25,6 +27,7 @@
 
 # # ConnectBlocksChallenge seed data
 # Challenge::ConnectBlocks.find_or_create_by!(
+#   date_when_available: Date.strptime('26/02/2024', '%d/%m/%Y'),
 #   name: "Category Matching",
 #   difficulty: :MEDIUM,
 #   # question_overview: "Connect all matching blocks",
@@ -37,6 +40,7 @@
 
 # # CodeOutputChallenge seed data
 # Challenge::CodeOutput.find_or_create_by!(
+#   date_when_available: Date.strptime('26/02/2024', '%d/%m/%Y'),
 #   name: "Prime Numbers",
 #   difficulty: :EXTREME,
 #   question_overview: "Analyze the following C code and answer the questions",
@@ -83,6 +87,7 @@
 
 # # CodeOutputChallenge seed data
 # Challenge::CodeOutput.find_or_create_by!(
+#   date_when_available: Date.strptime('26/02/2024', '%d/%m/%Y'),
 #   name: "Prime Numbers",
 #   difficulty: :HARD,
 #   question_overview: "Analyze the following C code and answer the questions",

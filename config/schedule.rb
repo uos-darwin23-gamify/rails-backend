@@ -21,6 +21,10 @@
 # set :output, "/home/user/darwin/rails-backend/cron_log.log"
 
 # every 1.day, at: '10:00 am' do
-#   # runner "NotificationJob.perform_now"
-#   rake 'cron:notification_to_all'
+#     # runner "NotificationJob.perform_now"
+#     rake 'cron:notification_to_all'
+# end
+
+# every 1.day, at: '1:00 am' do
+#     rake 'cron:give_min_score_for_past_challenges_where_no_solution'
 # end

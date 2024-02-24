@@ -8,6 +8,7 @@ class Challenge
   field :question_overview, type: String
   field :correct_answer_explanation, type: String
   field :difficulty, type: String
+  field :date_when_available, type: Date
 
   K = Constants::ADJUSTMENT_FACTOR_NORMAL
 
@@ -15,6 +16,7 @@ class Challenge
 
   validates :name, :question_overview, :correct_answer_explanation, length: {minimum: 1}
   validates :difficulty, inclusion: {in: DIFFICULTIES}
+  validates :date_when_available, presence: true
 
   def type
     "#{_type.split('::').last}Challenge"
@@ -47,5 +49,21 @@ class Challenge
 
   def adjustment_factor
     self.class::K
+  end
+
+  def self.available_today
+    where(date_when_available: Time.zone.today)
+  end
+
+  def self.available_in_past
+    where(:date_when_available.lt => Time.zone.today)
+  end
+
+  def available_today?
+    Time.zone.today == date_when_available
+  end
+
+  def available_in_past?
+    Time.zone.today > date_when_available
   end
 end

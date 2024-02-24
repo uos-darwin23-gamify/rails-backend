@@ -93,20 +93,24 @@ module ApplicationHelper
     if existing_solution.nil?
       new_elo = calculate_new_elo(user, challenge, 0)
       elo_change = new_elo - user.elo
-      user.update(elo: [new_elo, 0].max)
+      # user.update(elo: [new_elo, 0].max)
       Solution.create!(
         user_email:     user.email,
         challenge_oid:  challenge.id,
         answer_correct: false,
         new_elo:, elo_change:
       )
+      return elo_change
     elsif existing_solution&.answer_correct.nil?
       new_elo = calculate_new_elo(user, challenge, 0)
       elo_change = new_elo - user.elo
-      user.update(elo: [new_elo, 0].max)
+      # user.update(elo: [new_elo, 0].max)
       existing_solution.update(answer_correct: false,
                                new_elo:, elo_change:)
+      return elo_change
     end
+
+    0
   end
 
   def calculate_new_elo(user, challenge, result)

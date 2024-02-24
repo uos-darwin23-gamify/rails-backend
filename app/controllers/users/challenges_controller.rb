@@ -16,7 +16,7 @@ module Users
       respond_normal_challenges = placement_challenges_finished(user)
 
       challenges = if respond_normal_challenges
-                     Challenge.all.map do |challenge|
+                     Challenge.available_today.map do |challenge|
                        challenge_started = user.solutions.exists?(challenge_oid: challenge.id)
                        solution = Solution.find_by(user_email: user.email, challenge_oid: challenge.id)
                        extra_fields = {
@@ -64,6 +64,8 @@ module Users
                   end
 
       return render_bad_request if challenge.nil?
+
+      return render_bad_request if challenge.is_a?(Challenge) && !challenge.available_today?
 
       challenge_started = user.solutions.exists?(challenge_oid: challenge.id)
 
@@ -114,6 +116,8 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
                   end
 
       return render_bad_request if challenge.nil?
+
+      return render_bad_request if challenge.is_a?(Challenge) && !challenge.available_today?
 
       solution = params[:solution]
       return render_bad_request if solution.nil?
