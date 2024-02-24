@@ -9,12 +9,8 @@ class PlacementChallenge
   field :correct_answer_explanation, type: String
   field :difficulty, type: String
 
-  # =========================================================
-  # ELO CALCULATION CONSTANTS
+  K = Constants::ADJUSTMENT_FACTOR_PLACEMENT
 
-  K = 40
-
-  # =========================================================
   DIFFICULTIES = %w[SIMPLE EASY MEDIUM HARD EXTREME].freeze
 
   validates :name, :question_overview, :correct_answer_explanation, length: {minimum: 1}
@@ -30,5 +26,26 @@ class PlacementChallenge
 
   def verify_solution(solution)
     raise NotImplementedError, "Subclasses must define 'verify_solution'."
+  end
+
+  def difficulty_level
+    case difficulty
+    when "SIMPLE"
+      Constants::DIFFICULTY_0
+    when "EASY"
+      Constants::DIFFICULTY_1
+    when "MEDIUM"
+      Constants::DIFFICULTY_2
+    when "HARD"
+      Constants::DIFFICULTY_3
+    when "EXTREME"
+      Constants::DIFFICULTY_4
+    else
+      Constants::DIFFICULTY_0
+    end
+  end
+
+  def adjustment_factor
+    self.class::K
   end
 end

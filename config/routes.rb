@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get "email-notifications-setting", to: "users/settings#email_notifications_setting"
     post "unsubscribe", to: "users/settings#unsubscribe"
     get "unsubscribe", to: "users/settings#unsubscribe"
+
+    get "elo", to: "users/leaderboard#elo"
   end
 
   scope "api/socket-server" do

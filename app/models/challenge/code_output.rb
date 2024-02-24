@@ -12,10 +12,15 @@ class Challenge::CodeOutput < Challenge
            :validate_question_content
 
   def verify_solution(solution)
-    solution.is_a?(Array) &&
-    solution.all? {|s| s.is_a?(String) } &&
-    solution.length == correct_answer_regex_array.length &&
-    solution.zip(correct_answer_regex_array).all? {|s, regex| Regexp.new(regex).match?(s) }
+    return 0 unless solution.is_a?(Array) && solution.all? {|s| s.is_a?(String) }
+
+    counter = correct_answer_regex_array.length
+
+    solution.zip(correct_answer_regex_array).each do |s, regex|
+      counter -= 1 unless Regexp.new(regex).match?(s)
+    end
+
+    counter.to_f / correct_answer_regex_array.length
   end
 
   private

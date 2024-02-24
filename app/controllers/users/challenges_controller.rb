@@ -122,11 +122,16 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
 
       existing_solution = Solution.find_by(user_email: user.email, challenge_oid: challenge.id)
 
-      return render_bad_request unless existing_solution&.answer.nil?
+      return render_bad_request unless existing_solution&.answer_correct.nil?
 
-      existing_solution.update(answer: solution.to_json, answer_correct: result, end_time: Time.zone.now)
+      new_elo = calculate_new_elo(user, challenge, result)
+      elo_change = new_elo - user.elo
+      existing_solution.update(answer: solution.to_json, answer_correct: result, end_time: Time.zone.now,
+                               new_elo:, elo_change:)
 
-      unless result
+      user.update(elo: [new_elo, 0].max)
+
+      unless result == 1
         return render json:   {result: "Incorrect", explanation: challenge.correct_answer_explanation},
                       status: :precondition_failed
       end
@@ -146,11 +151,10 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
     end
 
     def placement_challenges_finished(user)
-      PlacementChallenge.find_each do |challenge|
+      PlacementChallenge.all.none? do |challenge|
         existing_solution = Solution.find_by(user_email: user.email, challenge_oid: challenge.id)
-        return false if existing_solution.end_time.nil?
+        existing_solution.nil? || existing_solution.end_time.nil?
       end
-      true
     end
   end
 end

@@ -9,7 +9,9 @@ class Challenge::Scq < Challenge
   validate :validate_answers, :validate_correct_answer
 
   def verify_solution(solution)
-    solution.is_a?(Integer) && solution == correct_answer
+    return 1 if solution.is_a?(Integer) && solution == correct_answer
+
+    0
   end
 
   private
