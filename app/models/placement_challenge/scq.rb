@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class ScqChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class PlacementChallenge::Scq < PlacementChallenge
   field :answers, type: Array
   field :correct_answer, type: Integer
 
@@ -32,3 +34,5 @@ class ScqChallenge < Challenge
                "must be an integer greater than or equal to 0 and less than the length of answers array")
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

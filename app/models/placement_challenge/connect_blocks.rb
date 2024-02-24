@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class ConnectBlocksChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class PlacementChallenge::ConnectBlocks < PlacementChallenge
   field :first_group, type: Array
   field :second_group, type: Array
   field :correct_answers, type: Array
@@ -60,3 +62,5 @@ class ConnectBlocksChallenge < Challenge
     end
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

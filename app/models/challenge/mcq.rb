@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class McqChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class Challenge::Mcq < Challenge
   field :answers, type: Array
   field :correct_answers, type: Array
 
@@ -39,3 +41,5 @@ class McqChallenge < Challenge
     end
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

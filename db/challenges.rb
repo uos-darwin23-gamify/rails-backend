@@ -2,7 +2,7 @@
 
 # # Mongoid syntax
 # # ScqChallenge seed data
-# ScqChallenge.find_or_create_by!(
+# Challenge::Scq.find_or_create_by!(
 #   name: "Capital Cities",
 #   difficulty: :SIMPLE,
 #   # question_overview: "Choose the correct answer",
@@ -13,7 +13,7 @@
 # )
 
 # # McqChallenge seed data
-# McqChallenge.find_or_create_by!(
+# Challenge::Mcq.find_or_create_by!(
 #   name: "General Geography Knowledge",
 #   difficulty: :EASY,
 #   # question_overview: "Choose all of the correct answers",
@@ -24,7 +24,7 @@
 # )
 
 # # ConnectBlocksChallenge seed data
-# ConnectBlocksChallenge.find_or_create_by!(
+# Challenge::ConnectBlocks.find_or_create_by!(
 #   name: "Category Matching",
 #   difficulty: :MEDIUM,
 #   # question_overview: "Connect all matching blocks",
@@ -36,7 +36,7 @@
 # )
 
 # # CodeOutputChallenge seed data
-# CodeOutputChallenge.find_or_create_by!(
+# Challenge::CodeOutput.find_or_create_by!(
 #   name: "Prime Numbers",
 #   difficulty: :EXTREME,
 #   question_overview: "Analyze the following C code and answer the questions",
@@ -82,7 +82,7 @@
 # )
 
 # # CodeOutputChallenge seed data
-# CodeOutputChallenge.find_or_create_by!(
+# Challenge::CodeOutput.find_or_create_by!(
 #   name: "Prime Numbers",
 #   difficulty: :HARD,
 #   question_overview: "Analyze the following C code and answer the questions",

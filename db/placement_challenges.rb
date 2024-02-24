@@ -1,22 +1,7 @@
-# # This file should ensure the existence of records required to run the application in every environment (production,
-# # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-# #
-# # Example:
-# #
-# #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-# #     MovieGenre.find_or_create_by!(name: genre_name)
-# #   end
-
-require_relative 'challenges'
-require_relative 'placement_challenges'
-
-# Active Record syntax
-PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
 
 # Mongoid syntax
 # ScqChallenge seed data
-Challenge::Scq.find_or_create_by!(
+PlacementChallenge::Scq.find_or_create_by!(
   name: "Capital Cities",
   difficulty: :SIMPLE,
   # question_overview: "Choose the correct answer",
@@ -27,7 +12,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 # McqChallenge seed data
-Challenge::Mcq.find_or_create_by!(
+PlacementChallenge::Mcq.find_or_create_by!(
   name: "General Geography Knowledge",
   difficulty: :EASY,
   # question_overview: "Choose all of the correct answers",
@@ -38,7 +23,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 # ConnectBlocksChallenge seed data
-Challenge::ConnectBlocks.find_or_create_by!(
+PlacementChallenge::ConnectBlocks.find_or_create_by!(
   name: "Category Matching",
   difficulty: :MEDIUM,
   # question_overview: "Connect all matching blocks",
@@ -50,7 +35,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 # CodeOutputChallenge seed data
-Challenge::CodeOutput.find_or_create_by!(
+PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "Prime Numbers",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -96,7 +81,7 @@ int main() {
 )
 
 # CodeOutputChallenge seed data
-Challenge::CodeOutput.find_or_create_by!(
+PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "Prime Numbers",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",

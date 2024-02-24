@@ -26,6 +26,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.boolean :email_notifications, default: true
       t.string :email_unsubscribe_token, null: false
 
+      t.integer :elo, null: false, default: 1000
+
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
