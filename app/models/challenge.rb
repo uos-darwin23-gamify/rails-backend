@@ -9,7 +9,7 @@ class Challenge
   field :correct_answer_explanation, type: String
   field :difficulty, type: String
 
-  DIFFICULTIES = %w[EASY MEDIUM HARD].freeze
+  DIFFICULTIES = %w[SIMPLE EASY MEDIUM HARD EXTREME].freeze
 
   validates :name, :question_overview, :correct_answer_explanation, length: {minimum: 1}
   validates :difficulty, inclusion: {in: DIFFICULTIES}
