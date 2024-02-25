@@ -11,7 +11,7 @@
 		{
 			name: 'consent1',
 			label:
-				'I have read and understood the project information sheet dated 07.02.2024 or the project has been fully explained to me. (If you will answer No to this question please do not proceed with this consent form until you are fully aware of what your participation in the project will mean.)'
+				'I have read and understood the project information sheet dated 21.02.2024 or the project has been fully explained to me. (If you will answer No to this question please do not proceed with this consent form until you are fully aware of what your participation in the project will mean.)'
 		},
 		{
 			name: 'consent2',
