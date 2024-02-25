@@ -35,7 +35,7 @@
 
 	onMount(() => {
 		const header = document.getElementById('admin-header');
-		const height = header?.getBoundingClientRect().height;
+		const height = header?.offsetHeight;
 		if (height !== undefined) {
 			headerHeight = height;
 		}
