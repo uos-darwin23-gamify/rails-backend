@@ -62,7 +62,7 @@
 
 	onMount(() => {
 		const header = document.getElementById('app-header');
-		const height = header?.getBoundingClientRect().height;
+		const height = header?.offsetHeight;
 		if (height !== undefined) {
 			headerHeight = height;
 		}

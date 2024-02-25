@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class ConnectBlocksChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class PlacementChallenge::ConnectBlocks < PlacementChallenge
   field :first_group, type: Array
   field :second_group, type: Array
   field :correct_answers, type: Array
@@ -8,10 +10,24 @@ class ConnectBlocksChallenge < Challenge
   validate :validate_first_group, :validate_second_group, :validate_correct_answers
 
   def verify_solution(solution)
-    solution.is_a?(Array) &&
-    solution.all? {|s| s.is_a?(Array) && s.length == 2 && s.all? {|i| i.is_a?(Integer) } } &&
-    solution.uniq.length == solution.length &&
-    solution.sort == correct_answers.sort
+    return 0 unless solution.is_a?(Array) && solution.all? {|s|
+                      s.is_a?(Array) && s.length == 2 && s.all? {|i|
+                        i.is_a?(Integer)
+                      }
+                    }
+
+    all_combinations = first_group.each_with_index.to_a.product(second_group.each_with_index.to_a).map {|((_, i), (_, j))|
+      [i, j].sort
+    }
+    counter = all_combinations.length
+    all_combinations.each do |combination|
+      if (correct_answers.include?(combination) && solution.exclude?(combination)) ||
+         (correct_answers.exclude?(combination) && solution.include?(combination))
+        counter -= 1
+      end
+    end
+
+    counter.to_f / all_combinations.length
   end
 
   private
@@ -60,3 +76,5 @@ class ConnectBlocksChallenge < Challenge
     end
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren
