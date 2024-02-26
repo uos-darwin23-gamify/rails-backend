@@ -2,7 +2,7 @@
 
 module Users
   class SettingsController < ApplicationController
-    before_action :authorize_user_controllers
+    before_action :authorize_user_controllers, except: [:unsubscribe]
 
     def change_password
       params[:id]

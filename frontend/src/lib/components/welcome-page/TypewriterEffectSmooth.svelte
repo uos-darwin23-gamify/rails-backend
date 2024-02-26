@@ -1,15 +1,9 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/ui';
 	import { Motion } from 'svelte-motion';
-	export let words: { text: string; className?: string }[];
-	export let className = void 0;
+	export let word: { text: string; className?: string };
+	export let className = '';
 	export let cursorClassName = void 0;
-	$: wordsArray = words.map((word) => {
-		return {
-			...word,
-			text: word.text.split('')
-		};
-	});
 </script>
 
 <div class={cn('my-6 flex space-x-1', className)}>
@@ -37,21 +31,15 @@
 				class="lg:text:3xl text-xs font-bold sm:text-base md:text-xl xl:text-5xl"
 				style="white-space: nowrap;"
 			>
-				<div>
-					{#each wordsArray as word, idx (`word-${idx}`)}
-						<div class="inline-block">
-							{#each word.text as char, index (`char-${index}`)}
-								<span class={cn(`text-black dark:text-white `, word.className)}>
-									{char}
-								</span>
-							{/each}
-							&nbsp;
-						</div>
+				<h1 class="inline-block">
+					{#each word.text as char, index (`char-${index}`)}
+						<span class={cn(`text-black dark:text-white `, word.className)}>
+							{char}
+						</span>
 					{/each}
-				</div>
-				{' '}
+					&nbsp;
+				</h1>
 			</div>
-			{' '}
 		</div>
 	</Motion>
 	<Motion
