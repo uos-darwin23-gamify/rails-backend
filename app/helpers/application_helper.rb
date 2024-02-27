@@ -178,5 +178,15 @@ module ApplicationHelper
   end
 
   def update_global_leaderboard
+    users = User.all_in_global_group.select {|user| placement_challenges_finished(user) }.sort_by {|user| -user.elo }
+
+    leaderboard_array = []
+
+    users.each do |user|
+      leaderboard_array << {username: user.username, elo: user.elo}
+    end
+
+    leaderboard_array = leaderboard_array.sort_by {|user| -user[:elo] }
+    GlobalLeaderboard.create!(leaderboard: leaderboard_array) unless leaderboard_array.empty?
   end
 end
