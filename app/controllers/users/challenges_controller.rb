@@ -135,6 +135,14 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
 
       user.update(elo: [new_elo, 0].max)
 
+      # Update Leaderboard
+
+      if user.league?
+        update_league_leaderboard
+      elsif user.global?
+        update_global_leaderboard
+      end
+
       unless result == 1
         return render json:   {result: "Incorrect", explanation: challenge.correct_answer_explanation},
                       status: :precondition_failed
@@ -152,13 +160,6 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
         user_email:    user.email,
         challenge_oid: challenge.id
       )
-    end
-
-    def placement_challenges_finished(user)
-      PlacementChallenge.all.none? do |challenge|
-        existing_solution = Solution.find_by(user_email: user.email, challenge_oid: challenge.id)
-        existing_solution.nil? || existing_solution.end_time.nil?
-      end
     end
   end
 end
