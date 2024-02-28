@@ -44,7 +44,10 @@ Rails.application.routes.draw do
     post "unsubscribe", to: "users/settings#unsubscribe"
     get "unsubscribe", to: "users/settings#unsubscribe"
 
-    get "elo", to: "users/leaderboard#elo"
+    scope "leaderboard" do
+      get "avatar-dropdown-info", to: "users/leaderboard#avatar_dropdown_info"
+      get "data", to: "users/leaderboard#leaderboard"
+    end
   end
 
   scope "api/socket-server" do

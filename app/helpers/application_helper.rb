@@ -174,7 +174,10 @@ module ApplicationHelper
     end
 
     leaderboard_array = leaderboard_array.sort_by {|user| -user[:elo] }
-    LeagueLeaderboard.create!(leaderboard: leaderboard_array) unless leaderboard_array.empty?
+    return if leaderboard_array.empty?
+
+    LeagueLeaderboard.create!(leaderboard:      leaderboard_array,
+                              unlocked_leagues:)
   end
 
   def update_global_leaderboard

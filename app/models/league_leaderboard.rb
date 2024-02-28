@@ -7,6 +7,7 @@ class LeagueLeaderboard
 
   field :timestamp, type: Time, default: -> { Time.zone.now }
   field :leaderboard, type: Array
+  field :unlocked_leagues, type: Array
 
   LEAGUE = %w[BRONZE SILVER GOLD SAPPHIRE RUBY EMERALD AMETHYST PEARL OBSIDIAN
               DIAMOND].freeze
@@ -14,6 +15,8 @@ class LeagueLeaderboard
   validates :leaderboard, presence: true
   validate :validate_leaderboard
   validates :timestamp, presence: true
+  validates :unlocked_leagues, presence: true
+  validate :validate_unlocked_leagues
 
   def id
     _id.to_s
@@ -32,5 +35,15 @@ class LeagueLeaderboard
       errors.add(:leaderboard, "invalid league") unless LEAGUE.include?(player[:league])
     end
     leaderboard.sort_by! {|player| -player[:elo] }
+  end
+
+  def validate_unlocked_leagues
+    unless unlocked_leagues.all? {|league| LEAGUE.include?(league) }
+      errors.add(:unlocked_leagues, "must be a subset of LEAGUE")
+    end
+
+    return if unlocked_leagues == unlocked_leagues.sort_by {|league| LEAGUE.index(league) }
+
+    errors.add(:unlocked_leagues, "must preserve the order of LEAGUE")
   end
 end

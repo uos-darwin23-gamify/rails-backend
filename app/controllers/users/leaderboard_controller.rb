@@ -4,9 +4,86 @@ module Users
   class LeaderboardController < ApplicationController
     before_action :authorize_user_controllers
 
-    def elo
+    def avatar_dropdown_info
       user = current_user
-      render json: {elo: user.elo}
+
+      unless user.league? || user.global?
+        return render json: {message: "Not Authorized"}, status: :unauthorized
+      end
+
+      stats = nil
+
+      if placement_challenges_finished(user)
+        if user.league?
+          latest_entry = LeagueLeaderboard.latest_entry
+
+          leaderboard = latest_entry.leaderboard
+
+          user_league = leaderboard.find {|entry| entry["username"] == user.username }[:league]
+          user_league_all = leaderboard.filter {|entry| entry["league"] == user_league }
+          user_position = user_league_all.find_index {|entry| entry["username"] == user.username } + 1
+          total_players_in_league = user_league_all.size
+
+          stats = {elo: user.elo, user_league: user_league.capitalize, user_position:, total_players_in_league:}
+        elsif user.global?
+          latest_entry = GlobalLeaderboard.latest_entry
+
+          leaderboard = latest_entry.leaderboard
+
+          user_position = leaderboard.find_index {|entry| entry["username"] == user.username } + 1
+          total_players = leaderboard.size
+
+          stats = {elo: user.elo, user_position:, total_players:}
+        end
+      end
+
+      render json: {username: user.username, group: user.group,
+placement_challenges_finished: placement_challenges_finished(user), stats: stats}
+    end
+
+    def leaderboard
+      user = current_user
+
+      unless user.league? || user.global?
+        return render json: {group: user.group}
+      end
+
+      stats = nil
+
+      if placement_challenges_finished(user)
+        if user.league?
+          latest_entry = LeagueLeaderboard.latest_entry
+          unlocked_leagues = latest_entry.unlocked_leagues
+          leaderboard = latest_entry.leaderboard
+
+          user_league = leaderboard.find {|entry| entry["username"] == user.username }[:league]
+          user_league_all = leaderboard.filter {|entry| entry["league"] == user_league }
+          user_position = user_league_all.find_index {|entry| entry["username"] == user.username } + 1
+          total_players_in_league = user_league_all.size
+
+          user_league_index = unlocked_leagues.find_index(user_league)
+          preceding_league = user_league_index > 0 ? unlocked_leagues[user_league_index - 1] : user_league
+          succeeding_league = user_league_index < unlocked_leagues.length - 1 ? unlocked_leagues[user_league_index + 1] : user_league
+
+          # neighbouring_leagues = [preceding_league, user_league, succeeding_league].map(&:capitalize)
+          neighbouring_leagues = [preceding_league, user_league, succeeding_league]
+
+          stats = {elo: user.elo, user_league: user_league, user_position:, total_players_in_league:,
+league_state: user_league_all, neighbouring_leagues:}
+        elsif user.global?
+          latest_entry = GlobalLeaderboard.latest_entry
+
+          leaderboard = latest_entry.leaderboard
+
+          user_position = leaderboard.find_index {|entry| entry["username"] == user.username } + 1
+          total_players = leaderboard.size
+
+          stats = {elo: user.elo, user_position:, total_players:, leaderboard_state: leaderboard}
+        end
+      end
+
+      render json: {username: user.username, group: user.group,
+placement_challenges_finished: placement_challenges_finished(user), stats: stats}
     end
   end
 end
