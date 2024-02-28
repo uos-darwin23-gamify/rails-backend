@@ -5,6 +5,8 @@
 	import LeagueProgression from '$lib/components/app/main/leaderboard/league-progression/LeagueProgression.svelte';
 	import { ShieldHalf } from 'lucide-svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
+	import LeagueDataTable from '$lib/components/app/main/leaderboard/league-data-table/data-table.svelte';
+	import GlobalDataTable from '$lib/components/app/main/leaderboard/global-data-table/data-table.svelte';
 
 	let username: string;
 	let placementChallengesFinished: boolean;
@@ -58,6 +60,11 @@
 					<Card.Header class="flex flex-row justify-between space-y-0 gap-2 pb-3">
 						<div class="flex flex-col gap-3 justify-between">
 							<Card.Title>Leaderboard</Card.Title>
+							{#if group === 'league'}
+								<Card.Description>League Leaderboard</Card.Description>
+							{:else}
+								<Card.Description>Global Leaderboard</Card.Description>
+							{/if}
 							<div class="flex flex-col space-y-1.5">
 								<Label>ELO:</Label>
 								<p class="text-xs leading-none text-muted-foreground">
@@ -69,39 +76,46 @@
 										{stats.user_position} out of {stats.total_players_in_league}
 									</p>
 								{:else}
-									<Label>Position in leaderboard:</Label>
+									<Label>Position on leaderboard:</Label>
 									<p class="text-xs leading-none text-muted-foreground">
-										Position in leaderboard:<br />{stats.user_position} out of {stats.total_players}
+										{stats.user_position} out of {stats.total_players}
 									</p>
 								{/if}
 							</div>
 						</div>
-						<div class="flex flex-col gap-1.5 items-center">
-							<Card.Title>Current League:</Card.Title>
-							<div class="shrink-0">
-								<ShieldHalf class="h-14 w-14 -ml-0.5" />
+						{#if group === 'league'}
+							<div class="flex flex-col gap-1.5 items-center">
+								<Card.Title>Current League:</Card.Title>
+								<div class="shrink-0">
+									<ShieldHalf class="h-14 w-14 -ml-0.5" />
+								</div>
+								{stats.user_league}
 							</div>
-							{stats.user_league}
-						</div>
+						{/if}
 					</Card.Header>
 					<Card.Content>
-						<Accordion.Root>
-							<Accordion.Item value="league-progression" class="border-0">
-								<Accordion.Trigger class="py-2">League Progression</Accordion.Trigger>
-								<Accordion.Content class="h-56">
-									<div class="flex flex-col gap-4">
-										<div class="mt-4">
-											<LeagueProgression
-												neighbouringLeagues={stats.neighbouring_leagues}
-												lowestEloInLeague={Math.min(...leagueStateToElos(stats.league_state))}
-												highestEloInLeague={Math.max(...leagueStateToElos(stats.league_state))}
-												userElo={stats.elo}
-											/>
+						{#if group === 'league'}
+							<Accordion.Root>
+								<Accordion.Item value="league-progression" class="border-0">
+									<Accordion.Trigger class="pt-1 pb-3.5">League Progression</Accordion.Trigger>
+									<Accordion.Content class="h-56">
+										<div class="flex flex-col gap-4">
+											<div class="mt-4">
+												<LeagueProgression
+													neighbouringLeagues={stats.neighbouring_leagues}
+													lowestEloInNextLeague={stats.succeeding_league_lowest_elo_player}
+													highestEloInPreviousLeague={stats.preceding_league_highest_elo_player}
+													userElo={stats.elo}
+												/>
+											</div>
 										</div>
-									</div>
-								</Accordion.Content>
-							</Accordion.Item>
-						</Accordion.Root>
+									</Accordion.Content>
+								</Accordion.Item>
+							</Accordion.Root>
+							<LeagueDataTable data={stats.league_state} {username} />
+						{:else}
+							<GlobalDataTable data={stats.leaderboard_state} {username} />
+						{/if}
 					</Card.Content>
 				{:else}
 					<Card.Header>

@@ -28,12 +28,27 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Timer, ShieldAlert } from 'lucide-svelte';
 
-	export let data: ChallengeOverview[];
+	export let dataIntermediate: ChallengeOverview[];
+
+	const difficultyOrder = {
+		SIMPLE: 0,
+		EASY: 1,
+		MEDIUM: 2,
+		HARD: 3,
+		EXTREME: 4
+	};
+
+	const data = dataIntermediate.sort((a: { difficulty: string }, b: { difficulty: string }) => {
+		const difficultyA = a.difficulty as keyof typeof difficultyOrder;
+		const difficultyB = b.difficulty as keyof typeof difficultyOrder;
+		return difficultyOrder[difficultyA] - difficultyOrder[difficultyB];
+	});
 
 	const table = createTable(readable(data), {
 		select: addSelectedRows(),
 		sort: addSortBy({
 			toggleOrder: ['asc', 'desc']
+			// initialSortKeys: [{ id: 'difficulty', order: 'desc' }]
 		}),
 		page: addPagination(),
 		// filter: addTableFilter({
@@ -149,6 +164,10 @@
 					render: ({ filterValue }) => {
 						return get(filterValue);
 					}
+				},
+				sort: {
+					compareFn: (a: keyof typeof difficultyOrder, b: keyof typeof difficultyOrder) =>
+						difficultyOrder[a] - difficultyOrder[b]
 				}
 			}
 		}),

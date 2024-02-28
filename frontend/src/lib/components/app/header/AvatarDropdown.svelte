@@ -93,7 +93,7 @@
 									ELO:<br />{stats.elo}
 								</p>
 								<p class="text-xs leading-none text-muted-foreground">
-									Position in leaderboard:<br />{stats.user_position} out of {stats.total_players}
+									Position on leaderboard:<br />{stats.user_position} out of {stats.total_players}
 								</p>
 							</div>
 						{/if}

@@ -42,7 +42,7 @@
 					>
 				</Card.Header>
 				<Card.Content>
-					<DataTable {data} />
+					<DataTable dataIntermediate={data} />
 				</Card.Content>
 				<!-- <Card.Footer class="flex justify-end">
 					{#if selectedRowIds !== false && selectedRowIds.length > 0}

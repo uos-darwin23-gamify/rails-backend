@@ -3,19 +3,22 @@
 	import { onMount } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
 	export let neighbouringLeagues: string[];
-	export let lowestEloInLeague: number;
-	export let highestEloInLeague: number;
+	export let highestEloInPreviousLeague: number | null;
+	export let lowestEloInNextLeague: number | null;
 	export let userElo: number;
 
 	let container: HTMLDivElement;
 	let lowerLeague: HTMLDivElement;
 	let upperLeague: HTMLDivElement;
 	const progressBarValue =
-		highestEloInLeague - lowestEloInLeague === 0
+		lowestEloInNextLeague === null || highestEloInPreviousLeague === null
 			? 50
-			: Math.round(
-					((userElo - lowestEloInLeague) * 100) / (highestEloInLeague - lowestEloInLeague)
-				);
+			: lowestEloInNextLeague - highestEloInPreviousLeague === 0
+				? 50
+				: Math.round(
+						((userElo - highestEloInPreviousLeague) * 100) /
+							(lowestEloInNextLeague - highestEloInPreviousLeague)
+					);
 
 	let animateProgressBarValue = 0;
 
@@ -93,10 +96,26 @@
 	<div class="absolute mt-32 flex justify-center current-league-fork">
 		<div class="flex justify-between w-full absolute -translate-y-full top-0">
 			<div class="h-5 w-0.5 current-league-fork-background-color">
-				<div class="absolute -translate-x-1/2 bottom-5">{lowestEloInLeague}</div>
+				<div class="absolute -translate-x-1/2 bottom-5">
+					<p
+						class="text-center max-w-14 leading-none"
+						class:text-xs={highestEloInPreviousLeague === null}
+						class:mb-1={highestEloInPreviousLeague !== null && lowestEloInNextLeague === null}
+					>
+						{highestEloInPreviousLeague ?? 'Min. League'}
+					</p>
+				</div>
 			</div>
 			<div class="h-5 w-0.5 current-league-fork-background-color">
-				<div class="absolute -translate-x-1/2 bottom-5">{highestEloInLeague}</div>
+				<div class="absolute -translate-x-1/2 bottom-5">
+					<p
+						class="text-center max-w-14 leading-none"
+						class:text-xs={lowestEloInNextLeague === null}
+						class:mb-1={lowestEloInNextLeague !== null && highestEloInPreviousLeague === null}
+					>
+						{lowestEloInNextLeague ?? 'Max. League'}
+					</p>
+				</div>
 			</div>
 		</div>
 		<div class="h-0.5 w-full current-league-fork-background-color"></div>
