@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
     get "placement-challenges-finished", to: "users/challenges#placement_challenges_status"
     get "challenges", to: "users/challenges#all_challenges"
+    get "challenges-available", to: "users/challenges#not_all_challenges_finished"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
     post "consent", to: "users/consent#submit_consent"

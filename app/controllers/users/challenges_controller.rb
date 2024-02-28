@@ -10,6 +10,19 @@ module Users
       render json: {placement_challenges_finished: placement_challenges_finished(user)}
     end
 
+    def not_all_challenges_finished
+      user = current_user
+
+      return render json: {available: true} unless placement_challenges_finished(user)
+
+      challenges_today = Challenge.available_today
+      all_finished = challenges_today.all? do |challenge|
+        user.solutions.exists?(challenge_oid: challenge.id, answer_correct: !nil)
+      end
+
+      render json: {available: !all_finished}
+    end
+
     def all_challenges
       user = current_user
 

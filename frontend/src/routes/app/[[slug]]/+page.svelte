@@ -2,7 +2,6 @@
 	import Header from '$lib/components/app/header/Header.svelte';
 	import SideMenu from '$lib/components/app/sidemenu/SideMenu.svelte';
 	import AppUrls from '$lib/enums/AppUrls';
-	import Home from '$lib/components/app/main/home/Home.svelte';
 	import Challenges from '$lib/components/app/main/challenges/Challenges.svelte';
 	import Challenge from '$lib/components/app/main/challenge/Challenge.svelte';
 	import Settings from '$lib/components/app/main/settings/Settings.svelte';
@@ -32,9 +31,6 @@
 
 	$: {
 		switch (data.slug) {
-			case AppUrls.LEADERBOARD:
-				mainComponent = Leaderboard;
-				break;
 			case AppUrls.GUIDE:
 				mainComponent = Guide;
 				break;
@@ -53,7 +49,7 @@
 				mainComponent = Settings;
 				break;
 			default:
-				mainComponent = Home;
+				mainComponent = Leaderboard;
 				break;
 		}
 	}

@@ -13,7 +13,5 @@
 </script>
 
 <div class="snap-start relative h-full w-full overflow-hidden flex">
-	<div class="flex grow items-center flex-col">
-		
-	</div>
+	<div class="flex grow items-center flex-col"></div>
 </div>

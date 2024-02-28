@@ -13,6 +13,7 @@
 	let group: 'league' | 'global' | 'admin_group' = 'admin_group';
 	let stats: any;
 	let error = false;
+	let challengesAvailable = false;
 
 	const handleLogout = async () => {
 		const logoutSuccessful = await logOut();
@@ -39,11 +40,26 @@
 		}
 	};
 
+	const getChallengesAvailable = async () => {
+		const response = await fetch('/api/challenges-available');
+
+		if (!response.ok) {
+			error = true;
+		} else {
+			const data = await response.json();
+			challengesAvailable = data.available;
+		}
+	};
+
 	let unsubscribe: () => void;
 
 	onMount(() => {
 		getData();
-		unsubscribe = page.subscribe(getData);
+		getChallengesAvailable();
+		unsubscribe = page.subscribe(() => {
+			getData();
+			getChallengesAvailable();
+		});
 
 		return () => unsubscribe();
 	});
@@ -54,7 +70,9 @@
 		<Button variant="ghost" builders={[builder]} class="relative h-8 w-8 rounded-full mx-1">
 			<Avatar.Root class="h-10 w-10">
 				{#if !error}
-					<Avatar.Fallback>{username?.replace(/[^A-Z]/g, '').slice(0, 2)}</Avatar.Fallback>
+					<Avatar.Fallback class={challengesAvailable ? 'bg-green-900' : ''}
+						>{username?.replace(/[^A-Z]/g, '').slice(0, 2)}</Avatar.Fallback
+					>
 				{:else}
 					<Avatar.Fallback>?</Avatar.Fallback>
 				{/if}
@@ -68,8 +86,15 @@
 				<p class="text-xs leading-none text-muted-foreground">@{username}</p>
 			</div>
 		</DropdownMenu.Label>
+		{#if challengesAvailable}
+			<DropdownMenu.Separator />
+			<DropdownMenu.Item
+				class="font-normal cursor-pointer bg-green-900"
+				on:click={() => goto('/app/challenges')}>New Challenges Available!</DropdownMenu.Item
+			>
+		{/if}
 		<DropdownMenu.Separator />
-		<DropdownMenu.Item class="font-normal cursor-pointer" on:click={() => goto('/app/leaderboard')}>
+		<DropdownMenu.Item class="font-normal cursor-pointer" on:click={() => goto('/app')}>
 			{#if !error}
 				{#if group !== 'admin_group'}
 					{#if placementChallengesFinished}

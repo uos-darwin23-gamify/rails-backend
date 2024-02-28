@@ -306,7 +306,11 @@
 			</Table.Body>
 		</Table.Root>
 	</div>
-	<DataTablePagination {tableModel} />
+	{#if data.length === 0}
+		<p class="text-center text-xl">No Challenges Available</p>
+	{:else}
+		<DataTablePagination {tableModel} />
+	{/if}
 </div>
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
@@ -316,7 +320,7 @@
 				<div class="flex items-center text-base gap-2">
 					<p class="text-center grow">You are about to start this challenge.</p>
 				</div>
-				<div class="flex items-center text-sm gap-2 mt-2">
+				<!-- <div class="flex items-center text-sm gap-2 mt-2">
 					<div class="shrink-0">
 						<Timer class="h-7 w-7 -ml-0.5" />
 					</div>
@@ -324,8 +328,8 @@
 						Challenges are time-based meaning the faster you complete a challenge, the more points
 						you will get.
 					</p>
-				</div>
-				<div class="flex items-center text-sm gap-2">
+				</div> -->
+				<div class="flex items-center text-sm gap-2 mt-2">
 					<div class="shrink-0">
 						<ShieldAlert class="h-7 w-7 -ml-0.5" />
 					</div>

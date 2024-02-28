@@ -7,9 +7,7 @@ module Users
     def avatar_dropdown_info
       user = current_user
 
-      unless user.league? || user.global?
-        return render json: {message: "Not Authorized"}, status: :unauthorized
-      end
+      return render json: {message: "Not Authorized"}, status: :unauthorized unless user.league? || user.global?
 
       stats = nil
 
@@ -40,15 +38,13 @@ module Users
       end
 
       render json: {username: user.username, group: user.group,
-placement_challenges_finished: placement_challenges_finished(user), stats: stats}
+placement_challenges_finished: placement_challenges_finished(user), stats:}
     end
 
     def leaderboard
       user = current_user
 
-      unless user.league? || user.global?
-        return render json: {group: user.group}
-      end
+      return render json: {group: user.group} unless user.league? || user.global?
 
       stats = nil
 
@@ -66,7 +62,7 @@ placement_challenges_finished: placement_challenges_finished(user), stats: stats
           total_players_in_league = user_league_all.size
 
           user_league_index = unlocked_leagues.find_index(user_league)
-          preceding_league = user_league_index > 0 ? unlocked_leagues[user_league_index - 1] : user_league
+          preceding_league = user_league_index.positive? ? unlocked_leagues[user_league_index - 1] : user_league
           succeeding_league = user_league_index < unlocked_leagues.length - 1 ? unlocked_leagues[user_league_index + 1] : user_league
 
           # neighbouring_leagues = [preceding_league, user_league, succeeding_league].map(&:capitalize)
@@ -77,19 +73,23 @@ placement_challenges_finished: placement_challenges_finished(user), stats: stats
 
           if preceding_league != user_league
             preceding_league_players = leaderboard.filter {|entry| entry["league"] == preceding_league }
-            preceding_league_highest_elo_player = preceding_league_players.max_by {|entry|
-              entry["elo"]
-            }&.[](:elo) unless preceding_league_players.empty?
+            unless preceding_league_players.empty?
+              preceding_league_highest_elo_player = preceding_league_players.max_by {|entry|
+                entry["elo"]
+              }&.[](:elo)
+            end
           end
 
           if succeeding_league != user_league
             succeeding_league_players = leaderboard.filter {|entry| entry["league"] == succeeding_league }
-            succeeding_league_lowest_elo_player = succeeding_league_players.min_by {|entry|
-              entry["elo"]
-            }&.[](:elo) unless succeeding_league_players.empty?
+            unless succeeding_league_players.empty?
+              succeeding_league_lowest_elo_player = succeeding_league_players.min_by {|entry|
+                entry["elo"]
+              }&.[](:elo)
+            end
           end
 
-          stats = {elo: user.elo, user_league: user_league, user_position:, total_players_in_league:,
+          stats = {elo: user.elo, user_league:, user_position:, total_players_in_league:,
 league_state: user_league_all, neighbouring_leagues:, preceding_league_highest_elo_player:, succeeding_league_lowest_elo_player:}
         elsif user.global?
           latest_entry = GlobalLeaderboard.latest_entry
@@ -104,7 +104,7 @@ league_state: user_league_all, neighbouring_leagues:, preceding_league_highest_e
       end
 
       render json: {username: user.username, group: user.group,
-placement_challenges_finished: placement_challenges_finished(user), stats: stats}
+placement_challenges_finished: placement_challenges_finished(user), stats:}
     end
   end
 end
