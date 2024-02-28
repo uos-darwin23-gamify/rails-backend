@@ -17,6 +17,7 @@
 	let menuClosed = true;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let mainComponent: (new (...args: any[]) => SvelteComponent) | null = null;
+	let pageTitle = '';
 
 	onMount(async () => {
 		const response = await fetch('/api/consent');
@@ -33,23 +34,29 @@
 		switch (data.slug) {
 			case AppUrls.GUIDE:
 				mainComponent = Guide;
+				pageTitle = 'Guide';
 				break;
 			case AppUrls.HELP:
 				mainComponent = Help;
+				pageTitle = 'Help';
 				break;
 			case AppUrls.CHALLENGES:
 				const challengeId = $page.url.searchParams.get('id');
 				if (challengeId !== null) {
 					mainComponent = Challenge;
+					pageTitle = 'Challenge';
 				} else {
 					mainComponent = Challenges;
+					pageTitle = 'Challenges';
 				}
 				break;
 			case AppUrls.SETTINGS:
 				mainComponent = Settings;
+				pageTitle = 'Settings';
 				break;
 			default:
 				mainComponent = Leaderboard;
+				pageTitle = 'Leaderboard';
 				break;
 		}
 	}
@@ -64,6 +71,10 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<title>{pageTitle} - GamifyCoding&#8482;</title>
+</svelte:head>
 
 <Header bind:menuClosed />
 <div class="relative flex" style={`height: calc(100% - ${headerHeight}px);`}>

@@ -55,7 +55,7 @@
 {:else if error === undefined}
 	<div class="flex grow p-4 relative overflow-x-auto">
 		<Card.Root class="flex grow relative overflow-x-auto">
-			<div class="grow w-full">
+			<div class="grow w-full flex flex-col">
 				{#if placementChallengesFinished}
 					<Card.Header class="flex flex-row justify-between space-y-0 gap-2 pb-3">
 						<div class="flex flex-col gap-3 justify-between">
