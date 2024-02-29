@@ -7,7 +7,7 @@
 		answers: ['', '', '', ''],
 		correct_answer: null,
 		correct_answer_explanation: '',
-		_type: 'ScqChallenge'
+		_type: 'McqChallenge'
 		// `updated_at` and `created_at` will be handled server-side
 	};
 
@@ -17,7 +17,7 @@
 	let file:File|null = null; // This will hold the uploaded file
 
 	const forms = {
-		'scqChallenge': 'Single Choice Question Challenge',
+		'mcqChallenge': 'Multi Choice Question Challenge',
 		// Add other form types here if needed
 	};
 
@@ -65,13 +65,14 @@
 			// Submit challenges here, or set them to state variable to be submitted later
 			// console.log(challenges);
       // Endpoint where you want to submit the form data
-      const endpoint = '/api/admin/scq-challenge-create'; // Adjust this to your actual endpoint
+      const endpoint = '/api/admin/mcq-challenge-create'; // Adjust this to your actual endpoint
 
       postChallenges(challenges, endpoint)
 
 		};
 		reader.readAsText(file);
 	}
+
 	function parseCsvLineWithQuotes(line) {
     const values = [];
     let current = '';
@@ -109,6 +110,7 @@
         // Extract question, answers, booleans, difficulty, and explanation from the values
         const name = values[0];
         const question_overview = values[0]
+				console.log(values)
         const answers = [
             {text: values[1], isCorrect: values[2] === 'TRUE'},
             {text: values[3], isCorrect: values[4] === 'TRUE'},
@@ -117,18 +119,21 @@
         ];
         const difficulty = values[9];
         const correct_answer_explanation = values[10];
-
+				console.log(answers)
         // Find the correct answer based on the boolean flags
-        const correctIndex = answers.findIndex(answer => answer.isCorrect);
+        const correctIndices = answers.reduce((acc, answer, index) => {
+            if (answer.isCorrect) acc.push(index);
+            return acc;
+        }, []);
 
         return {
             name,
             answers: answers.map(answer => answer.text),
-            correct_answer: correctIndex + 1, // Assuming correct_answer should be the index (1-based) of the correct answer
+            correct_answer: correctIndices, 
             difficulty,
             correct_answer_explanation,
             question_overview,
-            _type: 'ScqChallenge'
+            _type: 'McqChallenge'
         };
     });
 		return challenges;
@@ -147,7 +152,7 @@
 
 
 <form on:submit|preventDefault={handleSubmit}>
-  <h2>Upload SCQ Challenge CSV</h2>
+  <h2>Upload MCQ Challenge CSV</h2>
   <hr />
   <input type="file" accept=".csv" on:change={handleFileChange} />
   <hr />

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
       post "scq-challenge-create", to: "admin/challenge_editor#create_scq"
       post "mcq-challenge-create", to: "admin/challenge_editor#create_mcq"
+      post "blocks-challenge-create", to: "admin/challenge_editor#create_blocks"
     end
 
     get "challenges", to: "users/challenges#all_challenges"

@@ -72,31 +72,6 @@
 		};
 		reader.readAsText(file);
 	}
-	function parseCsvLineWithQuotes(line) {
-    const values = [];
-    let current = '';
-    let insideQuotes = false;
-  
-    for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-      
-        if (char === '"' && (i === 0 || line[i-1] !== '\\')) {
-            insideQuotes = !insideQuotes;
-            continue;
-        }
-      
-        if (char === ',' && !insideQuotes) {
-            values.push(current);
-            current = '';
-        } else {
-            current += char;
-        }
-    }
-  
-    values.push(current); // Push the last value
-  
-    return values.map(value => value.trim().replace(/^"(.*)"$/, '$1')); // Remove surrounding quotes if present
-	}
 
 	function csvToChallenges(csvText) {
     console.log("SPLITING")
@@ -104,16 +79,16 @@
     console.log(lines)
 		const challenges = lines.slice(1).map(line => {
         // Split each line by commas to get individual values
-        const values = parseCsvLineWithQuotes(line);
+        const values = line.split(',');
 				console.log(line)
         // Extract question, answers, booleans, difficulty, and explanation from the values
         const name = values[0];
         const question_overview = values[0]
         const answers = [
-            {text: values[1], isCorrect: values[2] === 'TRUE'},
-            {text: values[3], isCorrect: values[4] === 'TRUE'},
-            {text: values[5], isCorrect: values[6] === 'TRUE'},
-            {text: values[7], isCorrect: values[8] === 'TRUE'}
+            {text: values[1], isCorrect: values[2] === 'true'},
+            {text: values[3], isCorrect: values[4] === 'true'},
+            {text: values[5], isCorrect: values[6] === 'true'},
+            {text: values[7], isCorrect: values[8] === 'true'}
         ];
         const difficulty = values[9];
         const correct_answer_explanation = values[10];

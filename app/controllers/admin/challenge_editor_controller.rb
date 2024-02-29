@@ -50,6 +50,22 @@ module Admin
       end
     end
 
+    def create_blocks
+      Rails.logger.debug "---------------------------------------------------------------------------"
+      Rails.logger.debug "Starting"
+      Rails.logger.debug blocks_challenge_params
+      @challenge = Challenge.new(blocks_challenge_params)
+      Rails.logger.debug @challenge
+      puts "--------------------------"
+      puts @challenge.correct_answers
+      puts "-------------------------"
+      if @challenge.save
+        render json: @challenge, status: :created, location: @challenge
+      else
+        render json: @challenge.errors, status: :unprocessable_entity
+      end
+    end
+
     # PATCH/PUT /challenges/:id
     def update
       if @challenge.update(challenge_params)
@@ -90,6 +106,19 @@ module Admin
         :difficulty,
         :question_overview,
         {answers: []}, # Ensure this is an array
+        {correct_answers: []},
+        :correct_answer_explanation,
+        :_type
+      )
+    end
+
+    def blocks_challenge_params
+      params.require(:challenge).permit(
+        :name,
+        :difficulty,
+        :question_overview,
+        {first_group: []},
+        {second_group: []}, # Ensure this is an array
         {correct_answers: []},
         :correct_answer_explanation,
         :_type

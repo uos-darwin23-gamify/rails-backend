@@ -20,7 +20,10 @@
 	import CodeOutputForm from './code_output/form.svelte';
 	import ConnectBlocksForm from './connect_blocks/form.svelte';	
 	import ScqBulkForm from './scq/form_bulk.svelte'
-	// export let addNewEmails: (emails: string[]) => Promise<void>;
+	import McqBulkForm from './mcq/form_bulk.svelte'
+	import ConnectBlocksBulkForm from './connect_blocks/form_bulk.svelte'
+	import CodeOutputBulkForm from './code_output/form_bulk.svelte'
+
 
 	export let tableModel: TableViewModel<ChallengeOverview>;
 
@@ -128,6 +131,12 @@
 					<Tabs.Content value="bulk">
 						{#if selectedForm === 'form1'}
 							<ScqBulkForm/>
+						{:else if selectedForm === 'form2'}
+							<McqBulkForm/>
+						{:else if selectedForm === 'form3'}
+							<CodeOutputBulkForm/>
+						{:else if selectedForm === 'form4'}
+							<ConnectBlocksBulkForm/>
 						{/if}
 					<hr />
 					</Tabs.Content>

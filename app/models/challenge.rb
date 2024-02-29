@@ -12,7 +12,8 @@ class Challenge
   field :correct_answers, type: Array
   field :correct_answer, type: String
   field :_type, type: String
-
+  field :first_group, type: String
+  field :second_group, type: String
   DIFFICULTIES = %w[EASY MEDIUM HARD].freeze
 
   validates :name, :question_overview, :correct_answer_explanation, length: {minimum: 1}

@@ -1,15 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-	let challenge = {
-		name: '',
-		difficulty: '',
-		question_overview: '',
-		answers: ['', '', '', ''],
-		correct_answer: null,
-		correct_answer_explanation: '',
-		_type: 'ScqChallenge'
-		// `updated_at` and `created_at` will be handled server-side
-	};
 
 	let successMessage = '';
 	let dialog;
@@ -17,7 +7,7 @@
 	let file:File|null = null; // This will hold the uploaded file
 
 	const forms = {
-		'scqChallenge': 'Single Choice Question Challenge',
+		'mcqChallenge': 'Multi Choice Question Challenge',
 		// Add other form types here if needed
 	};
 
@@ -56,22 +46,6 @@
 		successMessage = 'All challenges submitted successfully!';
   }
 
-	async function parseAndSubmitCSV(file) {
-    console.log("PARSING")
-		const reader = new FileReader();
-		reader.onload = async (e) => {
-			const text = e.target.result;
-			const challenges = csvToChallenges(text);
-			// Submit challenges here, or set them to state variable to be submitted later
-			// console.log(challenges);
-      // Endpoint where you want to submit the form data
-      const endpoint = '/api/admin/scq-challenge-create'; // Adjust this to your actual endpoint
-
-      postChallenges(challenges, endpoint)
-
-		};
-		reader.readAsText(file);
-	}
 	function parseCsvLineWithQuotes(line) {
     const values = [];
     let current = '';
@@ -98,41 +72,42 @@
     return values.map(value => value.trim().replace(/^"(.*)"$/, '$1')); // Remove surrounding quotes if present
 	}
 
-	function csvToChallenges(csvText) {
-    console.log("SPLITING")
-    const lines = csvText.trim().split("\r\n");
-    console.log(lines)
-		const challenges = lines.slice(1).map(line => {
-        // Split each line by commas to get individual values
-        const values = parseCsvLineWithQuotes(line);
-				console.log(line)
-        // Extract question, answers, booleans, difficulty, and explanation from the values
-        const name = values[0];
-        const question_overview = values[0]
-        const answers = [
-            {text: values[1], isCorrect: values[2] === 'TRUE'},
-            {text: values[3], isCorrect: values[4] === 'TRUE'},
-            {text: values[5], isCorrect: values[6] === 'TRUE'},
-            {text: values[7], isCorrect: values[8] === 'TRUE'}
-        ];
-        const difficulty = values[9];
-        const correct_answer_explanation = values[10];
+  function csvToConnectBlocksChallenges(csvText) {
+        const lines = csvText.trim().split("\n");
+        return lines.slice(1).map(line => {
+            const values = parseCsvLineWithQuotes(line);
+            return createConnectBlocksChallenge(values);
+        });
+    }
 
-        // Find the correct answer based on the boolean flags
-        const correctIndex = answers.findIndex(answer => answer.isCorrect);
-
-        return {
-            name,
-            answers: answers.map(answer => answer.text),
-            correct_answer: correctIndex + 1, // Assuming correct_answer should be the index (1-based) of the correct answer
-            difficulty,
-            correct_answer_explanation,
-            question_overview,
-            _type: 'ScqChallenge'
+    function createConnectBlocksChallenge(values) {
+        let challenge = {
+            name: values[0],
+            difficulty: values[9],
+            question_overview: values[0],
+            first_group: [values[1], values[3], values[5], values[7]],
+            second_group: [values[2], values[4], values[6], values[8]],
+            correct_answers: [[0,0],[1,1],[2,2],[3,3]],
+            correct_answer_explanation: values[10],
+            _type: 'ConnectBlocksChallenge',
         };
-    });
-		return challenges;
-	}
+        console.log("---")
+        console.log(challenge)
+        return challenge;
+    }
+
+    async function parseAndSubmitCSV(file) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const text = e.target.result.toString();
+                const challenges = csvToConnectBlocksChallenges(text);
+                const endpoint = '/api/admin/blocks-challenge-create'; // Adjust to your actual endpoint
+                await postChallenges(challenges, endpoint);
+            };
+            reader.readAsText(file);
+        }
+    }
 
   async function handleSubmit() {
       console.log("STARTING FILE")
@@ -147,7 +122,7 @@
 
 
 <form on:submit|preventDefault={handleSubmit}>
-  <h2>Upload SCQ Challenge CSV</h2>
+  <h2>Upload MCQ Challenge CSV</h2>
   <hr />
   <input type="file" accept=".csv" on:change={handleFileChange} />
   <hr />
