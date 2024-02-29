@@ -169,7 +169,12 @@ int main() {
   # Escaping special characters:
   # printf("%d is a prime number.\\n", num);
   question_array: [
-    {question: 'What is the output for input "4"?'},
+    {question: 'What is the output for input "4"?', select: {
+      startLineNumber: 4,
+      startColumn: 3,
+      endLineNumber: 4,
+      endColumn: 41
+    }},
     {question: 'What is the output for input "7"?', select: {
       startLineNumber: 4,
       startColumn: 3,
@@ -214,14 +219,14 @@ int main() {
   question_array: [
     {question: 'What is the output to the console?'},
     {question: 'What is the value of sum at the end of the program?', select: {
-      startLineNumber: 10,
-      startColumn: 6,
-      endLineNumber: 14,
-      endColumn: 35
+      startLineNumber: 7,
+      startColumn: 10,
+      endLineNumber: 7,
+      endColumn: 10
     }},
     {question: 'How many times is the loop executed?', select: {
       startLineNumber: 8,
-      startColumn: 6,
+      startColumn: 3,
       endLineNumber: 8,
       endColumn: 40
     }},
@@ -278,8 +283,8 @@ int main() {
 }},
   question_array: [
     {question: 'What content is written to the file output.txt?', select: {
-      startLineNumber: 9,
-      startColumn: 9,
+      startLineNumber: 10,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 45
     }},
