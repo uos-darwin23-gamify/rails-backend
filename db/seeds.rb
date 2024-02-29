@@ -205,34 +205,37 @@ Challenge::CodeOutput.find_or_create_by!(
 #define MAX 10
 
 int main() {
-  int arr[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  int i, sum = 0;
-  for (i = 0; i < MAX; i++) {
-    if (arr[i] % 2 != 0) {
-      printf("%d ", arr[i]);
-      sum += arr[i];
+  int arr[MAX] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int *ptr = arr;
+  int sum = 0;
+    for (int i = 0; i < MAX; i++) {
+      if (i % 2 == 0) {
+        sum += *(ptr + i);
+      } else {
+        printf("%d ", *(ptr + i)); 
+      }
     }
-  }
-  printf("\\nSum: %d", sum);
-  return 0;
+    printf("\nSum: %d\n", sum); 
+
+    return 0;
 }},
   question_array: [
     {question: 'What is the output to the console?'},
     {question: 'What is the value of sum at the end of the program?', select: {
-      startLineNumber: 7,
+      startLineNumber: 13,
       startColumn: 10,
-      endLineNumber: 7,
-      endColumn: 10
+      endLineNumber: 16,
+      endColumn: 40
     }},
     {question: 'How many times is the loop executed?', select: {
-      startLineNumber: 8,
+      startLineNumber: 9,
       startColumn: 3,
-      endLineNumber: 8,
+      endLineNumber: 9,
       endColumn: 40
     }},
 ],
   correct_answer_regex_array: ["^1 3 5 7 9 \\nSum: 20$", "^20$", "^10$"],
-  correct_answer_explanation: "The program iterates over the array arr and prints odd numbers along with their sum at the end. For the given code, the output is '1 3 5 7 9 \\nSum: 20'. The value of sum at the end of the program is '20'. The loop is executed '10' times."
+  correct_answer_explanation: "The program iterates over the array arr and prints odd numbers, along with the sum of the even numbers at the end. The loop is executed 10 times."
 )
 
 Challenge::CodeOutput.find_or_create_by!(
@@ -259,7 +262,7 @@ int main() {
     }},
 ],
   correct_answer_regex_array: ["^5$"],
-  correct_answer_explanation: "Pointer arithmetic is used to access the 6th element of the array (index 5), which has a value of '5'."
+  correct_answer_explanation: "Pointer arithmetic is used to access the 6th element of the array (index 5), which has a value of 5."
 )
 
 Challenge::CodeOutput.find_or_create_by!(
@@ -268,27 +271,47 @@ Challenge::CodeOutput.find_or_create_by!(
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
+  
+void writeFile(const char *filename, const char *content) {
+    FILE *fp = fopen(filename, "w");
+    if (fp != NULL) {
+        fputs(content, fp);
+        fclose(fp);
+    }
+}
 
-#define MAX 10
+int countDigits(const char *str) {
+    int count = 0;
+    while (*str) {
+        if (*str >= '0' && *str <= '9') count++;
+        str++;
+    }
+    return count;
+}
 
 int main() {
-  FILE *fp;
-  int sum = 20;
-  fp = fopen("output.txt", "w");
-  if(fp != NULL) {
-    fprintf(fp, "Final sum is %d", sum);
-    fclose(fp);
-  }
-  return 0;
+    const char *msg = "Hello123World45!";
+    writeFile("output.txt", msg);
+
+    int digits = countDigits(msg);
+    printf("Number of digits in message: %d\n", digits);
+
+    return 0;
 }},
   question_array: [
-    {question: 'What content is written to the file output.txt?', select: {
-      startLineNumber: 10,
+    {question: 'What is written to output.txt?', select: {
+      startLineNumber: 21,
       startColumn: 5,
-      endLineNumber: 10,
+      endLineNumber: 21,
       endColumn: 45
     }},
+    {question: 'What is the output of the printf statement in main?', select: {
+      startLineNumber: 24,
+      startColumn: 3,
+      endLineNumber: 24,
+      endColumn: 40
+    }},
 ],
-  correct_answer_regex_array: ["^Final sum is 20$"],
-  correct_answer_explanation: "The program writes the final value of sum to a file named output.txt, with the content 'Final sum is 20'."
+  correct_answer_regex_array: ["^Hello123World45!$","^Number of digits in message: 5$"],
+  correct_answer_explanation: "The function writeFile writes the string msg to output.txt. The function countDigits counts the number of digits in the string msg, which contains 5 digits (12345)."
 )
