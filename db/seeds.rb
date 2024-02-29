@@ -215,7 +215,7 @@ int main() {
         printf("%d ", *(ptr + i)); 
       }
     }
-    printf("\nSum: %d\n", sum); 
+    printf("\nSum: %d", sum); 
 
     return 0;
 }},
