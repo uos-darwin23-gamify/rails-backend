@@ -20,7 +20,7 @@ class Challenge
   validates :difficulty, inclusion: {in: DIFFICULTIES}
 
   def type
-    _type
+    "#{_type.split('::').last}Challenge"
   end
 
   def id
