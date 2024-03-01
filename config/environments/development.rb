@@ -73,4 +73,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: "localhost:3000"}
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+
+  # config.action_mailer.default_url_options = {host: "gamifycoding.me"}
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   user_name: 'no-reply@gamifycoding.me',
+  #   password: 'no-reply',
+  #   domain: 'gamifycoding.me',
+  #   address: 'mail.gamifycoding.me',
+  #   port: 465,
+  #   authentication: :login,
+  #   enable_starttls_auto: true,
+  #   ssl: true,
+  #   tls: true
+  # }
 end

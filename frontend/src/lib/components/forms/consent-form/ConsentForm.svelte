@@ -11,7 +11,7 @@
 		{
 			name: 'consent1',
 			label:
-				'I have read and understood the project information sheet dated 07.02.2024 or the project has been fully explained to me. (If you will answer No to this question please do not proceed with this consent form until you are fully aware of what your participation in the project will mean.)'
+				'I have read and understood the project information sheet dated 21.02.2024 or the project has been fully explained to me. (If you will answer No to this question please do not proceed with this consent form until you are fully aware of what your participation in the project will mean.)'
 		},
 		{
 			name: 'consent2',
@@ -76,6 +76,14 @@
 		}
 	];
 
+	const formFieldsEmailNotifications = [
+		{
+			name: 'consent14',
+			label:
+				'I agree to daily email notifications containing information about new challenge releases, changes to leaderboard position as well as general user statistics being enabled by default. These notifications can be disabled on the settings page at any time.'
+		}
+	];
+
 	const headers = [
 		{ headerIndex: 0, header: 'Taking Part in the Project' },
 		{
@@ -85,9 +93,20 @@
 		{
 			headerIndex: formFieldsTakingPart.length + formFieldsInfoUsage.length,
 			header: 'So that the information you provide can be used legally by the researchers'
+		},
+		{
+			headerIndex:
+				formFieldsTakingPart.length + formFieldsInfoUsage.length + formFieldsCopyright.length,
+			header: 'Email Notifications'
 		}
 	];
-	const allFields = [...formFieldsTakingPart, ...formFieldsInfoUsage, ...formFieldsCopyright];
+
+	const allFields = [
+		...formFieldsTakingPart,
+		...formFieldsInfoUsage,
+		...formFieldsCopyright,
+		...formFieldsEmailNotifications
+	];
 
 	let checkboxes: boolean[] = new Array(allFields.length).fill(false);
 

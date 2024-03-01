@@ -61,7 +61,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="absolute origin-left rounded-full hover:brightness-75 active:brightness-50 bg-connection brightness-150"
+	class="absolute origin-left rounded-full hover:brightness-75 active:brightness-50 bg-connection brightness-150 cursor-pointer"
 	style={`transform: translate(${translationVector.x}px, ${translationVector.y}px) translateX(50%) rotate(${angle}rad); width: ${length}px; height: ${14}px;`}
 	on:click|stopPropagation={() => (connectionSelected = connection.id)}
 	class:selected={connectionSelected === connection.id}

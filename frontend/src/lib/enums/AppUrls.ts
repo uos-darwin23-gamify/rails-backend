@@ -1,6 +1,5 @@
 enum AppUrls {
-	HOME = '',
-	LEADERBOARD = 'leaderboard',
+	LEADERBOARD = '',
 	CHALLENGES = 'challenges',
 	GUIDE = 'guide',
 	SETTINGS = 'settings',

@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Dashboard</title>
+	<title>Admin Dashboard - GamifyCoding&#8482;</title>
 </svelte:head>
 
 <main class="h-dvh w-dvw flex">

@@ -19,6 +19,22 @@ class User < ApplicationRecord
 
   has_many :solutions, foreign_key: "user_email", primary_key: "email"
 
+  def self.all_in_league_group
+    where(group: User.groups[:league])
+  end
+
+  def self.all_in_global_group
+    where(group: User.groups[:global])
+  end
+
+  def league?
+    group == "league"
+  end
+
+  def global?
+    group == "global"
+  end
+
   private
 
   def email_in_pre_authorized_emails

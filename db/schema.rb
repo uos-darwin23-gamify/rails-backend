@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
     t.datetime "end_time"
     t.string "answer"
     t.boolean "answer_correct"
+    t.integer "new_elo"
+    t.integer "elo_change"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,10 +54,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
     t.integer "group", null: false
     t.string "username", null: false
     t.boolean "consent", default: false
+    t.boolean "email_notifications", default: true
+    t.string "email_unsubscribe_token", null: false
+    t.integer "elo", default: 1000, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email_unsubscribe_token"], name: "index_users_on_email_unsubscribe_token", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

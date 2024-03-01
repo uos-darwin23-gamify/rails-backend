@@ -28,12 +28,27 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Timer, ShieldAlert } from 'lucide-svelte';
 
-	export let data: ChallengeOverview[];
+	export let dataIntermediate: ChallengeOverview[];
+
+	const difficultyOrder = {
+		SIMPLE: 0,
+		EASY: 1,
+		MEDIUM: 2,
+		HARD: 3,
+		EXTREME: 4
+	};
+
+	const data = dataIntermediate.sort((a: { difficulty: string }, b: { difficulty: string }) => {
+		const difficultyA = a.difficulty as keyof typeof difficultyOrder;
+		const difficultyB = b.difficulty as keyof typeof difficultyOrder;
+		return difficultyOrder[difficultyA] - difficultyOrder[difficultyB];
+	});
 
 	const table = createTable(readable(data), {
 		select: addSelectedRows(),
 		sort: addSortBy({
 			toggleOrder: ['asc', 'desc']
+			// initialSortKeys: [{ id: 'difficulty', order: 'desc' }]
 		}),
 		page: addPagination(),
 		// filter: addTableFilter({
@@ -149,6 +164,10 @@
 					render: ({ filterValue }) => {
 						return get(filterValue);
 					}
+				},
+				sort: {
+					compareFn: (a: keyof typeof difficultyOrder, b: keyof typeof difficultyOrder) =>
+						difficultyOrder[a] - difficultyOrder[b]
 				}
 			}
 		}),
@@ -287,7 +306,11 @@
 			</Table.Body>
 		</Table.Root>
 	</div>
-	<DataTablePagination {tableModel} />
+	{#if data.length === 0}
+		<p class="text-center text-xl">No Challenges Available</p>
+	{:else}
+		<DataTablePagination {tableModel} />
+	{/if}
 </div>
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
@@ -297,7 +320,7 @@
 				<div class="flex items-center text-base gap-2">
 					<p class="text-center grow">You are about to start this challenge.</p>
 				</div>
-				<div class="flex items-center text-sm gap-2 mt-2">
+				<!-- <div class="flex items-center text-sm gap-2 mt-2">
 					<div class="shrink-0">
 						<Timer class="h-7 w-7 -ml-0.5" />
 					</div>
@@ -305,8 +328,8 @@
 						Challenges are time-based meaning the faster you complete a challenge, the more points
 						you will get.
 					</p>
-				</div>
-				<div class="flex items-center text-sm gap-2">
+				</div> -->
+				<div class="flex items-center text-sm gap-2 mt-2">
 					<div class="shrink-0">
 						<ShieldAlert class="h-7 w-7 -ml-0.5" />
 					</div>
