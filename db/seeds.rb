@@ -860,7 +860,7 @@ question_array: [
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
-  name: "Bit-wise Operators test",
+  name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
