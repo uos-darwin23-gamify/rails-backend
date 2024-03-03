@@ -8,12 +8,7 @@ class Challenge
   field :question_overview, type: String
   field :correct_answer_explanation, type: String
   field :difficulty, type: String
-  field :answers, type: Array
-  field :correct_answers, type: Array
-  field :correct_answer, type: String
-  field :_type, type: String
-  field :first_group, type: String
-  field :second_group, type: String  field :date_when_available, type: Date
+  field :date_when_available, type: Date
 
   K = Constants::ADJUSTMENT_FACTOR_NORMAL
 
