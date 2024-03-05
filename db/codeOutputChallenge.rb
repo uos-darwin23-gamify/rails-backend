@@ -96,7 +96,7 @@ int main() {
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Pointer Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -174,7 +174,7 @@ int main() {
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Pointers",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -346,7 +346,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Pointers",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -444,7 +444,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arrays",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -472,7 +472,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arrays",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -499,7 +499,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arrays",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -621,7 +621,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
+  date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -656,7 +656,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -695,7 +695,7 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
+  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -734,7 +734,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "Arithmetic",
   difficulty: :EASY,
   question_overview: "Analyze the following C code and answer the questions",
@@ -761,7 +761,7 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -788,7 +788,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
+  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: "For Loops",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
@@ -825,7 +825,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -861,7 +861,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -897,7 +897,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -970,7 +970,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Buffer Overflow",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -1126,3 +1126,6 @@ question_array: [
 ],
   correct_answer_regex_array: ["^HellaCaders$"],
   correct_answer_explanation: "Concatenating 'Coders' to 'Hello' results in 'HelloCoders'. The loop then changes 'o' to 'a', resulting in 'HellaCaders'."
+
+)
+end

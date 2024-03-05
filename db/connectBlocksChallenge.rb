@@ -54,7 +54,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Advanced Bit Manipulation",
   difficulty: :MEDIUM,
   question_overview: "Match the bit manipulation operations with their outcomes",
@@ -211,6 +211,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 
 # Mongoid syntax
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Control Statements",
   difficulty: :EASY,
   question_overview: "Match the following control statements with their functionalities.",
@@ -232,6 +233,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Switch Statements",
   difficulty: :MEDIUM,
   question_overview: "Match the components of a switch statement with their descriptions.",
@@ -242,6 +244,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Loops",
   difficulty: :MEDIUM,
   question_overview: "Match the loop types with their descriptions.",
@@ -263,6 +266,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Array and Loop Concepts",
   difficulty: :MEDIUM,
   question_overview: "Match the concepts with their correct descriptions in the context of loops and arrays.",
@@ -273,6 +277,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Function Components",
   difficulty: :MEDIUM,
   question_overview: "Match the function components with their descriptions.",
@@ -294,17 +299,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  name: "Pointer Concepts",
-  difficulty: :HARD,
-  question_overview: "Match the pointer concepts with their correct descriptions.",
-  first_group: ["*", "&", "Pointer declaration", "Pointer arithmetic"],
-  second_group: ["Dereference operator", "Address-of operator", "Specifies a pointer to a type", "Mathematical operations on pointer values"],
-  correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
-  correct_answer_explanation: "* dereferences a pointer, & gets the address, pointer declaration introduces a pointer, pointer arithmetic involves calculations."
-)
-
-
-Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Pointer Concepts",
   difficulty: :HARD,
   question_overview: "Match the following expressions with their correct output assuming int x = 5 and y = 3;",
@@ -315,6 +310,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Macros",
   difficulty: :EASY,
   question_overview: "Match the following #define macros with their correct usage.",
@@ -325,6 +321,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Array Operations",
   difficulty: :MEDIUM,
   question_overview: "Match the array operations with their correct descriptions using the declarion, int arr[10] = {0};.",
@@ -335,6 +332,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Character and String Functions",
   difficulty: :EASY,
   question_overview: "Match the character/string functions with their correct descriptions.",
@@ -345,6 +343,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "File Operations",
   difficulty: :EASY,
   question_overview: "Match the file operation functions with their correct descriptions.",
@@ -366,6 +365,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Pointer Operations",
   difficulty: :HARD,
   question_overview: "Match the following pointer operations with their correct descriptions.",
@@ -374,3 +374,5 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
   correct_answer_explanation: "& signifies the address of something. a = b signifies setting the value of b to a. "
 )
+
+end
