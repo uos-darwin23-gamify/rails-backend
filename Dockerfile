@@ -55,6 +55,11 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# # Install packages needed for deployment
+# RUN apt-get update -qq && \
+#     apt-get install --no-install-recommends -y curl libvips postgresql-client cron && \
+#     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
@@ -66,6 +71,9 @@ USER rails:rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# # Update crontab
+# RUN bundle exec whenever --update-crontab
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000

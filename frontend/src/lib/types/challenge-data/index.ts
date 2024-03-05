@@ -6,7 +6,7 @@ import type { CodeOutputChallengeDataType as Code } from './code';
 type BaseChallengeDataType = {
 	name: string;
 	type: 'ScqChallenge' | 'McqChallenge' | 'ConnectBlocksChallenge' | 'CodeOutputChallenge';
-	difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+	difficulty: 'SIMPLE' | 'EASY' | 'MEDIUM' | 'HARD' | 'EXTREME';
 	question_overview: string;
 	start_time: string;
 	end_time: string;

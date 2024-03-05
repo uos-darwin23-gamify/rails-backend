@@ -13,7 +13,7 @@ module Users
     end
 
     def info
-      return render json: {userType: "Not Authenticated"}, status: :unauthorized unless authenticated?
+      return {message: "Not Authorized"}, status: :unauthorized unless authenticated?
 
       user = current_user
 

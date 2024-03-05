@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Badge } from '$lib/components/ui/badge';
 
-	export let value: 'HARD' | 'MEDIUM' | 'EASY';
+	export let value: 'SIMPLE' | 'EASY' | 'MEDIUM' | 'HARD' | 'EXTREME';
 	let bgColor = '';
 
 	switch (value) {
@@ -13,6 +13,12 @@
 			break;
 		case 'EASY':
 			bgColor = 'bg-green-900';
+			break;
+		case 'SIMPLE':
+			bgColor = 'bg-indigo-900';
+			break;
+		case 'EXTREME':
+			bgColor = 'bg-pink-900';
 			break;
 		default:
 			break;

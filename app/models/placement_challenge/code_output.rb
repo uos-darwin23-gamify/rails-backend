@@ -1,18 +1,26 @@
 # frozen_string_literal: true
 
-class CodeOutputChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class PlacementChallenge::CodeOutput < PlacementChallenge
   field :code, type: String
   field :question_array, type: Array
   field :correct_answer_regex_array, type: Array
 
   validates :code, length: {minimum: 1}
-  validate :validate_correct_answer_regex_length, :validate_correct_answer_regex_content, :validate_question_content
+  validate :validate_correct_answer_regex_length, :validate_correct_answer_regex_content,
+           :validate_question_content
 
   def verify_solution(solution)
-    solution.is_a?(Array) &&
-    solution.all? {|s| s.is_a?(String) } &&
-    solution.length == correct_answer_regex_array.length &&
-    solution.zip(correct_answer_regex_array).all? {|s, regex| Regexp.new(regex).match?(s) }
+    return 0 unless solution.is_a?(Array) && solution.all? {|s| s.is_a?(String) }
+
+    counter = correct_answer_regex_array.length
+
+    solution.zip(correct_answer_regex_array).each do |s, regex|
+      counter -= 1 unless Regexp.new(regex).match?(s)
+    end
+
+    counter.to_f / correct_answer_regex_array.length
   end
 
   private
@@ -50,3 +58,5 @@ class CodeOutputChallenge < Challenge
     hash[:startLineNumber].is_a?(Integer) && hash[:startColumn].is_a?(Integer) && hash[:endLineNumber].is_a?(Integer) && hash[:endColumn].is_a?(Integer)
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
-class ScqChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class Challenge::Scq < Challenge
   field :answers, type: Array
   field :correct_answer, type: Integer
 
   validate :validate_answers, :validate_correct_answer
 
   def verify_solution(solution)
-    solution.is_a?(Integer) && solution == correct_answer
+    return 1 if solution.is_a?(Integer) && solution == correct_answer
+
+    0
   end
 
   private
@@ -32,3 +36,5 @@ class ScqChallenge < Challenge
                "must be an integer greater than or equal to 0 and less than the length of answers array")
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

@@ -32,7 +32,9 @@ Rails.application.routes.draw do
       delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
     end
 
+    get "placement-challenges-finished", to: "users/challenges#placement_challenges_status"
     get "challenges", to: "users/challenges#all_challenges"
+    get "challenges-available", to: "users/challenges#not_all_challenges_finished"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
     post "consent", to: "users/consent#submit_consent"
@@ -42,6 +44,11 @@ Rails.application.routes.draw do
     get "email-notifications-setting", to: "users/settings#email_notifications_setting"
     post "unsubscribe", to: "users/settings#unsubscribe"
     get "unsubscribe", to: "users/settings#unsubscribe"
+
+    scope "leaderboard" do
+      get "avatar-dropdown-info", to: "users/leaderboard#avatar_dropdown_info"
+      get "data", to: "users/leaderboard#leaderboard"
+    end
   end
 
   scope "api/socket-server" do

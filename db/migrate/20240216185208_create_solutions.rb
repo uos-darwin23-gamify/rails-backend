@@ -7,6 +7,8 @@ class CreateSolutions < ActiveRecord::Migration[7.1]
       t.datetime :end_time
       t.string :answer
       t.boolean :answer_correct
+      t.integer :new_elo
+      t.integer :elo_change
 
       t.timestamps
     end

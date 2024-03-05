@@ -1,13 +1,25 @@
 # frozen_string_literal: true
 
-class McqChallenge < Challenge
+# rubocop:disable Style/ClassAndModuleChildren
+
+class Challenge::Mcq < Challenge
   field :answers, type: Array
   field :correct_answers, type: Array
 
   validate :validate_answers, :validate_correct_answers
 
   def verify_solution(solution)
-    solution.is_a?(Array) && solution.all? {|s| s.is_a?(Integer) } && solution.sort == correct_answers.sort
+    return 0 unless solution.is_a?(Array) && solution.all? {|s| s.is_a?(Integer) }
+
+    counter = answers.length
+    (0...answers.length).each do |i|
+      if (correct_answers.include?(i) && solution.exclude?(i)) ||
+         (correct_answers.exclude?(i) && solution.include?(i))
+        counter -= 1
+      end
+    end
+
+    counter.to_f / answers.length
   end
 
   private
@@ -39,3 +51,5 @@ class McqChallenge < Challenge
     end
   end
 end
+
+# rubocop:enable Style/ClassAndModuleChildren

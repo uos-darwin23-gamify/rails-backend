@@ -10,7 +10,11 @@ class Solution < ApplicationRecord
   private
 
   def challenge_exists
-    errors.add(:challenge_oid, "doesn't exist") unless Challenge.exists?(challenge_oid)
+    return if Challenge.exists?(challenge_oid) || PlacementChallenge.exists?(challenge_oid)
+
+    errors.add(:challenge_oid,
+               "doesn't exist")
+
     #   errors.add(:challenge_oid, "doesn't exist") unless Challenge.exists?(oid: challenge_oid)
   end
 
