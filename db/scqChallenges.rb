@@ -1,5 +1,4 @@
-ActiveRecord::Base.transaction do
-  # Clearing existing data is assumed to be handled elsewhere
+
 
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
@@ -433,7 +432,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),,
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Bitwise Operations',
   difficulty: :MEDIUM,
   question_overview: "How do you perform a bitwise AND operation on two variables a and b in C?",
@@ -463,7 +462,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),,
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Pointers',
   difficulty: :HARD,
   question_overview: "How do you access the value stored in the address a pointer points to in C?",
@@ -504,7 +503,7 @@ Challenge::Scq.find_or_create_by!(
 
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
-  name: 'sizeof operator',
+  name: 'sizeof Operator',
   difficulty: :HARD,
   question_overview: "What does the sizeof operator in C return when applied to a pointer type?",
   answers: ["The size of the data type the pointer points to", "The size of the pointer itself", "The size of memory block allocated by the pointer", "The length of the array the pointer points to"],
@@ -514,12 +513,12 @@ Challenge::Scq.find_or_create_by!(
 
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
-  name: 'strtok library',
+  name: 'strtok Library',
   difficulty: :MEDIUM,
   question_overview: "In C, what does the standard library function 'strtok' do?",
   answers: ["Tokenizes a string", "Sorts a string", "Compares two strings", "Copies a string"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "The library 'strtok' has the functionality to tokenize strings."
 )
 
 Challenge::Scq.find_or_create_by!(
@@ -579,7 +578,7 @@ Challenge::Scq.find_or_create_by!(
   question_overview: "Which standard library in C provides mathematical functions?",
   answers: ["math.h", "cmath", "mathlib.h", "stdlib.h"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "'math.h' is the library in C that provides mathematical functions."
 )
 
 Challenge::Scq.find_or_create_by!(
@@ -589,7 +588,6 @@ Challenge::Scq.find_or_create_by!(
   question_overview: "How is a multi-dimensional array accessed in C?",
   answers: ["Using multiple indices", "Using a single index", "Using pointer arithmetic", "Using commas between indices"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "To access a specifc element in a multi-dimensional array, multiple indices are needed to specify which array the element is in, and then the position of the element in the array itself."
 )
 
-end

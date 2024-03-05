@@ -8,7 +8,6 @@
 # #     MovieGenre.find_or_create_by!(name: genre_name)
 # #   end
 
-require_relative 'challenges'
 require_relative 'placement_challenges'
 require_relative 'codeOutputChallenge'
 require_relative 'connectBlocksChallenge'

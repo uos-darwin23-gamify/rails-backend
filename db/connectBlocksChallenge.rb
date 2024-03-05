@@ -375,4 +375,3 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "& signifies the address of something. a = b signifies setting the value of b to a. "
 )
 
-end

@@ -960,7 +960,7 @@ int main() {
 question_array: [
     {question: 'What is the data type of floors in the Building structure?'},
     {question: 'If the user inputs 10 for the number of floors, what value is stored in b.floors?'},
-    {question: 'How many bytes are allocated for material in the Building structure?'}
+    {question: 'How many bytes are allocated for material in the Building structure?'},
     {question: 'What format specifier is used for width in the printf statement?'},
     {question: 'If the width entered is 15.5, what is the output for the width in the printf statement?'}
 ],
@@ -1128,4 +1128,3 @@ question_array: [
   correct_answer_explanation: "Concatenating 'Coders' to 'Hello' results in 'HelloCoders'. The loop then changes 'o' to 'a', resulting in 'HellaCaders'."
 
 )
-end

@@ -170,12 +170,12 @@ Challenge::Mcq.find_or_create_by!(
 
 Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('13/03/2024', '%d/%m/%Y'), #13
-  name: "Invalid Keywords",
+  name: "C Keywords",
   difficulty: :HARD,
   question_overview: "Which of the following are valid C keywords?",
-  answers: ['class', 'interface', 'template', 'package'],
-  correct_answers: [],
-  correct_answer_explanation: "None of the listed options are valid C keywords. They are more commonly associated with other programming languages like Java or C++."
+  answers: ['class', 'interface', 'template', 'break'],
+  correct_answers: [3],
+  correct_answer_explanation: "None of the listed options are valid C keywords, except for 'break' which forces an exit from a loop or a switch statement. They are more commonly associated with other programming languages like Java or C++."
 )
 
 Challenge::Mcq.find_or_create_by!(
@@ -219,7 +219,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y')), #15
+  date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y'), #15
   name: "Compiler Directives",
   difficulty: :MEDIUM,
   question_overview: "Which of the following are valid compiler directives in C?",
@@ -298,4 +298,3 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "Function declarations must specify the return type. Functions cannot return any type; they must return a type that is specified. Definitions must match declarations, and C does not support default parameter values."
 )
 
-end
