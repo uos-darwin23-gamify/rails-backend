@@ -87,7 +87,7 @@
 />
 
 <div class="snap-start relative h-full w-full overflow-hidden flex">
-	<div class="flex grow items-center flex-col">
+	<div class="flex grow items-center flex-col overflow-y-scroll sm:overflow-y-auto">
 		<canvas
 			class="absolute w-full"
 			style={`height: calc(100dvh - ${headerHeight}px);`}
