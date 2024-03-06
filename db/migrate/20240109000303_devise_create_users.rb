@@ -21,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.integer :group, null: false
 
       t.string :username, null: false
-      t.boolean :consent, default: false
+      # t.boolean :consent, default: false
 
       t.boolean :email_notifications, default: true
       t.string :email_unsubscribe_token, null: false
