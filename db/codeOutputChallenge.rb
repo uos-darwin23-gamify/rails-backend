@@ -96,7 +96,7 @@ int main() {
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Pointer Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -174,7 +174,7 @@ int main() {
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Pointers",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -346,7 +346,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Pointers",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -443,9 +443,63 @@ question_array: [
   correct_answer_explanation: "x is modified to equal 35 after the line stated in the question, and the line that alters the value of y has not been executed yet. Therefore this is equal to 35+35, which is 70."
 )
 
+Challenge::CodeOutput.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: "Arrays",
+  difficulty: :MEDIUM,
+  question_overview: "Analyze the following C code and answer the questions",
+  code: %Q{#include <stdio.h>
+
+int main() {
+    int numbers[3] = {5, 10, 15};
+    int *p = numbers;
+    int offset = 1;
+
+    *p = *p + 1;  
+    *(p + offset) = *(p + offset) * 2;  
+    p[offset + 1] = p[offset + 1] - 5;  
+
+    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    
+    return 0;
+}},
+question_array: [
+    {question: 'What is the final value of the first element in the numbers array?'},
+    {question: 'What is the value of the second element in the numbers array after the code execution?'}
+],
+  correct_answer_regex_array: ["^6$","^20$"],
+  correct_answer_explanation: "The first element (*p) is incremented by 1, changing from 5 to 6. The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
+)
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: "Arrays",
+  difficulty: :MEDIUM,
+  question_overview: "Analyze the following C code and answer the questions",
+  code: %Q{#include <stdio.h>
+
+int main() {
+    int numbers[3] = {5, 10, 15};
+    int *p = numbers;
+    int offset = 1;
+
+    *p = *p + 1;  
+    *(p + offset) = *(p + offset) * 2;  
+    p[offset + 1] = p[offset + 1] - 5;  
+
+    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    
+    return 0;
+}},
+question_array: [
+    {question: 'What is the value of the second element in the numbers array after the code execution?'}
+],
+  correct_answer_regex_array: ["^20$"],
+  correct_answer_explanation: "The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
+)
+
+Challenge::CodeOutput.find_or_create_by!(
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arrays",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -567,7 +621,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
+  date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -602,7 +656,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -641,7 +695,7 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
+  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -680,7 +734,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "Arithmetic",
   difficulty: :EASY,
   question_overview: "Analyze the following C code and answer the questions",
@@ -707,7 +761,7 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -734,7 +788,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
+  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: "For Loops",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
@@ -771,7 +825,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -807,7 +861,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -843,7 +897,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "For Loops",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -906,7 +960,7 @@ int main() {
 question_array: [
     {question: 'What is the data type of floors in the Building structure?'},
     {question: 'If the user inputs 10 for the number of floors, what value is stored in b.floors?'},
-    {question: 'How many bytes are allocated for material in the Building structure?'}
+    {question: 'How many bytes are allocated for material in the Building structure?'},
     {question: 'What format specifier is used for width in the printf statement?'},
     {question: 'If the width entered is 15.5, what is the output for the width in the printf statement?'}
 ],
@@ -916,7 +970,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Buffer Overflow",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -1072,3 +1126,5 @@ question_array: [
 ],
   correct_answer_regex_array: ["^HellaCaders$"],
   correct_answer_explanation: "Concatenating 'Coders' to 'Hello' results in 'HelloCoders'. The loop then changes 'o' to 'a', resulting in 'HellaCaders'."
+
+)

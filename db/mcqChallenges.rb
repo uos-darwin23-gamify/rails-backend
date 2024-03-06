@@ -49,7 +49,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: ,
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Valid Integer Types",
   difficulty: :EASY,
   question_overview: "Which of the following are valid integer types in C?",
@@ -109,7 +109,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+  date_when_available: Date.strptime('14/03/2024', '%d/%m/%Y'), #14
   name: "Casting in C",
   difficulty: :HARD,
   question_overview: "Which of the following is a correct way to perform casting in C?",
@@ -170,16 +170,16 @@ Challenge::Mcq.find_or_create_by!(
 
 Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('13/03/2024', '%d/%m/%Y'), #13
-  name: "Invalid Keywords",
+  name: "C Keywords",
   difficulty: :HARD,
   question_overview: "Which of the following are valid C keywords?",
-  answers: ['class', 'interface', 'template', 'package'],
-  correct_answers: [],
-  correct_answer_explanation: "None of the listed options are valid C keywords. They are more commonly associated with other programming languages like Java or C++."
+  answers: ['class', 'interface', 'template', 'break'],
+  correct_answers: [3],
+  correct_answer_explanation: "None of the listed options are valid C keywords, except for 'break' which forces an exit from a loop or a switch statement. They are more commonly associated with other programming languages like Java or C++."
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
+  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
   name: "Standard Library Functions",
   difficulty: :MEDIUM,
   question_overview: "Which of the following are standard library functions for dynamic memory management in C?",
@@ -189,7 +189,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('04/04/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Operating System Interaction",
   difficulty: :MEDIUM,
   question_overview: "Which of the following functions are used to interact with the operating system in C?",
@@ -209,7 +209,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('14/03/2024', '%d/%m/%Y'), #14
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
   name: "File Handling Functions",
   difficulty: :HARD,
   question_overview: "Which of the following functions are used in file handling in C?",
@@ -219,7 +219,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y')), #15
+  date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y'), #15
   name: "Compiler Directives",
   difficulty: :MEDIUM,
   question_overview: "Which of the following are valid compiler directives in C?",
@@ -229,7 +229,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: ,
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Variable Scope",
   difficulty: :MEDIUM,
   question_overview: "Which of the following scopes are valid in C?",
@@ -289,7 +289,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('20/04/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Function Declaration and Definition",
   difficulty: :MEDIUM,
   question_overview: "Which of the following statements are true regarding functions in C?",
@@ -297,3 +297,4 @@ Challenge::Mcq.find_or_create_by!(
   correct_answers: [0],
   correct_answer_explanation: "Function declarations must specify the return type. Functions cannot return any type; they must return a type that is specified. Definitions must match declarations, and C does not support default parameter values."
 )
+

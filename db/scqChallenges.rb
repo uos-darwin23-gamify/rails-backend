@@ -1,5 +1,4 @@
-ActiveRecord::Base.transaction do
-  # Clearing existing data is assumed to be handled elsewhere
+
 
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
@@ -32,7 +31,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Input Output',
   difficulty: :MEDIUM,
   question_overview: "Which directive is used to include standard input and output facilities in a C program?",
@@ -71,18 +70,8 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "The '/' operator is used for division, dividing one number by another."
 )
 
-Challenge::Scq.find_or_create_by!(    THIS SHOULD BE A Multiple choice question
-  date_when_available: '',
-  name: 'Constants',
-  difficulty: :MEDIUM,
-  question_overview: "What keyword is used to define a constant in C?",
-  answers: ["#define", "const", "constant", "define"],
-  correct_answer: 0,
-  correct_answer_explanation: "#define' is a preprocessor directive used for defining macros or constants in C."
-)
-
 Challenge::Scq.find_or_create_by!( 
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Loops',
   difficulty: :MEDIUM,
   question_overview: "Which loop executes at least once regardless of the condition?", 
@@ -112,7 +101,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Casting',
   difficulty: :MEDIUM,
   question_overview: "Which function converts a string to an integer?",
@@ -122,7 +111,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Operators',
   difficulty: :MEDIUM,
   question_overview: "What does the '&&' operator represent?",
@@ -161,15 +150,6 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "Memory for an array can be dynamically allocated using the malloc function, which allows for flexible array sizes at runtime."
 )
 
-Challenge::Scq.find_or_create_by!( THIS IS A MULTIPLE CHOICE - int arr[10]
-  date_when_available: '',
-  name: 'Arrays',
-  difficulty: :MEDIUM,
-  question_overview: "Which of the following is a correct way to initialize an array of 10 integers?",
-  answers: ["int arr[10] = {0}", "int arr[] = 10", "int arr[10]", "10 int arr[]"],
-  correct_answer: 0,
-  correct_answer_explanation: "An array can be initialized with values at declaration time using curly braces {}, listing all elements within."
-)
 
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('12/03/2024', '%d/%m/%Y'), #12
@@ -202,7 +182,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Arrays',
   difficulty: :MEDIUM,
   question_overview: "How do you read a string into a character array?",
@@ -211,18 +191,8 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "A string can be read into a character array using the scanf function with the %s format specifier."
 )
 
-Challenge::Scq.find_or_create_by!( IS THIS CORRECT WHAT
-  date_when_available: '',
-  name: 'Operators',
-  difficulty: :MEDIUM,
-  question_overview: "What is the purpose of the 'sizeof' operator?",
-  answers: ["Change memory size of variable", "Compute size of data type", "Allocate memory size", "Define variable size"],
-  correct_answer: 1,
-  correct_answer_explanation: "The 'sizeof' operator is used to determine the size, in bytes, of a data type or variable."
-)
-
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('13/03/2024', '%d/%m/%Y'), #13
+  date_when_available: Date.strptime('22/03/2024', '%d/%m/%Y'), #22
   name: 'Files',
   difficulty: :MEDIUM,
   question_overview: "How do you correctly open a file for only writing?",
@@ -252,7 +222,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('22/03/2024', '%d/%m/%Y'), #22
+  date_when_available: Date.strptime('13/03/2024', '%d/%m/%Y'), #13
   name: 'Switch Statement',
   difficulty: :MEDIUM,
   question_overview: "In which scenario do you use 'switch' statement?",
@@ -262,7 +232,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!( 
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Arrays',
   difficulty: :MEDIUM,
   question_overview: "How is a multi-dimensional array declared in C?",
@@ -272,7 +242,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Pointers',
   difficulty: :EASY,
   question_overview: "What is the correct syntax for a pointer declaration?",
@@ -282,7 +252,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Loops',
   difficulty: :MEDIUM,
   question_overview: "How do you make an infinite loop using 'for'?",
@@ -292,7 +262,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Memory',
   difficulty: :HARD,
   question_overview: "What is a characteristic of dynamic memory allocation?",
@@ -302,7 +272,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Operator',
   difficulty: :EASY,
   question_overview: "Which operator is used for referencing a variable address?",
@@ -312,7 +282,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Strings',
   difficulty: :MEDIUM,
   question_overview: "How to concatenate two strings in C?",
@@ -362,8 +332,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'String copying',
   difficulty: :MEDIUM,
   question_overview: "What C library function copies a string?",
   answers: ["strcpy()", "copyStr()", "strCpy()", "cloneString()"],
@@ -389,16 +359,6 @@ Challenge::Scq.find_or_create_by!(
   answers: ["sqrt()", "pow()", "squareRoot()", "root()"],
   correct_answer: 0,
   correct_answer_explanation: "The sqrt function from the math.h library calculates the square root of a given number."
-)
-
-Challenge::Scq.find_or_create_by!( THIS IS A MULTIPLE CHOICE QUESTION that is HARD this is == === != 
-  date_when_available: '',
-  name: '',
-  difficulty: :HARD,
-  question_overview: "What operator checks equality between two values?",
-  answers: ["==", "=", "===", "!="],
-  correct_answer: 0,
-  correct_answer_explanation: "The '==' operator checks for equality between two values, returning true if they are equal."
 )
 
 Challenge::Scq.find_or_create_by!(
@@ -442,8 +402,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Header files',
   difficulty: :MEDIUM,
   question_overview: "What header file provides functions for string manipulation?",
   answers: ["string.h", "strings.h", "stdio.h", "strlib.h"],
@@ -453,7 +413,7 @@ Challenge::Scq.find_or_create_by!(
 
 Challenge::Scq.find_or_create_by!(
   date_when_available:  Date.strptime('24/03/2024', '%d/%m/%Y'), #24
-  name: '',
+  name: 'Structure definition',
   difficulty: :SIMPLE,
   question_overview: "How is a structure defined in C?",
   answers: ["struct MyStruct {}", "define struct MyStruct {}", "class MyStruct {}", "structure MyStruct {};"],
@@ -462,8 +422,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Header files',
   difficulty: :MEDIUM,
   question_overview: "In C, which header file is required to use the 'qsort' function?",
   answers: ["stdlib.h", "stdio.h", "math.h", "string.h"],
@@ -472,8 +432,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Bitwise Operations',
   difficulty: :MEDIUM,
   question_overview: "How do you perform a bitwise AND operation on two variables a and b in C?",
   answers: ["a & b", "a && b", "a and b", "AND(a, b)"],
@@ -482,8 +442,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!( 
-  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
-  name: '',
+  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
+  name: 'File reading and writing',
   difficulty: :HARD,
   question_overview: "Which function is used to open a file for both reading and writing in C?",
   answers: ["fopen() with mode 'r+'", "fopen() with mode 'w'", "fopen() with mode 'a'", "open() with mode 'rw'"],
@@ -492,8 +452,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Casting',
   difficulty: :MEDIUM,
   question_overview: "What is the result of casting a float to an int in C when the float is 3.9?",
   answers: ["3", "4", "3.0", "4.0"],
@@ -502,8 +462,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Pointers',
   difficulty: :HARD,
   question_overview: "How do you access the value stored in the address a pointer points to in C?",
   answers: ["&ptr", "*ptr", "ptr*", "ptr&"],
@@ -512,8 +472,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Bitwise operators',
   difficulty: :HARD,
   question_overview: "Which bitwise operator is used for shifting bits to the left, filling the right with zeros?",
   answers: ["<<", ">>", "&<<", "|<<"],
@@ -521,19 +481,9 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "The '<<' operator shifts bits to the left, filling the right with zeros."
 )
 
-Challenge::Scq.find_or_create_by!( THIS IS AGAIN MULTIPLE CHOICE TECHNIALLY CAN USE INCLUDE AS WELl
-  date_when_available: '',
-  name: '',
-  difficulty: :HARD,
-  question_overview: "In a multi-file C program, how are functions defined in one file made available in another?",
-  answers: ["Using #include directive", "Using extern keyword", "By redefining the functions", "Using #define directive"],
-  correct_answer: 1,
-  correct_answer_explanation: "The extern keyword is used before a function declaration in one file to make it available in another file."
-)
-
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Bitwise operators',
   difficulty: :HARD,
   question_overview: "Which operator is used to invert all bits in an integer variable 'a' in C?",
   answers: ["~a", "!a", "=-a", "^a"],
@@ -542,8 +492,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Reading files',
   difficulty: :HARD,
   question_overview: "How do you read a string from a file until a newline is encountered using fgets in C?",
   answers: ["fgets(str, MAX, file)", "fgets(file, str, MAX)", "fgets(MAX, file, str)", "fgets(file, MAX, str)"],
@@ -552,8 +502,8 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'sizeof Operator',
   difficulty: :HARD,
   question_overview: "What does the sizeof operator in C return when applied to a pointer type?",
   answers: ["The size of the data type the pointer points to", "The size of the pointer itself", "The size of memory block allocated by the pointer", "The length of the array the pointer points to"],
@@ -562,13 +512,13 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'strtok Library',
   difficulty: :MEDIUM,
   question_overview: "In C, what does the standard library function 'strtok' do?",
   answers: ["Tokenizes a string", "Sorts a string", "Compares two strings", "Copies a string"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "The library 'strtok' has the functionality to tokenize strings."
 )
 
 Challenge::Scq.find_or_create_by!(
@@ -622,23 +572,22 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'C Libraries',
   difficulty: :MEDIUM,
   question_overview: "Which standard library in C provides mathematical functions?",
   answers: ["math.h", "cmath", "mathlib.h", "stdlib.h"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "'math.h' is the library in C that provides mathematical functions."
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: '',
-  name: '',
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  name: 'Multi-dimensional arrays',
   difficulty: :MEDIUM,
   question_overview: "How is a multi-dimensional array accessed in C?",
   answers: ["Using multiple indices", "Using a single index", "Using pointer arithmetic", "Using commas between indices"],
   correct_answer: 0,
-  correct_answer_explanation: ""
+  correct_answer_explanation: "To access a specifc element in a multi-dimensional array, multiple indices are needed to specify which array the element is in, and then the position of the element in the array itself."
 )
 
-end
