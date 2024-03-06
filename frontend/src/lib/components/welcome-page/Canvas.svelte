@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { createNoise3D } from 'simplex-noise';
 	import TypewriterEffectSmooth from '$lib/components/welcome-page/TypewriterEffectSmooth.svelte';
+	import Slide2 from '$lib/components/welcome-page/Slide2.svelte';
 
 	let speed: 'slow' | 'fast' = 'slow';
 	let waveOpacity = 0.5;
@@ -94,9 +95,10 @@
 		></canvas>
 		<div class="flex flex-col justify-center items-center grow relative">
 			<TypewriterEffectSmooth
-				word={{ text: 'Welcome Page', className: 'text-xl sm:text-4xl' }}
+				word={{ text: 'Redefining C Teaching', className: 'text-xl sm:text-4xl' }}
 				className="mx-2"
 			/>
 		</div>
+		<Slide2 />
 	</div>
 </div>
