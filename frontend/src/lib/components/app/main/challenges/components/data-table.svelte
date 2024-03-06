@@ -307,7 +307,7 @@
 		</Table.Root>
 	</div>
 	{#if data.length === 0}
-		<p class="text-center text-xl">No Challenges Available</p>
+		<p class="text-center text-xl">No Challenges Available...</p>
 	{:else}
 		<DataTablePagination {tableModel} />
 	{/if}
