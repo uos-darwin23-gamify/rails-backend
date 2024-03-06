@@ -229,7 +229,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('05/04/2024', '%d/%m/%Y'),
+  date_when_available: ,
   name: "Variable Scope",
   difficulty: :MEDIUM,
   question_overview: "Which of the following scopes are valid in C?",
@@ -258,7 +258,7 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "`printf` and `scanf` are used for output and input in C, respectively. `cin` and `cout` are C++ stream objects, not C functions."
 )
 
-Challenge::Mcq.find_or_create_by!(
+Challenge::Mcq.find_or_create_by!(a
   date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "Operator Evaluation",
   difficulty: :MEDIUM,

@@ -11,8 +11,7 @@ PlacementChallenge::Scq.find_or_create_by!(
 )
 
 
-PlacementChallenge::Mcq.find_or_create_by!( THIS IS DEFFO A MULTIPLE CHOICE 
-  date_when_available: '',
+PlacementChallenge::Mcq.find_or_create_by!( 
   name: 'Variables',
   difficulty: :EASY,
   question_overview: "How to declare a floating-point variable named 'temp'?",

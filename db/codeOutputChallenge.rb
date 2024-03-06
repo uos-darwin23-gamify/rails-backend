@@ -443,60 +443,6 @@ question_array: [
   correct_answer_explanation: "x is modified to equal 35 after the line stated in the question, and the line that alters the value of y has not been executed yet. Therefore this is equal to 35+35, which is 70."
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
-  name: "Arrays",
-  difficulty: :MEDIUM,
-  question_overview: "Analyze the following C code and answer the questions",
-  code: %Q{#include <stdio.h>
-
-int main() {
-    int numbers[3] = {5, 10, 15};
-    int *p = numbers;
-    int offset = 1;
-
-    *p = *p + 1;  
-    *(p + offset) = *(p + offset) * 2;  
-    p[offset + 1] = p[offset + 1] - 5;  
-
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
-    
-    return 0;
-}},
-question_array: [
-    {question: 'What is the final value of the first element in the numbers array?'},
-    {question: 'What is the value of the second element in the numbers array after the code execution?'}
-],
-  correct_answer_regex_array: ["^6$","^20$"],
-  correct_answer_explanation: "The first element (*p) is incremented by 1, changing from 5 to 6. The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
-)
-
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),
-  name: "Arrays",
-  difficulty: :MEDIUM,
-  question_overview: "Analyze the following C code and answer the questions",
-  code: %Q{#include <stdio.h>
-
-int main() {
-    int numbers[3] = {5, 10, 15};
-    int *p = numbers;
-    int offset = 1;
-
-    *p = *p + 1;  
-    *(p + offset) = *(p + offset) * 2;  
-    p[offset + 1] = p[offset + 1] - 5;  
-
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
-    
-    return 0;
-}},
-question_array: [
-    {question: 'What is the value of the second element in the numbers array after the code execution?'}
-],
-  correct_answer_regex_array: ["^20$"],
-  correct_answer_explanation: "The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
-)
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('03/03/2024', '%d/%m/%Y'),

@@ -181,16 +181,6 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "The '.' (dot) operator is used to access a member of a structure variable."
 )
 
-Challenge::Scq.find_or_create_by!( THIS IS DEFFO A MULTIPLE CHOICE 
-  date_when_available: '',
-  name: 'Variables',
-  difficulty: :EASY,
-  question_overview: "How to declare a floating-point variable named 'temp'?",
-  answers: ["float temp;", "int temp;", "double temp;", "char temp;"],
-  correct_answer: 0,
-  correct_answer_explanation: "A floating-point variable can be declared using the 'float' or 'double' keyword followed by the variable name."
-)
-
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
   name: 'Outputs',

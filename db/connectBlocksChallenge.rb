@@ -231,15 +231,6 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "Explicit casting examples for different types."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
-  name: "Switch Statements",
-  difficulty: :MEDIUM,
-  question_overview: "Match the components of a switch statement with their descriptions.",
-  first_group: ["switch", "case", "break", "default"],
-  second_group: ["Starts the switch statement", "Represents a branch based on a value", "Exits the switch statement", "Executes if no case matches"],
-  correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
-  correct_answer_explanation: "switch to initiate, case for value-based branches, break to exit, default for no match."
-)
 
 Challenge::ConnectBlocks.find_or_create_by!(
   name: "Loops",
@@ -314,15 +305,6 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "17 results from multiplying x and y and adding 2. 9 is the result of incrementing x before adding y. 1 is the result of dividing x by the incremented value of y. 2 is the result of x modulo the decremented value of y."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
-  name: "Macros",
-  difficulty: :EASY,
-  question_overview: "Match the following #define macros with their correct usage.",
-  first_group: ["#define PI 3.14", "#define SQUARE(x) ((x) * (x))", "#define MAX(a, b) ((a) > (b) ? (a) : (b))", "#define CHECK_ZERO(x) ((x) == 0 ? 1 : 0)"],
-  second_group: ["Used to define a constant for PI", "Used to define a macro for squaring a number", "Used to define a macro to find the maximum of two numbers", "Used to define a macro to check if a number is zero"],
-  correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
-  correct_answer_explanation: "PI is defined as 3.14, SQUARE computes the square of x, MAX returns the maximum of a and b, CHECK_ZERO checks if x is zero."
-)
 
 Challenge::ConnectBlocks.find_or_create_by!(
   name: "Array Operations",
