@@ -33,7 +33,7 @@ class NotificationMailer < ApplicationMailer
             else
               user_league_all = leaderboard.filter { |entry| entry["league"] == user_league }
               user_position = user_league_all.find_index { |entry| entry["username"] == user.username } + 1
-      
+              @total_players_in_league = user_league_all.size
               @currentLeague = user_league.capitalize
               @currentPos = user_position
               @leaderboard = "league"
