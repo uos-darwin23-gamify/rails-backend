@@ -6,6 +6,8 @@
 	import { socketConnection } from '$lib/stores';
 	import { Toaster } from '$lib/components/ui/sonner';
 
+	$: $socketConnection;
+
 	onMount(async () => {
 		await authenticated.verify();
 		socketConnection.reset();

@@ -101,8 +101,34 @@
 	import * as Popover from '$lib/components/ui/popover';
 	import { Info } from 'lucide-svelte';
 
-	export let data: ConnectBlocksChallengeDataType;
+	export let dataIntermediate: ConnectBlocksChallengeDataType;
 	export let solutionState: ConnectBlocksChallengeSolutionType;
+	let data: ConnectBlocksChallengeDataType;
+
+	let indicesFirstGroup: number[] = Array.from(
+		{ length: dataIntermediate.first_group.length },
+		(_, i) => i
+	);
+	let indicesSecondGroup: number[] = Array.from(
+		{ length: dataIntermediate.second_group.length },
+		(_, i) => i
+	);
+
+	// Fisher-Yates algorithm - uniform probability distribution
+	for (let i = indicesFirstGroup.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[indicesFirstGroup[i], indicesFirstGroup[j]] = [indicesFirstGroup[j], indicesFirstGroup[i]];
+	}
+
+	for (let i = indicesSecondGroup.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[indicesSecondGroup[i], indicesSecondGroup[j]] = [indicesSecondGroup[j], indicesSecondGroup[i]];
+	}
+
+	data = { ...dataIntermediate };
+
+	data.first_group = indicesFirstGroup.map((index) => dataIntermediate.first_group[index]);
+	data.second_group = indicesSecondGroup.map((index) => dataIntermediate.second_group[index]);
 
 	const groupToBlockIntermediate = (group: string[], groupId: number) =>
 		group.map((block, index) => ({ content: block, group: groupId, groupIndex: index }));
@@ -161,10 +187,18 @@
 				partial.push([firstBlock.groupIndex, secondBlock.groupIndex]);
 			});
 
-			const uniquePartial = Array.from(
+			const uniquePartialIntermediate = Array.from(
 				new Set(partial.map((value) => JSON.stringify(value))),
 				(json) => JSON.parse(json)
 			);
+
+			const uniquePartial: number[][] = [];
+			uniquePartialIntermediate.forEach(([first, second]) => {
+				const firstOriginal = indicesFirstGroup[first];
+				const secondOriginal = indicesSecondGroup[second];
+
+				uniquePartial.push([firstOriginal, secondOriginal]);
+			});
 
 			solutionState = uniquePartial;
 		} else {
@@ -232,7 +266,9 @@
 		});
 
 		if (lock) {
-			solutionState?.forEach(([firstIndex, secondIndex]) => {
+			solutionState?.forEach(([first, second]) => {
+				const firstIndex = indicesFirstGroup.findIndex((value) => value === first);
+				const secondIndex = indicesSecondGroup.findIndex((value) => value === second);
 				const firstBlock = blocks.find(
 					({ group, groupIndex }) => group === 1 && groupIndex === firstIndex
 				)!;

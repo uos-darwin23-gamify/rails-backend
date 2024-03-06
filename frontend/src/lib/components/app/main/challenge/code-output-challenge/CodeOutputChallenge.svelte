@@ -63,6 +63,24 @@
 			editor.dispose();
 		}
 	});
+
+	let indices: number[] = Array.from({ length: data.question_array.length }, (_, i) => i);
+
+	// Fisher-Yates algorithm - uniform probability distribution
+	onMount(() => {
+		for (let i = indices.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[indices[i], indices[j]] = [indices[j], indices[i]];
+		}
+	});
+
+	const castSelect = (select: any) =>
+		select as {
+			startLineNumber: number;
+			startColumn: number;
+			endLineNumber: number;
+			endColumn: number;
+		};
 </script>
 
 <!-- <svelte:window on:resize={() => editor?.layout()} /> -->
@@ -81,28 +99,35 @@
 	</div>
 	<div class="flex grow basis-2/5 mt-4 overflow-x-auto w-full shrink-0 overflow-y-hidden">
 		<div class="flex flex-col grow gap-4">
-			{#each data.question_array as item, index (index)}
+			{#each data.question_array as _, index (index)}
 				<div class="flex gap-4">
 					<div class="flex items-center">
 						<div class="grow sm:text-sm min-w-44 text-xs text-left">
 							{#if atLeastOneSelect}
-								{#if item.select}
+								{#if data.question_array[indices[index]].select}
 									<Button
 										class="text-wrap h-fit flex"
 										variant="outline"
 										on:click={() => {
-											if (item.select) {
-												editor?.setSelection(item.select);
-												editor?.revealLine(item.select.startLineNumber);
+											if (data.question_array[indices[index]].select) {
+												editor?.setSelection(
+													castSelect(data.question_array[indices[index]].select)
+												);
+												editor?.revealLine(
+													castSelect(data.question_array[indices[index]].select).startLineNumber
+												);
 												editorContainer?.scrollIntoView({ behavior: 'smooth' });
 											}
-										}}><p class="sm:text-sm text-xs text-left">{item.question}</p></Button
+										}}
+										><p class="sm:text-sm text-xs text-left">
+											{data.question_array[indices[index]].question}
+										</p></Button
 									>
 								{:else}
-									<p class="px-4">{item.question}</p>
+									<p class="px-4">{data.question_array[indices[index]].question}</p>
 								{/if}
 							{:else}
-								<p>{item.question}</p>
+								<p>{data.question_array[indices[index]].question}</p>
 							{/if}
 						</div>
 					</div>
@@ -110,23 +135,27 @@
 						{#if index === data.question_array.length - 1 && index === 0}
 							<Input
 								disabled={lock}
-								bind:value={answers[index]}
+								bind:value={answers[indices[index]]}
 								class="focus-visible:mr-1 focus-visible:mb-1 focus-visible:mt-1"
 							/>
 						{:else if index === data.question_array.length - 1}
 							<Input
 								disabled={lock}
-								bind:value={answers[index]}
+								bind:value={answers[indices[index]]}
 								class="focus-visible:mr-1 focus-visible:mb-1"
 							/>
 						{:else if index === 0}
 							<Input
 								disabled={lock}
-								bind:value={answers[index]}
+								bind:value={answers[indices[index]]}
 								class="focus-visible:mr-1 focus-visible:mt-1"
 							/>
 						{:else}
-							<Input disabled={lock} bind:value={answers[index]} class="focus-visible:mr-1" />
+							<Input
+								disabled={lock}
+								bind:value={answers[indices[index]]}
+								class="focus-visible:mr-1"
+							/>
 						{/if}
 					</div>
 				</div>
