@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Consent - GamifyCoding&#8482;</title>
+	<title>Consent</title>
 </svelte:head>
 
 <ConsentForm />

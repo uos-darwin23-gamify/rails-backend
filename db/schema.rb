@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_220922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "username", null: false
+    t.integer "group", null: false
+    t.datetime "start_time", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "end_time"
+    t.integer "session_duration_seconds"
+    t.integer "elo_session_start", null: false
+    t.integer "elo_session_end"
+    t.boolean "placement_challenges_finished_session_start", null: false
+    t.boolean "placement_challenges_finished_session_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pre_authorized_emails", force: :cascade do |t|
     t.string "email", null: false

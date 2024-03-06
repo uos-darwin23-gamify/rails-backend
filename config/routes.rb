@@ -53,5 +53,7 @@ Rails.application.routes.draw do
 
   scope "api/socket-server" do
     post "/auth/status", to: "socket_server/authentication_status#index"
+    post "/activity/connect", to: "socket_server/activity#connect"
+    post "/activity/disconnect", to: "socket_server/activity#disconnect"
   end
 end

@@ -73,7 +73,7 @@
 </script>
 
 <svelte:head>
-	<title>{pageTitle} - GamifyCoding&#8482;</title>
+	<title>{pageTitle}</title>
 </svelte:head>
 
 <Header bind:menuClosed />
