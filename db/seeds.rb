@@ -9,10 +9,10 @@
 # #   end
 
 require_relative 'placement_challenges'
-#require_relative 'codeOutputChallenge'
-#require_relative 'connectBlocksChallenge'
-#require_relative 'mcqChallenges'
-#crequire_relative 'scqChallenges'
+require_relative 'codeOutputChallenge'
+require_relative 'connectBlocksChallenge'
+require_relative 'mcqChallenges'
+require_relative 'scqChallenges'
 
 # Active Record syntax
 PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
