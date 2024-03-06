@@ -1,5 +1,3 @@
-
-
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: 'Main Function',
@@ -590,4 +588,3 @@ Challenge::Scq.find_or_create_by!(
   correct_answer: 0,
   correct_answer_explanation: "To access a specifc element in a multi-dimensional array, multiple indices are needed to specify which array the element is in, and then the position of the element in the array itself."
 )
-

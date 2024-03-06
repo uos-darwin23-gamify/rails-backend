@@ -1,4 +1,3 @@
-
 # CodeOutputChallenge seed data
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
@@ -693,7 +692,6 @@ question_array: [
   correct_answer_explanation: "The result of the bit-wise AND operation (4) is written to the file. The file writing operation occurs after the bit-wise AND operation, not the OR operation. The value written to the file is the result of the AND operation, not the subsequent OR operation. "
 )
 
-
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
   name: "Bit-wise Operators",
@@ -758,7 +756,6 @@ question_array: [
   correct_answer_regex_array: ["^10$", "^20$"],
   correct_answer_explanation: "num1 is initialized to 10 at the beginning of the main function, along with num2 being initialized to 20."
 )
-
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
@@ -1032,7 +1029,6 @@ question_array: [
   Since c is 'B' and the loop prints it 5 times, the output is five 'B' characters separated by spaces. If num is 3, the condition num > 3 is false, so c remains 'A'. The loop executes three times, printing 'A A A '. This combines concepts of conditionals and loops. "
 )
 
-
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('24/03/2024', '%d/%m/%Y'), #24
   name: "For Loops",
@@ -1094,7 +1090,6 @@ question_array: [
   correct_answer_regex_array: ["^HelloWorld$", "^10$", "^10$"],
   correct_answer_explanation: "strcat concatenates str2 to str1, resulting in 'HelloWorld'. After concatenation, str1 contains 10 characters, which is determined by strlen. The loop iterates equal to the length of str1, which is 10."
 )
-
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23

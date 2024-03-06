@@ -15,5 +15,4 @@ require_relative 'mcqChallenges'
 require_relative 'scqChallenges'
 
 # Active Record syntax
-PreAuthorizedEmail.find_or_create_by!(:email => "admin@test.com", group: PreAuthorizedEmail.groups["admin_group"])
-
+PreAuthorizedEmail.find_or_create_by!(:email => "admin@gamifycoding.me", group: PreAuthorizedEmail.groups["admin_group"])

@@ -1,4 +1,3 @@
-
 # Mongoid syntax
 # ScqChallenge seed data
 PlacementChallenge::Scq.find_or_create_by!(
@@ -9,7 +8,6 @@ PlacementChallenge::Scq.find_or_create_by!(
   correct_answer: 2,
   correct_answer_explanation: "The 'int main() {}' syntax is standard in C for defining the main function that marks the entry point of the program."
 )
-
 
 PlacementChallenge::Mcq.find_or_create_by!(
   name: 'Variables',
@@ -60,7 +58,6 @@ PlacementChallenge::ConnectBlocks.find_or_create_by!(
   correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
   correct_answer_explanation: "PI is defined as 3.14, SQUARE computes the square of x, MAX returns the maximum of a and b, CHECK_ZERO checks if x is zero."
 )
-
 
 # CodeOutputChallenge seed data
 PlacementChallenge::CodeOutput.find_or_create_by!(
@@ -144,7 +141,6 @@ int main() {
   correct_answer_explanation: "The program writes the final value of sum to a file named output.txt, with the content 'Final sum is 20'."
 )
 
-
 PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "Arrays",
   difficulty: :EXTREME,
@@ -171,7 +167,6 @@ question_array: [
   correct_answer_regex_array: ["^6$","^20$"],
   correct_answer_explanation: "The first element (*p) is incremented by 1, changing from 5 to 6. The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
 )
-
 
 PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "String Concatenation",

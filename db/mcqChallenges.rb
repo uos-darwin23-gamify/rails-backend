@@ -258,7 +258,7 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "`printf` and `scanf` are used for output and input in C, respectively. `cin` and `cout` are C++ stream objects, not C functions."
 )
 
-Challenge::Mcq.find_or_create_by!(a
+Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "Operator Evaluation",
   difficulty: :MEDIUM,
@@ -297,4 +297,3 @@ Challenge::Mcq.find_or_create_by!(
   correct_answers: [0],
   correct_answer_explanation: "Function declarations must specify the return type. Functions cannot return any type; they must return a type that is specified. Definitions must match declarations, and C does not support default parameter values."
 )
-
