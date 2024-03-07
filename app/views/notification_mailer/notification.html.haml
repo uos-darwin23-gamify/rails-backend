@@ -100,7 +100,7 @@
                 - if !@placement_challenges_finished
                   %p You are not currently placed on the leaderboard. Complete the placement challenges to get a leaderboard placement.
                 - else
-                  %p Your current elo is: #{@elo},
+                  %p Your current score is: #{@elo},
                   - if @leaderboard == "league"
                     %p You are in the #{@currentLeague} League.
                     %p Your position is #{@currentPos} out of #{@total_players_in_league} in your league!

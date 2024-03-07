@@ -66,7 +66,7 @@
 								<Card.Description>Global Leaderboard</Card.Description>
 							{/if}
 							<div class="flex flex-col space-y-1.5">
-								<Label>ELO:</Label>
+								<Label>Score:</Label>
 								<p class="text-xs leading-none text-muted-foreground">
 									{stats.elo}
 								</p>

@@ -102,7 +102,7 @@
 							<div class="flex flex-col space-y-1">
 								<p class="text-sm font-medium leading-none">Statistics</p>
 								<p class="text-xs leading-none text-muted-foreground">
-									ELO:<br />{stats.elo}
+									Score:<br />{stats.elo}
 								</p>
 								<p class="text-xs leading-none text-muted-foreground">
 									League:<br />{stats.user_league}

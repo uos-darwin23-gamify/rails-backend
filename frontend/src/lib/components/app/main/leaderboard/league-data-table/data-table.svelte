@@ -62,7 +62,7 @@
 		}),
 		table.column({
 			accessor: 'elo',
-			header: 'ELO',
+			header: 'Score',
 			id: 'elo',
 			cell: ({ value, row }) => {
 				if (row.isData()) {
