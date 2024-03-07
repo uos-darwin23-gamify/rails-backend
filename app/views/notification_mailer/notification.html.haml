@@ -88,8 +88,6 @@
   %body
     %table.outer{ "width" => "100%", "height" => "100%" }
       %tr
-        %td.spacer
-          &nbsp;
         %td.padding
           %table.inner
             %tr
@@ -100,10 +98,7 @@
                 %p.align-center Daily Notifcation:
                 %p Hello @#{@username},
                 - if !@placement_challenges_finished
-                  - if @leaderboard == "league"
-                    %p You are not currently placed in a league. Complete the placement challenges to get a league placement.
-                  - else
-                    %p You are not currently placed on the global leaderboard. Complete the placement challenges to get a global leaderboard placement.
+                  %p You are not currently placed on the leaderboard. Complete the placement challenges to get a leaderboard placement.
                 - else
                   %p Your current elo is: #{@elo},
                   - if @leaderboard == "league"
@@ -138,9 +133,9 @@
                             %td= "Code Output Question" 
                           %td= challenge.difficulty
                   %p
-                    %a.button{ href: 'gamifycoding.me/app/challenges' } Complete your Challenges
+                    %a.button{ href: 'https://gamifycoding.me/app/challenges', style: 'color: white;' } Complete your Challenges
                 %br
                 %p.sign-off Best regards,
                 %p.sign-off GamifyCoding™
                 %p.align-center.last-element.muted.unsubscribe
-                  %a{ "href" => "gamifycoding.me/api/unsubscribe?token=" + @unsubscribe_token} Unsubscribe
+                  %a{ "href" => "https://gamifycoding.me/api/unsubscribe?token=" + @unsubscribe_token} Unsubscribe
