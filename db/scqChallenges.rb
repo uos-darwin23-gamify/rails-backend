@@ -103,7 +103,7 @@ Challenge::Scq.find_or_create_by!(
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Casting',
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "Which function converts a string to an integer?",
   answers: ["atoi()", "itos()", "stoint()", "stringToInt()"],
   correct_answer: 0,
@@ -141,17 +141,6 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('10/03/2024', '%d/%m/%Y'), #10
-  name: 'Memory',
-  difficulty: :HARD,
-  question_overview: "How do you allocate memory dynamically for an array of 10 integers?",
-  answers: ["malloc(10 * sizeof(int))", "new int[10]", "int malloc[10]", "allocate(10)"],
-  correct_answer: 0,
-  correct_answer_explanation: "Memory for an array can be dynamically allocated using the malloc function, which allows for flexible array sizes at runtime."
-)
-
-
-Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('12/03/2024', '%d/%m/%Y'), #12
   name: 'Operators',
   difficulty: :MEDIUM,
@@ -182,17 +171,17 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('10/03/2024', '%d/%m/%Y'), #10
   name: 'Arrays',
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "How do you read a string into a character array?",
   answers: ["scanf(\"%s\",str);", "getString(str);", "read(str);", "input(str);"],
   correct_answer: 0,
   correct_answer_explanation: "A string can be read into a character array using the scanf function with the %s format specifier."
 )
 
-Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('22/03/2024', '%d/%m/%Y'), #22
+Challenge::Scq.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: 'Files',
   difficulty: :MEDIUM,
   question_overview: "How do you correctly open a file for only writing?",
@@ -232,7 +221,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!( 
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('22/03/2024', '%d/%m/%Y'), #22
   name: 'Arrays',
   difficulty: :MEDIUM,
   question_overview: "How is a multi-dimensional array declared in C?",
@@ -242,7 +231,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('28/03/2024', '%d/%m/%Y'), #28
   name: 'Pointers',
   difficulty: :EASY,
   question_overview: "What is the correct syntax for a pointer declaration?",
@@ -262,29 +251,19 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
-  name: 'Memory',
-  difficulty: :HARD,
-  question_overview: "What is a characteristic of dynamic memory allocation?",
-  answers: ["Memory is managed at runtime", "Allocates static memory size", "Memory cannot be freed", "Allocates constant memory"],
-  correct_answer: 0,
-  correct_answer_explanation: "Dynamic memory allocation allows variables to be allocated memory at runtime, but it must be manually managed to avoid leaks."
-)
-
-Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
   name: 'Operator',
-  difficulty: :EASY,
+  difficulty: :SIMPLE,
   question_overview: "Which operator is used for referencing a variable address?",
   answers: ["*", "&", "->", "."],
   correct_answer: 1,
   correct_answer_explanation: "The '&' operator is used for referencing, i.e., obtaining the memory address of a variable."
 )
 
-Challenge::Scq.find_or_create_by!(
+Challenge::Scq.find_or_create_by!( 
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'Strings',
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "How to concatenate two strings in C?",
   answers: ["strcat(s1,s2)", "concat(s1,s2)", "s1 + s2", "s1.append(s2)"],
   correct_answer: 0,
@@ -331,10 +310,10 @@ Challenge::Scq.find_or_create_by!(
   correct_answer_explanation: "The 'long long int' data type is best for storing large integers that exceed the range of standard int types."
 )
 
-Challenge::Scq.find_or_create_by!(
+Challenge::Scq.find_or_create_by!( 
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'String copying',
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "What C library function copies a string?",
   answers: ["strcpy()", "copyStr()", "strCpy()", "cloneString()"],
   correct_answer: 0,
@@ -442,7 +421,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!( 
-  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: 'File reading and writing',
   difficulty: :HARD,
   question_overview: "Which function is used to open a file for both reading and writing in C?",
@@ -462,7 +441,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
   name: 'Pointers',
   difficulty: :HARD,
   question_overview: "How do you access the value stored in the address a pointer points to in C?",
@@ -472,7 +451,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
   name: 'Bitwise operators',
   difficulty: :HARD,
   question_overview: "Which bitwise operator is used for shifting bits to the left, filling the right with zeros?",
@@ -482,7 +461,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: 'Bitwise operators',
   difficulty: :HARD,
   question_overview: "Which operator is used to invert all bits in an integer variable 'a' in C?",
@@ -502,7 +481,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('12/03/2024', '%d/%m/%Y'), #12
   name: 'sizeof Operator',
   difficulty: :HARD,
   question_overview: "What does the sizeof operator in C return when applied to a pointer type?",
@@ -514,7 +493,7 @@ Challenge::Scq.find_or_create_by!(
 Challenge::Scq.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: 'strtok Library',
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "In C, what does the standard library function 'strtok' do?",
   answers: ["Tokenizes a string", "Sorts a string", "Compares two strings", "Copies a string"],
   correct_answer: 0,
@@ -539,26 +518,6 @@ Challenge::Scq.find_or_create_by!(
   answers: ["stdio.h", "stdlib.h", "string.h", "math.h"],
   correct_answer: 0,
   correct_answer_explanation: "The stdio.h is the header file that includes the functions printf and scanf"
-)
-
-Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('28/03/2024', '%d/%m/%Y'), #28
-  name: 'Memory',
-  difficulty: :EASY,
-  question_overview: "What is the return type of the 'malloc' or 'calloc' functions in C?",
-  answers: ["int *", "float *", "void *", "char *"],
-  correct_answer: 2,
-  correct_answer_explanation: "The return types are void *"
-)
-
-Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
-  name: 'Memory',
-  difficulty: :SIMPLE,
-  question_overview: "Which function is used to deallocate memory in C?",
-  answers: ["free", "dealloc", "memory_free", "release"],
-  correct_answer: 0,
-  correct_answer_explanation: "Free is used to deallocate memory slots in C"
 )
 
 Challenge::Scq.find_or_create_by!(

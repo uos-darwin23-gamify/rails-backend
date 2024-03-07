@@ -96,7 +96,7 @@ int main() {
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('14/03/2024', '%d/%m/%Y'), #14
   name: "Pointer Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -122,8 +122,8 @@ int main() {
   correct_answer_explanation: "Pointer arithmetic is used to access the 6th element of the array (index 5), which has a value of 5."
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "File Writing",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
@@ -635,14 +635,6 @@ int main() {
     result = a & b; 
     printf("a & b = %u\\n", result);
 
-    FILE *file = fopen("result.txt", "w");
-    if (file == NULL) {
-        printf("Error opening file!\\n");
-        return 1;
-    }
-    fprintf(file, "%u", result);
-    fclose(file);
-
     result = a | b; 
     printf("a | b = %u\\n", result);
 
@@ -655,8 +647,8 @@ question_array: [
   correct_answer_explanation: "The bit-wise AND operation between 12 (1100 in binary) and 5 (0101 in binary) results in 4 (0100 in binary). "
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -709,17 +701,7 @@ int main() {
     
     result = a & b;
     printf("a & b = %u\\n", result);
-
  
-    FILE *file = fopen("result.txt", "w");
-    if (file == NULL) {
-        printf("Error opening file!\\n");
-        return 1;
-    }
-    fprintf(file, "%u", result);
-    fclose(file);
-
-
     result = a | b; 
     printf("a | b = %u\\n", result);
 
@@ -761,9 +743,9 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
   name: "Arithmetic",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
 
@@ -932,8 +914,8 @@ question_array: [
   correct_answer_explanation: "The loop iterates from 1 to MAX_VALUE (5), inclusive, resulting in 5 iterations."
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23 
   name: "Variables",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -970,9 +952,9 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
   name: "Buffer Overflow",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
 
@@ -1057,11 +1039,11 @@ question_array: [
     {question: 'What is the final value of the loop variable i after the loop completes?'},
     {question: 'What would be the output if the initial value of c is changed to "C" and num is set to 2?'}
 ],
-  correct_answer_regex_array: ["^5$", "^C C$"],
+  correct_answer_regex_array: ["^5$", "^C C $"],
   correct_answer_explanation: "After the loop completes, i is incremented to 5, which breaks the loop condition. With c starting at 'C' and num set to 2, the condition num > 3 is false, so c remains 'C'. The loop executes twice, printing 'C C'. "
 )
 
-Challenge::CodeOutput.find_or_create_by!(
+Challenge::CodeOutput.find_or_create_by!( 
   date_when_available: Date.strptime('20/03/2024', '%d/%m/%Y'), #20
   name: "String Concatenation",
   difficulty: :EXTREME,

@@ -29,16 +29,6 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
-  name: "Storage Class Specifiers",
-  difficulty: :HARD,
-  question_overview: "Which of the following are storage class specifiers in C?",
-  answers: ['auto', 'register', 'volatile', 'static'],
-  correct_answers: [0, 1, 3],
-  correct_answer_explanation: "`auto`, `register`, and `static` are storage class specifiers in C. `volatile` is a type qualifier, not a storage class specifier."
-)
-
-Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('09/03/2024', '%d/%m/%Y'), # 09
   name: "Valid String Initializations",
   difficulty: :EASY,
@@ -49,7 +39,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
   name: "Valid Integer Types",
   difficulty: :EASY,
   question_overview: "Which of the following are valid integer types in C?",
@@ -59,7 +49,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('09/03/2024', '%d/%m/%Y'), #--
+  date_when_available: Date.strptime('09/03/2024', '%d/%m/%Y'), #09
   name: "Function Return Types",
   difficulty: :MEDIUM,
   question_overview: "Which of the following can be used as return types for a function in C?",
@@ -68,7 +58,7 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "All the options are valid return types in C. Functions can return basic data types, pointers, and structs."
 )
 
-Challenge::Mcq.find_or_create_by!(
+Challenge::Mcq.find_or_create_by!( 
   date_when_available: Date.strptime('20/03/2024', '%d/%m/%Y'), #20
   name: "C Standard Library Functions",
   difficulty: :HARD,
@@ -98,10 +88,10 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "All the options are valid conditional expressions in C, used to compare values and determine logic flow."
 )
 
-Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('10/03/2024', '%d/%m/%Y'), #10
+Challenge::Mcq.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Valid Preprocessor Directives",
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "Which of the following are valid preprocessor directives in C?",
   answers: ['#include', '#define', '#ifdef', '#create'],
   correct_answers: [0, 1, 2],
@@ -139,16 +129,6 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('12/03/2024', '%d/%m/%Y'), #12
-  name: "Memory Allocation Errors",
-  difficulty: :HARD,
-  question_overview: "Which of the following can be a consequence of incorrect memory allocation in C?",
-  answers: ['Memory leak', 'Segmentation fault', 'Buffer overflow', 'Syntax error'],
-  correct_answers: [0, 1, 2],
-  correct_answer_explanation: "Memory leak, segmentation fault, and buffer overflow can result from incorrect memory allocation. Syntax error is a compile-time error, not related to memory allocation."
-)
-
-Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('31/03/2024', '%d/%m/%Y'),
   name: "Loop Keywords",
   difficulty: :MEDIUM,
@@ -179,9 +159,9 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Standard Library Functions",
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "Which of the following are standard library functions for dynamic memory management in C?",
   answers: ['malloc', 'alloc', 'realloc', 'free'],
   correct_answers: [0, 2, 3],
@@ -189,7 +169,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
   name: "Operating System Interaction",
   difficulty: :MEDIUM,
   question_overview: "Which of the following functions are used to interact with the operating system in C?",
@@ -208,8 +188,8 @@ Challenge::Mcq.find_or_create_by!(
   correct_answer_explanation: "None of the listed options, except for `stdio.h`, are part of the C standard library. `iostream` is a C++ header, while `conio.h` and `cobol.h` are not standard C library headers."
 )
 
-Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+Challenge::Mcq.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "File Handling Functions",
   difficulty: :HARD,
   question_overview: "Which of the following functions are used in file handling in C?",
@@ -220,32 +200,12 @@ Challenge::Mcq.find_or_create_by!(
 
 Challenge::Mcq.find_or_create_by!(
   date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y'), #15
-  name: "Compiler Directives",
-  difficulty: :MEDIUM,
-  question_overview: "Which of the following are valid compiler directives in C?",
-  answers: ['#pragma', '#define', '#include', '#version'],
-  correct_answers: [0, 1, 2],
-  correct_answer_explanation: "`#pragma`, `#define`, and `#include` are valid compiler directives in C. `#version` is not a standard compiler directive in C."
-)
-
-Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Variable Scope",
   difficulty: :MEDIUM,
   question_overview: "Which of the following scopes are valid in C?",
   answers: ['Local', 'Global', 'Function', 'Block'],
   correct_answers: [0, 1, 3],
   correct_answer_explanation: "Local, Global, and Block scopes are valid in C. 'Function' is not a recognized scope."
-)
-
-Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
-  name: "Type Qualifiers",
-  difficulty: :EASY,
-  question_overview: "Which of the following are type qualifiers in C?",
-  answers: ['static', 'volatile', 'const', 'register'],
-  correct_answers: [1, 2],
-  correct_answer_explanation: "`volatile` and `const` are type qualifiers in C. `static` and `register` are storage class specifiers, not type qualifiers."
 )
 
 Challenge::Mcq.find_or_create_by!(
@@ -289,7 +249,7 @@ Challenge::Mcq.find_or_create_by!(
 )
 
 Challenge::Mcq.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('10/03/2024', '%d/%m/%Y'), #10
   name: "Function Declaration and Definition",
   difficulty: :MEDIUM,
   question_overview: "Which of the following statements are true regarding functions in C?",

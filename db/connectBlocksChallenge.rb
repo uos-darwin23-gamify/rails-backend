@@ -76,9 +76,9 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('28/03/2024', '%d/%m/%Y'), #28
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Advanced Data Structures",
-  difficulty: :HARD,
+  difficulty: :EXTREME,
   question_overview: "Match the data structures with their characteristic operations",
   first_group: ["Binary Tree", "Linked List", "Stack", "Queue"],
   second_group: ["Hierarchical access", "Sequential access", "last-in-first-out access", "first-in-first-out access"],
@@ -86,7 +86,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "Binary tree for hierarchical data, linked list for linear data, stack supports last-in-first-out, and queue supports first-in-first-out."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
+Challenge::ConnectBlocks.find_or_create_by!( 
   date_when_available: Date.strptime('13/03/2024', '%d/%m/%Y'), #13
   name: "Memory Management",
   difficulty: :EXTREME,
@@ -97,10 +97,10 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "malloc for allocation, calloc for allocation and initialization, free for deallocation, realloc for resizing."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('14/03/2024', '%d/%m/%Y'), #14
+Challenge::ConnectBlocks.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Thread Management in C",
-  difficulty: :MEDIUM,
+  difficulty: :EXTREME,
   question_overview: "Match the thread-related functions to their descriptions",
   first_group: ["pthread_create", "pthread_join", "pthread_exit", "pthread_cancel"],
   second_group: ["Starts a new thread", "Waits for a thread to terminate", "Exits the calling thread", "Sends a cancellation request to a thread"],
@@ -119,10 +119,10 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "printf outputs formatted text, scanf reads formatted input, putchar outputs a character, getchar reads a character."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
+Challenge::ConnectBlocks.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Structs and Enums",
-  difficulty: :HARD,
+  difficulty: :EXTREME,
   question_overview: "Match the struct and enum related terms to their descriptions",
   first_group: ["struct", "enum", "typedef", "union"],
   second_group: ["Defines a new data type", "Creates an alias for a type", "Allows one variable to store different data types", "Defines a collection of constants"],
@@ -130,26 +130,15 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "struct defines a collection of consts, enum defines defines a data type, typedef creates type aliases, and union stores different data types."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
+Challenge::ConnectBlocks.find_or_create_by!( 
+  date_when_available: Date.strptime('24/03/2024', '%d/%m/%Y'), #24
   name: "Preprocessor Directives",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Match the preprocessor directives to their functions",
   first_group: ["#define", "#include", "#ifdef", "#pragma"],
   second_group: ["Includes a file", "Defines a macro", "Checks if a macro is defined", "Specifies compiler-specific instructions"],
   correct_answers: [[0, 1], [1, 0], [2, 2], [3, 3]],
   correct_answer_explanation: "#define creates macros, #include includes files, #ifdef checks macro definitions, and #pragma gives special instructions."
-)
-
-Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('24/03/2024', '%d/%m/%Y'), #24
-  name: "Memory Management",
-  difficulty: :HARD,
-  question_overview: "Match the memory management functions to their descriptions",
-  first_group: ["brk", "mmap", "sbrk", "munmap"],
-  second_group: ["Maps files or devices into memory", "Changes the data segment size", "Deallocates mapped memory", "Increments the program's data space"],
-  correct_answers: [[0, 1], [1, 0], [2, 3], [3, 2]],
-  correct_answer_explanation: "brk and sbrk change data segment size (sbrk increments the data segment size), mmap maps devices or files, and munmap deallocates mapped memory."
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
@@ -163,7 +152,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "';' ends a statement, '{}' encloses blocks, '//' starts a comment, '#include' inserts files."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
+Challenge::ConnectBlocks.find_or_create_by!( 
   date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
   name: "Logical and Bitwise Operations",
   difficulty: :EASY,
@@ -187,26 +176,14 @@ Challenge::ConnectBlocks.find_or_create_by!(
 
 Challenge::ConnectBlocks.find_or_create_by!(
   date_when_available: Date.strptime('19/03/2024', '%d/%m/%Y'), #19
-  name: "Storage Classes",
-  difficulty: :HARD,
-  question_overview: "Match the storage class specifiers to their properties",
-  first_group: ["auto", "register", "static", "extern"],
-  second_group: ["Automatic storage duration", "Hint for compiler optimization", "Persistent local variable", "References variable from another file"],
-  correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
-  correct_answer_explanation: "'auto' for automatic storage, 'register' hints at register storage, 'static' for persistent variables, 'extern' for external linking."
-)
-
-Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('20/03/2024', '%d/%m/%Y'), #20
   name: "Advanced Data Types",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Match the advanced data types to their descriptions",
   first_group: ["void pointer", "struct", "union", "enum"],
   second_group: ["Can point to any data type", "Collection of related data items", "Stores various data types in the same memory location", "Defines a set of named integer constants"],
   correct_answers: [[0, 0], [1, 1], [2, 2], [3, 3]],
   correct_answer_explanation: "void pointer is generic, struct groups data, union shares memory for different types, enum lists named integers."
 )
-
 
 
 # Mongoid syntax
@@ -233,7 +210,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: "Switch Statements",
   difficulty: :MEDIUM,
   question_overview: "Match the components of a switch statement with their descriptions.",
@@ -244,7 +221,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('20/03/2024', '%d/%m/%Y'), #20
   name: "Loops",
   difficulty: :MEDIUM,
   question_overview: "Match the loop types with their descriptions.",
@@ -299,7 +276,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "Pointer Concepts",
   difficulty: :HARD,
   question_overview: "Match the following expressions with their correct output assuming int x = 5 and y = 3;",
@@ -331,10 +308,10 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "The fourth element of arr is set to 5. The size of arr is calculated, and writing to arr[10] is out of bounds."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!(
+Challenge::ConnectBlocks.find_or_create_by!( NOT COVERED, EXTREME
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Character and String Functions",
-  difficulty: :EASY,
+  difficulty: :EXTREME,
   question_overview: "Match the character/string functions with their correct descriptions.",
   first_group: ["strlen(\"hello\")", "strcat(\hello\",\"world\")", "strcmp(\"hello\",\"world\")", "strncpy(dest, src, n)"],
   second_group: ["Returns the length of the string \"hello\"", "Appends \"world\" to \"hello\"", "Compares two strings \"hello\" and \"world\"", "Copies up to n characters from src to dest"],
@@ -365,7 +342,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('28/03/2024', '%d/%m/%Y'), #28
   name: "Pointer Operations",
   difficulty: :HARD,
   question_overview: "Match the following pointer operations with their correct descriptions.",
