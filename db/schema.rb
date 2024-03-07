@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_220922) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_175918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_220922) do
     t.boolean "placement_challenges_finished_session_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "elo_difference"
+    t.string "league_session_start"
+    t.integer "league_position_session_start"
+    t.integer "league_size_session_start"
+    t.string "league_session_end"
+    t.integer "league_position_session_end"
+    t.integer "league_size_session_end"
+    t.integer "global_position_session_start"
+    t.integer "global_leaderboard_size_session_start"
+    t.integer "global_position_session_end"
+    t.integer "global_leaderboard_size_session_end"
   end
 
   create_table "pre_authorized_emails", force: :cascade do |t|
@@ -68,7 +79,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_220922) do
     t.integer "user_type", default: 0, null: false
     t.integer "group", null: false
     t.string "username", null: false
-    t.boolean "consent", default: false
     t.boolean "email_notifications", default: true
     t.string "email_unsubscribe_token", null: false
     t.integer "elo", default: 1000, null: false
