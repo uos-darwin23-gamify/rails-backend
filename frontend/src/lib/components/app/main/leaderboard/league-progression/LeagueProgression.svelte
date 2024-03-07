@@ -10,6 +10,9 @@
 	let container: HTMLDivElement;
 	let lowerLeague: HTMLDivElement;
 	let upperLeague: HTMLDivElement;
+	let lowerLeagueImageError = false;
+	let upperLeagueImageError = false;
+	let currentLeagueImageError = false;
 	const progressBarValue =
 		lowestEloInNextLeague === null || highestEloInPreviousLeague === null
 			? 50
@@ -72,7 +75,16 @@
 			bind:this={lowerLeague}
 		>
 			<div class="shrink-0">
-				<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{#if !lowerLeagueImageError}
+					<img
+						src={`/league-icons/${neighbouringLeagues[0]}.svg`}
+						class="h-8 w-8 -ml-0.5"
+						alt="Lower League Icon"
+						on:error={() => (lowerLeagueImageError = true)}
+					/>
+				{:else}
+					<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{/if}
 			</div>
 			{neighbouringLeagues[0]}
 		</div>
@@ -88,7 +100,16 @@
 			bind:this={upperLeague}
 		>
 			<div class="shrink-0">
-				<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{#if !upperLeagueImageError}
+					<img
+						src={`/league-icons/${neighbouringLeagues[2]}.svg`}
+						class="h-8 w-8 -ml-0.5"
+						alt="Upper League Icon"
+						on:error={() => (upperLeagueImageError = true)}
+					/>
+				{:else}
+					<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{/if}
 			</div>
 			{neighbouringLeagues[2]}
 		</div>
@@ -122,7 +143,16 @@
 		<div class="h-5 w-0.5 current-league-fork-background-color absolute mt-0.5 fork-center"></div>
 		<div class="absolute mt-7 flex flex-col items-center">
 			<div class="shrink-0">
-				<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{#if !currentLeagueImageError}
+					<img
+						src={`/league-icons/${neighbouringLeagues[1]}.svg`}
+						class="h-8 w-8 -ml-0.5"
+						alt="Current League Icon"
+						on:error={() => (currentLeagueImageError = true)}
+					/>
+				{:else}
+					<ShieldHalf class="h-8 w-8 -ml-0.5" />
+				{/if}
 			</div>
 			{neighbouringLeagues[1]}
 		</div>

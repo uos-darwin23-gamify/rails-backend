@@ -102,7 +102,10 @@
                 - else
                   %p Your current score is: #{@elo},
                   - if @leaderboard == "league"
-                    %p You are in the #{@currentLeague} League.
+                    %div{style: 'display: flex;'}
+                      %div{style: 'flex-shrink: 0;'}
+                        %img{src: "gamifycoding.me/league-icons/#{@currentLeague.upcase}.png", alt: 'Current League Icon', style: 'width: 2rem; height: 2rem; margin-left: -0.125rem; diplay: block;'}
+                    %p{style: 'margin-top: 0;'} You are in the #{@currentLeague} League.
                     %p Your position is #{@currentPos} out of #{@total_players_in_league} in your league!
                   - else
                     %p Your position is #{@currentPos} out of #{@total_players} on the global leaderboard!
