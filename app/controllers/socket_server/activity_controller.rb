@@ -34,7 +34,7 @@ module SocketServer
           league_position_session_end:               nil,
           league_size_session_end:                   nil,
           global_position_session_end:               nil,
-          global_leaderboard_size_session_end:       nil,
+          global_leaderboard_size_session_end:       nil
         )
 
         return render json: {message: "OK"}
@@ -47,7 +47,7 @@ module SocketServer
       if user.group == "league"
         if placement_challenges_finished_session_start
           latest_entry = LeagueLeaderboard.latest_entry
-          unlocked_leagues = latest_entry.unlocked_leagues
+          latest_entry.unlocked_leagues
           leaderboard = latest_entry.leaderboard
           user_league = leaderboard.find {|entry| entry["username"] == user.username }&.[](:league)
           user_league_all = leaderboard.filter {|entry| entry["league"] == user_league }
@@ -90,7 +90,7 @@ module SocketServer
             placement_challenges_finished_session_start:,
 
             global_position_session_start:               user_position,
-            global_leaderboard_size_session_start:       total_players,
+            global_leaderboard_size_session_start:       total_players
           )
         else
           Activity.create!(
@@ -128,7 +128,7 @@ module SocketServer
       if user.group == "league"
         if placement_challenges_finished_session_end
           latest_entry = LeagueLeaderboard.latest_entry
-          unlocked_leagues = latest_entry.unlocked_leagues
+          latest_entry.unlocked_leagues
           leaderboard = latest_entry.leaderboard
           user_league = leaderboard.find {|entry| entry["username"] == user.username }&.[](:league)
           user_league_all = leaderboard.filter {|entry| entry["league"] == user_league }
@@ -144,7 +144,7 @@ module SocketServer
 
             league_session_end:                        user_league,
             league_position_session_end:               user_position,
-            league_size_session_end:                   total_players_in_league,
+            league_size_session_end:                   total_players_in_league
           )
         else
           last_activity.update!(
@@ -170,7 +170,7 @@ module SocketServer
             placement_challenges_finished_session_end: placement_challenges_finished(user),
 
             global_position_session_end:               user_position,
-            global_leaderboard_size_session_end:       total_players,
+            global_leaderboard_size_session_end:       total_players
           )
         else
           last_activity.update!(

@@ -1,6 +1,17 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import { Timer, ShieldAlert, Home, Swords, Settings2, Shield, BookText, CheckCircle, HelpCircle, BellPlus } from 'lucide-svelte';
+	import {
+		Timer,
+		ShieldAlert,
+		Home,
+		Swords,
+		Settings2,
+		Shield,
+		BookText,
+		CheckCircle,
+		HelpCircle,
+		BellPlus
+	} from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	let userIsInLeagueGroup = true;
@@ -34,9 +45,7 @@
 							<div class="shrink-0">
 								<Swords class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								Compete in Challenges to earn points and climb the Leaderboard.
-							</p>
+							<p>Compete in Challenges to earn points and climb the Leaderboard.</p>
 						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
@@ -50,17 +59,13 @@
 							<div class="shrink-0">
 								<Shield class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								Keep track of your progress on the Leaderboard.
-							</p>
+							<p>Keep track of your progress on the Leaderboard.</p>
 						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
 								<CheckCircle class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								The harder the question, the more points you can score!
-							</p>
+							<p>The harder the question, the more points you can score!</p>
 						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
@@ -84,7 +89,8 @@
 								<HelpCircle class="h-7 w-7 -ml-0.5" />
 							</div>
 							<p>
-								You can view and download the Consent Form and Participant Information Sheet at any time from the Help section.
+								You can view and download the Consent Form and Participant Information Sheet at any
+								time from the Help section.
 							</p>
 						</div>
 					</div>
@@ -95,9 +101,7 @@
 							<div class="shrink-0">
 								<Swords class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								Compete in Challenges to earn points and climb the Leaderboard.
-							</p>
+							<p>Compete in Challenges to earn points and climb the Leaderboard.</p>
 						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
@@ -111,18 +115,14 @@
 							<div class="shrink-0">
 								<Shield class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								Keep track of your progress on the Leaderboard.
-							</p>
+							<p>Keep track of your progress on the Leaderboard.</p>
 						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
 								<CheckCircle class="h-7 w-7 -ml-0.5" />
 							</div>
-							<p>
-								The harder the question, the more points you can score!
-							</p>
-						</div>	
+							<p>The harder the question, the more points you can score!</p>
+						</div>
 						<div class="flex items-center text-sm gap-4">
 							<div class="shrink-0">
 								<ShieldAlert class="h-7 w-7 -ml-0.5" />
@@ -145,7 +145,8 @@
 								<HelpCircle class="h-7 w-7 -ml-0.5" />
 							</div>
 							<p>
-								You can view and download the Consent Form and Participant Information Sheet at any time from the Help section.
+								You can view and download the Consent Form and Participant Information Sheet at any
+								time from the Help section.
 							</p>
 						</div>
 					</div>
