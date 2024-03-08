@@ -28,7 +28,7 @@
 	>
 		<div use:motion class="overflow-hidden">
 			<div
-				class="lg:text:3xl text-xs font-bold sm:text-base md:text-xl xl:text-5xl"
+				class="lg:text-3xl text-xs font-bold sm:text-base md:text-xl xl:text-5xl"
 				style="white-space: nowrap;"
 			>
 				<h1 class="inline-block">
@@ -52,14 +52,13 @@
 		}}
 		transition={{
 			duration: 0.8,
-
 			repeat: Infinity,
 			repeatType: 'reverse'
 		}}
 	>
 		<span
 			use:motion
-			class={cn('block h-4 w-[4px]  rounded-sm bg-blue-500 sm:h-6 xl:h-12', cursorClassName)}
+			class={cn('block h-7 w-[4px] sm:h-10 rounded-sm bg-blue-500 xl:h-12', cursorClassName)}
 		></span>
 	</Motion>
 </div>
