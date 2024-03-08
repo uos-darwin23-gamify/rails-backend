@@ -114,7 +114,6 @@ int main() {
 )
 
 PlacementChallenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('09/03/2024', '%d/%m/%Y'),  #9
   name: "Pointers",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
