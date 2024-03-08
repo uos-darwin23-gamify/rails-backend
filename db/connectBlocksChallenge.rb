@@ -308,7 +308,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "The fourth element of arr is set to 5. The size of arr is calculated, and writing to arr[10] is out of bounds."
 )
 
-Challenge::ConnectBlocks.find_or_create_by!( NOT COVERED, EXTREME
+Challenge::ConnectBlocks.find_or_create_by!(
   date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
   name: "Character and String Functions",
   difficulty: :EXTREME,
