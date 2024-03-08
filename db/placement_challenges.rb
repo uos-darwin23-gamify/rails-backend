@@ -86,7 +86,7 @@ int main() {
   return 0;
 }},
   # Escaping special characters:
-  # printf("%d is a prime number.\\n", num);
+  # printf("%d is a prime number.", num);
   question_array: [
     {question: 'What is the output for input "4"?', select: {
       startLineNumber: 4,
@@ -143,7 +143,7 @@ int main() {
     writeFile("output.txt", msg);
 
     int digits = countDigits(msg);
-    printf("Number of digits in message: %d\\n", digits);
+    printf("Number of digits in message: %d ", digits);
 
     return 0;
 }},
@@ -170,7 +170,7 @@ int main() {
     *(p + offset) = *(p + offset) * 2;  
     p[offset + 1] = p[offset + 1] - 5;  
 
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    printf("First = %d, Second = %d, Third = %d ", numbers[0], numbers[1], numbers[2]);
     
     return 0;
 }},
@@ -195,7 +195,7 @@ int main() {
     char str2[] = "World";
     strcat(str1, str2);
 
-    printf("%s\\n", str1);
+    printf("%s ", str1);
     int length = strlen(str1);
 
     for(int i = 0; i < length; i++) {
@@ -204,7 +204,7 @@ int main() {
         }
     }
 
-    printf("%s\\n", str1);
+    printf("%s ", str1);
     return 0;
 }},
 question_array: [
