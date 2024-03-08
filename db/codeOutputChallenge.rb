@@ -1,3 +1,4 @@
+
 # CodeOutputChallenge seed data
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
@@ -23,7 +24,7 @@ int main() {
   return 0;
 }},
   # Escaping special characters:
-  # printf("%d is a prime number.\\n", num);
+  # printf("%d is a prime number.", num);
   question_array: [
     {question: 'What is the output for input "4"?', select: {
       startLineNumber: 4,
@@ -71,7 +72,7 @@ int main() {
         printf("%d ", *(ptr + i)); 
       }
     }
-    printf("\\nSum: %d", sum); 
+    printf("Sum: %d", sum); 
 
     return 0;
 }},
@@ -90,12 +91,12 @@ int main() {
       endColumn: 40
     }},
 ],
-  correct_answer_regex_array: ["^1 3 5 7 9 \\nSum: 20$", "^20$", "^10$"],
+  correct_answer_regex_array: ["^1 3 5 7 9 Sum: 20$", "^20$", "^10$"],
   correct_answer_explanation: "The program iterates over the array arr and prints odd numbers, along with the sum of the even numbers at the end. The loop is executed 10 times."
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
+  date_when_available: Date.strptime('14/03/2024', '%d/%m/%Y'), #14
   name: "Pointer Arithmetic",
   difficulty: :MEDIUM,
   question_overview: "Analyze the following C code and answer the questions",
@@ -121,8 +122,8 @@ int main() {
   correct_answer_explanation: "Pointer arithmetic is used to access the 6th element of the array (index 5), which has a value of 5."
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "File Writing",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
@@ -150,7 +151,7 @@ int main() {
     writeFile("output.txt", msg);
 
     int digits = countDigits(msg);
-    printf("Number of digits in message: %d\\n", digits);
+    printf("Number of digits in message: %d", digits);
 
     return 0;
 }},
@@ -192,7 +193,7 @@ int main() {
             printf("%d ", *(ptr + i)); 
         }
     }
-    printf("\\nSum: %d\\n", sum); 
+    printf("Sum: %d", sum); 
 
     FILE *fp = fopen("output.txt", "w");
     if (fp != NULL) { 
@@ -239,7 +240,7 @@ int main() {
     writeFile("output.txt", msg);
 
     int digits = countDigits(msg);
-    printf("Number of digits in message: %d\\n", digits);
+    printf("Number of digits in message: %d", digits);
 
     return 0;
 }},
@@ -263,9 +264,9 @@ int main() {
     int count = 5;
     while (count > 0) {
         if (num % 2 == 0) {
-            printf("%d is even\\n", num);
+            printf("%d is even ", num);
         } else {
-            printf("%d is odd\\n", num);
+            printf("%d is odd ", num);
         }
         num++;
         count--;
@@ -276,12 +277,7 @@ question_array: [
     {question: 'What is the output of the program?'},
     {question: 'What is the final value of num when the program finishes execution?'}
 ],
-  correct_answer_regex_array: ["^10 is even
-  11 is odd
-  12 is even
-  13 is odd
-  14 is even$",
-  "^15$"],
+  correct_answer_regex_array: ["^10 is even 11 is odd 12 is even 13 is odd 14 is even $","^15$"],
   correct_answer_explanation: "The program checks if each num from 10 to 14 is even or odd and prints the corresponding message. The num variable starts at 10 and is incremented in each of the 5 iterations of the loop, ending at 15 when the program completes."
 )
 
@@ -296,11 +292,11 @@ int main() {
     int a = 4, b = 3;
     int result = a - b;
     if (result > 0) {
-        printf("Positive\\n");
+        printf("Positive ");
     } else if (result == 0) {
-        printf("Zero\\n");
+        printf("Zero ");
     } else {
-        printf("Negative\\n");
+        printf("Negative ");
     }
 
     for (int i = 0; i < a; i++) {
@@ -314,8 +310,7 @@ question_array: [
     {question: 'What is the output from the for loop?'},
     {question: 'What will the output of the whole program be if "a" is changed to 3?'}
 ],
-  correct_answer_regex_array: ["Positive$", "^0 3 6 9$", "^Zero
-  0 3 6$"],
+  correct_answer_regex_array: ["Positive $", "^0 3 6 9 $", "^Zero 0 3 6 $"],
   correct_answer_explanation: "The if-else block checks the value of result, which is the result of a - b (4 - 3 = 1). Since 1 is greater than 0, the program prints 'Positive'. The for loop iterates with i starting from 0 up to less than a (4). In each iteration, it prints i * b, which produces the sequence 0 (0x3), 3 (1x3), 6 (2x3), and 9 (3x3). If both a and b are 3, result becomes 0, triggering the else if branch to print 'Zero'. The for loop will iterate three times (0, 1, 2) and print 0 3 6. "
 )
 
@@ -358,7 +353,7 @@ int main() {
     int *ptr2 = &y;
     *ptr1 = *ptr1 + *ptr2;
 
-    printf("x = %d, y = %d\\n", x, y);
+    printf("x = %d, y = %d", x, y);
     return 0;
 }},
 question_array: [
@@ -384,7 +379,7 @@ int main() {
         sum += *(ptr + i);
     }
 
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
 
     int x = 25;
     int y = 35;
@@ -393,7 +388,7 @@ int main() {
     *xptr = *xptr + 10;
     *yptr = *yptr - 5;
 
-    printf("x = %d, y = %d\\n", x, y);
+    printf("x = %d, y = %d", x, y);
 
     return 0;
 }},
@@ -422,7 +417,7 @@ int main() {
         sum += *(ptr + i);
     }
 
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
 
     int x = 25;
     int y = 35;
@@ -431,7 +426,7 @@ int main() {
     *xptr = *xptr + 10;
     *yptr = *yptr - 5;
 
-    printf("x = %d, y = %d\\n", x, y);
+    printf("x = %d, y = %d", x, y);
 
     return 0;
 }},
@@ -458,7 +453,7 @@ int main() {
     *(p + offset) = *(p + offset) * 2;  
     p[offset + 1] = p[offset + 1] - 5;  
 
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    printf("First = %d, Second = %d, Third = %d", numbers[0], numbers[1], numbers[2]);
     
     return 0;
 }},
@@ -486,7 +481,7 @@ int main() {
     *(p + offset) = *(p + offset) * 2;  
     p[offset + 1] = p[offset + 1] - 5;  
 
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    printf("First = %d, Second = %d, Third = %d", numbers[0], numbers[1], numbers[2]);
     
     return 0;
 }},
@@ -513,7 +508,7 @@ int main() {
     *(p + offset) = *(p + offset) * 2;  
     p[offset + 1] = p[offset + 1] - 5;  
 
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    printf("First = %d, Second = %d, Third = %d", numbers[0], numbers[1], numbers[2]);
     
     return 0;
 }},
@@ -566,14 +561,14 @@ int main() {
     ptr += 2;
     *ptr = 'Z';
     
-    printf("%c, %c\\n", chars[1], *ptr);
+    printf("%c, %c", chars[1], *ptr);
 
     int numbers[] = {1, 2, 3, 4};
     int *numPtr = numbers;
     numPtr += 3; 
     *numPtr = *numPtr + 5;
     
-    printf("%d\\n", numbers[3]);
+    printf("%d", numbers[3]);
 
     return 0;
 }},
@@ -600,14 +595,14 @@ int main() {
     ptr += 2;
     *ptr = 'Z';
     
-    printf("%c, %c\\n", chars[1], *ptr);
+    printf("%c, %c", chars[1], *ptr);
 
     int numbers[] = {1, 2, 3, 4};
     int *numPtr = numbers;
     numPtr += 3; 
     *numPtr = *numPtr + 5;
     
-    printf("%d\\n", numbers[3]);
+    printf("%d", numbers[3]);
 
     return 0;
 }},
@@ -632,18 +627,10 @@ int main() {
     unsigned int result;
 
     result = a & b; 
-    printf("a & b = %u\\n", result);
-
-    FILE *file = fopen("result.txt", "w");
-    if (file == NULL) {
-        printf("Error opening file!\\n");
-        return 1;
-    }
-    fprintf(file, "%u", result);
-    fclose(file);
+    printf("a & b = %u", result);
 
     result = a | b; 
-    printf("a | b = %u\\n", result);
+    printf("a | b = %u", result);
 
     return 0;
 }},
@@ -654,8 +641,8 @@ question_array: [
   correct_answer_explanation: "The bit-wise AND operation between 12 (1100 in binary) and 5 (0101 in binary) results in 4 (0100 in binary). "
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'), 
   name: "Bit-wise Operators",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -668,19 +655,19 @@ int main() {
 
  
     result = a & b; 
-    printf("a & b = %u\\n", result);
+    printf("a & b = %u", result);
 
  
     FILE *file = fopen("result.txt", "w");
     if (file == NULL) {
-        printf("Error opening file!\\n");
+        printf("Error opening file!");
         return 1;
     }
     fprintf(file, "%u", result);
     fclose(file);
 
     result = a | b; 
-    printf("a | b = %u\\n", result);
+    printf("a | b = %u", result);
 
     return 0;
 }},
@@ -691,6 +678,7 @@ question_array: [
   correct_answer_regex_array: ["^4$", "^4$"],
   correct_answer_explanation: "The result of the bit-wise AND operation (4) is written to the file. The file writing operation occurs after the bit-wise AND operation, not the OR operation. The value written to the file is the result of the AND operation, not the subsequent OR operation. "
 )
+
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
@@ -706,20 +694,10 @@ int main() {
 
     
     result = a & b;
-    printf("a & b = %u\\n", result);
-
+    printf("a & b = %u", result);
  
-    FILE *file = fopen("result.txt", "w");
-    if (file == NULL) {
-        printf("Error opening file!\\n");
-        return 1;
-    }
-    fprintf(file, "%u", result);
-    fclose(file);
-
-
     result = a | b; 
-    printf("a | b = %u\\n", result);
+    printf("a | b = %u", result);
 
     return 0;
 }},
@@ -746,7 +724,7 @@ int main() {
     int num1 = 10;
     int num2 = 20;
     int sum = add(num1, num2);
-    printf("The sum is: %d\\n", sum);
+    printf("The sum is: %d", sum);
     return 0;
 }},
 question_array: [
@@ -757,10 +735,11 @@ question_array: [
   correct_answer_explanation: "num1 is initialized to 10 at the beginning of the main function, along with num2 being initialized to 20."
 )
 
+
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('08/03/2024', '%d/%m/%Y'), #8
   name: "Arithmetic",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
 
@@ -772,7 +751,7 @@ int main() {
     int num1 = 10;
     int num2 = 20;
     int sum = add(num1, num2);
-    printf("The sum is: %d\\n", sum);
+    printf("The sum is: %d", sum);
     return 0;
 }},
 question_array: [
@@ -810,7 +789,7 @@ int main() {
                 break;
         }
     }
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
     return 0;
 }},
 question_array: [
@@ -847,7 +826,7 @@ int main() {
                 break;
         }
     }
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
     return 0;
 }},
 question_array: [
@@ -883,7 +862,7 @@ int main() {
                 break;
         }
     }
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
     return 0;
 }},
 question_array: [
@@ -919,7 +898,7 @@ int main() {
                 break;
         }
     }
-    printf("Sum = %d\\n", sum);
+    printf("Sum = %d", sum);
     return 0;
 }},
 question_array: [
@@ -929,8 +908,8 @@ question_array: [
   correct_answer_explanation: "The loop iterates from 1 to MAX_VALUE (5), inclusive, resulting in 5 iterations."
 )
 
-Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
+Challenge::CodeOutput.find_or_create_by!( 
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23 
   name: "Variables",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
@@ -951,7 +930,7 @@ int main() {
     printf("Enter the building material: ");
     scanf("%s", b.material);   
 
-    printf("Building: %d floors, %f width, made of %s\\n", b.floors, b.width, b.material);
+    printf("Building: %d floors, %f width, made of %s", b.floors, b.width, b.material);
     return 0;
 }},
 question_array: [
@@ -967,9 +946,9 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('27/03/2024', '%d/%m/%Y'), #27
   name: "Buffer Overflow",
-  difficulty: :MEDIUM,
+  difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
 
@@ -988,7 +967,7 @@ int main() {
     printf("Enter the building material: ");
     scanf("%s", b.material);  
 
-    printf("Building: %d floors, %f width, made of %s\\n", b.floors, b.width, b.material);
+    printf("Building: %d floors, %f width, made of %s", b.floors, b.width, b.material);
     return 0;
 }},
 question_array: [
@@ -1029,6 +1008,7 @@ question_array: [
   Since c is 'B' and the loop prints it 5 times, the output is five 'B' characters separated by spaces. If num is 3, the condition num > 3 is false, so c remains 'A'. The loop executes three times, printing 'A A A '. This combines concepts of conditionals and loops. "
 )
 
+
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('24/03/2024', '%d/%m/%Y'), #24
   name: "For Loops",
@@ -1053,11 +1033,11 @@ question_array: [
     {question: 'What is the final value of the loop variable i after the loop completes?'},
     {question: 'What would be the output if the initial value of c is changed to "C" and num is set to 2?'}
 ],
-  correct_answer_regex_array: ["^5$", "^C C$"],
+  correct_answer_regex_array: ["^5$", "^C C $"],
   correct_answer_explanation: "After the loop completes, i is incremented to 5, which breaks the loop condition. With c starting at 'C' and num set to 2, the condition num > 3 is false, so c remains 'C'. The loop executes twice, printing 'C C'. "
 )
 
-Challenge::CodeOutput.find_or_create_by!(
+Challenge::CodeOutput.find_or_create_by!( 
   date_when_available: Date.strptime('20/03/2024', '%d/%m/%Y'), #20
   name: "String Concatenation",
   difficulty: :EXTREME,
@@ -1070,7 +1050,7 @@ int main() {
     char str2[] = "World";
     strcat(str1, str2);
 
-    printf("%s\\n", str1);
+    printf("%s", str1);
     int length = strlen(str1);
 
     for(int i = 0; i < length; i++) {
@@ -1079,7 +1059,7 @@ int main() {
         }
     }
 
-    printf("%s\\n", str1);
+    printf("%s", str1);
     return 0;
 }},
 question_array: [
@@ -1090,6 +1070,7 @@ question_array: [
   correct_answer_regex_array: ["^HelloWorld$", "^10$", "^10$"],
   correct_answer_explanation: "strcat concatenates str2 to str1, resulting in 'HelloWorld'. After concatenation, str1 contains 10 characters, which is determined by strlen. The loop iterates equal to the length of str1, which is 10."
 )
+
 
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
@@ -1104,7 +1085,7 @@ int main() {
     char str2[] = "World";
     strcat(str1, str2);
 
-    printf("%s\\n", str1);
+    printf("%s", str1);
     int length = strlen(str1);
 
     for(int i = 0; i < length; i++) {
@@ -1113,7 +1094,7 @@ int main() {
         }
     }
 
-    printf("%s\\n", str1);
+    printf("%s", str1);
     return 0;
 }},
 question_array: [

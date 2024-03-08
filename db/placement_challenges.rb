@@ -1,3 +1,4 @@
+
 # Mongoid syntax
 # ScqChallenge seed data
 PlacementChallenge::Scq.find_or_create_by!(
@@ -8,6 +9,7 @@ PlacementChallenge::Scq.find_or_create_by!(
   correct_answer: 2,
   correct_answer_explanation: "The 'int main() {}' syntax is standard in C for defining the main function that marks the entry point of the program."
 )
+
 
 PlacementChallenge::Mcq.find_or_create_by!(
   name: 'Variables',
@@ -22,7 +24,7 @@ PlacementChallenge::Mcq.find_or_create_by!(
 PlacementChallenge::Mcq.find_or_create_by!(
   name: "Loop Constructs",
   difficulty: :MEDIUM,
-  question_overview: "Which of the following are valid loop constructs in programming?",
+  question_overview: "Which of the following are valid loop constructs in C programming?",
   answers: ['for', 'while', 'do-while', 'foreach'],
   correct_answers: [0, 1, 2],
   correct_answer_explanation: "The `for`, `while`, and `do-while` loops are standard looping constructs in many programming languages. `foreach` is not universally valid, as its availability and syntax can vary."
@@ -59,6 +61,7 @@ PlacementChallenge::ConnectBlocks.find_or_create_by!(
   correct_answer_explanation: "PI is defined as 3.14, SQUARE computes the square of x, MAX returns the maximum of a and b, CHECK_ZERO checks if x is zero."
 )
 
+
 # CodeOutputChallenge seed data
 PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "Prime Numbers",
@@ -83,7 +86,7 @@ int main() {
   return 0;
 }},
   # Escaping special characters:
-  # printf("%d is a prime number.\\n", num);
+  # printf("%d is a prime number.", num);
   question_array: [
     {question: 'What is the output for input "4"?', select: {
       startLineNumber: 4,
@@ -110,35 +113,46 @@ int main() {
   correct_answer_explanation: "The code is a simple C program to check if a number is prime. For input '4', the output is '4 is not a prime number.' because 4 is not a prime number. For input '7', the output is '7 is a prime number.' because 7 is a prime number. The main() function returns '0' indicating successful execution of the program."
 )
 
-# CodeOutputChallenge seed data
 PlacementChallenge::CodeOutput.find_or_create_by!(
-  name: "File Writing",
+  date_when_available: Date.strptime('09/03/2024', '%d/%m/%Y'),  #9
+  name: "Pointers",
   difficulty: :HARD,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
+#include <stdlib.h>
 
-#define MAX 10
+void writeFile(const char *filename, const char *content) {
+    FILE *fp = fopen(filename, "w");
+    if (fp != NULL) {
+        fputs(content, fp);
+        fclose(fp);
+    }
+}
+
+int countDigits(const char *str) {
+    int count = 0;
+    while (*str) {
+        if (*str >= '0' && *str <= '9') count++;
+        str++;
+    }
+    return count;
+}
 
 int main() {
-  FILE *fp;
-  int sum = 20;
-  fp = fopen("output.txt", "w");
-  if(fp != NULL) {
-    fprintf(fp, "Final sum is %d", sum);
-    fclose(fp);
-  }
-  return 0;
+    const char *msg = "Hello123World45!";
+    writeFile("output.txt", msg);
+
+    int digits = countDigits(msg);
+    printf("Number of digits in message: %d ", digits);
+
+    return 0;
 }},
-  question_array: [
-    {question: 'What content is written to the file output.txt?', select: {
-      startLineNumber: 10,
-      startColumn: 5,
-      endLineNumber: 10,
-      endColumn: 45
-    }},
+question_array: [
+    {question: 'If msg were changed to "2024NewYear", how many digits would countDigits return?'},
+    {question: 'What is the initial character pointed to by the *str pointer in the countDigits function when called with msg?'}
 ],
-  correct_answer_regex_array: ["^Final sum is 20$"],
-  correct_answer_explanation: "The program writes the final value of sum to a file named output.txt, with the content 'Final sum is 20'."
+  correct_answer_regex_array: ["^4$", "^H$"],
+  correct_answer_explanation: "The new string contains 4 digits (2024). The pointer *str initially points to the first character of msg, which is H."
 )
 
 PlacementChallenge::CodeOutput.find_or_create_by!(
@@ -156,7 +170,7 @@ int main() {
     *(p + offset) = *(p + offset) * 2;  
     p[offset + 1] = p[offset + 1] - 5;  
 
-    printf("First = %d, Second = %d, Third = %d\\n", numbers[0], numbers[1], numbers[2]);
+    printf("First = %d, Second = %d, Third = %d ", numbers[0], numbers[1], numbers[2]);
     
     return 0;
 }},
@@ -167,6 +181,7 @@ question_array: [
   correct_answer_regex_array: ["^6$","^20$"],
   correct_answer_explanation: "The first element (*p) is incremented by 1, changing from 5 to 6. The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
 )
+
 
 PlacementChallenge::CodeOutput.find_or_create_by!(
   name: "String Concatenation",
@@ -180,7 +195,7 @@ int main() {
     char str2[] = "World";
     strcat(str1, str2);
 
-    printf("%s\\n", str1);
+    printf("%s ", str1);
     int length = strlen(str1);
 
     for(int i = 0; i < length; i++) {
@@ -189,7 +204,7 @@ int main() {
         }
     }
 
-    printf("%s\\n", str1);
+    printf("%s ", str1);
     return 0;
 }},
 question_array: [
