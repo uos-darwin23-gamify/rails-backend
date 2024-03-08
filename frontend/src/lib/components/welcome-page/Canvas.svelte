@@ -76,21 +76,25 @@
 		drawWave(5);
 		animationId = requestAnimationFrame(render);
 	};
+
+	let container: HTMLDivElement;
+	$: containerHeight = container?.scrollHeight ?? 0;
 </script>
 
 <svelte:window
 	on:resize={() => {
+		containerHeight = container?.scrollHeight ?? 0;
 		w = ctx.canvas.width = window.innerWidth;
 		h = ctx.canvas.height = window.innerHeight;
 		ctx.filter = `blur(${blur}px)`;
 	}}
 />
 
-<div class="snap-start relative h-full w-full overflow-hidden flex">
-	<div class="flex grow items-center flex-col overflow-y-scroll sm:overflow-y-auto">
+<div class="relative h-full w-full flex">
+	<div class="flex grow items-center flex-col" bind:this={container}>
 		<canvas
 			class="absolute w-full"
-			style={`height: calc(100dvh - ${headerHeight}px);`}
+			style={`height: max(${containerHeight}px, calc(100dvh - ${headerHeight}px));`}
 			bind:this={canvas}
 		></canvas>
 		<div class="flex flex-col justify-center items-center grow relative">

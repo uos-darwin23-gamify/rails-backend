@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Canvas from '$lib/components/welcome-page/Canvas.svelte';
-	import Slide2 from '$lib/components/welcome-page/Slide2.svelte';
 
 	let headerHeight = 64;
 
@@ -14,9 +13,6 @@
 	});
 </script>
 
-<div
-	class="grow relative overflow-y-auto snap-y snap-mandatory"
-	style={`height: calc(100% - ${headerHeight}px);`}
->
- 	<Canvas />
+<div class="grow relative overflow-y-auto" style={`height: calc(100% - ${headerHeight}px);`}>
+	<Canvas />
 </div>
