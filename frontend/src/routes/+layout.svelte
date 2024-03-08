@@ -1,11 +1,11 @@
 <script lang="ts">
 	import '../global.pcss';
-	import { socketConnection, monaco } from '$lib/stores';
+	import { monaco } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
 	import { PUBLIC_SENTRY_DSN } from '$env/static/public';
 
-	$: $socketConnection;
+	// $: $socketConnection;
 	$: $monaco;
 
 	onMount(async () => {

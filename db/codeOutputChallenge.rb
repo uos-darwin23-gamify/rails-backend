@@ -1102,5 +1102,4 @@ question_array: [
 ],
   correct_answer_regex_array: ["^HellaCaders$"],
   correct_answer_explanation: "Concatenating 'Coders' to 'Hello' results in 'HelloCoders'. The loop then changes 'o' to 'a', resulting in 'HellaCaders'."
-
 )

@@ -37,8 +37,8 @@ Rails.application.routes.draw do
     get "challenges-available", to: "users/challenges#not_all_challenges_finished"
     get "challenge", to: "users/challenges#challenge"
     post "challenge", to: "users/challenges#submit_challenge_solution"
-    post "consent", to: "users/consent#submit_consent"
-    get "consent", to: "users/consent#consent"
+    # post "consent", to: "users/consent#submit_consent"
+    # get "consent", to: "users/consent#consent"
     post "change-password", to: "users/settings#change_password"
     post "email-notifications-setting", to: "users/settings#change_email_notifications_setting"
     get "email-notifications-setting", to: "users/settings#email_notifications_setting"
@@ -53,5 +53,7 @@ Rails.application.routes.draw do
 
   scope "api/socket-server" do
     post "/auth/status", to: "socket_server/authentication_status#index"
+    post "/activity/connect", to: "socket_server/activity#connect"
+    post "/activity/disconnect", to: "socket_server/activity#disconnect"
   end
 end

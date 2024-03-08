@@ -11,7 +11,7 @@
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	// import { goto } from '$app/navigation';
 
 	export let data;
 	let menuClosed = true;
@@ -19,16 +19,16 @@
 	let mainComponent: (new (...args: any[]) => SvelteComponent) | null = null;
 	let pageTitle = '';
 
-	onMount(async () => {
-		const response = await fetch('/api/consent');
+	// onMount(async () => {
+	// 	const response = await fetch('/api/consent');
 
-		if (response.ok) {
-			const consent = (await response.json()).consent;
-			!consent && goto('/app/consent');
-		} else {
-			console.error('Failed to fetch');
-		}
-	});
+	// 	if (response.ok) {
+	// 		const consent = (await response.json()).consent;
+	// 		!consent && goto('/app/consent');
+	// 	} else {
+	// 		console.error('Failed to fetch');
+	// 	}
+	// });
 
 	$: {
 		switch (data.slug) {
@@ -73,7 +73,7 @@
 </script>
 
 <svelte:head>
-	<title>{pageTitle} - GamifyCoding&#8482;</title>
+	<title>{pageTitle}</title>
 </svelte:head>
 
 <Header bind:menuClosed />

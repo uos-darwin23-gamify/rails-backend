@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { createNoise3D } from 'simplex-noise';
 	import TypewriterEffectSmooth from '$lib/components/welcome-page/TypewriterEffectSmooth.svelte';
+	import Slide2 from '$lib/components/welcome-page/Slide2.svelte';
 
 	let speed: 'slow' | 'fast' = 'slow';
 	let waveOpacity = 0.5;
@@ -75,28 +76,33 @@
 		drawWave(5);
 		animationId = requestAnimationFrame(render);
 	};
+
+	let container: HTMLDivElement;
+	$: containerHeight = container?.scrollHeight ?? 0;
 </script>
 
 <svelte:window
 	on:resize={() => {
+		containerHeight = container?.scrollHeight ?? 0;
 		w = ctx.canvas.width = window.innerWidth;
 		h = ctx.canvas.height = window.innerHeight;
 		ctx.filter = `blur(${blur}px)`;
 	}}
 />
 
-<div class="snap-start relative h-full w-full overflow-hidden flex">
-	<div class="flex grow items-center flex-col">
+<div class="relative h-full w-full flex">
+	<div class="flex grow items-center flex-col" bind:this={container}>
 		<canvas
 			class="absolute w-full"
-			style={`height: calc(100dvh - ${headerHeight}px);`}
+			style={`height: max(${containerHeight}px, calc(100dvh - ${headerHeight}px));`}
 			bind:this={canvas}
 		></canvas>
 		<div class="flex flex-col justify-center items-center grow relative">
 			<TypewriterEffectSmooth
-				word={{ text: 'Welcome Page', className: 'text-xl sm:text-4xl' }}
+				word={{ text: 'Redefining C Teaching', className: 'text-xl sm:text-4xl' }}
 				className="mx-2"
 			/>
 		</div>
+		<Slide2 />
 	</div>
 </div>
