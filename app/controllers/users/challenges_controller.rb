@@ -144,7 +144,7 @@ finished: !solution&.end_time.nil?, answer: solution&.answer}
       new_elo = calculate_new_elo(user, challenge, result)
       elo_change = new_elo - user.elo
       existing_solution.update(answer: solution.to_json, answer_correct: result, end_time: Time.zone.now,
-                               new_elo:, elo_change:)
+                               new_elo:, elo_change:, score: result)
 
       user.update(elo: [new_elo, 0].max)
 
