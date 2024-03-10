@@ -204,7 +204,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value of *(ptr + 5) after the code has been executed?'}
+    {question: 'What is the value of *(ptr + 5) after the code has been executed?', select: {
+      startLineNumber: 6,
+      startColumn: 5,
+      endLineNumber: 15,
+      endColumn: 6
+    }}
 ],
   correct_answer_regex_array: ["^5$"],
   correct_answer_explanation: "Pointer arithmetic is used to access the 6th element in the array (since array indexing starts at 0), which is 5."
@@ -245,8 +250,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'If msg were changed to "2024NewYear", how many digits would countDigits return?'},
-    {question: 'What is the initial character pointed to by the *str pointer in the countDigits function when called with msg?'}
+    {question: 'If msg were changed to "2024NewYear", how many digits would countDigits return?', select: {
+      startLineNumber: 12,
+      startColumn: 1,
+      endLineNumber: 19,
+      endColumn: 1
+    }},
+    {question: 'What is the initial character pointed to by the *str pointer in the countDigits function when called with msg?', select: {
+      startLineNumber: 12,
+      startColumn: 1,
+      endLineNumber: 22,
+      endColumn: 42
+    }}
 ],
   correct_answer_regex_array: ["^4$", "^H$"],
   correct_answer_explanation: "The new string contains 4 digits (2024). The pointer *str initially points to the first character of msg, which is H."
@@ -274,8 +289,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the program?'},
-    {question: 'What is the final value of num when the program finishes execution?'}
+    {question: 'What is the output of the program?', select: {
+      startLineNumber: 6,
+      startColumn: 4,
+      endLineNumber: 14,
+      endColumn: 5
+    }},
+    {question: 'What is the final value of num when the program finishes execution?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 14,
+      endColumn: 5
+    }}
 ],
   correct_answer_regex_array: ["^10 is even 11 is odd 12 is even 13 is odd 14 is even $","^15$"],
   correct_answer_explanation: "The program checks if each num from 10 to 14 is even or odd and prints the corresponding message. The num variable starts at 10 and is incremented in each of the 5 iterations of the loop, ending at 15 when the program completes."
@@ -306,9 +331,24 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the if-else block in this program?'},
-    {question: 'What is the output from the for loop?'},
-    {question: 'What will the output of the whole program be if "a" is changed to 3?'}
+    {question: 'What is the output of the if-else block in this program?', select: {
+      startLineNumber: 6,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 5
+    }},
+    {question: 'What is the output from the for loop?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 16,
+      endColumn: 5
+    }},
+    {question: 'What will the output of the whole program be if "a" is changed to 3?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 16,
+      endColumn: 5
+    }}
 ],
   correct_answer_regex_array: ["Positive $", "^0 3 6 9 $", "^Zero 0 3 6 $"],
   correct_answer_explanation: "The if-else block checks the value of result, which is the result of a - b (4 - 3 = 1). Since 1 is greater than 0, the program prints 'Positive'. The for loop iterates with i starting from 0 up to less than a (4). In each iteration, it prints i * b, which produces the sequence 0 (0x3), 3 (1x3), 6 (2x3), and 9 (3x3). If both a and b are 3, result becomes 0, triggering the else if branch to print 'Zero'. The for loop will iterate three times (0, 1, 2) and print 0 3 6. "
@@ -333,7 +373,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of this program?'}
+    {question: 'What is the output of this program?', select: {
+      startLineNumber: 7,
+      startColumn: 4,
+      endLineNumber: 11,
+      endColumn: 5
+    }}
 ],
   correct_answer_regex_array: ["^A$"],
   correct_answer_explanation: "After calculating the sum of a and b, which is 5 + 3 = 8, the program checks if c (8) is even or odd by evaluating c % 2. Since 8 % 2 equals 0, the number is even, so the condition c % 2 == 0 is true. Therefore, the program prints 'A'. "
@@ -357,7 +402,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value of x at the end of this program?'}
+    {question: 'What is the value of x at the end of this program?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 36
+    }}
 ],
   correct_answer_regex_array: ["^20$"],
   correct_answer_explanation: "Before the operation, ptr1 points to x (5) and ptr2 points to y (15). The line *ptr1 = *ptr1 + *ptr2; modifies the value of x by adding the value of y to it, making x equal to 20 (5 + 15). The value of y remains unchanged at 15."
@@ -393,9 +443,24 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the total sum calculated by the first part of the program? (give the number only)'},
-    {question: 'What is the final value of x at the end of the program?'},
-    {question: 'What is the final value of y at the end of the program?'}
+    {question: 'What is the total sum calculated by the first part of the program? (give the number only)', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 29
+    }},
+    {question: 'What is the final value of x at the end of the program?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 36
+    }},
+    {question: 'What is the final value of y at the end of the program?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 36
+    }}
 ],
   correct_answer_regex_array: ["^150$", "^35$", "^30$"],
   correct_answer_explanation: "The loop iterates over the array arr, summing its elements (10 + 20 + 30 + 40 + 50) to produce 150. x is initially 25. The operation *xptr = *xptr + 10; adds 10 to x, resulting in 35. y starts at 35. The operation *yptr = *yptr - 5; subtracts 5 from y, giving 30. "
@@ -431,7 +496,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value of x+y after the line "*xptr = *xptr + 10;"?'}
+    {question: 'What is the value of x+y after the line "*xptr = *xptr + 10;"?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 18,
+      endColumn: 24
+    }}
 ],
   correct_answer_regex_array: ["^70$"],
   correct_answer_explanation: "x is modified to equal 35 after the line stated in the question, and the line that alters the value of y has not been executed yet. Therefore this is equal to 35+35, which is 70."
@@ -458,8 +528,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the final value of the first element in the numbers array?'},
-    {question: 'What is the value of the second element in the numbers array after the code execution?'}
+    {question: 'What is the final value of the first element in the numbers array?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }},
+    {question: 'What is the value of the second element in the numbers array after the code execution?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }}
 ],
   correct_answer_regex_array: ["^6$","^20$"],
   correct_answer_explanation: "The first element (*p) is incremented by 1, changing from 5 to 6. The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
@@ -486,7 +566,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value of the second element in the numbers array after the code execution?'}
+    {question: 'What is the value of the second element in the numbers array after the code execution?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }}
 ],
   correct_answer_regex_array: ["^20$"],
   correct_answer_explanation: "The second element (*(p + offset) where offset is 1) is doubled, changing from 10 to 20."
@@ -513,7 +598,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What does the third element of the array become at the end of the program?'}
+    {question: 'What does the third element of the array become at the end of the program?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }}
 ],
   correct_answer_regex_array: ["^10$"],
   correct_answer_explanation: "5 is subtracted from the third element (p[offset + 1]), changing it from 15 to 10."
@@ -540,8 +630,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the printf statement?'},
-    {question: 'If the value of offset is changed to 2, what will be the new value of the second element after execution?'}
+    {question: 'What is the output of the printf statement?', select: {
+      startLineNumber: 12,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 87
+    }},
+    {question: 'If the value of offset is changed to 2, what will be the new value of the second element after execution?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }}
 ],
   correct_answer_regex_array: ["^First = 6, Second = 20, Third = 10$", "^10$"],
   correct_answer_explanation: "The output reflects the final values of the array elements after the modifications. Changing offset to 2 would modify the third element instead of the second one in the line *(p + offset) = *(p + offset) * 2;. Thus, the second element remains unaltered at 10."
@@ -573,9 +673,24 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the new value of the character at the third position in the chars array?'},
-    {question: 'What character is printed first by the printf statement?'},
-    {question: 'What is the value of *ptr directly after ptr is incremented (before the value it points to is changed)?'}
+    {question: 'What is the new value of the character at the third position in the chars array?', select: {
+      startLineNumber: 3,
+      startColumn: 1,
+      endLineNumber: 20,
+      endColumn: 2
+    }},
+    {question: 'What character is printed first by the printf statement?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 39
+    }},
+    {question: 'What is the value of *ptr directly after ptr is incremented (before the value it points to is changed)?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 7,
+      endColumn: 14
+    }}
 ],
   correct_answer_regex_array: ["^Z$", "^B$", "^C$"],
   correct_answer_explanation: "The pointer ptr is moved 2 positions ahead, pointing to 'C', and changes it to 'Z'.  The printf statement first prints chars[1], which remains unchanged as 'B'.  After incrementing ptr by 2, it points to the third element, which is C."
@@ -607,8 +722,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the final value printed for the last element in the numbers array?'},
-    {question: 'If the pointer numPtr is decremented by 2 positions after the increment operation, what integer value does it point to now?'}
+    {question: 'What is the final value printed for the last element in the numbers array?', select: {
+      startLineNumber: 17,
+      startColumn: 4,
+      endLineNumber: 17,
+      endColumn: 26
+    }},
+    {question: 'If the pointer numPtr is decremented by 2 positions after the increment operation, what integer value does it point to now?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 14,
+      endColumn: 17
+    }}
 ],
   correct_answer_regex_array: ["^9$", "^2$"],
   correct_answer_explanation: "The pointer numPtr is moved to point to the last element (4) and then increments it by 5, resulting in 9. After the increment, numPtr points to the last element (9 after modification). Decreasing it by 2 points it to the second element of the array, which is 2."
@@ -635,7 +760,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the bit-wise AND operation between a and b?'}
+    {question: 'What is the output of the bit-wise AND operation between a and b?', select: {
+      startLineNumber: 8,
+      startColumn: 4,
+      endLineNumber: 8,
+      endColumn: 20
+    }}
 ],
   correct_answer_regex_array: ["^4$"],
   correct_answer_explanation: "The bit-wise AND operation between 12 (1100 in binary) and 5 (0101 in binary) results in 4 (0100 in binary). "
@@ -672,8 +802,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What value is written to the file result.txt?'},
-    {question: 'Assuming the file result.txt is successfully opened and written to, what will its content be after executing the bit-wise OR operation?'}
+    {question: 'What value is written to the file result.txt?', select: {
+      startLineNumber: 18,
+      startColumn: 4,
+      endLineNumber: 18,
+      endColumn: 29
+    }},
+    {question: 'Assuming the file result.txt is successfully opened and written to, what will its content be after executing the bit-wise OR operation?', select: {
+      startLineNumber: 21,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 21
+    }}
 ],
   correct_answer_regex_array: ["^4$", "^4$"],
   correct_answer_explanation: "The result of the bit-wise AND operation (4) is written to the file. The file writing operation occurs after the bit-wise AND operation, not the OR operation. The value written to the file is the result of the AND operation, not the subsequent OR operation. "
@@ -702,8 +842,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the bit-wise OR operation between a and b?'},
-    {question: 'If a is changed to 9 and b remains 5, what is the new output of the bit-wise AND operation?'}
+    {question: 'What is the output of the bit-wise OR operation between a and b?', select: {
+      startLineNumber: 12,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 20
+    }},
+    {question: 'If a is changed to 9 and b remains 5, what is the new output of the bit-wise AND operation?', select: {
+      startLineNumber: 4,
+      startColumn: 4,
+      endLineNumber: 9,
+      endColumn: 20
+    }}
 ],
   correct_answer_regex_array: ["^13$", "^1$"],
   correct_answer_explanation: "The bit-wise OR operation between 12 (1100 in binary) and 5 (0101 in binary) results in 13 (1101 in binary)."
@@ -728,8 +878,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value of num1?'},
-    {question: 'What is the value of num2?'}
+    {question: 'What is the value of num1?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 13,
+      endColumn: 1
+    }},
+    {question: 'What is the value of num2?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 13,
+      endColumn: 1
+    }}
 ],
   correct_answer_regex_array: ["^10$", "^20$"],
   correct_answer_explanation: "num1 is initialized to 10 at the beginning of the main function, along with num2 being initialized to 20."
@@ -755,9 +915,24 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What value does the add function return when passed num1 and num2?'},
-    {question: 'What is the output of the printf statement?'},
-    {question: 'What is the return value of the main function?'}
+    {question: 'What value does the add function return when passed num1 and num2?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 10,
+      endColumn: 31
+    }},
+    {question: 'What is the output of the printf statement?', select: {
+      startLineNumber: 11,
+      startColumn: 4,
+      endLineNumber: 11,
+      endColumn: 35
+    }},
+    {question: 'What is the return value of the main function?', select: {
+      startLineNumber: 7,
+      startColumn: 0,
+      endLineNumber: 13,
+      endColumn: 1
+    }}
 ],
   correct_answer_regex_array: ["^30$", "^The sum is: 30$","^0$"],
   correct_answer_explanation: "The add function returns the sum of num1 and num2 (10 + 20). The printf function outputs the sum of num1 and num2. The main function returns 0, indicating that the program executed successfully."
@@ -793,8 +968,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the final value of sum after the loop completes?'},
-    {question: 'How many times is the default case executed in the switch statement?'}
+    {question: 'What is the final value of sum after the loop completes?', select: {
+      startLineNumber: 5,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 5
+    }},
+    {question: 'How many times is the default case executed in the switch statement?', select: {
+      startLineNumber: 6,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 5
+    }}
 ],
   correct_answer_regex_array: ["^28$", "^2$"],
   correct_answer_explanation: "The sum is calculated as 1 (case 1) + 2 (default for 2) + 6 (double 3 for case 3) + 4 (default for 4) + 15 (triple 5 for case 5), which totals 28. The default case is executed for the values of i that are 2 and 4. "
@@ -830,7 +1015,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the value added to sum when i is 3?'}
+    {question: 'What is the value added to sum when i is 3?', select: {
+      startLineNumber: 7,
+      startColumn: 8,
+      endLineNumber: 20,
+      endColumn: 10
+    }}
 ],
   correct_answer_regex_array: ["^6$"],
   correct_answer_explanation: "When i is 3, the case is to double i (3 * 2), resulting in 6 being added to sum."
@@ -866,7 +1056,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'If MAX_VALUE is changed to 6, what will be the new output for sum?'}
+    {question: 'If MAX_VALUE is changed to 6, what will be the new output for sum?', select: {
+      startLineNumber: 2,
+      startColumn: 0,
+      endLineNumber: 2,
+      endColumn: 20
+    }}
 ],
   correct_answer_regex_array: ["^34$"],
   correct_answer_explanation: "With MAX_VALUE as 6, the additional loop iteration adds 6 to the previous total of 28, resulting in 34."
@@ -902,7 +1097,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'How many iterations does the for loop execute?'}
+    {question: 'How many iterations does the for loop execute?', select: {
+      startLineNumber: 6,
+      startColumn: 4,
+      endLineNumber: 21,
+      endColumn: 6
+    }}
 ],
   correct_answer_regex_array: ["^5$"],
   correct_answer_explanation: "The loop iterates from 1 to MAX_VALUE (5), inclusive, resulting in 5 iterations."
@@ -934,11 +1134,36 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the data type of floors in the Building structure?'},
-    {question: 'If the user inputs 10 for the number of floors, what value is stored in b.floors?'},
-    {question: 'How many bytes are allocated for material in the Building structure?'},
-    {question: 'What format specifier is used for width in the printf statement?'},
-    {question: 'If the width entered is 15.5, what is the output for the width in the printf statement?'}
+    {question: 'What is the data type of floors in the Building structure?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 7,
+      endColumn: 1
+    }},
+    {question: 'If the user inputs 10 for the number of floors, what value is stored in b.floors?', select: {
+      startLineNumber: 12,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 28
+    }},
+    {question: 'How many bytes are allocated for material in the Building structure?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 7,
+      endColumn: 1
+    }},
+    {question: 'What format specifier is used for width in the printf statement?', select: {
+      startLineNumber: 14,
+      startColumn: 4,
+      endLineNumber: 14,
+      endColumn: 27
+    }},
+    {question: 'If the width entered is 15.5, what is the output for the width in the printf statement?', select: {
+      startLineNumber: 18,
+      startColumn: 4,
+      endLineNumber: 18,
+      endColumn: 88
+    }}
 ],
   correct_answer_regex_array: ["^int$", "^10$", "^50$","^%f$", "^15.500000$"],
   correct_answer_explanation: "In the Building structure, floors is declared as an integer type. The value entered by the user (10) is directly stored in b.floors using scanf. The material array in the Building structure is allocated 50 bytes, one for each character in the array. 
@@ -971,7 +1196,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'Will there be a buffer overflow if a string of 50 characters is entered for the building material? (Enter precisely yes or no - do not include capitals)'}
+    {question: 'Will there be a buffer overflow if a string of 50 characters is entered for the building material? (Enter precisely yes or no - do not include capitals)', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 7,
+      endColumn: 1
+    }}
 ],
   correct_answer_regex_array: ["^yes$"],
   correct_answer_explanation: "For a 50-character array in C, you can safely store 49 characters plus the null terminator \0. If you attempt to store 50 characters without accounting for the null terminator, it will indeed cause a buffer overflow, as there won't be space allocated for \0 to signify the end of the string."
@@ -998,10 +1228,30 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What character is stored in c after the if statement?'},
-    {question: 'How many times is the printf statement executed?'},
-    {question: 'What is the output of the program?'},
-    {question: 'If num is changed to 3, what will be the new output?'}
+    {question: 'What character is stored in c after the if statement?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 15,
+      endColumn: 1
+    }},
+    {question: 'How many times is the printf statement executed?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 5
+    }},
+    {question: 'What is the output of the program?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 5
+    }},
+    {question: 'If num is changed to 3, what will be the new output?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 15,
+      endColumn: 1
+    }}
 ],
   correct_answer_regex_array: ["^B$", "^5$","^B B B B B $", "^A A A $"],
   correct_answer_explanation: "Since num is greater than 3, the if statement executes, changing c from 'A' to 'B'. The loop iterates from 0 to 4 (inclusive), which is 5 times, corresponding to the value of num.
@@ -1030,8 +1280,18 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the final value of the loop variable i after the loop completes?'},
-    {question: 'What would be the output if the initial value of c is changed to "C" and num is set to 2?'}
+    {question: 'What is the final value of the loop variable i after the loop completes?', select: {
+      startLineNumber: 10,
+      startColumn: 4,
+      endLineNumber: 12,
+      endColumn: 5
+    }},
+    {question: 'What would be the output if the initial value of c is changed to "C" and num is set to 2?', select: {
+      startLineNumber: 3,
+      startColumn: 0,
+      endLineNumber: 15,
+      endColumn: 1
+    }}
 ],
   correct_answer_regex_array: ["^5$", "^C C $"],
   correct_answer_explanation: "After the loop completes, i is incremented to 5, which breaks the loop condition. With c starting at 'C' and num set to 2, the condition num > 3 is false, so c remains 'C'. The loop executes twice, printing 'C C'. "
@@ -1063,9 +1323,24 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'After concatenation, what is the content of str1? (do not put any " in your answer)'},
-    {question: 'What is the length of str1 after concatenation?'},
-    {question: 'How many times is the loop executed?'}
+    {question: 'After concatenation, what is the content of str1? (do not put any " in your answer)', select: {
+      startLineNumber: 7,
+      startColumn: 4,
+      endLineNumber: 7,
+      endColumn: 24
+    }},
+    {question: 'What is the length of str1 after concatenation?', select: {
+      startLineNumber: 7,
+      startColumn: 4,
+      endLineNumber: 7,
+      endColumn: 24
+    }},
+    {question: 'How many times is the loop executed?', select: {
+      startLineNumber: 12,
+      startColumn: 4,
+      endLineNumber: 16,
+      endColumn: 5
+    }}
 ],
   correct_answer_regex_array: ["^HelloWorld$", "^10$", "^10$"],
   correct_answer_explanation: "strcat concatenates str2 to str1, resulting in 'HelloWorld'. After concatenation, str1 contains 10 characters, which is determined by strlen. The loop iterates equal to the length of str1, which is 10."
@@ -1098,7 +1373,12 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'If str2 was "Coders", what would be the final output?'}
+    {question: 'If str2 was "Coders", what would be the final output?', select: {
+      startLineNumber: 5,
+      startColumn: 4,
+      endLineNumber: 18,
+      endColumn: 24
+    }}
 ],
   correct_answer_regex_array: ["^HellaCaders$"],
   correct_answer_explanation: "Concatenating 'Coders' to 'Hello' results in 'HelloCoders'. The loop then changes 'o' to 'a', resulting in 'HellaCaders'."
