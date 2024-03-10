@@ -42,7 +42,7 @@ int main() {
       startLineNumber: 2,
       startColumn: 1,
       endLineNumber: 18,
-      endColumn: 1
+      endColumn: 2
     }},
 ],
   correct_answer_regex_array: ["^4 is not a prime number.$", "^7 is a prime number.$", "^0$"],
@@ -79,14 +79,14 @@ int main() {
   question_array: [
     {question: 'What is the output to the console?'},
     {question: 'What is the value of sum at the end of the program?', select: {
-      startLineNumber: 13,
-      startColumn: 10,
+      startLineNumber: 16,
+      startColumn: 23,
       endLineNumber: 16,
-      endColumn: 40
+      endColumn: 26
     }},
     {question: 'How many times is the loop executed?', select: {
       startLineNumber: 9,
-      startColumn: 3,
+      startColumn: 5,
       endLineNumber: 9,
       endColumn: 40
     }},
@@ -157,16 +157,16 @@ int main() {
 }},
   question_array: [
     {question: 'What is written to output.txt?', select: {
-      startLineNumber: 21,
+      startLineNumber: 22,
       startColumn: 5,
-      endLineNumber: 21,
+      endLineNumber: 22,
       endColumn: 45
     }},
     {question: 'What is the output of the printf statement in main?', select: {
-      startLineNumber: 24,
-      startColumn: 3,
-      endLineNumber: 24,
-      endColumn: 40
+      startLineNumber: 25,
+      startColumn: 5,
+      endLineNumber: 25,
+      endColumn: 60
     }},
 ],
   correct_answer_regex_array: ["^Hello123World45!$","^Number of digits in message: 5$"],
@@ -254,12 +254,12 @@ question_array: [
       startLineNumber: 12,
       startColumn: 1,
       endLineNumber: 19,
-      endColumn: 1
+      endColumn: 2
     }},
     {question: 'What is the initial character pointed to by the *str pointer in the countDigits function when called with msg?', select: {
       startLineNumber: 12,
       startColumn: 1,
-      endLineNumber: 22,
+      endLineNumber: 25,
       endColumn: 42
     }}
 ],
@@ -291,15 +291,15 @@ int main() {
 question_array: [
     {question: 'What is the output of the program?', select: {
       startLineNumber: 6,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 14,
-      endColumn: 5
+      endColumn: 6
     }},
     {question: 'What is the final value of num when the program finishes execution?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 14,
-      endColumn: 5
+      endColumn: 6
     }}
 ],
   correct_answer_regex_array: ["^10 is even 11 is odd 12 is even 13 is odd 14 is even $","^15$"],
@@ -333,19 +333,19 @@ int main() {
 question_array: [
     {question: 'What is the output of the if-else block in this program?', select: {
       startLineNumber: 6,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 5
     }},
     {question: 'What is the output from the for loop?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 16,
       endColumn: 5
     }},
     {question: 'What will the output of the whole program be if "a" is changed to 3?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 16,
       endColumn: 5
     }}
@@ -375,9 +375,9 @@ int main() {
 question_array: [
     {question: 'What is the output of this program?', select: {
       startLineNumber: 7,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 11,
-      endColumn: 5
+      endColumn: 6
     }}
 ],
   correct_answer_regex_array: ["^A$"],
@@ -404,7 +404,7 @@ int main() {
 question_array: [
     {question: 'What is the value of x at the end of this program?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 36
     }}
@@ -445,19 +445,19 @@ int main() {
 question_array: [
     {question: 'What is the total sum calculated by the first part of the program? (give the number only)', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 29
     }},
     {question: 'What is the final value of x at the end of the program?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 36
     }},
     {question: 'What is the final value of y at the end of the program?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 36
     }}
@@ -498,7 +498,7 @@ int main() {
 question_array: [
     {question: 'What is the value of x+y after the line "*xptr = *xptr + 10;"?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 18,
       endColumn: 24
     }}
@@ -530,13 +530,13 @@ int main() {
 question_array: [
     {question: 'What is the final value of the first element in the numbers array?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }},
     {question: 'What is the value of the second element in the numbers array after the code execution?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }}
@@ -568,7 +568,7 @@ int main() {
 question_array: [
     {question: 'What is the value of the second element in the numbers array after the code execution?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }}
@@ -600,7 +600,7 @@ int main() {
 question_array: [
     {question: 'What does the third element of the array become at the end of the program?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }}
@@ -632,13 +632,13 @@ int main() {
 question_array: [
     {question: 'What is the output of the printf statement?', select: {
       startLineNumber: 12,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 87
     }},
     {question: 'If the value of offset is changed to 2, what will be the new value of the second element after execution?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }}
@@ -681,15 +681,15 @@ question_array: [
     }},
     {question: 'What character is printed first by the printf statement?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 39
     }},
     {question: 'What is the value of *ptr directly after ptr is incremented (before the value it points to is changed)?', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 7,
-      endColumn: 14
+      endColumn: 24
     }}
 ],
   correct_answer_regex_array: ["^Z$", "^B$", "^C$"],
@@ -724,15 +724,15 @@ int main() {
 question_array: [
     {question: 'What is the final value printed for the last element in the numbers array?', select: {
       startLineNumber: 17,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 17,
-      endColumn: 26
+      endColumn: 30
     }},
     {question: 'If the pointer numPtr is decremented by 2 positions after the increment operation, what integer value does it point to now?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 14,
-      endColumn: 17
+      endColumn: 27
     }}
 ],
   correct_answer_regex_array: ["^9$", "^2$"],
@@ -760,9 +760,9 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the bit-wise AND operation between a and b?', select: {
+    {question: 'What is the value of result after the bit-wise AND operation between a and b? (provide your answer in base-10)', select: {
       startLineNumber: 8,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 8,
       endColumn: 20
     }}
@@ -804,13 +804,13 @@ int main() {
 question_array: [
     {question: 'What value is written to the file result.txt?', select: {
       startLineNumber: 18,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 18,
-      endColumn: 29
+      endColumn: 40
     }},
     {question: 'Assuming the file result.txt is successfully opened and written to, what will its content be after executing the bit-wise OR operation?', select: {
       startLineNumber: 21,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 21
     }}
@@ -842,15 +842,15 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'What is the output of the bit-wise OR operation between a and b?', select: {
+    {question: 'What is the value of the bit-wise OR operation between a and b? (provide your answer in base-10)', select: {
       startLineNumber: 12,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 20
     }},
-    {question: 'If a is changed to 9 and b remains 5, what is the new output of the bit-wise AND operation?', select: {
+    {question: 'If a is changed to 9 and b remains 5, what is the new value of the bit-wise AND operation? (provide your answer in base-10)', select: {
       startLineNumber: 4,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 9,
       endColumn: 20
     }}
@@ -882,13 +882,13 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 13,
-      endColumn: 1
+      endColumn: 2
     }},
     {question: 'What is the value of num2?', select: {
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 13,
-      endColumn: 1
+      endColumn: 2
     }}
 ],
   correct_answer_regex_array: ["^10$", "^20$"],
@@ -917,13 +917,13 @@ int main() {
 question_array: [
     {question: 'What value does the add function return when passed num1 and num2?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 10,
       endColumn: 31
     }},
     {question: 'What is the output of the printf statement?', select: {
       startLineNumber: 11,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 11,
       endColumn: 35
     }},
@@ -931,7 +931,7 @@ question_array: [
       startLineNumber: 7,
       startColumn: 0,
       endLineNumber: 13,
-      endColumn: 1
+      endColumn: 2
     }}
 ],
   correct_answer_regex_array: ["^30$", "^The sum is: 30$","^0$"],
@@ -970,13 +970,13 @@ int main() {
 question_array: [
     {question: 'What is the final value of sum after the loop completes?', select: {
       startLineNumber: 5,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 5
     }},
     {question: 'How many times is the default case executed in the switch statement?', select: {
       startLineNumber: 6,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 5
     }}
@@ -1017,9 +1017,9 @@ int main() {
 question_array: [
     {question: 'What is the value added to sum when i is 3?', select: {
       startLineNumber: 7,
-      startColumn: 8,
+      startColumn: 9,
       endLineNumber: 20,
-      endColumn: 10
+      endColumn: 20
     }}
 ],
   correct_answer_regex_array: ["^6$"],
@@ -1056,7 +1056,7 @@ int main() {
     return 0;
 }},
 question_array: [
-    {question: 'If MAX_VALUE is changed to 6, what will be the new output for sum?', select: {
+    {question: 'If MAX_VALUE is changed to 6, what will be the new value of sum after the for loop executes?', select: {
       startLineNumber: 2,
       startColumn: 0,
       endLineNumber: 2,
@@ -1099,7 +1099,7 @@ int main() {
 question_array: [
     {question: 'How many iterations does the for loop execute?', select: {
       startLineNumber: 6,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 21,
       endColumn: 6
     }}
@@ -1138,11 +1138,11 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 7,
-      endColumn: 1
+      endColumn: 2
     }},
     {question: 'If the user inputs 10 for the number of floors, what value is stored in b.floors?', select: {
       startLineNumber: 12,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 28
     }},
@@ -1150,24 +1150,24 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 7,
-      endColumn: 1
+      endColumn: 2
     }},
     {question: 'What format specifier is used for width in the printf statement?', select: {
       startLineNumber: 14,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 14,
       endColumn: 27
     }},
     {question: 'If the width entered is 15.5, what is the output for the width in the printf statement?', select: {
       startLineNumber: 18,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 18,
       endColumn: 88
     }}
 ],
   correct_answer_regex_array: ["^int$", "^10$", "^50$","^%f$", "^15.500000$"],
   correct_answer_explanation: "In the Building structure, floors is declared as an integer type. The value entered by the user (10) is directly stored in b.floors using scanf. The material array in the Building structure is allocated 50 bytes, one for each character in the array. 
-  The %f format specifier is used for floating-point numbers, which is the type of width. The printf function, when using %f, outputs floating-point numbers with six digits after the decimal by default."
+  The %f format specifier is used for floating-point numbers, which is the type of width. The printf function, when using %f, outputs floating-point numbers with six digits after the decimal point by default."
 )
 
 Challenge::CodeOutput.find_or_create_by!(
@@ -1200,7 +1200,7 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 7,
-      endColumn: 1
+      endColumn: 2
     }}
 ],
   correct_answer_regex_array: ["^yes$"],
@@ -1232,17 +1232,17 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 15,
-      endColumn: 1
+      endColumn: 2
     }},
     {question: 'How many times is the printf statement executed?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 5
     }},
     {question: 'What is the output of the program?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 5
     }},
@@ -1250,7 +1250,7 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 15,
-      endColumn: 1
+      endColumn: 2
     }}
 ],
   correct_answer_regex_array: ["^B$", "^5$","^B B B B B $", "^A A A $"],
@@ -1282,7 +1282,7 @@ int main() {
 question_array: [
     {question: 'What is the final value of the loop variable i after the loop completes?', select: {
       startLineNumber: 10,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 12,
       endColumn: 5
     }},
@@ -1290,7 +1290,7 @@ question_array: [
       startLineNumber: 3,
       startColumn: 0,
       endLineNumber: 15,
-      endColumn: 1
+      endColumn: 2
     }}
 ],
   correct_answer_regex_array: ["^5$", "^C C $"],
@@ -1325,19 +1325,19 @@ int main() {
 question_array: [
     {question: 'After concatenation, what is the content of str1? (do not put any " in your answer)', select: {
       startLineNumber: 7,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 7,
       endColumn: 24
     }},
     {question: 'What is the length of str1 after concatenation?', select: {
       startLineNumber: 7,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 7,
       endColumn: 24
     }},
     {question: 'How many times is the loop executed?', select: {
       startLineNumber: 12,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 16,
       endColumn: 5
     }}
@@ -1375,7 +1375,7 @@ int main() {
 question_array: [
     {question: 'If str2 was "Coders", what would be the final output?', select: {
       startLineNumber: 5,
-      startColumn: 4,
+      startColumn: 5,
       endLineNumber: 18,
       endColumn: 24
     }}
