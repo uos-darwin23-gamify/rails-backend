@@ -257,3 +257,4 @@ Challenge::Mcq.find_or_create_by!(
   correct_answers: [0],
   correct_answer_explanation: "Function declarations must specify the return type. Functions cannot return any type; they must return a type that is specified. Definitions must match declarations, and C does not support default parameter values."
 )
+

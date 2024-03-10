@@ -164,7 +164,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 )
 
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
+  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
   name: "Function Overloading and Recursion",
   difficulty: :HARD,
   question_overview: "Match the concepts to their descriptions in C",
@@ -188,7 +188,7 @@ Challenge::ConnectBlocks.find_or_create_by!(
 
 # Mongoid syntax
 Challenge::ConnectBlocks.find_or_create_by!(
-  date_when_available: Date.strptime('29/03/2024', '%d/%m/%Y'),
+  date_when_available: Date.strptime('15/03/2024', '%d/%m/%Y'), #15
   name: "Control Statements",
   difficulty: :EASY,
   question_overview: "Match the following control statements with their functionalities.",

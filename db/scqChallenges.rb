@@ -371,7 +371,7 @@ Challenge::Scq.find_or_create_by!(
 )
 
 Challenge::Scq.find_or_create_by!(
-  date_when_available: Date.strptime('16/03/2024', '%d/%m/%Y'), #16
+  date_when_available: Date.strptime('25/03/2024', '%d/%m/%Y'), #25
   name: 'Operators',
   difficulty: :MEDIUM,
   question_overview: "Which operator is used to access members of a pointer to a structure?",

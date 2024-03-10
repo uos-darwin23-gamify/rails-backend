@@ -710,7 +710,7 @@ question_array: [
 )
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
+  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
   name: "Arithmetic",
   difficulty: :EASY,
   question_overview: "Analyze the following C code and answer the questions",
@@ -766,7 +766,7 @@ question_array: [
 Challenge::CodeOutput.find_or_create_by!(
   date_when_available: Date.strptime('18/03/2024', '%d/%m/%Y'), #18
   name: "For Loops",
-  difficulty: :HARD,
+  difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
   code: %Q{#include <stdio.h>
 #define MAX_VALUE 5
@@ -1073,7 +1073,7 @@ question_array: [
 
 
 Challenge::CodeOutput.find_or_create_by!(
-  date_when_available: Date.strptime('23/03/2024', '%d/%m/%Y'), #23
+  date_when_available: Date.strptime('17/03/2024', '%d/%m/%Y'), #17
   name: "String Concatenation",
   difficulty: :EXTREME,
   question_overview: "Analyze the following C code and answer the questions",
