@@ -3,6 +3,10 @@
     {
       "command": "bundle exec rake cron:notification_to_all",
       "schedule": "0 12 * * *"
+    },
+    {
+      "command": "bundle exec rake cron:give_min_score_for_past_challenges_where_no_solution",
+      "schedule": "0 1 * * *"
     }
   ]
 }
