@@ -76,13 +76,16 @@ To deploy this platform in a production environment ready for user onboarding, f
     ```bash
     cd <path_to_top_level_directory>
     ```
-    - Clone this Git mono-repo:
+    - Clone this Git mono-repo including the backend submodules:
     ```bash
-    git clone <TODO> <TODO>
+    # HTTPS
+    git clone --recurse-submodules https://github.com/uos-darwin23-gamify/gamify-coding.git
+    # SSH
+    git clone --recurse-submodules git@github.com:uos-darwin23-gamify/gamify-coding.git
     ```
     - Create a master.key for symmetric encryption/decryption of credentials:
     ```bash
-    cd <TODO>/rails-backend/config
+    cd gamify-coding/rails-backend/config
     touch master.key
     nano master.key
     # Enter a random sequence of alpha-numeric characters (the longer the better) - Save this value, will be used in another step (<master_key>)>
@@ -102,7 +105,7 @@ To deploy this platform in a production environment ready for user onboarding, f
     # Save the new file (e.g. Ctrl+S) and close the tab - the terminal should be again free after this operation
     ```
     - Set realtime-backend credentials:
-        - Open the file \<TODO>/realtime-backend/ecosystem.config.js in VSCode and replace <socket_server_api_key> with the value from the previous step and save (this key is used for authenticated communication between the 2 backends):
+        - Open the file *gamify-coding/realtime-backend/ecosystem.config.js* in VSCode and replace <socket_server_api_key> with the value from the previous step and save (this key is used for authenticated communication between the 2 backends):
             ```bash
             SOCKET_SERVER_API_KEY: <socket_server_api_key>
             ```
@@ -287,19 +290,37 @@ To deploy this platform in a production environment ready for user onboarding, f
         ```bash
         dokku postgres:info postgres-database
 
-        # And save the printed ip address (<local_postgres_db_ip_address>)
-        # And password TODO (<local_postgres_db_password>)
+        # And save the printed ip address (abr. <local_postgres_db_ip_address>)
+        # And password (abr. <local_postgres_db_password>)
+
+        # Example output of command with above information location highlighted:
+
+        =====> postgres-database postgres service information
+        Config dir:          /var/lib/dokku/services/postgres/postgres-database/data
+        Config options:                               
+        Data dir:            /var/lib/dokku/services/postgres/postgres-database/data
+        Dsn:                 postgres:// postgres:<local_postgres_db_password>@dokku-postgres-postgres-database:5432/ postgres_database
+        Exposed ports:       -                        
+        Id:                  8990a51709df214d29535588ab201c0260d388fa13693f3f82e26244df01455f
+        Internal ip:         <local_postgres_db_ip_address>               
+        Initial network:                              
+        Links:               rails-backend            
+        Post create network:                          
+        Post start network:                           
+        Service root:        /var/lib/dokku/services/postgres/postgres-database
+        Status:              running                  
+        Version:             postgres:16.2
         ```
     - Navigate to postgres.<domain_name> in a new browser tab, then login with:
         - Email: admin@<domain_name>
         - Password: earlier generated password <generate_password_for_postgres_web_gui>
-    - Create a new server connection and in the connection details, use these values:
+    - Create a new server connection (Object -> Register -> Server…), use these values in the *Connection* tab:
         - host name/address: <local_postgres_db_ip_address> (from previous step)
         - port: 5432
         - maintenance database: postgres_database
         - username: postgres
         - kerberos authentication: false
-        - password: <local_postgres_db_password>
+        - password: <local_postgres_db_password> (from previous step)
         - save password: true
         - role: postgres
         - service: leave blank
