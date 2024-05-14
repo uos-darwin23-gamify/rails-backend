@@ -30,6 +30,10 @@ Rails.application.routes.draw do
       post "pre-authorized-emails", to: "admin/pre_authorized_emails#create_pre_authorized_email"
       put "pre-authorized-emails", to: "admin/pre_authorized_emails#update_pre_authorized_email"
       delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
+
+      get "users", to: "admin/users#all_users"
+      delete "users/:id", to: "admin/users#destroy"
+      put "users/:id", to: "admin/users#promote_to_admin"
     end
 
     get "placement-challenges-finished", to: "users/challenges#placement_challenges_status"

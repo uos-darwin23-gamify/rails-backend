@@ -12,16 +12,6 @@
 <ul class="menu menu-lg p-4 min-h-full text-base-content flex-nowrap">
 	<li>
 		<Button
-			variant={!slug ? 'secondary' : 'outline'}
-			href={`/admin${AdminDashboardUrls.OVERVIEW ? '/' + AdminDashboardUrls.OVERVIEW : ''}`}
-			data-testid="overview-button"
-			on:click={() => dispatch('sideMenuItemClicked')}
-			class="flex items-center text-sm justify-start"><Home class="h-5 w-5 mr-2" />Overview</Button
-		>
-	</li>
-	<div class="my-1" />
-	<li>
-		<Button
 			variant={slug === AdminDashboardUrls.CHALLENGE_EDITOR ? 'secondary' : 'outline'}
 			href={`/admin${
 				AdminDashboardUrls.CHALLENGE_EDITOR ? '/' + AdminDashboardUrls.CHALLENGE_EDITOR : ''

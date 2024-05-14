@@ -1521,6 +1521,11 @@ formsnap@^0.4.2:
   resolved "https://registry.yarnpkg.com/formsnap/-/formsnap-0.4.2.tgz#e755dea68f1f5cfa9c9e4919f03de266f7170631"
   integrity sha512-iUhGDUcjUW9tCOYLZ1rbNR1wkjtEbrXDxhUnl7+zPKjP5K8ikDfhZWH1cquKdUcHJoSE7M/Rruvg0fNQMjSNtA==
 
+fp-ts@^2.16.5:
+  version "2.16.5"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.16.5.tgz#d79b97168aeafcf9612f18bbc017f513ecb20ac9"
+  integrity sha512-N8T8PwMSeTKKtkm9lkj/zSTAnPC/aJIIrQhnHxxkL0KLsRCNUPANksJOlMXxcKKCo7H1ORP3No9EMD+fP0tsdA==
+
 fraction.js@^4.3.6:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.7.tgz#06ca0085157e42fda7f9e726e79fefc4068840f7"
@@ -1701,6 +1706,11 @@ inherits@2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
+
+io-ts@^2.2.21:
+  version "2.2.21"
+  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.21.tgz#4ef754176f7082a1099d04c7d5c4ea53267c530a"
+  integrity sha512-zz2Z69v9ZIC3mMLYWIeoUcwWD6f+O7yP92FMVVaXEOSZH1jnVBmET/urd/uoarD1WGBY4rCj8TAyMPzsGNzMFQ==
 
 is-binary-path@~2.1.0:
   version "2.1.0"
