@@ -1,3 +1,19 @@
+<script lang="ts" context="module">
+	export type SelectType =
+		| {
+				startLineNumber: number;
+				startColumn: number;
+				endLineNumber: number;
+				endColumn: number;
+		  }
+		| undefined;
+
+	export type QuestionArrayType = {
+		question: string;
+		select: SelectType;
+	};
+</script>
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import * as Card from '$lib/components/ui/card';
@@ -29,7 +45,15 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import SingleChoice from './challenge-specific/SingleChoice.svelte';
 	import MultipleChoice from './challenge-specific/MultipleChoice.svelte';
-	import McqChallenge from '$lib/components/app/main/challenge/mcq-challenge/McqChallenge.svelte';
+	import CodeOutput from './challenge-specific/CodeOutput.svelte';
+
+	const INITIAL_CODE_EDITOR_CONTENT = `#include <stdio.h>
+
+int main() {
+    // TODO
+
+    return 0;
+}`;
 
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'long'
@@ -53,19 +77,7 @@
 		second_group: string[];
 		correct_answers: [number, number][];
 	};
-	type SelectType =
-		| {
-				startLineNumber: number;
-				startColumn: number;
-				endLineNumber: number;
-				endColumn: number;
-		  }
-		| undefined;
 
-	type QuestionArrayType = {
-		question: string;
-		select: SelectType;
-	};
 	let codeOutputData: {
 		code: string;
 		question_array: QuestionArrayType[];
@@ -84,7 +96,7 @@
 		}
 		if (type?.value !== ChallengeCategory.CODE_OUTPUT) {
 			codeOutputData = {
-				code: '',
+				code: INITIAL_CODE_EDITOR_CONTENT,
 				question_array: [{ question: '', select: undefined }],
 				correct_answer_regex_array: ['']
 			};
@@ -251,7 +263,11 @@
 						{:else if type.value === ChallengeCategory.CONNECT_BLOCKS}
 							PLACEHOLDER
 						{:else if type.value === ChallengeCategory.CODE_OUTPUT}
-							PLACEHOLDER
+							<CodeOutput
+								bind:code={codeOutputData.code}
+								bind:question_array={codeOutputData.question_array}
+								bind:correct_answer_regex_array={codeOutputData.correct_answer_regex_array}
+							/>
 						{/if}
 					</div>
 				</Card.Content>

@@ -19,11 +19,11 @@
 <Accordion.Root bind:value={accordionValue} class="mt-4">
 	<Accordion.Item value="overall-details" class="border-b-0">
 		<Accordion.Trigger
-			class="hover:no-underline hover:bg-accent hover:text-accent-foreground rounded-md h-10 py-2 -mx-2 px-2"
+			class="bg-accent/30 hover:no-underline hover:bg-accent hover:text-accent-foreground rounded-md h-10 py-2 px-2"
 			>Overall Details:</Accordion.Trigger
 		>
 		<Accordion.Content class="*:p-0">
-			<div class="flex max-sm:flex-col gap-4 pt-6 relative">
+			<div class="flex max-sm:flex-col gap-4 pt-6">
 				<div class="flex flex-col gap-6 grow basis-1/3">
 					<div class="flex flex-col gap-2">
 						<Label for="name">Challenge Name</Label>
@@ -36,19 +36,19 @@
 								<Select.Value placeholder="Choose difficulty…" />
 							</Select.Trigger>
 							<Select.Content>
-								<Select.Item value={challengeDifficulties[0].value}
+								<Select.Item class="cursor-pointer" value={challengeDifficulties[0].value}
 									>{challengeDifficulties[0].label}</Select.Item
 								>
-								<Select.Item value={challengeDifficulties[1].value}
+								<Select.Item class="cursor-pointer" value={challengeDifficulties[1].value}
 									>{challengeDifficulties[1].label}</Select.Item
 								>
-								<Select.Item value={challengeDifficulties[2].value}
+								<Select.Item class="cursor-pointer" value={challengeDifficulties[2].value}
 									>{challengeDifficulties[2].label}</Select.Item
 								>
-								<Select.Item value={challengeDifficulties[3].value}
+								<Select.Item class="cursor-pointer" value={challengeDifficulties[3].value}
 									>{challengeDifficulties[3].label}</Select.Item
 								>
-								<Select.Item value={challengeDifficulties[4].value}
+								<Select.Item class="cursor-pointer" value={challengeDifficulties[4].value}
 									>{challengeDifficulties[4].label}</Select.Item
 								>
 							</Select.Content>
@@ -65,25 +65,25 @@
 								</Select.Value>
 							</Select.Trigger>
 							<Select.Content>
-								<Select.Item value={challengeTypes[0].value}
+								<Select.Item class="cursor-pointer" value={challengeTypes[0].value}
 									><svelte:component
 										this={challengeTypes[0].icon}
 										class="mr-1 my-1"
 									/>{challengeTypes[0].label}</Select.Item
 								>
-								<Select.Item value={challengeTypes[1].value}
+								<Select.Item class="cursor-pointer" value={challengeTypes[1].value}
 									><svelte:component
 										this={challengeTypes[1].icon}
 										class="mr-1 my-1"
 									/>{challengeTypes[1].label}</Select.Item
 								>
-								<Select.Item value={challengeTypes[2].value}
+								<Select.Item class="cursor-pointer" value={challengeTypes[2].value}
 									><svelte:component
 										this={challengeTypes[2].icon}
 										class="mr-1 my-1"
 									/>{challengeTypes[2].label}</Select.Item
 								>
-								<Select.Item value={challengeTypes[3].value}
+								<Select.Item class="cursor-pointer" value={challengeTypes[3].value}
 									><svelte:component
 										this={challengeTypes[3].icon}
 										class="mr-1 my-1"
@@ -93,7 +93,7 @@
 						</Select.Root>
 					</div>
 				</div>
-				<Separator orientation="vertical" class="max-sm:hidden mx-2" />
+				<Separator orientation="vertical" class="max-sm:hidden mx-2 h-auto" />
 				<Separator orientation="horizontal" class="sm:hidden my-2" />
 				<div class="flex flex-col gap-6 grow basis-2/3">
 					<div class="flex flex-col gap-2">

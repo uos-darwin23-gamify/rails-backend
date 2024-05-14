@@ -29,14 +29,14 @@
 		<p class="text-sm text-muted-foreground">
 			Fill out the answers and click on the one that is correct.
 		</p>
-		<p class="text-sm text-muted-foreground">Answer order will be randomized for every user.</p>
+		<p class="text-sm text-muted-foreground">Order will be individually randomized for every user.</p>
 	</div>
 	<Button on:click={() => (answers = [...answers, ''])}
 		><PlusCircle class="h-5 w-5 mr-2" />Add</Button
 	>
 </div>
 {#if !rerendering}
-	<RadioGroup.Root value={correct_answer?.toString()} class="flex grow flex-col gap-2">
+	<RadioGroup.Root value={correct_answer?.toString()} class="flex grow flex-col gap-2 min-w-96">
 		{#each Array(Math.ceil(answers.length / 2)) as _, index (index)}
 			<div class="flex gap-2">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -34,7 +34,7 @@
 		<p class="text-sm text-muted-foreground">
 			Fill out the answers and check the ones that are correct.
 		</p>
-		<p class="text-sm text-muted-foreground">Answer order will be randomized for every user.</p>
+		<p class="text-sm text-muted-foreground">Order will be individually randomized for every user.</p>
 	</div>
 	<Button
 		on:click={() => {
@@ -44,7 +44,7 @@
 	>
 </div>
 {#if !rerendering}
-	<div class="flex grow flex-col gap-2">
+	<div class="flex grow flex-col gap-2 min-w-96">
 		{#each Array(Math.ceil(answers.length / 2)) as _, index (index)}
 			<div class="flex gap-2">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
