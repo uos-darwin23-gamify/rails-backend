@@ -31,10 +31,16 @@ Rails.application.routes.draw do
       put "pre-authorized-emails", to: "admin/pre_authorized_emails#update_pre_authorized_email"
       delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
 
-      get "challenge-editor-all", to: "admin/challenge_editor#all_challenges"
-      post "scq-challenge-create", to: "admin/challenge_editor#create_scq"
-      post "mcq-challenge-create", to: "admin/challenge_editor#create_mcq"
-      post "blocks-challenge-create", to: "admin/challenge_editor#create_blocks"
+      scope "challenges" do
+        get "/", to: "admin/challenge_editor#all"
+        delete "/:id", to: "admin/challenge_editor#destroy"
+
+
+
+        # post "scq-challenge-create", to: "admin/challenge_editor#create_scq"
+        # post "mcq-challenge-create", to: "admin/challenge_editor#create_mcq"
+        # post "blocks-challenge-create", to: "admin/challenge_editor#create_blocks"
+      end
 
       get "users", to: "admin/users#all_users"
       delete "users/:id", to: "admin/users#destroy"

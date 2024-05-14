@@ -3,25 +3,33 @@
 module Admin
   class ChallengeEditorController < ApplicationController
     before_action :authorize_admin_controllers
-    before_action :set_challenge, only: %i[show update destroy]
+    before_action :set_challenge, only: %i[destroy]
 
-    def all_challenges
+    def all
       challenges = Challenge.all.map do |challenge|
         challenge.as_json(methods: %i[id type])
       end
-      render json: challenges
+      placement_challenges = PlacementChallenge.all.map do |challenge|
+        challenge.as_json(methods: %i[id type])
+      end
+      render json: {challenges: challenges, placement_challenges: placement_challenges}
     end
 
-    # GET /challenges
-    def index
-      @challenges = Challenge.all
-      render json: @challenges
+    def destroy
+      @challenge.destroy
+      render json: {message: "Challenge deleted successfully"}
     end
 
-    # GET /challenges/:id
-    def show
-      render json: @challenge
-    end
+    # # GET /challenges
+    # def index
+    #   @challenges = Challenge.all
+    #   render json: @challenges
+    # end
+
+    # # GET /challenges/:id
+    # def show
+    #   render json: @challenge
+    # end
 
     # POST /challenges
     def create_scq
@@ -75,16 +83,18 @@ module Admin
       end
     end
 
-    # DELETE /challenges/:id
-    def destroy
-      @challenge.destroy
-    end
-
     private
 
-    # Use callbacks to share common setup or constraints between actions
     def set_challenge
-      @challenge = Challenge.find(params[:id])
+      if params[:id].to_s == params[:id]
+        @challenge = Challenge.find(params[:id])
+        if !@challenge
+          @challenge = PlacementChallenge.find(params[:id])
+        end
+        render json: {message: 'Challenge not found'}, status: :not_found unless @challenge
+      else
+        render json: {message: 'Invalid challenge ID parameter'}, status: :bad_request
+      end
     end
 
     # Only allow a list of trusted parameters through
