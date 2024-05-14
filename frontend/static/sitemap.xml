@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gamifycoding.me</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/login</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/signup</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/forgot-password</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/app</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/app/challenges</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/app/leaderboard</loc>
+  </url>
+  <url>
+    <loc>https://gamifycoding.me/app/guide</loc>
+  </url>
+</urlset>

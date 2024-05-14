@@ -2,12 +2,12 @@
 	import Header from '$lib/components/admin/header/Header.svelte';
 	import SideMenu from '$lib/components/admin/sidemenu/SideMenu.svelte';
 	import AdminDashboardUrls from '$lib/enums/AdminDashboardUrls.js';
-	import Overview from '$lib/components/admin/main/overview/Overview.svelte';
 	import ChallengeEditor from '$lib/components/admin/main/challenge-editor/ChallengeEditor.svelte';
 	import Users from '$lib/components/admin/main/users/Users.svelte';
 	import PreAuthorizedEmails from '$lib/components/admin/main/pre-authorized-emails/PreAuthorizedEmails.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data;
 	let menuClosed = true;
@@ -26,7 +26,7 @@
 				mainComponent = PreAuthorizedEmails;
 				break;
 			default:
-				mainComponent = Overview;
+				goto('/admin/' + AdminDashboardUrls.CHALLENGE_EDITOR);
 				break;
 		}
 	}

@@ -2,8 +2,9 @@
 	import { onMount } from 'svelte';
 	import { createNoise3D } from 'simplex-noise';
 	import TypewriterEffectSmooth from '$lib/components/welcome-page/TypewriterEffectSmooth.svelte';
+	import Cards from '$lib/components/welcome-page/Cards.svelte';
 
-	let speed: 'slow' | 'fast' = 'slow';
+	const SPEED = 0.001;
 	let waveOpacity = 0.5;
 	let waveWidth = 50;
 	let blur = 10;
@@ -28,17 +29,6 @@
 	let x: number;
 	let ctx: any;
 
-	const getSpeed = () => {
-		switch (speed) {
-			case 'slow':
-				return 0.001;
-			case 'fast':
-				return 0.002;
-			default:
-				return 0.001;
-		}
-	};
-
 	onMount(() => {
 		ctx = canvas.getContext('2d');
 		w = ctx.canvas.width = window.innerWidth;
@@ -53,7 +43,7 @@
 
 	const waveColors = ['#38bdf8', '#818cf8', '#c084fc', '#e879f9', '#22d3ee'];
 	const drawWave = (n: number) => {
-		nt += getSpeed();
+		nt += SPEED;
 		for (i = 0; i < n; i++) {
 			ctx.beginPath();
 			ctx.lineWidth = waveWidth || 50;
@@ -75,28 +65,33 @@
 		drawWave(5);
 		animationId = requestAnimationFrame(render);
 	};
+
+	let container: HTMLDivElement;
+	$: containerHeight = container?.scrollHeight ?? 0;
 </script>
 
 <svelte:window
 	on:resize={() => {
+		containerHeight = container?.scrollHeight ?? 0;
 		w = ctx.canvas.width = window.innerWidth;
 		h = ctx.canvas.height = window.innerHeight;
 		ctx.filter = `blur(${blur}px)`;
 	}}
 />
 
-<div class="snap-start relative h-full w-full overflow-hidden flex">
-	<div class="flex grow items-center flex-col">
+<div class="relative h-full w-full flex">
+	<div class="flex grow items-center flex-col" bind:this={container}>
 		<canvas
 			class="absolute w-full"
-			style={`height: calc(100dvh - ${headerHeight}px);`}
+			style={`height: max(${containerHeight}px, calc(100dvh - ${headerHeight}px));`}
 			bind:this={canvas}
 		></canvas>
 		<div class="flex flex-col justify-center items-center grow relative">
 			<TypewriterEffectSmooth
-				word={{ text: 'Welcome Page', className: 'text-xl sm:text-4xl' }}
+				word={{ text: 'Redefining C Teaching', className: 'text-xl sm:text-4xl' }}
 				className="mx-2"
 			/>
 		</div>
+		<Cards />
 	</div>
 </div>

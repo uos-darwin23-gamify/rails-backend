@@ -27,6 +27,10 @@ class User < ApplicationRecord
     where(group: User.groups[:global])
   end
 
+  def admin_group?
+    group == "admin_group"
+  end
+
   def league?
     group == "league"
   end

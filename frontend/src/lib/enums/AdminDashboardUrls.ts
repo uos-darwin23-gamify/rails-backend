@@ -1,5 +1,5 @@
 enum AdminDashboardUrls {
-	OVERVIEW = '',
+	INDEX = '',
 	CHALLENGE_EDITOR = 'challenge-editor',
 	USERS = 'users',
 	PRE_AUTHORIZED_EMAILS = 'pre-authorized-emails'

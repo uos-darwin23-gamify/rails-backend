@@ -29,6 +29,7 @@ module Users
     end
 
     def append_group_and_username_and_email_unsubscribe_token
+      params[:user][:email] = params[:user][:email].downcase
       params[:user][:group] = determine_group
       params[:user][:username] = generate_username
       params[:user][:email_unsubscribe_token] = generate_email_unsubscribe_token

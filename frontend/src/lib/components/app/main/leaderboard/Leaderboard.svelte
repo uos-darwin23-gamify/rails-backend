@@ -14,6 +14,7 @@
 	let stats: any;
 	let error: string | undefined = undefined;
 	let loading = true;
+	let imageError = false;
 
 	const getLeaderboardData = async () => {
 		const response = await fetch('/api/leaderboard/data');
@@ -66,7 +67,7 @@
 								<Card.Description>Global Leaderboard</Card.Description>
 							{/if}
 							<div class="flex flex-col space-y-1.5">
-								<Label>ELO:</Label>
+								<Label>Score:</Label>
 								<p class="text-xs leading-none text-muted-foreground">
 									{stats.elo}
 								</p>
@@ -87,7 +88,16 @@
 							<div class="flex flex-col gap-1.5 items-center">
 								<Card.Title>Current League:</Card.Title>
 								<div class="shrink-0">
-									<ShieldHalf class="h-14 w-14 -ml-0.5" />
+									{#if !imageError}
+										<img
+											src={`/league-icons/${stats.user_league}.svg`}
+											class="h-14 w-14 -ml-0.5"
+											alt="Current League Icon"
+											on:error={() => (imageError = true)}
+										/>
+									{:else}
+										<ShieldHalf class="h-14 w-14 -ml-0.5" />
+									{/if}
 								</div>
 								{stats.user_league}
 							</div>
