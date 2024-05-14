@@ -3,12 +3,12 @@
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import UserType from '$lib/enums/UserType';
-	import { socketConnection } from '$lib/stores';
+	// import { socketConnection } from '$lib/stores';
 
 	onMount(async () => {
 		await authenticated.verify();
-		socketConnection.reset();
-		$socketConnection.on('user-type', ({ userType }) => console.log(userType));
+		// socketConnection.reset();
+		// $socketConnection.on('user-type', ({ userType }) => console.log(userType));
 	});
 	$: loading = $authenticated === null;
 	$: {

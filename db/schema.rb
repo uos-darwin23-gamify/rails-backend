@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_09_180516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "username", null: false
+    t.integer "group", null: false
+    t.datetime "start_time", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "end_time"
+    t.integer "session_duration_seconds"
+    t.integer "elo_session_start", null: false
+    t.integer "elo_session_end"
+    t.boolean "placement_challenges_finished_session_start", null: false
+    t.boolean "placement_challenges_finished_session_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "elo_difference"
+    t.string "league_session_start"
+    t.integer "league_position_session_start"
+    t.integer "league_size_session_start"
+    t.string "league_session_end"
+    t.integer "league_position_session_end"
+    t.integer "league_size_session_end"
+    t.integer "global_position_session_start"
+    t.integer "global_leaderboard_size_session_start"
+    t.integer "global_position_session_end"
+    t.integer "global_leaderboard_size_session_end"
+  end
 
   create_table "pre_authorized_emails", force: :cascade do |t|
     t.string "email", null: false
@@ -38,8 +64,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
     t.datetime "end_time"
     t.string "answer"
     t.boolean "answer_correct"
+    t.integer "new_elo"
+    t.integer "elo_change"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "score"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,10 +80,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_185208) do
     t.integer "user_type", default: 0, null: false
     t.integer "group", null: false
     t.string "username", null: false
+    t.boolean "email_notifications", default: true
+    t.string "email_unsubscribe_token", null: false
+    t.integer "elo", default: 1000, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email_unsubscribe_token"], name: "index_users_on_email_unsubscribe_token", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

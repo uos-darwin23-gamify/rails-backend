@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AppUrls from '$lib/enums/AppUrls';
 	import { createEventDispatcher } from 'svelte';
-	import { Home, Swords, Settings2, Shield, BookText } from 'lucide-svelte';
+	import { Swords, Settings2, Shield, BookText, HelpCircle } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import LogoutButton from '$lib/components/LogoutButton.svelte';
 
@@ -14,16 +14,6 @@
 	<li>
 		<Button
 			variant={!slug ? 'secondary' : 'outline'}
-			href={`/app${AppUrls.HOME ? '/' + AppUrls.HOME : ''}`}
-			data-testid="home-button"
-			on:click={() => dispatch('sideMenuItemClicked')}
-			class="flex items-center text-sm justify-start"><Home class="h-5 w-5 mr-2" />Home</Button
-		>
-	</li>
-	<div class="my-1" />
-	<li>
-		<Button
-			variant={slug === AppUrls.LEADERBOARD ? 'secondary' : 'outline'}
 			href={`/app${AppUrls.LEADERBOARD ? '/' + AppUrls.LEADERBOARD : ''}`}
 			data-testid="leaderboard-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
@@ -61,6 +51,17 @@
 			on:click={() => dispatch('sideMenuItemClicked')}
 			class="flex items-center text-sm justify-start"
 			><Settings2 class="h-5 w-5 mr-2" />Settings</Button
+		>
+	</li>
+	<div class="my-1" />
+	<li>
+		<Button
+			variant={slug === AppUrls.HELP ? 'secondary' : 'outline'}
+			href={`/app${AppUrls.HELP ? '/' + AppUrls.HELP : ''}`}
+			data-testid="help-button"
+			on:click={() => dispatch('sideMenuItemClicked')}
+			class="flex items-center text-sm justify-start"
+			><HelpCircle class="h-5 w-5 mr-2" />Help</Button
 		>
 	</li>
 	<div class="grow"></div>

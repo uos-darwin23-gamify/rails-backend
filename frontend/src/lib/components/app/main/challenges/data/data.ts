@@ -35,6 +35,14 @@ export const challengeDiffuculties = [
 	{
 		value: 'HARD',
 		label: 'Hard'
+	},
+	{
+		value: 'SIMPLE',
+		label: 'Simple'
+	},
+	{
+		value: 'EXTREME',
+		label: 'Extreme'
 	}
 ];
 

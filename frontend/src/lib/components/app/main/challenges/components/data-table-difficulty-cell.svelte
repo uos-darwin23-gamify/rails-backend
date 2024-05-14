@@ -17,6 +17,12 @@
 		case 'EASY':
 			bgColor = 'bg-green-900';
 			break;
+		case 'SIMPLE':
+			bgColor = 'bg-indigo-900';
+			break;
+		case 'EXTREME':
+			bgColor = 'bg-pink-900';
+			break;
 		default:
 			break;
 	}

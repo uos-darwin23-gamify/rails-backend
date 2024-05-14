@@ -1,0 +1,67 @@
+!!!
+%html
+  %head
+    %title Welcome To GamifyCoding™
+    :css
+      body, table {
+        font-family: 'Geist', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        color: white;
+        margin-top: 0;
+      }
+      p {
+        color: white;
+      }
+      .background {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==) no-repeat;
+        background-size: cover;
+      }
+      .outer {
+        background-color: #262626;
+        background: linear-gradient(315deg, rgba(227,123,70,1) 3%, rgba(198,51,92,1) 44%, rgba(86,50,139,1) 85%);
+      }
+      .inner {
+        background-color: #262626;
+        margin: 0 auto;
+        width: 95%;
+        height: 95%;
+        border-radius: .3rem;
+        padding: 1.5rem;
+      }
+      .spacer {
+        line-height: 0;
+        margin: 0;
+      }
+      .padding {
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+      }
+      .last-element {
+        margin-bottom: 0;
+      }
+      .sign-off {
+        margin: 0;
+        text-align: right;
+        font-size: 11px;
+      }
+  %body
+    %table.outer{ "width" => "100%", "height" => "100%" }
+      %tr
+        %td.padding
+          %table.inner
+            %tr
+              %td.background
+                %p.spacer
+                  &nbsp;
+                %h1 GamifyCoding™
+                %p Hello @#{@username},
+                %p Welcome to GamifyCoding™, the platform where you can solve C programming challenges to gain points and move up the leaderboard, competing with other players.
+                %p
+                  %a{ href: 'https://gamifycoding.me', style: 'color: white;' } Visit the platform
+                %p
+                  %a{ href: 'https://gamifycoding.me/app/guide', style: 'color: white;' } How to use the platform
+                %p.sign-off Good Luck!
+                %p.last-element.sign-off GamifyCoding™

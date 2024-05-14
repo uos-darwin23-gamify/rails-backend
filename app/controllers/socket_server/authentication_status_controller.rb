@@ -7,8 +7,9 @@ module SocketServer
     def index
       user_type = authenticated_from_socket?
 
-      if authenticated_from_socket?
-        render json: {userType: user_type}
+      if user_type
+        user = current_user_from_socket
+        render json: {userType: user_type, email: user.email}
       else
         render json: {userType: "Not Authenticated"}, status: :unauthorized
       end

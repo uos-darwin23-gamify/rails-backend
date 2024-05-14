@@ -168,7 +168,11 @@
 				<Card.Content class="flex grow flex-col">
 					<p class="text-wrap mb-4">{data.question_overview}</p>
 					<div class="flex grow relative overflow-x-auto" id="challenge-container">
-						<svelte:component this={mainComponent} {data} bind:solutionState />
+						{#if challengeType === ChallengeType.CONNECT_BLOCKS}
+							<svelte:component this={mainComponent} dataIntermediate={data} bind:solutionState />
+						{:else}
+							<svelte:component this={mainComponent} {data} bind:solutionState />
+						{/if}
 					</div>
 				</Card.Content>
 				<Card.Footer class="flex justify-between">

@@ -7,12 +7,17 @@
 	let data: ChallengeOverview[];
 	let loading = true;
 
+	let placementChallenges = false;
+
 	const getChallengeOverviews = async () => {
 		loading = true;
-		const response = await fetch('/api/challenges');
+		const responseChallenges = await fetch('/api/challenges');
+		const responsePlacementChallengesFinished = await fetch('/api/placement-challenges-finished');
 
-		if (response.ok) {
-			data = await response.json();
+		if (responseChallenges.ok && responsePlacementChallengesFinished.ok) {
+			data = await responseChallenges.json();
+			placementChallenges = !(await responsePlacementChallengesFinished.json())
+				.placement_challenges_finished;
 			loading = false;
 		}
 	};
@@ -29,13 +34,15 @@
 		<Card.Root class="flex grow relative overflow-x-auto">
 			<div class="grow w-full">
 				<Card.Header>
-					<Card.Title>Challenges</Card.Title>
+					<Card.Title>{placementChallenges ? 'Placement Challenges' : 'Challenges'}</Card.Title>
 					<Card.Description
-						>Complete challenges to gain points and move up the leaderboard.</Card.Description
+						>{placementChallenges
+							? 'Complete these challenges to get your initial ranking.'
+							: 'Complete challenges to gain points and move up the leaderboard.'}</Card.Description
 					>
 				</Card.Header>
 				<Card.Content>
-					<DataTable {data} />
+					<DataTable dataIntermediate={data} />
 				</Card.Content>
 				<!-- <Card.Footer class="flex justify-end">
 					{#if selectedRowIds !== false && selectedRowIds.length > 0}
