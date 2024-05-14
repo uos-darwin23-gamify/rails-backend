@@ -67,8 +67,7 @@
 				t.literal(ChallengeDifficulty.HARD),
 				t.literal(ChallengeDifficulty.EXTREME)
 			]),
-			correct_answer_explanation: t.string,
-			created_at: t.string
+			correct_answer_explanation: t.string
 		}),
 		t.union([
 			ScqChallengeType,
@@ -95,7 +94,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import ChallengeDataTable from './challenge-data-table/data-table.svelte';
 	import PlacementChallengeDataTable from './placement-challenge-data-table/data-table.svelte';
 	import * as Card from '$lib/components/ui/card';
@@ -103,7 +102,9 @@
 	import { isRight } from 'fp-ts/lib/Either';
 	import { toast } from 'svelte-sonner';
 	import Button from '$lib/components/new-york/ui/button/button.svelte';
-	import { Pencil1 } from 'radix-icons-svelte';
+	import { Pencil1, Calendar } from 'radix-icons-svelte';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { Input } from '$lib/components/ui/input';
 
 	let challengeData: {
 		challenges: Challenge[];
@@ -175,6 +176,39 @@
 		}
 	};
 
+	let offsetDialogOpen = false;
+	let offsetNumberOfDays = 0;
+
+	const offsetChallengeReleaseDates = async () => {
+		const response = await fetch(
+			'/api/admin/challenges/offset?offset=' + encodeURIComponent(offsetNumberOfDays),
+			{
+				method: 'POST'
+			}
+		);
+		if (response.ok) {
+			getChallenges();
+			offsetDialogOpen = false;
+			toast.success('Release dates updated successfully!');
+		} else {
+			toast.error('Release dates update failed!');
+		}
+	};
+
+	$: {
+		if (!offsetDialogOpen) {
+			offsetNumberOfDays = 0;
+		}
+	}
+
+	const updateOffsetNumberOfDays = async (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		offsetNumberOfDays = isNaN(parseInt(target.value)) ? 0 : parseInt(target.value);
+		offsetNumberOfDays = offsetNumberOfDays + 1;
+		await tick();
+		offsetNumberOfDays = offsetNumberOfDays - 1;
+	};
+
 	let currentViewMode: ViewMode = ViewMode.CHALLENGES;
 </script>
 
@@ -192,11 +226,20 @@
 							<Card.Title>Challenges</Card.Title>
 							<Card.Description>List of all challenges.</Card.Description>
 						</div>
-						<Button class="h-8"
-							><Pencil1 class="h-5 w-5 mr-2" />Create<span class="max-sm:hidden">
-								&nbsp;New&nbsp;Challenge</span
-							></Button
-						>
+						<div class="flex flex-col gap-2">
+							<Button class="h-8" href="/admin/challenge-editor/new"
+								><Pencil1 class="h-5 w-5 mr-2" />Create<span class="max-sm:hidden">
+									&nbsp;New&nbsp;Challenge</span
+								></Button
+							>
+							{#if currentViewMode === ViewMode.CHALLENGES}
+								<Button variant="secondary" on:click={() => (offsetDialogOpen = true)}
+									><Calendar class="h-5 w-5 mr-2" />Offset<span class="max-sm:hidden">
+										&nbsp;All&nbsp;Release&nbsp;Dates</span
+									></Button
+								>
+							{/if}
+						</div>
 					</div>
 				</Card.Header>
 				<Card.Content>
@@ -227,3 +270,28 @@
 		</Card.Root>
 	</div>
 {/if}
+<Dialog.Root bind:open={offsetDialogOpen}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Bulk Release Date Offset</Dialog.Title>
+			<Dialog.Description class="pt-2 pb-3">
+				Offset release date of all challenges by same number of days. This can be used for setting
+				new start dates of experiments.
+			</Dialog.Description>
+			<div class="flex gap-2 items-center">
+				<p>Offset&nbsp;by&nbsp;</p>
+				<Input
+					type="number"
+					class="w-24"
+					value={offsetNumberOfDays}
+					on:change={updateOffsetNumberOfDays}
+				/>
+				<p>&nbsp;day{offsetNumberOfDays !== 1 && offsetNumberOfDays !== -1 ? 's' : ''}.</p>
+			</div>
+		</Dialog.Header>
+		<Dialog.Footer class="mt-4 flex sm:justify-between gap-2">
+			<Button variant="secondary" on:click={() => (offsetDialogOpen = false)}>Cancel</Button>
+			<Button on:click={offsetChallengeReleaseDates}>Offset Challenges</Button>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>

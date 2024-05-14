@@ -14,7 +14,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import { challengeTypes, challengeDiffuculties, challengeStatuses } from '../data/data';
+	import { challengeTypes, challengeDifficulties, challengeStatuses } from '../data/data';
 	import ScqForm from './scq/form.svelte';
 	import McqForm from './mcq/form.svelte';
 	import CodeOutputForm from './code_output/form.svelte';
@@ -78,7 +78,7 @@
 				<DataTableFacetedFilter
 					bind:filterValues={$filterValues.difficulty}
 					title="Difficulty"
-					options={challengeDiffuculties}
+					options={challengeDifficulties}
 				/>
 				<!-- <DataTableFacetedFilter
 					bind:filterValues={$filterValues.status}

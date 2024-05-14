@@ -33,7 +33,9 @@ Rails.application.routes.draw do
 
       scope "challenges" do
         get "/", to: "admin/challenge_editor#all"
+        get "/single", to: "admin/challenge_editor#single"
         delete "/:id", to: "admin/challenge_editor#destroy"
+        post "/offset", to: "admin/challenge_editor#offset"
 
 
 

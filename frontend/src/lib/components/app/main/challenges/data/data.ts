@@ -23,7 +23,7 @@ export const challengeTypes = [
 	}
 ];
 
-export const challengeDiffuculties = [
+export const challengeDifficulties = [
 	{
 		value: 'EASY',
 		label: 'Easy'

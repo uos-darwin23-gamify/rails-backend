@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Badge } from '$lib/components/new-york/ui/badge';
-	// import { challengeDiffuculties } from '../data/data';
+	// import { challengeDifficulties } from '../data/data';
 
 	export let value: string;
-	// const color = challengeDiffuculties.find(({ value: _value }) => value === _value)?.color;
-	// const label = challengeDiffuculties.find(({ value: _value }) => value === _value)?.label;
+	// const color = challengeDifficulties.find(({ value: _value }) => value === _value)?.color;
+	// const label = challengeDifficulties.find(({ value: _value }) => value === _value)?.label;
 	let bgColor = '';
 
 	switch (value) {

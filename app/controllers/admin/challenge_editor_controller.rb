@@ -3,7 +3,7 @@
 module Admin
   class ChallengeEditorController < ApplicationController
     before_action :authorize_admin_controllers
-    before_action :set_challenge, only: %i[destroy]
+    before_action :set_challenge, only: %i[single destroy]
 
     def all
       challenges = Challenge.all.map do |challenge|
@@ -15,9 +15,23 @@ module Admin
       render json: {challenges: challenges, placement_challenges: placement_challenges}
     end
 
+    def single
+      render json: @challenge.as_json(methods: %i[id type])
+    end
+
     def destroy
       @challenge.destroy
       render json: {message: "Challenge deleted successfully"}
+    end
+
+    def offset
+      begin
+        offset_days_param = Integer(params[:offset])
+        Challenge.offset_date_when_available_by(offset_days_param)
+        render json: {message: "Challenge available dates offset successfully"}
+      rescue ArgumentError
+        render json: {message: "Invalid offset parameter. Please provide an integer."}, status: :bad_request
+      end
     end
 
     # # GET /challenges

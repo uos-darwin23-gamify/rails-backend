@@ -66,4 +66,11 @@ class Challenge
   def available_in_past?
     Time.zone.today > date_when_available
   end
+
+  def self.offset_date_when_available_by(days)
+    all.each do |challenge|
+      challenge.date_when_available += days
+      challenge.save
+    end
+  end
 end

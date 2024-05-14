@@ -6,7 +6,7 @@
 	import Button from '$lib/components/new-york/ui/button/button.svelte';
 	import { Cross2 } from 'radix-icons-svelte';
 	import type { Writable } from 'svelte/store';
-	import { challengeTypes, challengeDiffuculties } from '../data/data';
+	import { challengeTypes, challengeDifficulties } from '../data/data';
 
 	export let tableModel: TableViewModel<PlacementChallenge>;
 
@@ -47,7 +47,7 @@
 				<DataTableFacetedFilter
 					bind:filterValues={$filterValues.Difficulty}
 					title="Difficulty"
-					options={challengeDiffuculties}
+					options={challengeDifficulties}
 				/>
 				{#if showReset}
 					<Button

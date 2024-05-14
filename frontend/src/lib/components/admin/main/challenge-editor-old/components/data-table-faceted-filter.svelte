@@ -6,13 +6,13 @@
 	import { cn } from '$lib/utils/ui';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Badge from '$lib/components/new-york/ui/badge/badge.svelte';
-	import { challengeTypes, challengeDiffuculties, challengeStatuses } from '../data/data';
+	import { challengeTypes, challengeDifficulties, challengeStatuses } from '../data/data';
 
 	export let filterValues: string[] = [];
 	export let title: string;
 	export let options = [] as
 		| typeof challengeTypes
-		| typeof challengeDiffuculties
+		| typeof challengeDifficulties
 		| typeof challengeStatuses;
 
 	let open = false;

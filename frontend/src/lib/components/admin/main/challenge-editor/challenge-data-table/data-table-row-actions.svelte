@@ -27,7 +27,9 @@
 	<DropdownMenu.Content class="w-[160px]" align="end">
 		<HoverCard.Root>
 			<HoverCard.Trigger>
-				<DropdownMenu.Item class="cursor-pointer" on:click={() => goto('/admin/TODO')}
+				<DropdownMenu.Item
+					class="cursor-pointer"
+					on:click={() => goto('/admin/challenge-editor/edit?id=' + encodeURIComponent(value.id))}
 					>Edit</DropdownMenu.Item
 				>
 			</HoverCard.Trigger>
