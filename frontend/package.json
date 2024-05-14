@@ -41,6 +41,8 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"formsnap": "^0.4.2",
+		"fp-ts": "^2.16.5",
+		"io-ts": "^2.2.21",
 		"isomorphic-fetch": "^3.0.0",
 		"lucide-svelte": "^0.309.0",
 		"mode-watcher": "^0.1.2",

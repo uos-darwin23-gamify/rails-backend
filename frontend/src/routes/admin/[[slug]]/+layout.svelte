@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import UserType from '$lib/enums/UserType';
+	import { Toaster } from '$lib/components/ui/sonner';
 	// import { socketConnection } from '$lib/stores';
 
 	onMount(async () => {
@@ -30,6 +31,7 @@
 </svelte:head>
 
 <main class="h-dvh w-dvw flex">
+	<Toaster theme="dark" />
 	{#if loading}
 		<div class="grow flex items-center justify-center">
 			<span class="loading loading-infinity loading-lg" />

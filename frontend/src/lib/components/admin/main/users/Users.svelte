@@ -1,153 +1,101 @@
+<script lang="ts" context="module">
+	import * as t from 'io-ts';
+
+	export enum Group {
+		LEAGUE = 'league',
+		GLOBAL = 'global',
+		ADMIN = 'admin_group'
+	}
+
+	export const UserType = t.type({
+		id: t.number,
+		username: t.string,
+		email: t.string,
+		group: t.union([t.literal(Group.LEAGUE), t.literal(Group.GLOBAL), t.literal(Group.ADMIN)])
+	});
+
+	export type User = t.TypeOf<typeof UserType>;
+</script>
+
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import * as Card from '$lib/components/ui/card';
-    import { Button } from '$lib/components/ui/button';
-    import * as Dialog from '$lib/components/ui/dialog';
+	import { onMount } from 'svelte';
+	import * as Card from '$lib/components/ui/card';
+	import { isRight } from 'fp-ts/lib/Either';
+	import DataTable from './components/data-table.svelte';
+	import { toast } from 'svelte-sonner';
+	import { authenticated } from '$lib/stores';
 
-    let users: any[] = [];  
+	let users: User[] = [];
+	let loading = true;
 
-    onMount(async () => {
-        const response = await fetch('/api/admin/users');
-        users = await response.json();
-    });
+	const getUsers = async () => {
+		loading = true;
+		const response = await fetch('/api/admin/users');
 
-    async function deleteUser(id: any) {
-        const response = await fetch(`/api/admin/users/${id}`, {
-            method: 'DELETE'
-        });
-        if (response.ok) {
-            users = users.filter(user => user.id !== id);
-        }
-    }
+		if (response.ok) {
+			const data = await response.json();
 
-    async function promoteUser(id: any) {
-        const response = await fetch(`/api/admin/users/${id}`, {
-            method: 'PUT'
-        });
-        if (response.ok) {
+			const dataIntermediate: User[] = [];
 
-            users = users.map(user => user.id === id ? {...user, user_type: 'admin_group'} : user);
-            const user = users.find(user => user.id === id);
-            if (user) {
-                user.group = 'admin_group';
-            }
-        }
-    }
-    let deleteDialogOpen = false;
-    let userToDelete: null = null;
+			data.forEach((user: any) => {
+				const validationResult = UserType.decode(user);
 
-    let promoteDialogOpen = false;
-    let userToPromote: null = null;
-    //$: users = users;
+				if (isRight(validationResult)) {
+					const userValidated: User = validationResult.right;
+					dataIntermediate.push(userValidated);
+				} else {
+					console.error('Invalid user object received from API: ', validationResult.left);
+				}
+			});
+
+			users = dataIntermediate;
+			loading = false;
+		}
+	};
+
+	const deleteUser = async (id: number) => {
+		const response = await fetch(`/api/admin/users/${encodeURIComponent(id)}`, {
+			method: 'DELETE'
+		});
+		if (response.ok) {
+			authenticated.verify();
+			getUsers();
+			toast.success('User deleted successfully!');
+		} else {
+			toast.error('User deletion failed!');
+		}
+	};
+
+	const promoteUser = async (id: number) => {
+		const response = await fetch(`/api/admin/users/${encodeURIComponent(id)}`, {
+			method: 'PUT'
+		});
+		if (response.ok) {
+			getUsers();
+			toast.success('User promoted successfully!');
+		} else {
+			toast.error('User promotion failed!');
+		}
+	};
+
+	onMount(getUsers);
 </script>
 
 <div class="flex grow p-4 relative overflow-x-auto">
-    <Card.Root class="flex grow relative overflow-x-auto">
-        <div class="grow w-full">
-            <Card.Header>
-                <Card.Title>Users</Card.Title>
-            </Card.Header>
-            <Card.Content>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Rank</th>
-                            <th>Group</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each users as user (user.id)}
-                            <tr>
-                                <td>{user.username}</td>
-
-                                {#if user.group === 'admin_group'}
-                                    <td>Admin</td>
-                                {:else}
-                                    <td>{user.rank}</td>
-                                {/if}
-
-                                {#if user.group === 'admin_group'}
-                                    <td>Admin</td>
-                                {:else if user.group == 'league_group'}
-                                    <td>League</td>
-                                {:else}
-                                    <td>Global</td>
-                                {/if}
-
-                                <td><Button on:click={() => (deleteDialogOpen = true, userToDelete = user.id)}>Delete</Button></td>
-                                
-                                {#if user.group !== 'admin_group'}
-                                    <td><Button on:click={() => (promoteDialogOpen = true, userToPromote = user.id)}>Promote to Admin</Button></td>
-                                {/if}
-                            </tr>
-                        {/each}
-                    </tbody>
-                </table>
-            </Card.Content>
-        </div>
-    </Card.Root>
+	{#if loading}
+		<div class="grow flex items-center justify-center">
+			<span class="loading loading-ring loading-lg" />
+		</div>
+	{:else}
+		<Card.Root class="flex grow relative overflow-x-auto">
+			<div class="grow w-full">
+				<Card.Header>
+					<Card.Title>Users</Card.Title>
+				</Card.Header>
+				<Card.Content>
+					<DataTable data={users} {deleteUser} {promoteUser} />
+				</Card.Content>
+			</div>
+		</Card.Root>
+	{/if}
 </div>
-
-<Dialog.Root bind:open={deleteDialogOpen}>
-    <Dialog.Content>
-        <Dialog.Header>
-            <Dialog.Title>Are you absolutely sure?</Dialog.Title>
-            <Dialog.Description>
-                This action cannot be undone. This will permanently delete the selected user.
-            </Dialog.Description>
-        </Dialog.Header>
-        <Dialog.Footer class="mt-4 flex sm:justify-between gap-2">
-            <Button
-                variant="secondary"
-                on:click={() => {
-                    deleteDialogOpen = false;
-                }}>Cancel</Button
-            >
-            <Button
-                on:click={() => {
-                    deleteUser(userToDelete);
-                    deleteDialogOpen = false;
-                    userToDelete = null;
-                }}>Delete User</Button
-            >
-        </Dialog.Footer>
-    </Dialog.Content>
-</Dialog.Root>
-
-<Dialog.Root bind:open={promoteDialogOpen}>
-    <Dialog.Content>
-        <Dialog.Header>
-            <Dialog.Title>Are you absolutely sure?</Dialog.Title>
-            <Dialog.Description>
-                This action cannot be undone. This will permanently promote the user to an admin.
-            </Dialog.Description>
-        </Dialog.Header>
-        <Dialog.Footer class="mt-4 flex sm:justify-between gap-2">
-            <Button
-                variant="secondary"
-                on:click={() => {
-                    promoteDialogOpen = false;
-                }}>Cancel</Button
-            >
-            <Button
-                on:click={() => {
-                    promoteUser(userToPromote)
-                    promoteDialogOpen = false;
-                    userToPromote = null;
-                }}>Promote User</Button
-            >
-        </Dialog.Footer>
-    </Dialog.Content>
-</Dialog.Root>
-
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        text-align: left;
-    }
-</style>
