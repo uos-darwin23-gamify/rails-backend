@@ -249,7 +249,7 @@ int main() {
 							bind:correct_answer_explanation
 							bind:type
 						/>
-						<Separator orientation="horizontal" class="my-6" />
+						<Separator orientation="horizontal" class="mb-6 mt-5" />
 						{#if type.value === ChallengeCategory.SCQ}
 							<SingleChoice
 								bind:answers={scqData.answers}

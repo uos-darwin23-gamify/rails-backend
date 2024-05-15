@@ -23,7 +23,7 @@
 			>Overall Details:</Accordion.Trigger
 		>
 		<Accordion.Content class="*:p-0">
-			<div class="flex max-sm:flex-col gap-4 pt-6">
+			<div class="flex max-sm:flex-col gap-4 p-1 pt-6">
 				<div class="flex flex-col gap-6 grow basis-1/3">
 					<div class="flex flex-col gap-2">
 						<Label for="name">Challenge Name</Label>

@@ -11,9 +11,6 @@
 		.fill(false)
 		.map((_, index) => correct_answers.includes(index));
 
-	$: console.log(answers);
-	$: console.log(checkboxState);
-	$: console.log(correct_answers);
 	$: {
 		correct_answers = checkboxState
 			.map((value, index) => (value ? index : undefined))
@@ -34,7 +31,9 @@
 		<p class="text-sm text-muted-foreground">
 			Fill out the answers and check the ones that are correct.
 		</p>
-		<p class="text-sm text-muted-foreground">Order will be individually randomized for every user.</p>
+		<p class="text-sm text-muted-foreground">
+			Order will be individually randomized for every user.
+		</p>
 	</div>
 	<Button
 		on:click={() => {
