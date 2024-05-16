@@ -36,12 +36,8 @@ Rails.application.routes.draw do
         get "/single", to: "admin/challenge_editor#single"
         delete "/:id", to: "admin/challenge_editor#destroy"
         post "/offset", to: "admin/challenge_editor#offset"
-
-
-
-        # post "scq-challenge-create", to: "admin/challenge_editor#create_scq"
-        # post "mcq-challenge-create", to: "admin/challenge_editor#create_mcq"
-        # post "blocks-challenge-create", to: "admin/challenge_editor#create_blocks"
+        put "/edit", to: "admin/challenge_editor#edit"
+        post "/new", to: "admin/challenge_editor#new"
       end
 
       get "users", to: "admin/users#all_users"
