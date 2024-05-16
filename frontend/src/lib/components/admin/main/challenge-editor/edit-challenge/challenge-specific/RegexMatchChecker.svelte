@@ -18,7 +18,6 @@
 		}
 
 		if (!regexPatternError) {
-			console.log({ regexPattern, testValue });
 			regexMatchesTestValue = new RegExp(regexPattern).test(testValue);
 		}
 	}

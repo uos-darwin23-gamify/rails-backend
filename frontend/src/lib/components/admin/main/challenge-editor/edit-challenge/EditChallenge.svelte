@@ -15,7 +15,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import { isRight } from 'fp-ts/lib/Either';
@@ -46,6 +46,7 @@
 	import SingleChoice from './challenge-specific/SingleChoice.svelte';
 	import MultipleChoice from './challenge-specific/MultipleChoice.svelte';
 	import CodeOutput from './challenge-specific/CodeOutput.svelte';
+	import ConnectBlocksChallenge from './challenge-specific/connect-blocks-challenge/ConnectBlocksChallenge.svelte';
 
 	const INITIAL_CODE_EDITOR_CONTENT = `#include <stdio.h>
 
@@ -190,6 +191,13 @@ int main() {
 	};
 
 	onMount(getChallenge);
+
+	let rerenderingConnectBlocks = false;
+	const forceRerenderConnectBlocks = async () => {
+		rerenderingConnectBlocks = true;
+		await tick();
+		rerenderingConnectBlocks = false;
+	};
 </script>
 
 {#if loading}
@@ -261,7 +269,14 @@ int main() {
 								bind:correct_answers={mcqData.correct_answers}
 							/>
 						{:else if type.value === ChallengeCategory.CONNECT_BLOCKS}
-							PLACEHOLDER
+							{#if !rerenderingConnectBlocks}
+								<ConnectBlocksChallenge
+									bind:first_group={connectBlocksData.first_group}
+									bind:second_group={connectBlocksData.second_group}
+									bind:correct_answers={connectBlocksData.correct_answers}
+									{forceRerenderConnectBlocks}
+								/>
+							{/if}
 						{:else if type.value === ChallengeCategory.CODE_OUTPUT}
 							<CodeOutput
 								bind:code={codeOutputData.code}
