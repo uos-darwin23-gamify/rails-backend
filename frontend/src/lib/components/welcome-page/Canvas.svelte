@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 	import { createNoise3D } from 'simplex-noise';
 	import TypewriterEffectSmooth from '$lib/components/welcome-page/TypewriterEffectSmooth.svelte';
-	import Slide2 from '$lib/components/welcome-page/Slide2.svelte';
+	import Cards from '$lib/components/welcome-page/Cards.svelte';
 
-	let speed: 'slow' | 'fast' = 'slow';
+	const SPEED = 0.001;
 	let waveOpacity = 0.5;
 	let waveWidth = 50;
 	let blur = 10;
@@ -29,17 +29,6 @@
 	let x: number;
 	let ctx: any;
 
-	const getSpeed = () => {
-		switch (speed) {
-			case 'slow':
-				return 0.001;
-			case 'fast':
-				return 0.002;
-			default:
-				return 0.001;
-		}
-	};
-
 	onMount(() => {
 		ctx = canvas.getContext('2d');
 		w = ctx.canvas.width = window.innerWidth;
@@ -54,7 +43,7 @@
 
 	const waveColors = ['#38bdf8', '#818cf8', '#c084fc', '#e879f9', '#22d3ee'];
 	const drawWave = (n: number) => {
-		nt += getSpeed();
+		nt += SPEED;
 		for (i = 0; i < n; i++) {
 			ctx.beginPath();
 			ctx.lineWidth = waveWidth || 50;
@@ -103,6 +92,6 @@
 				className="mx-2"
 			/>
 		</div>
-		<Slide2 />
+		<Cards />
 	</div>
 </div>

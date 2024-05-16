@@ -12,7 +12,9 @@
 <ul class="menu menu-lg p-4 min-h-full text-base-content flex-nowrap">
 	<li>
 		<Button
-			variant={slug === AdminDashboardUrls.CHALLENGE_EDITOR ? 'secondary' : 'outline'}
+			variant={slug?.split('/')[0] === AdminDashboardUrls.CHALLENGE_EDITOR
+				? 'secondary'
+				: 'outline'}
 			href={`/admin${
 				AdminDashboardUrls.CHALLENGE_EDITOR ? '/' + AdminDashboardUrls.CHALLENGE_EDITOR : ''
 			}`}
@@ -25,7 +27,7 @@
 	<div class="my-1" />
 	<li>
 		<Button
-			variant={slug === AdminDashboardUrls.USERS ? 'secondary' : 'outline'}
+			variant={slug?.split('/')[0] === AdminDashboardUrls.USERS ? 'secondary' : 'outline'}
 			href={`/admin${AdminDashboardUrls.USERS ? '/' + AdminDashboardUrls.USERS : ''}`}
 			data-testid="users-button"
 			on:click={() => dispatch('sideMenuItemClicked')}
@@ -35,7 +37,9 @@
 	<div class="my-1" />
 	<li>
 		<Button
-			variant={slug === AdminDashboardUrls.PRE_AUTHORIZED_EMAILS ? 'secondary' : 'outline'}
+			variant={slug?.split('/')[0] === AdminDashboardUrls.PRE_AUTHORIZED_EMAILS
+				? 'secondary'
+				: 'outline'}
 			href={`/admin${
 				AdminDashboardUrls.PRE_AUTHORIZED_EMAILS
 					? '/' + AdminDashboardUrls.PRE_AUTHORIZED_EMAILS

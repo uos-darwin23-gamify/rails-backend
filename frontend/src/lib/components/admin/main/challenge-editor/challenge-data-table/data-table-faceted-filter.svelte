@@ -6,14 +6,11 @@
 	import { cn } from '$lib/utils/ui';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Badge from '$lib/components/new-york/ui/badge/badge.svelte';
-	import { challengeTypes, challengeDifficulties, challengeStatuses } from '../data/data';
+	import { challengeTypes, challengeDifficulties } from '../data/data';
 
 	export let filterValues: string[] = [];
 	export let title: string;
-	export let options = [] as
-		| typeof challengeTypes
-		| typeof challengeDifficulties
-		| typeof challengeStatuses;
+	export let options = [] as typeof challengeTypes | typeof challengeDifficulties;
 
 	let open = false;
 
@@ -31,7 +28,7 @@
 		<Button builders={[builder]} variant="outline" size="sm" class="h-8 grow">
 			<PlusCircled class="mr-2 h-4 w-4 hidden sm:block" />
 			{title}
-			<p>{filterValues}</p>
+
 			{#if filterValues.length > 0}
 				<Separator orientation="vertical" class="mx-2 h-4" />
 				<Badge variant="secondary" class="rounded-sm px-1 font-normal lg:hidden">

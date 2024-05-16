@@ -25,6 +25,10 @@ export const challengeTypes = [
 
 export const challengeDifficulties = [
 	{
+		value: 'SIMPLE',
+		label: 'Simple'
+	},
+	{
 		value: 'EASY',
 		label: 'Easy'
 	},
@@ -37,26 +41,7 @@ export const challengeDifficulties = [
 		label: 'Hard'
 	},
 	{
-		value: 'SIMPLE',
-		label: 'Simple'
-	},
-	{
 		value: 'EXTREME',
 		label: 'Extreme'
-	}
-];
-
-export const challengeStatuses = [
-	{
-		value: 'New',
-		label: 'New'
-	},
-	{
-		value: 'In Progress',
-		label: 'In Progress'
-	},
-	{
-		value: 'Finished',
-		label: 'Finished'
 	}
 ];

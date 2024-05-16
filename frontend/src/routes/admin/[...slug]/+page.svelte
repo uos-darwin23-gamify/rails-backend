@@ -8,6 +8,8 @@
 	import type { SvelteComponent } from 'svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import NewChallenge from '$lib/components/admin/main/challenge-editor/new-challenge/NewChallenge.svelte';
+	import EditChallenge from '$lib/components/admin/main/challenge-editor/edit-challenge/EditChallenge.svelte';
 
 	export let data;
 	let menuClosed = true;
@@ -18,6 +20,12 @@
 		switch (data.slug) {
 			case AdminDashboardUrls.CHALLENGE_EDITOR:
 				mainComponent = ChallengeEditor;
+				break;
+			case AdminDashboardUrls.CHALLENGE_EDITOR_NEW_CHALLENGE:
+				mainComponent = NewChallenge;
+				break;
+			case AdminDashboardUrls.CHALLENGE_EDITOR_EDIT_CHALLENGE:
+				mainComponent = EditChallenge;
 				break;
 			case AdminDashboardUrls.USERS:
 				mainComponent = Users;

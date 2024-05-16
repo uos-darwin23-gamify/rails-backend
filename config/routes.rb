@@ -31,6 +31,15 @@ Rails.application.routes.draw do
       put "pre-authorized-emails", to: "admin/pre_authorized_emails#update_pre_authorized_email"
       delete "pre-authorized-emails", to: "admin/pre_authorized_emails#delete_pre_authorized_email"
 
+      scope "challenges" do
+        get "/", to: "admin/challenge_editor#all"
+        get "/single", to: "admin/challenge_editor#single"
+        delete "/:id", to: "admin/challenge_editor#destroy"
+        post "/offset", to: "admin/challenge_editor#offset"
+        put "/edit", to: "admin/challenge_editor#edit"
+        post "/new", to: "admin/challenge_editor#new"
+      end
+
       get "users", to: "admin/users#all_users"
       delete "users/:id", to: "admin/users#destroy"
       put "users/:id", to: "admin/users#promote_to_admin"
