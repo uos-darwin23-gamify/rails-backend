@@ -1,5 +1,5 @@
 # GamifyCoding™
-[![DOI](https://zenodo.org/badge/TODO.svg)](https://zenodo.org/badge/latestdoi/TODO) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![DOI](https://zenodo.org/badge/DOI/<ZENODO_DOI>.svg)](https://doi.org/<ZENODO_DOI>) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A full-stack mobile-friendly web platform where users can solve C programming challenges to gain points and move up the leaderboard, competing with other players. Was created as part of an experiment that aimed to discover differences in extrinsic motivation between users who have access to a global leaderboard vs. those who are limited to a league-based one.
 
@@ -88,20 +88,26 @@ To deploy this platform in a production environment ready for user onboarding, f
     cd gamify-coding/rails-backend/config
     touch master.key
     nano master.key
-    # Enter a random sequence of alpha-numeric characters (the longer the better) - Save this value, will be used in another step (<master_key>)>
+    # Enter a random sequence of alpha-numeric characters (the longer the better) - Save this value, will be used in another step (abbr. <master_key>)>
     # And save (Ctrl+X -> Y -> Enter)
+    ```
     - Install Gems from Gemfile
     ```bash
     bundle
     ```
     - Set rails-backend credentials:
     ```bash
-    EDITOR="code --wait" bin/rails credentials:edit
+    # Remove existing credentials
+    rm credentials.yml.enc
+
+    # And create new ones
+    EDITOR="code --wait" rails credentials:edit
+
     # A new tab in VSCode should open, in this tab overwrite the existing content with the following:
-    ```bash
     secret_key_base: <random sequence of alpha-numeric characters (the longer the better)>
     devise_jwt_secret_key: <random sequence of alpha-numeric characters (the longer the better)>
     socket_server_api_key: <random sequence of alpha-numeric characters (the longer the better) - Save this value, will be used in the next step (<socket_server_api_key>)>
+
     # Save the new file (e.g. Ctrl+S) and close the tab - the terminal should be again free after this operation
     ```
     - Set realtime-backend credentials:
@@ -256,12 +262,14 @@ To deploy this platform in a production environment ready for user onboarding, f
         # Open a new terminal in VSCode
         cd <path_to_top_level_directory>/realtime-backend
         git init --initial-branch=main
+        git add .
         git commit -m "<your_commit_message>"
         git remote add dokku dokku@<domain_name>:realtime-backend
         git push dokku main
 
         # Wait for realtime-backend to deploy, then:
         cd ../rails-backend
+        git add .
         git init --initial-branch=main
         git commit -m "<your_commit_message>"
         git remote add dokku dokku@<domain_name>:rails-backend
@@ -290,8 +298,8 @@ To deploy this platform in a production environment ready for user onboarding, f
         ```bash
         dokku postgres:info postgres-database
 
-        # And save the printed ip address (abr. <local_postgres_db_ip_address>)
-        # And password (abr. <local_postgres_db_password>)
+        # And save the printed ip address (abbr. <local_postgres_db_ip_address>)
+        # And password (abbr. <local_postgres_db_password>)
 
         # Example output of command with above information location highlighted:
 
