@@ -89,20 +89,42 @@ int main() {
 
 	$: {
 		if (type?.value !== ChallengeCategory.SCQ) {
-			scqData = { answers: [''], correct_answer: 0 };
+			if (challengeData?.type === ChallengeCategory.SCQ) {
+				scqData.answers = challengeData.answers;
+				scqData.correct_answer = challengeData.correct_answer;
+			} else {
+				scqData = { answers: [''], correct_answer: 0 };
+			}
 		}
 		if (type?.value !== ChallengeCategory.MCQ) {
-			mcqData = { answers: [''], correct_answers: [0] };
+			if (challengeData?.type === ChallengeCategory.MCQ) {
+				mcqData.answers = challengeData.answers;
+				mcqData.correct_answers = challengeData.correct_answers;
+			} else {
+				mcqData = { answers: [''], correct_answers: [0] };
+			}
 		}
 		if (type?.value !== ChallengeCategory.CONNECT_BLOCKS) {
-			connectBlocksData = { first_group: [''], second_group: [''], correct_answers: [[0, 0]] };
+			if (challengeData?.type === ChallengeCategory.CONNECT_BLOCKS) {
+				connectBlocksData.first_group = challengeData.first_group;
+				connectBlocksData.second_group = challengeData.second_group;
+				connectBlocksData.correct_answers = challengeData.correct_answers;
+			} else {
+				connectBlocksData = { first_group: [''], second_group: [''], correct_answers: [[0, 0]] };
+			}
 		}
 		if (type?.value !== ChallengeCategory.CODE_OUTPUT) {
-			codeOutputData = {
-				code: INITIAL_CODE_EDITOR_CONTENT,
-				question_array: [{ question: '', select: undefined }],
-				correct_answer_regex_array: ['']
-			};
+			if (challengeData?.type === ChallengeCategory.CODE_OUTPUT) {
+				codeOutputData.code = challengeData.code;
+				codeOutputData.question_array = challengeData.question_array;
+				codeOutputData.correct_answer_regex_array = challengeData.correct_answer_regex_array;
+			} else {
+				codeOutputData = {
+					code: INITIAL_CODE_EDITOR_CONTENT,
+					question_array: [{ question: '', select: undefined }],
+					correct_answer_regex_array: ['']
+				};
+			}
 		}
 	}
 

@@ -4,7 +4,6 @@ module Admin
   class ChallengeEditorController < ApplicationController
     before_action :authorize_admin_controllers
     before_action :set_challenge, only: %i[single destroy]
-    before_action :unpack_params, only: %i[edit]
 
     def all
       challenges = Challenge.all.map do |challenge|
@@ -86,67 +85,33 @@ module Admin
 
       render json: {message: 'Challenge updated successfully'}
     end
-    # # GET /challenges
-    # def index
-    #   @challenges = Challenge.all
-    #   render json: @challenges
-    # end
 
-    # # GET /challenges/:id
-    # def show
-    #   render json: @challenge
-    # end
+    def new
+      date_when_available = params[:date_when_available]
+      type = params[:type]
+      rest = params.except(:id, :date_when_available, :type, :controller, :action, :premitted,
+                           :challenge_editor).permit!
 
-    # POST /challenges
-    def create_scq
-      Rails.logger.debug "---------------------------------------------------------------------------"
-      Rails.logger.debug "Starting"
-      Rails.logger.debug scq_challenge_params
-      @challenge = Challenge.new(scq_challenge_params)
-      Rails.logger.debug @challenge
-      if @challenge.save
-        render json: @challenge, status: :created, location: @challenge
-      else
-        render json: @challenge.errors, status: :unprocessable_entity
+      class_name = "Challenge::#{type.split('Challenge').first}"
+      if !date_when_available
+        class_name = "Placement" + class_name
       end
-    end
 
-    def create_mcq
-      Rails.logger.debug "---------------------------------------------------------------------------"
-      Rails.logger.debug "Starting"
-      Rails.logger.debug mcq_challenge_params
-      @challenge = Challenge.new(mcq_challenge_params)
-      Rails.logger.debug @challenge
-      if @challenge.save
-        render json: @challenge, status: :created, location: @challenge
+      if Object.const_defined?(class_name)
+        if date_when_available
+          challenge = class_name.constantize.new(rest.merge(date_when_available: Date.parse(date_when_available)))
+        else
+          challenge = class_name.constantize.new(rest)
+        end
       else
-        render json: @challenge.errors, status: :unprocessable_entity
+        return render json: {message: 'Challenge class with provided type does not exist'}, status: 500
       end
-    end
 
-    def create_blocks
-      Rails.logger.debug "---------------------------------------------------------------------------"
-      Rails.logger.debug "Starting"
-      Rails.logger.debug blocks_challenge_params
-      @challenge = Challenge.new(blocks_challenge_params)
-      Rails.logger.debug @challenge
-      puts "--------------------------"
-      puts @challenge.correct_answers
-      puts "-------------------------"
-      if @challenge.save
-        render json: @challenge, status: :created, location: @challenge
-      else
-        render json: @challenge.errors, status: :unprocessable_entity
+      unless challenge.save
+        return render_internal_server_error
       end
-    end
 
-    # PATCH/PUT /challenges/:id
-    def update
-      if @challenge.update(challenge_params)
-        render json: @challenge
-      else
-        render json: @challenge.errors, status: :unprocessable_entity
-      end
+      render json: {message: 'Challenge created successfully'}
     end
 
     private
@@ -159,49 +124,8 @@ module Admin
         end
         render json: {message: 'Challenge not found'}, status: :not_found unless @challenge
       else
-        render json: {message: 'Invalid challenge ID parameter'}, status: :bad_request
+        render json: {message: 'Challenge with provided ID does not exist'}, status: :bad_request
       end
-    end
-
-    def unpack_params
-    end
-
-    # Only allow a list of trusted parameters through
-    def scq_challenge_params
-      params.require(:challenge).permit(
-        :name,
-        :difficulty,
-        :question_overview,
-        {answers: []}, # Ensure this is an array
-        :correct_answer,
-        :correct_answer_explanation,
-        :_type
-      )
-    end
-
-    def mcq_challenge_params
-      params.require(:challenge).permit(
-        :name,
-        :difficulty,
-        :question_overview,
-        {answers: []}, # Ensure this is an array
-        {correct_answers: []},
-        :correct_answer_explanation,
-        :_type
-      )
-    end
-
-    def blocks_challenge_params
-      params.require(:challenge).permit(
-        :name,
-        :difficulty,
-        :question_overview,
-        {first_group: []},
-        {second_group: []}, # Ensure this is an array
-        {correct_answers: []},
-        :correct_answer_explanation,
-        :_type
-      )
     end
   end
 end
