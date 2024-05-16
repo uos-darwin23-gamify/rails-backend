@@ -65,7 +65,7 @@
 				{value.name}
 				<br />
 				<br />
-				Note: The score of users who have already completed this challenge will remain unchanged.
+				Note: The scores of users who have already completed this challenge will remain unchanged.
 			</Dialog.Description>
 		</Dialog.Header>
 		<Dialog.Footer class="mt-4 flex sm:justify-between gap-2">

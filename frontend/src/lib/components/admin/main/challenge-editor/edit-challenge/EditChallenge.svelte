@@ -49,6 +49,7 @@
 	import ConnectBlocksChallenge from './challenge-specific/connect-blocks-challenge/ConnectBlocksChallenge.svelte';
 	import { toast } from 'svelte-sonner';
 	import * as Accordion from '$lib/components/ui/accordion';
+	import { Info } from 'lucide-svelte';
 
 	const INITIAL_CODE_EDITOR_CONTENT = `#include <stdio.h>
 
@@ -440,8 +441,34 @@ int main() {
 		<Card.Root class="flex grow relative overflow-x-auto">
 			<div class="grow w-full flex flex-col">
 				<Card.Header>
-					<div class="flex justify-between items-start">
-						<Card.Title>Edit Challenge</Card.Title>
+					<div class="flex justify-between items-center">
+						<div class="flex gap-4 items-center">
+							<Card.Title>Edit Challenge</Card.Title>
+							<Popover.Root>
+								<Popover.Trigger asChild let:builder>
+									<Button
+										aria-label="Additional Information"
+										builders={[builder]}
+										variant="outline"
+										size="icon"><Info class="h-5 w-5" /></Button
+									>
+								</Popover.Trigger>
+								<Popover.Content class="w-80">
+									<div class="flex justify-between space-x-4">
+										<div class="shrink-0">
+											<Info className="h-4 w-4" />
+										</div>
+										<div class="space-y-1">
+											<h4 class="text-sm font-semibold">Note</h4>
+											<p class="text-sm">
+												The scores of users who have already completed this challenge will remain
+												unchanged. New submissions will use the updated challenge data.
+											</p>
+										</div>
+									</div>
+								</Popover.Content>
+							</Popover.Root>
+						</div>
 						{#if !isPlacementChallenge}
 							<div class="flex max-sm:flex-col sm:items-center gap-2 sm:gap-4">
 								<Label for="release-date">Release Date</Label>

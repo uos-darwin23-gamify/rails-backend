@@ -318,8 +318,8 @@ int main() {
 	<Card.Root class="flex grow relative overflow-x-auto">
 		<div class="grow w-full flex flex-col">
 			<Card.Header>
-				<div class="flex justify-between items-start">
-					<Card.Title>Edit Challenge</Card.Title>
+				<div class="flex justify-between items-center">
+					<Card.Title>New Challenge</Card.Title>
 					{#if !isPlacementChallenge}
 						<div class="flex max-sm:flex-col sm:items-center gap-2 sm:gap-4">
 							<Label for="release-date">Release Date</Label>
