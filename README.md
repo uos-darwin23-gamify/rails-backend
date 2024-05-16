@@ -63,7 +63,7 @@ To deploy this platform in a production environment ready for user onboarding, f
         - TXT Record (DMARC Record):
         Name: _dmarc
         Value: v=DMARC1; p=none; rua=mailto:admin@<domain_name>
-4. Create a Sentry.io account and a new organization for error reporting in production:
+4. Create a Sentry.io account and a new organization named "gamifycoding" for error reporting in production:
     - Within the organization create 2 new projects:
         - One named "rails-backend" with RAILS as the platform.
         - Another named "realtime-backend" with EXPRESS as the platform.
