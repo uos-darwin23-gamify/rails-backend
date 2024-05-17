@@ -1,0 +1,144 @@
+!!!
+%html
+  %head
+    %title Your Daily Notifications - GamifyCoding™
+    :css
+      body, table {
+        font-family: 'Geist', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        color: white;
+        margin-top: 0;
+      }
+      p {
+        color: white;
+      }
+      .background {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==) no-repeat;
+        background-size: cover;
+      }
+      .outer {
+        background-color: #262626;
+        background: linear-gradient(315deg, rgba(227,123,70,1) 3%, rgba(198,51,92,1) 44%, rgba(86,50,139,1) 85%);
+      }
+      .inner {
+        background-color: #262626;
+        margin: 0 auto;
+        width: 95%;
+        height: 95%;
+        border-radius: .3rem;
+        padding: 1.5rem;
+      }
+      .spacer {
+        line-height: 0;
+        margin: 0;
+      }
+      .padding {
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+      }
+      .last-element {
+        margin-bottom: 0;
+      }
+      .sign-off {
+        margin: 0;
+        text-align: right;
+        font-size: 11px;
+      }
+      .align-center {
+        text-align: center;
+      }
+      .muted a, .muted a[href] {
+        color: #a3a3a3;
+      }
+      .unsubscribe {
+        font-size: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #333;
+        color: white;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #555;
+      }
+      th {
+        background-color: #222;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px 0;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+      .button:hover {
+        background-color: #2980b9;
+      }
+  %body
+    %table.outer{ "width" => "100%", "height" => "100%" }
+      %tr
+        %td.padding
+          %table.inner
+            %tr
+              %td.background
+                %p.spacer
+                  &nbsp;
+                %h1 GamifyCoding™
+                %p.align-center Daily Notifcation:
+                %p Hello @#{@username},
+                - if !@placement_challenges_finished
+                  %p You are not currently placed on the leaderboard. Complete the placement challenges to get a leaderboard placement.
+                - else
+                  %p Your current score is: #{@elo},
+                  - if @leaderboard == "league"
+                    %div{style: 'display: flex;'}
+                      %div{style: 'flex-shrink: 0;'}
+                        %img{src: "gamifycoding.me/league-icons/#{@currentLeague.upcase}.png", alt: 'Current League Icon', style: 'width: 2rem; height: 2rem; margin-left: -0.125rem; diplay: block;'}
+                    %p{style: 'margin-top: 0;'} You are in the #{@currentLeague} League.
+                    %p Your position is #{@currentPos} out of #{@total_players_in_league} in your league!
+                  - else
+                    %p Your position is #{@currentPos} out of #{@total_players} on the global leaderboard!
+                %h2 Today's Challenges:
+                - if @current_challenges.empty?
+                  - if @no_challenges_available_inherent
+                    %p.align-center No Challenges Available Today.
+                  - else
+                    %p.align-center You have completed all challenges for today, congratulations!
+                - else
+                  %table
+                    %thead
+                      %tr
+                        %th Name
+                        %th Type
+                        %th Difficulty
+                    %tbody
+                      - @current_challenges.each do |challenge|
+                        %tr
+                          %td= challenge.name
+                          - if challenge.type == "ConnectBlocksChallenge"
+                            %td= "Connect Blocks Question"
+                          - elsif challenge.type == "ScqChallenge"
+                            %td= "Single Choice Question"
+                          - elsif challenge.type == "McqChallenge"
+                            %td= "Multiple Answer Question"
+                          - else
+                            %td= "Code Output Question" 
+                          %td= challenge.difficulty
+                  %p
+                    %a.button{ href: 'https://gamifycoding.me/app/challenges', style: 'color: white;' } Complete your Challenges
+                %br
+                %p.sign-off Best regards,
+                %p.sign-off GamifyCoding™
+                %p.align-center.last-element.muted.unsubscribe
+                  %a{ "href" => "https://gamifycoding.me/api/unsubscribe?token=" + @unsubscribe_token} Unsubscribe

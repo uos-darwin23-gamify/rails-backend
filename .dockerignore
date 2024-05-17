@@ -3,6 +3,11 @@
 # Ignore git directory.
 /.git/
 
+# Ignore node_modules
+/frontend/node_modules/
+
+/Dockerfile
+
 # Ignore bundler config.
 /.bundle
 
