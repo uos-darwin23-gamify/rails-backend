@@ -1,16 +1,16 @@
 # GamifyCoding™
 [![DOI](https://zenodo.org/badge/DOI/<ZENODO_DOI>.svg)](https://doi.org/<ZENODO_DOI>) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A full-stack mobile-friendly web platform where users can solve C programming challenges to gain points and move up the leaderboard, competing with other players. Was created as part of an experiment that aimed to discover differences in extrinsic motivation between users who have access to a global leaderboard vs. those who are limited to a league-based one.
+A full-stack mobile-friendly web platform where users can solve C programming challenges to gain points and move up the leaderboard, competing with other players. Was created as part of an experiment that researched the impact of users having access to a global leaderboard vs. a more limited league-based one.
 
 # How it works
 Users are split into 2 groups:
 - One where users can access a global leaderboard with scores of all other players in this "global" group.
 - And one where users can only access a league-based leaderboard with the scores of other players in their league as well as the score thresholds to either get promoted or demoted to the next or previous league, respectively.
 
-Only sign-ups with pre-authorized emails are allowed within the platform and admins can expand & modify this pre-authorized email list. This list includes information regarding the group that a user with a given email will be assigned upon sign-up. After sign-up, a user's group cannot be changed.
+Only sign-ups with pre-authorized emails are allowed within the platform and admins can expand & modify this pre-authorized email list. This list includes information regarding the group that a user with a given email will be assigned to upon sign-up. After sign-up, a user's group cannot be changed.
 
-Placement challenges to obtain an initial leaderboard position as well as normal daily-released challenges can be configured within the platform as an admin. Users have to first complete the placement challenges in order to have access to the normal daily-released ones and, by default, will be notified daily by email about all the challenges available for completion for a given day.
+Placement challenges to obtain an initial leaderboard position as well as normal daily-released challenges can be configured within the platform as an admin. Users have to first complete the placement challenges in order to have access to the normal daily-released ones and, by default, will be notified daily by email (@ 12PM) about all the challenges available for completion for a given day.
 
 Each of these challenges can have 1 of 4 different types supported by the platform:
 
@@ -18,6 +18,8 @@ Each of these challenges can have 1 of 4 different types supported by the platfo
 - Multiple Choice (select all correct answers)
 - Connect The Blocks (select correct pairings between options in 2 groups)
 - Code Analysis/Output (read through the C code presented in a read-only VSCode editor and answer the open questions, matched through admin-configured regular expressions for determining correctness)
+
+Users who don't complete a normal daily-released challenge on a given day (by midnight) will have a "decay" mechanism applied resulting in them getting the lowest possible score for it. This operation occurs @ 1AM everyday and is not limited to just the previous day's challenges but all past challenges.
 
 # Production Deployment
 To deploy this platform in a production environment ready for user onboarding, follow these steps:
@@ -369,13 +371,18 @@ To deploy this platform in a production environment ready for user onboarding, f
         # Assuming "root" root-level user on server, change if required
         scp root@<domain_name>:~/YYYY-MM-DD/* .
         ```
-- To clear all data from the databases (use with caution!):
+- To clear all data from the databases (use with caution!) and/or re-seed data e.g. to start a new experiment/competition:
     - SSH into the server with root-level access and run these commands:
         ```bash
         dokku ps:stop rails-backend
+
+        # To clear all postgres DB data run:
         dokku run rails-backend bundle exec rake DISABLE_DATABASE_ENVIRONMENT_CHECK=1 db:drop
         dokku run rails-backend bundle exec rake db:create
         dokku run rails-backend bundle exec rake db:migrate
+
+        # To clear all mongo DB data run:
+        dokku run rails-backend bundle exec rake mongo:drop
 
         # Only if you want to re-seed the databases:
         dokku run rails-backend bundle exec rake db:seed
